@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        //anim = gameObject.GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animator>();
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
                 case playerState.Moveable:
                     float h = Input.GetAxis("Horizontal" + PlayerIndex);
                     float v = Input.GetAxis("Vertical" + PlayerIndex);
-                    //anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));	
+                    anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));	
                     rb2d.velocity = new Vector2( h * HorizontalSpeed,v *VerticalSpeed);
                     break;
                 case playerState.Default:
