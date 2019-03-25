@@ -16,7 +16,7 @@ public class PooledObject : MonoBehaviour
     {
         StopAllCoroutines();
         gameObject.SetActive(false);
-        ObjectPool.Singleton.Recycle(this);
+        ObjectPool.Singleton.Push(this);
     }
 
     private IEnumerator RecycleAfter(float t)

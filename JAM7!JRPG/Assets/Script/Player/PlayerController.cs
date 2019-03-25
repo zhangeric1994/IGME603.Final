@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
                 PlayerState previousState = currentState;
                 currentState = value;
 
-                Debug.LogFormat("[Player] {0} --> {1}", previousState, currentState);
+                Debug.Log(LogUtility.MakeLogStringFormat("PlayerController", "{0} --> {1}", previousState, currentState));
 
                 switch (currentState)
                 {
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
                     else
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 
-                    if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<BoxCollider2D>()))
+                    if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<Collider2D>()))
                         CurrentState = PlayerState.OnGround;
                     else
                         isInAir = true;
