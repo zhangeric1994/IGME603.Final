@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class Bullet : PooledObject
@@ -7,6 +8,7 @@ public class Bullet : PooledObject
     public bool isFriendly = false;
     public int numHits = 1;
     public int rawDamage = 100;
+    public float range = 0;
 
     private int numHitsRemaining;
     private bool hasEnergy;
@@ -17,6 +19,14 @@ public class Bullet : PooledObject
 
         numHitsRemaining = numHits;
         hasEnergy = true;
+
+        if (range > 0)
+            StartCoroutine(RecycleAfterOutOfRange());
+    }
+
+    private IEnumerator RecycleAfterOutOfRange()
+    {
+        yield break;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
