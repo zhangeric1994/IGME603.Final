@@ -6,7 +6,7 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool Singleton { get; private set; }
 
     [Header("Config")]
-    [SerializeField] private static Vector3 stackingPlace = Vector3.one * -100;
+    [SerializeField] private static Vector3 stackingPlace = Vector3.one * -10000;
     [SerializeField] private PooledObject[] prefabs;
 
     private Stack<PooledObject>[] pooledObjects;

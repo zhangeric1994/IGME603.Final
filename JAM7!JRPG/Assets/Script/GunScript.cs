@@ -12,10 +12,17 @@ public class GunScript:MonoBehaviour
 
     public KeyCode fireKey;
     public KeyCode reloadKey;
+    private GameObject parent;
+
+    private void Start()
+    {
+        parent = GetComponent<Transform>().parent.gameObject;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        Fire(parent.GetComponent<PlayerController>().GetAllignment());
         if (Input.GetKeyDown(fireKey)&&canFire)
         {
             if (reloading && bulletsFired < magazineSize) {
@@ -24,7 +31,7 @@ public class GunScript:MonoBehaviour
             }
 
             if (bulletsFired < magazineSize)
-                Fire();
+                Fire(parent.GetComponent<PlayerController>().GetAllignment());
         }
     }
     
@@ -74,10 +81,21 @@ public class GunScript:MonoBehaviour
         fireRate = 1;
     }
 
-    void Fire()
+    void Fire(Vector2 dir)
     {
+        Debug.Log(1);
         bulletsFired++;
-        //Use a function where you pass in the damage values and range*metricScale for the instantiating the bullets from the bullet class.
+
+        Bullet bullet = ObjectPool.Singleton.Pop<Bullet>(0);
+        bullet.isFriendly = true;
+        bullet.range = range;
+
+        bullet.GetComponent<LinearMovement>().initialPosition = parent.transform.position;
+        bullet.GetComponent<LinearMovement>().orientation = dir;
+        bullet.GetComponent<LinearMovement>().speed = 3;
+
+        bullet.gameObject.SetActive(true);
+
         canFire = false;
         StartCoroutine(Firing(fireRate));
     }

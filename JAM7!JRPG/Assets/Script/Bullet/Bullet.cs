@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class Bullet : PooledObject
 {
@@ -11,14 +10,20 @@ public class Bullet : PooledObject
     public float range = 0;
 
     private int numHitsRemaining;
-    private bool hasEnergy;
+    private LinearMovement linear;
+
+    protected override void Die()
+    {
+        base.Die();
+
+        // FX
+    }
 
     protected override void OnEnable()
     {
         base.OnEnable();
-
+        linear = GetComponent<LinearMovement>();
         numHitsRemaining = numHits;
-        hasEnergy = true;
 
         if (range > 0)
             StartCoroutine(RecycleAfterOutOfRange());
@@ -26,6 +31,11 @@ public class Bullet : PooledObject
 
     private IEnumerator RecycleAfterOutOfRange()
     {
+        while (Vector3.Distance(transform.position, linear.initialPosition) < range)
+            yield return null;
+
+        Die();
+
         yield break;
     }
 
@@ -35,18 +45,18 @@ public class Bullet : PooledObject
             switch (other.tag)
             {
                 case "Enemy":
-                    other.GetComponent<IDamageable>().ApplyDamage(rawDamage);
-                    if (--numHitsRemaining == 0)
-                        Die();
+                    //other.GetComponent<IDamageable>().ApplyDamage(rawDamage);
+                    //if (--numHitsRemaining == 0)
+                        //Die();
                     break;
             }
         else
             switch (other.tag)
             {
                 case "Player":
-                    other.GetComponent<IDamageable>().ApplyDamage(rawDamage);
-                    if (--numHitsRemaining == 0)
-                        Die();
+                    //other.GetComponent<IDamageable>().ApplyDamage(rawDamage);
+                    //if (--numHitsRemaining == 0)
+                        //Die();
                     break;
             }
     }

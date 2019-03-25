@@ -29,14 +29,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int defense;
     [SerializeField] private int damage;
 
+    //new stuff
+    public enum gun { Shotgun, Machinegun, Sniper}
+    public gun guntype;
+    public KeyCode leftmove;
+    public KeyCode rightmove;
+    public KeyCode jump;
+    /// <summary>
+    /// //////////////
+    
+    /// </summary>
     private int id;
     private PlayerState currentState;
 
-    private Vector2 aimmingDirection;
+    private Vector2 aimmingDirection = new Vector2(1, 0);
 
     private SpriteRenderer renderer;
     private Rigidbody2D rb2d;
     private Animator anim;
+    private GunScript gunScript;
 
     private bool isInAir;
 
@@ -143,6 +154,11 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = pos;
     }
+
+    public Vector2 GetAllignment()
+    {
+        return aimmingDirection;
+    }
     
     public void SetStats(int value, StatsType type, bool overwrite = false)
     {
@@ -182,9 +198,9 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
+        gunScript = GetComponentInChildren<GunScript>();
         hp = maxHp;
-
+        gunScript.ChooseWeapon(guntype);
         CurrentState = PlayerState.OnGround;
     }
 
