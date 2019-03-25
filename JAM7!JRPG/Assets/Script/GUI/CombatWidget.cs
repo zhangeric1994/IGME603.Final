@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerWidget : GUIWidget
+public class CombatWidget : GUIWidget
 {
     [Header("References")]
     [SerializeField] private Text magazineText;
     [SerializeField] private PlayerHealthWidget healthWidget;
 
-    public override void Redraw(params object[] args)
+    public override void Initialize(params object[] args)
     {
         PlayerController player = (PlayerController)args[0];
 
@@ -15,7 +15,7 @@ public class PlayerWidget : GUIWidget
 
         player.OnMagazineUpdate.AddListener(UpdateMagazine);
 
-        healthWidget.Redraw(player);
+        healthWidget.Initialize(player);
     }
 
     private void UpdateMagazine(int n)

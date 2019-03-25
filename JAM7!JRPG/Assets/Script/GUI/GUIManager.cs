@@ -17,7 +17,7 @@ public abstract class GUIWindow : MonoBehaviour
 
 public abstract class GUIWidget : MonoBehaviour
 {
-    public virtual void Redraw(params object[] args) { }
+    public virtual void Initialize(params object[] args) { }
 
     public virtual void Show()
     {

@@ -171,6 +171,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public override string ToString()
+    {
+        return id.ToString();
+    }
+
     private void Awake()
     {
         OnHpChange = new EventOnDataChange<int>();

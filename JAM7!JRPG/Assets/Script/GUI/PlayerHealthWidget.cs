@@ -2,7 +2,7 @@
 
 public class PlayerHealthWidget : GUIWidget
 {
-    public override void Redraw(params object[] args)
+    public override void Initialize(params object[] args)
     {
         PlayerController player = (PlayerController)args[0];
 
