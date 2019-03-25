@@ -31,8 +31,8 @@ public abstract class Enemy : MonoBehaviour
 
 	private float IdleStart;
 	private float IdleDuration;
-	
-	private bool turnBacked;
+
+    private bool turnBacked;
 	public Vector3 defaultScale;
 	private bool deathCounted;
 	private float lastFacingLeft;
