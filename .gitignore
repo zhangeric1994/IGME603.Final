@@ -54,5 +54,8 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-Library/
-Temp/
+
+/JAM7!JRPG/Library
+/JAM7!JRPG/Temp
+/JAM7!JRPG/obj
+/JAM7!JRPG/.idea
