@@ -10,6 +10,7 @@ public class EnemyGenerator : MonoBehaviour
     // Start is called before the first frame update
     public void Active() {
         for (int i = 0; i < num; i++) {
+            //ObjectPool.Singleton.Pop(4);
             Instantiate(enemy, transform.position, Quaternion.identity);
         }
     }

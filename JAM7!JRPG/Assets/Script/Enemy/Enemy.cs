@@ -13,9 +13,10 @@ public enum EnemyState : int
 }
 public abstract class Enemy : MonoBehaviour
 {
-	
-	private Transform target;
-	private Animator enemy_anim;
+
+    public Transform targetCharacter;
+    private Transform targetJumpPoint;
+    private Animator enemy_anim;
 	private Rigidbody2D rb2d;
 	public int health = 15;
 	public float speed = 1f;
@@ -32,7 +33,7 @@ public abstract class Enemy : MonoBehaviour
 	private float IdleStart;
 	private float IdleDuration;
 
-    private bool turnBacked;
+    public bool turnBacked;
 	public Vector3 defaultScale;
 	private bool deathCounted;
 	private float lastFacingLeft;
@@ -99,7 +100,7 @@ public abstract class Enemy : MonoBehaviour
 	// Update is called once per frame
 	protected void FixedUpdate ()
 	{
-		if (!target)
+		if (!targetCharacter)
 		{
 			setTarget();
 		}
@@ -112,66 +113,45 @@ public abstract class Enemy : MonoBehaviour
 		// 2. chase type: rush into character
 		if (health > 0 && !knocking)
 		{
-			float distanceToEnemy = (self.position - target.position).sqrMagnitude;
+			float distanceToEnemy = (self.position - targetCharacter.position).sqrMagnitude;
 			switch (CurrentState)
 			{
 				case EnemyState.CircleMove:
-					if (!turnBacked)
-					{
-						direction = (target.position - self.position).normalized;
-					}
-
 					// cycle check
-					if (turnBacked && (defaultPos - self.position).magnitude < 2)
-					{
-						direction = (target.position - self.position).normalized;
-						turnBacked = false;
-					}
 
-					if (seconds % 10 == 0 && lastTurnSecond != seconds && !turnBacked)
-					{
-						int x = Random.Range(0, 100);
-						if (x < 50)
-						{
-							direction = (defaultPos - self.position).normalized;
-							turnBacked = true;
-						}
+					direction = (targetCharacter.position - self.position).normalized;
 
-						lastTurnSecond = seconds;
-					}
+
 					
-					if (direction.y > 0.1f && Mathf.Abs(direction.x) > 0.1f)
-					{
-						// uniform the direction vector
-//						findCloestJumpPoint();
-//						lastFindJump = secondsf;
-//						currentState = EnemyState.FindingJumpPoint;
-					}
-					else
-					{
-						direction = new Vector3(direction.x,0.0f,0.0f);
-					}
-					
-					if (distanceToEnemy > distanceConstraint )
-					{
-						//float step = speed * Time.deltaTime;
-						enemy_anim.SetFloat("Speed", 1f);
-						//Rigidbody2D.AddForce(direction * speed);
-						//if(Mathf.Abs(rb2d.velocity.x) < Maxspeed)rb2d.AddForce(-direction * speed);
-						transform.position += direction * speed * Time.deltaTime;
-					}
-					else
-					{
-						//float step = speed * Time.deltaTime;
-						enemy_anim.SetFloat("Speed", 1f);
-						//if(Mathf.Abs(rb2d.velocity.x) < Maxspeed)rb2d.AddForce(-direction * speed);
-						transform.position += -direction * speed * Time.deltaTime ;
-					}
+                    if (Mathf.Abs(direction.x) < 0.1f) direction.x = direction.x>0?0.1f:-0.1f;
+                    direction = turnBacked ? new Vector3(-direction.x,0.0f,0.0f) : new Vector3(direction.x, 0.0f, 0.0f);
+
+                    if (distanceToEnemy <= distanceConstraint && !turnBacked)
+                    {
+                        turnBacked = true;
+                        lastTurnSecond = seconds;
+                    }
+                    else {
+                        enemy_anim.SetFloat("Speed", 1f);
+                        transform.position += direction * speed * Time.deltaTime;
+
+                        if (seconds % 6 == 0 && lastTurnSecond != seconds)
+                        {
+                            int x = Random.Range(0, 100);
+                            if (x < 50)
+                            {
+                                turnBacked = !turnBacked;
+                                print("turnBacked");
+                            }
+                            lastTurnSecond = seconds;
+                        }
+                    }
+
 					break;
 				
 				case EnemyState.ChaseMove:
 					//chase type
-					direction = (target.position - self.position).normalized;
+					direction = (targetCharacter.position - self.position).normalized;
 					
 					if (distanceToEnemy > 0.5f && direction.y > 0.2f && Mathf.Abs(direction.x) > 0.1f && lastFindJump + 4f < Time.unscaledTime)
 					{
@@ -205,8 +185,9 @@ public abstract class Enemy : MonoBehaviour
 					break;
 				
 				case EnemyState.FindingJumpPoint:
-					direction = (target.position - self.position).normalized;
-					if (distanceToEnemy < 0.01f)
+					direction = (targetJumpPoint.position - self.position).normalized;
+                    float distanceToJump = (self.position - targetJumpPoint.position).sqrMagnitude;
+                    if (distanceToJump < 0.01f)
 					{
 						//arrived
 						StartCoroutine(Jump());
@@ -216,7 +197,7 @@ public abstract class Enemy : MonoBehaviour
 					}
 					else
 					{
-						if (distanceToEnemy > 0.5f && direction.y > 0.2f && Mathf.Abs(direction.x) > 0.1f)
+						if (distanceToJump > 0.5f && direction.y > 0.2f && Mathf.Abs(direction.x) > 0.1f)
 						{
 							findCloestJumpPoint();
 							lastFindJump = secondsf;
@@ -236,7 +217,7 @@ public abstract class Enemy : MonoBehaviour
 					{
 						// back to move
 						CurrentState = defaultState;
-						setTarget();
+						//setTarget();
 					}
 					break;
 			}
@@ -266,9 +247,19 @@ public abstract class Enemy : MonoBehaviour
 
 	private void setTarget()
 	{
-		var players = GameObject.FindGameObjectsWithTag("Player");
-		int playersIndex = Random.Range(0, players.Length);
-		target = players[playersIndex].transform;
+        float smallestDistance = 9999;
+        Transform cloestPlayer = null;
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var player in players)
+        {
+            var direction = player.transform.position - transform.position;
+            // in the same level
+            if (smallestDistance > direction.sqrMagnitude){
+                    smallestDistance = direction.sqrMagnitude;
+                    cloestPlayer = player.transform;
+            }
+        }
+        targetCharacter = cloestPlayer;
 	}
 	
 	
@@ -283,7 +274,7 @@ public abstract class Enemy : MonoBehaviour
 			if (Mathf.Abs(direction.y) < 0.1f)
 			{
 				// in the same level
-				if (smallestDistance > direction.sqrMagnitude && jumpPoint.GetComponent<JumpPoint>().getJumpForce().x * direction.x > 0 )
+				if (smallestDistance > direction.sqrMagnitude)
 				{
 					
 					smallestDistance = direction.sqrMagnitude;
@@ -292,7 +283,7 @@ public abstract class Enemy : MonoBehaviour
 
 			}
 		}
-		target = cloestJumpPoint;
+        targetJumpPoint = cloestJumpPoint;
 	}
 
 	public void setState(EnemyState state)
@@ -321,7 +312,7 @@ public abstract class Enemy : MonoBehaviour
 	IEnumerator Jump()
 	{
 		yield return new WaitForSeconds(0.5f);
-		Vector3 force = target.gameObject.GetComponent<JumpPoint>().getJumpForce();
+		Vector3 force = targetJumpPoint.gameObject.GetComponent<JumpPoint>().getJumpForce();
 		rb2d.AddForce(force);
 	}
 

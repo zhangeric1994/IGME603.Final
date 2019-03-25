@@ -42,7 +42,7 @@ public class ForwardCamera : MonoBehaviour
         }
 
         float posx = Mathf.SmoothDamp(transform.position.x, target.position.x, ref velocity.x, smoothTimeX);
-        float posy = Mathf.SmoothDamp(transform.position.y, target.position.y, ref velocity.y, smoothTimeY);
+        float posy = Mathf.SmoothDamp(transform.position.y, target.position.y+0.7f, ref velocity.y, smoothTimeY);
         transform.position = new Vector3(posx + x, posy + y, transform.position.z);
     }
 
