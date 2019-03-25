@@ -24,7 +24,7 @@ public class ObjectPool : MonoBehaviour
         return recyclable;
     }
 
-    public T GetObject<T>(int id) where T : MonoBehaviour
+    public T Pop<T>(int id) where T : MonoBehaviour
     {
         if (pooledObjects[id].Count > 0)
             return pooledObjects[id].Pop().GetComponent<T>();
@@ -37,7 +37,7 @@ public class ObjectPool : MonoBehaviour
         return obj;
     }
 
-    public void Recycle(PooledObject obj)
+    public void Push(PooledObject obj)
     {
         if (obj.id >= 0)
         {
@@ -60,13 +60,23 @@ public class ObjectPool : MonoBehaviour
             GameObject child;
             for (int id = 0; id < pooledObjects.Length; id++)
             {
-                pooledObjects[id] = new Stack<PooledObject>(256);
+                pooledObjects[id] = new Stack<PooledObject>(16);
+
                 child = new GameObject();
                 child.name = id.ToString();
                 child.transform.parent = transform;
             }
         }
         else if (this != Singleton)
+        {
+            Debug.LogWarning(LogUtility.MakeLogString("ObjectPool", "You cannot create multiple object pools."));
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (this == Singleton)
+            Singleton = null;
     }
 }

@@ -21,9 +21,11 @@ public enum PlayerState
 public class PlayerController : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float jumpPower;
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int walkSpeed;
+    [SerializeField] private int jumpPower;
+    [SerializeField] private int maxMagazine;
+    [SerializeField] private int maxHp;
+
     [SerializeField] private int power;
     [SerializeField] private int accuracy;
     [SerializeField] private int defense;
@@ -39,6 +41,12 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     private bool isInAir;
+
+    private int hp;
+    private int magazine;
+
+    public EventOnDataChange<int> OnHpChange { get; private set; }
+    public EventOnDataUpdate<int> OnMagazineUpdate { get; private set; }
 
     public int Id
     {
@@ -73,7 +81,7 @@ public class PlayerController : MonoBehaviour
                 PlayerState previousState = currentState;
                 currentState = value;
 
-                Debug.LogFormat("[Player] {0} --> {1}", previousState, currentState);
+                Debug.Log(LogUtility.MakeLogStringFormat("PlayerController", "{0} --> {1}", previousState, currentState));
 
                 switch (currentState)
                 {
@@ -88,7 +96,51 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
+    public int Hp
+    {
+        get
+        {
+            return hp;
+        }
+
+        private set
+        {
+            if (value != hp)
+            {
+                hp = value;
+
+                OnHpChange.Invoke(hp, maxHp);
+            }
+        }
+    }
+
+    public int MaxHp
+    {
+        get
+        {
+            return maxHp;
+        }
+    }
+
+    public int Magazine
+    {
+        get
+        {
+            return magazine;
+        }
+
+        private set
+        {
+            if (value != magazine)
+            {
+                magazine = value;
+
+                OnMagazineUpdate.Invoke(magazine);
+            }
+        }
+    }
+
     public void TeleportTo(Vector3 pos)
     {
         transform.position = pos;
@@ -108,7 +160,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case StatsType.Health:
-                maxHealth = overwrite?maxHealth+value:value;
+                maxHp = overwrite?maxHp+value:value;
                 break;
 
             case StatsType.Defense:
@@ -121,11 +173,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        OnHpChange = new EventOnDataChange<int>();
+        OnMagazineUpdate = new EventOnDataUpdate<int>();
+    }
+
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        hp = maxHp;
 
         CurrentState = PlayerState.OnGround;
     }
@@ -184,6 +244,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+
 
                     if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>()))
                         CurrentState = PlayerState.OnGround;
