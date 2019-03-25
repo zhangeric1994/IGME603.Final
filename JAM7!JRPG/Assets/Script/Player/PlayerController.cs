@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public enum StatsType : int
 {
@@ -20,8 +21,8 @@ public enum PlayerState
 public class PlayerController : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private int walkSpeed;
-    [SerializeField] private int jumpPower;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float jumpPower;
     [SerializeField] private int maxHealth;
     [SerializeField] private int power;
     [SerializeField] private int accuracy;
@@ -137,7 +138,7 @@ public class PlayerController : MonoBehaviour
                 {
                     float x = Input.GetAxis("Horizontal" + Id);
                     float y = Input.GetAxis("Vertical" + Id);
-
+            
                     if (x != 0 && y != 0)
                         aimmingDirection = new Vector2(x, Mathf.Clamp01(y)).normalized;
 
@@ -184,7 +185,7 @@ public class PlayerController : MonoBehaviour
                     else
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 
-                    if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<BoxCollider2D>()))
+                    if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>()))
                         CurrentState = PlayerState.OnGround;
                     else
                         isInAir = true;

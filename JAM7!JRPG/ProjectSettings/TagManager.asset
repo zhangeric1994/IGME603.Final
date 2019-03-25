@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Enemy
+  - JumpPoint
+  - PlayerHitBox
   layers:
   - Default
   - TransparentFX
@@ -14,9 +17,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Enemy
+  - CameraBound
+  - Player
   - 
   - 
   - 
@@ -50,4 +53,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3787760311
+    locked: 0
+  - name: Active
+    uniqueID: 3153934361
     locked: 0
