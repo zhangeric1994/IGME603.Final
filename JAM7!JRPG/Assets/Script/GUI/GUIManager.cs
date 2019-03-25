@@ -53,6 +53,11 @@ public class GUIManager : MonoBehaviour
         PERMANENT,
     }
 
+    [Header("References")]
+    public Sprite emptyHeart;
+    public Sprite halfHeart;
+    public Sprite fullHeart;
+
     private Stack<string> uiWindowStack = new Stack<string>();
     private Dictionary<string, GUIWindow> uiWindowsOpened = new Dictionary<string, GUIWindow>();
 
