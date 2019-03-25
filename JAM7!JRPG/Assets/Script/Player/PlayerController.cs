@@ -10,10 +10,11 @@ public enum StatsType : int
     Damage
 }
 
-public enum playerState
+public enum PlayerState
 {
     Default = 0,
     OnGround,
+    InAir,
 }
 
 public class PlayerController : MonoBehaviour
@@ -28,12 +29,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int damage;
 
     private int id;
-    private playerState currentState;
+    private PlayerState currentState;
 
     private Vector2 aimmingDirection;
 
+    private SpriteRenderer renderer;
     private Rigidbody2D rb2d;
     private Animator anim;
+
+    private bool isInAir;
 
     public int Id
     {
@@ -49,7 +53,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public playerState CurrentState
+    public PlayerState CurrentState
     {
         // this allowed to triggger codes when the state switched
         get
@@ -65,12 +69,19 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                playerState previousState = currentState;
+                PlayerState previousState = currentState;
                 currentState = value;
+
+                Debug.LogFormat("[Player] {0} --> {1}", previousState, currentState);
+
                 switch (currentState)
                 {
-                    case playerState.OnGround:
-                        //switch to moveable
+                    case PlayerState.OnGround:
+                        isInAir = false;
+                        break;
+
+                    case PlayerState.InAir:
+                        rb2d.AddForce(jumpPower * Vector2.up);
                         break;
                 }
             }
@@ -111,30 +122,72 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        rb2d = gameObject.GetComponent<Rigidbody2D>();
-        anim = gameObject.GetComponent<Animator>();
+        renderer = GetComponent<SpriteRenderer>();
+        rb2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        CurrentState = PlayerState.OnGround;
     }
 
     private void Update()
     {
         switch (currentState)
         {
-            case playerState.OnGround:
+            case PlayerState.OnGround:
                 {
                     float x = Input.GetAxis("Horizontal" + Id);
                     float y = Input.GetAxis("Vertical" + Id);
 
                     if (x != 0 && y != 0)
-                        aimmingDirection = new Vector2(Mathf.Clamp01(x), y).normalized;
+                        aimmingDirection = new Vector2(x, Mathf.Clamp01(y)).normalized;
 
                     //anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));
 
-                    if (y > 0)
-                        rb2d.velocity = new Vector2(0, walkSpeed);
-                    else if (y < 0)
-                        rb2d.velocity = new Vector2(0, -walkSpeed);
+                    if (x > 0)
+                    {
+                        rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
+                        renderer.flipX = false;
+                    }
+                    else if (x < 0)
+                    {
+                        rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
+                        renderer.flipX = true;
+                    }
                     else
-                        rb2d.velocity = Vector2.zero;
+                        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+
+                    if (Input.GetButtonDown("Jump" + Id))
+                        CurrentState = PlayerState.InAir;
+                }
+                break;
+
+            case PlayerState.InAir:
+                {
+                    float x = Input.GetAxis("Horizontal" + Id);
+                    float y = Input.GetAxis("Vertical" + Id);
+
+                    if (x != 0 && y != 0)
+                        aimmingDirection = new Vector2(x, y).normalized;
+
+                    //anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));
+
+                    if (x > 0)
+                    {
+                        rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
+                        renderer.flipX = false;
+                    }
+                    else if (x < 0)
+                    {
+                        rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
+                        renderer.flipX = true;
+                    }
+                    else
+                        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+
+                    if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<BoxCollider2D>()))
+                        CurrentState = PlayerState.OnGround;
+                    else
+                        isInAir = true;
                 }
                 break;
         }
