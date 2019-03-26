@@ -114,6 +114,11 @@ public abstract class Enemy : MonoBehaviour
 		if (health > 0 && !knocking)
 		{
 			float distanceToEnemy = (self.position - targetCharacter.position).sqrMagnitude;
+			if (distanceToEnemy > 5f)
+			{
+				return;
+			}
+
 			switch (CurrentState)
 			{
 				case EnemyState.CircleMove:
@@ -217,7 +222,7 @@ public abstract class Enemy : MonoBehaviour
 					{
 						// back to move
 						CurrentState = defaultState;
-						//setTarget();
+						setTarget();
 					}
 					break;
 			}

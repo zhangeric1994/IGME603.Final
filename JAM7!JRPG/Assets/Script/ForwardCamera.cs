@@ -23,7 +23,7 @@ public class ForwardCamera : MonoBehaviour
     public void Initialize() {
         var players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var player in players) {
-            if (player.GetComponent<PlayerCombatController>().PlayerID  == index) {
+            if (player.GetComponent<PlayerCombatController>().Id  == index) {
                 target = player.transform;
             }
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -48,6 +49,9 @@ public class PlayerCombatController : MonoBehaviour
 
     private int hp;
     private int magazine;
+    
+    private float invulnerableInterval = 0.3f;
+    private float lastHit;
 
     public EventOnDataChange2<int> OnHpChange { get; private set; }
     public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
@@ -218,6 +222,9 @@ public class PlayerCombatController : MonoBehaviour
 
                     if (Input.GetButtonDown("Jump" + PlayerID))
                         CurrentState = PlayerCombatState.InAir;
+                    
+                    if (Input.GetButtonDown("Pick" + Id))
+                        GetItem();
                 }
                 break;
 
@@ -259,7 +266,27 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
-    private void getItem()
+    public void Hurt()
+    {
+        if (lastHit + invulnerableInterval < Time.unscaledTime)
+        {
+            //Hp--;
+            //todo fix hp add
+            if (Hp < 0)
+            {
+                //dead
+            }
+            else
+            {
+                StartCoroutine(HurtDelay());
+            }
+            
+            lastHit = Time.unscaledTime;
+        }
+
+    }
+
+    private void GetItem()
     {
         var items = FindObjectsOfType<Item>();
         foreach (var item in items)
@@ -278,5 +305,19 @@ public class PlayerCombatController : MonoBehaviour
                     }
                 }
         }
+    }
+
+    IEnumerator HurtDelay()
+    {
+        //simple animation
+        anim.SetBool("Hurt",true);
+        renderer.color = Color.gray;
+        yield return new WaitForSeconds(0.1f);
+        renderer.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        renderer.color = Color.gray;
+        yield return new WaitForSeconds(0.1f);
+        renderer.color = Color.white;
+        anim.SetBool("Hurt",false);
     }
 }
