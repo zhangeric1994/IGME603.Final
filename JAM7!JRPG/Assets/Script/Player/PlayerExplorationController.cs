@@ -82,11 +82,11 @@ public class PlayerExplorationController : MonoBehaviour
         PlayerID = id;
     }
 
-    public void StartCombat(EnemyProxy enemy)
+    public void StartCombat(EnemyProxy enemy, bool isBoss = false)
     {
         CurrentState = PlayerExplorationState.InCombat;
 
-        enemy.StartCombat(this);
+        enemy.StartCombat(this, isBoss);
     }
 
     public void EndCombat()
@@ -101,6 +101,9 @@ public class PlayerExplorationController : MonoBehaviour
         {
             case "Enemy":
                 StartCombat(go.GetComponent<EnemyProxy>());
+                break;
+            case "Boss":
+                StartCombat(go.GetComponent<EnemyProxy>(), true);
                 break;
             case "MusicCollider":
                 if (PlayerID == 1) break;
