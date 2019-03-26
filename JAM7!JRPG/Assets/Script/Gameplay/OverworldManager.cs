@@ -5,7 +5,7 @@ using UnityEngine;
 public class OverworldManager : MonoBehaviour
 {
 	[SerializeField]
-	private Vector3[] spawnPositions;
+	private Transform[] spawnPositions;
 	[SerializeField]
 	private int maxEnemies;
 	[SerializeField]
@@ -22,7 +22,7 @@ public class OverworldManager : MonoBehaviour
 	void Update()
 	{
 		if(enemies.Count < maxEnemies) {
-			enemies.Add(Instantiate(enemySpawns[Random.Range(0, enemySpawns.Length)], spawnPositions[Random.Range(0, spawnPositions.Length)], Quaternion.identity));
+			enemies.Add(Instantiate(enemySpawns[Random.Range(0, enemySpawns.Length)], spawnPositions[Random.Range(0, spawnPositions.Length)].position, Quaternion.identity));
 		}
     }
 }
