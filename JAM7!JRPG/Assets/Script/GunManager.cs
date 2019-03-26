@@ -88,7 +88,7 @@ public class GunManager : MonoBehaviour
     }
 
 
-    public void equipWeapon(PlayerController player, GunType type, int level)
+    public void equipWeapon(PlayerCombatController player, GunType type, int level)
     {
         var defaultPos = Guns[(int) type].transform.localPosition;
         var temp = Instantiate(Guns[(int) type]);

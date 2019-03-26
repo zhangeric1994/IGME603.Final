@@ -18,7 +18,7 @@ public class Gun:MonoBehaviour
     public GunType type;
     
     
-    private PlayerController player;
+    private PlayerCombatController player;
     private int level;
     
     private void Start()
@@ -115,7 +115,7 @@ public class Gun:MonoBehaviour
     
     public void AcquireGun(int _level)
     {
-        player = gameObject.GetComponentInParent<PlayerController>();
+        player = gameObject.GetComponentInParent<PlayerCombatController>();
         GunInfo info = GunManager._instance.getGunData(type);
     
         damage = info.damage[_level-1];
