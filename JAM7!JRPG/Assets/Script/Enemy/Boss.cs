@@ -23,6 +23,7 @@ public class Boss : Enemy
         setState(defaultState);
         health = health * 1;
         idle = true;
+        boss = true;
     }
 
     // Update is called once per frame

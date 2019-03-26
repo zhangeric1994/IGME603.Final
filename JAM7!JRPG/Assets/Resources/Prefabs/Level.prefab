@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a6218c82dc9584997caa64a0aaf596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 8758948419831872088, guid: 0e919b08fddfc5e449d25dfa04da6fb4, type: 3}
+  enemy: {fileID: 4287550550548676021, guid: 0e919b08fddfc5e449d25dfa04da6fb4, type: 3}
   num: 4
 --- !u!1 &8529929565316546674
 GameObject:
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a6218c82dc9584997caa64a0aaf596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 8758948419831872088, guid: 0e919b08fddfc5e449d25dfa04da6fb4, type: 3}
+  enemy: {fileID: 2001553319671103512, guid: a70a472cb47d4c24ca85bbe83ff2c9ca, type: 3}
   num: 5
 --- !u!1 &8529929566733543112
 GameObject:
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a6218c82dc9584997caa64a0aaf596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 8758948419831872088, guid: 0e919b08fddfc5e449d25dfa04da6fb4, type: 3}
+  enemy: {fileID: 4287550550548676021, guid: 0e919b08fddfc5e449d25dfa04da6fb4, type: 3}
   num: 7
 --- !u!1001 &4917010459060239473
 PrefabInstance:
@@ -543,11 +543,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8529929565791902052}
     m_Modifications:
-    - target: {fileID: 974475256765505439, guid: caf8bc9eefce459419acb18bf8154b93,
-        type: 3}
-      propertyPath: m_Name
-      value: BackGround
-      objectReference: {fileID: 0}
     - target: {fileID: 3820410106885134489, guid: caf8bc9eefce459419acb18bf8154b93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -602,6 +597,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974475256765505439, guid: caf8bc9eefce459419acb18bf8154b93,
+        type: 3}
+      propertyPath: m_Name
+      value: BackGround
       objectReference: {fileID: 0}
     - target: {fileID: 632817913468651691, guid: caf8bc9eefce459419acb18bf8154b93,
         type: 3}

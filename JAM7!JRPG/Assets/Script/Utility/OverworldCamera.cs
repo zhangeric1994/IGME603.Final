@@ -2,8 +2,8 @@
 
 public class OverworldCamera : MonoBehaviour
 {
-    [SerializeField]
-    GameObject player;
+    public int index;
+    [SerializeField] private Transform target;
     [SerializeField]
     float camMin;
     [SerializeField]
@@ -14,16 +14,35 @@ public class OverworldCamera : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
+
+        Initialize();
     }
 
+    void Initialize()
+    {
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var player in players)
+        {
+            if (player.GetComponent<PlayerExplorationController>() != null)
+                if (player.GetComponent<PlayerExplorationController>().PlayerID == index)
+                {
+                    target = player.transform;
+                }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        Vector3 furthest = cam.WorldToViewportPoint(player.transform.position);
+        if (target == null)
+        {
+            Initialize();
+            return;
+        }
+        Vector3 furthest = cam.WorldToViewportPoint(target.position);
         Vector3 center = Vector3.zero;
 
 
-        Vector3 toView = cam.WorldToViewportPoint(player.transform.position);
+        Vector3 toView = cam.WorldToViewportPoint(target.position);
 
         if (Vector3.Distance(toView, new Vector3(0.5f, 0.5f, 0.0f)) >
            Vector3.Distance(furthest, new Vector3(0.5f, 0.5f, 0.0f)))
@@ -31,10 +50,9 @@ public class OverworldCamera : MonoBehaviour
             furthest = toView;
         }
 
-        center = player.transform.position;
+        center = target.position;
 
         center.z = -10.0f;
-        print(center);
 
         transform.position = center;
 

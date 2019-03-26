@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Ground
   - GameManager
+  - Enemy
+  - PlayerHitBox
+  - JumpPoint
+  - Shield
+  - Door
+  - MusicCollider
   layers:
   - Default
   - TransparentFX

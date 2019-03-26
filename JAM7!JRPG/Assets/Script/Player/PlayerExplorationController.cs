@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum PlayerExplorationState
 {
@@ -17,6 +16,8 @@ public class PlayerExplorationController : MonoBehaviour
     public int PlayerID { get; private set; }
 
     private PlayerExplorationState currentState;
+
+    public GameObject cam;
 
     public PlayerExplorationState CurrentState
     {
@@ -45,6 +46,8 @@ public class PlayerExplorationController : MonoBehaviour
                         HUD.Singleton.ShowExplorationUI(PlayerID);
                         HUD.Singleton.HideCombatUI(PlayerID);
                         gameObject.SetActive(true);
+                        cam.GetComponent<ForwardCamera>().enabled = false;
+                        cam.GetComponent<OverworldCamera>().enabled = true;
                         break;
                 }
 
@@ -64,6 +67,8 @@ public class PlayerExplorationController : MonoBehaviour
                         HUD.Singleton.HideExplorationUI(PlayerID);
                         HUD.Singleton.ShowCombatUI(PlayerID);
                         gameObject.SetActive(false);
+                        cam.GetComponent<ForwardCamera>().enabled = true;
+                        cam.GetComponent<OverworldCamera>().enabled = false;
                         break;
                 }
             }
@@ -97,6 +102,14 @@ public class PlayerExplorationController : MonoBehaviour
             case "Enemy":
                 StartCombat(go.GetComponent<EnemyProxy>());
                 break;
+            case "MusicCollider":
+                if (PlayerID == 1) break;
+                string[] splitName = go.name.Split('_');
+                MusicManager.Instance.PlayMusic(splitName[1]);
+                GameObject another = go.GetComponent<mutual>().another;
+                go.SetActive(false);
+                another.SetActive(true);
+                break;
         }
     }
 
@@ -105,8 +118,25 @@ public class PlayerExplorationController : MonoBehaviour
         CurrentState = PlayerExplorationState.Exploring;
     }
 
+    public void GetCamera()
+    {
+        var cameras = GameObject.FindGameObjectsWithTag("MainCamera");
+        foreach (var camera in cameras)
+        {
+            if (camera.GetComponent<OverworldCamera>().index == PlayerID)
+            {
+                cam = camera;
+            }
+        }
+    }
+
     private void Update()
     {
+        if (cam == null)
+        {
+            GetCamera();
+            return;
+        }
         switch (currentState)
         {
             case PlayerExplorationState.Exploring:
