@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooter : Enemy
@@ -21,12 +20,13 @@ public class Shooter : Enemy
     void Update()
     {
         int time = (int)Time.unscaledTime;
-        if(time%fireRate == 0 && lastShotTime != time && (targetCharacter.position - transform.position).sqrMagnitude < 5f)
+        if (targetCharacter == null) return;
+        if (time % fireRate == 0 && lastShotTime != time && (targetCharacter.position - transform.position).sqrMagnitude < 5f)
         {
             //fire 
             lastShotTime = time;
             StartCoroutine(shot());
-            
+
         }
     }
 
@@ -36,7 +36,7 @@ public class Shooter : Enemy
         bullet.isFriendly = false;
         bullet.range = 5;
         float dmg = 1.0f;
-        bullet.rawDamage = (int) dmg;
+        bullet.rawDamage = (int)dmg;
         bullet.transform.rotation = Quaternion.identity;
         bullet.transform.right = dir;
         if (dir.x == 0 && dir.y == 0)
@@ -48,18 +48,19 @@ public class Shooter : Enemy
         bullet.GetComponent<LinearMovement>().initialPosition = transform.position;
         bullet.GetComponent<LinearMovement>().orientation = dir;
         bullet.GetComponent<LinearMovement>().speed = 1.0f;
-        
+
         bullet.gameObject.SetActive(true);
     }
-    
-    IEnumerator shot() {
+
+    IEnumerator shot()
+    {
         float defaultSpeed = speed;
         speed = 0;
         yield return new WaitForSeconds(1f);
         //fire
-        Vector2 dir= (targetCharacter.position - transform.position).normalized;
+        Vector2 dir = (targetCharacter.position - transform.position).normalized;
         dir.y = 0;
-        dir.x= dir.x > 0? 1.0f:-1.0f;
+        dir.x = dir.x > 0 ? 1.0f : -1.0f;
         fire(dir);
         yield return new WaitForSeconds(0.1f);
         speed = defaultSpeed;
