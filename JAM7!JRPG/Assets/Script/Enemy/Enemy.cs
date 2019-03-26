@@ -255,7 +255,7 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine(Destroy_delay());
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             deathCounted = true;
-           
+
         }
 
     }
@@ -334,7 +334,7 @@ public abstract class Enemy : MonoBehaviour
         {
             //dead
             int num = Random.Range(0, 100);
-            if(num <20||boss) GunManager._instance.randomDrop(transform.position);
+            if (num < 50 || boss) GunManager._instance.randomDrop(transform.position);
             Destroy(gameObject);
         }
         else
