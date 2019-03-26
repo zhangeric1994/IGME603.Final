@@ -25,6 +25,8 @@ public class GunManager : MonoBehaviour
     
     [SerializeField] private GameObject[] GunsItem;
     
+    [SerializeField] private GameObject Heal;
+    
     [SerializeField] private Sprite[] levelTag;
     public static GunManager _instance;
     
@@ -42,29 +44,29 @@ public class GunManager : MonoBehaviour
         // MachineGun Assignment
         MachineGun.damage = new int[] {2,3,4};
         MachineGun.range = new int[] {5,5,6};
-        MachineGun.reloadSpeed = new float[] {1.5f,1.4f,1.3f};
-        MachineGun.magazineSize = new int[] {10,15,20};
+        MachineGun.reloadSpeed = new float[] {0.5f,0.4f,0.3f};
+        MachineGun.magazineSize = new int[] {10,20,30};
         MachineGun.fireRate = new float[] {0.2f,0.15f,0.1f};
         
         
         //SniperRifle Assignment
-        SniperRifle.damage = new int[] {9,11,13};
-        SniperRifle.range = new int[] {9,10,11};
-        SniperRifle.reloadSpeed = new float[] {2.1f,1.9f,1.8f};
-        SniperRifle.magazineSize = new int[] {4,5,6};
+        SniperRifle.damage = new int[] {9,19,30};
+        SniperRifle.range = new int[] {5,6,7};
+        SniperRifle.reloadSpeed = new float[] {1.2f,1.1f,1.0f};
+        SniperRifle.magazineSize = new int[] {5,6,7};
         SniperRifle.fireRate = new float[] {0.65f,0.6f,0.55f};
         
         //ShotGun Assignment
-        ShotGun.damage = new int[] {14,20,25};
-        ShotGun.range = new int[] {2,3,3};
-        ShotGun.reloadSpeed = new float[] {2.0f,1.95f,1.9f};
+        ShotGun.damage = new int[] {15,20,25};
+        ShotGun.range = new int[] {1,1,2};
+        ShotGun.reloadSpeed = new float[] {0.9f,0.85f,0.8f};
         ShotGun.magazineSize = new int[] {2,3,4};
-        ShotGun.fireRate = new float[] {0.7f,0.65f,0.6f};
+        ShotGun.fireRate = new float[] {0.5f,0.4f,0.3f};
         
         //Pistol Assignment
-        Pistol.damage = new int[] {4,6,7};
-        Pistol.range = new int[] {5,6,7};
-        Pistol.reloadSpeed = new float[] {1.2f,1.15f,1.1f};
+        Pistol.damage = new int[] {4,8,9};
+        Pistol.range = new int[] {3,4,5};
+        Pistol.reloadSpeed = new float[] {0.3f,0.2f,0.1f};
         Pistol.magazineSize = new int[] {7,8,9};
         Pistol.fireRate = new float[] {0.3f,0.25f,0.2f};
     }
@@ -101,11 +103,38 @@ public class GunManager : MonoBehaviour
     }
     
     
-    public void generateDrop(Transform player, GunType type, int level)
+    public void generateDrop(Vector3 player, GunType type, int level)
     {
         var temp = Instantiate(GunsItem[(int) type]);
         temp.GetComponent<Item>().getLevelSprite().sprite = levelTag[level - 1];
         //todo Add a parent to organize
+        temp.transform.position = player;
+    }
+    
+    public void generateHealDrop(Transform player)
+    {
+        var temp = Instantiate(Heal);
+        //todo Add a parent to organize
         temp.transform.position = player.position;
+    }
+    
+    
+    
+    public void randomDrop(Vector3 Pos)
+    {
+        int random = Random.Range(0, 100);
+        int type = Random.Range(0, 3);
+        if (random < 15)
+        {
+            //level three
+            generateDrop(Pos, (GunType) type, 3);
+        }else if (random > 15 && random < 45)
+        {
+            generateDrop(Pos, (GunType) type, 2);
+        }
+        else
+        {
+            generateDrop(Pos, (GunType) type, 1);
+        }
     }
 }

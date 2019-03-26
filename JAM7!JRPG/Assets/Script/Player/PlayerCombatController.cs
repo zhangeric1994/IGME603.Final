@@ -5,12 +5,19 @@ using UnityEngine.Tilemaps;
 public enum StatsType : int
 {
     // may move this part to stats manager or game manager
-    Health,
     Power,
-    Accuracy,
-    Defense,
-    Damage
+    Dexterity,
+    Wisdom
 }
+
+public enum HeroType : int
+{
+    // may move this part to stats manager or game manager
+    Knight,
+    Nurse,
+    Fat
+}
+
 
 public enum PlayerCombatState
 {
@@ -22,16 +29,14 @@ public enum PlayerCombatState
 public class PlayerCombatController : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private int walkSpeed;
+    [SerializeField] private float walkSpeed;
     [SerializeField] private int jumpPower;
     [SerializeField] private int maxMagazine;
     [SerializeField] private int maxHp;
 
-    [SerializeField] private int power;
-    [SerializeField] private int accuracy;
-    [SerializeField] private int defense;
-    [SerializeField] private int damage;
-
+    public int power;
+    public int dexterity;
+    public int wisdom;
     public Transform gunHolder;
 
     private int id;
@@ -51,9 +56,17 @@ public class PlayerCombatController : MonoBehaviour
     private float invulnerableInterval = 0.3f;
     private float lastHit;
 
+    [SerializeField] private HeroType type;
+    
+    [SerializeField]private float coolDown;
+    private float lastAbility;
+
+    [SerializeField]private GameObject shield;
+
+    private bool inAbility = false;
     public EventOnDataChange2<int> OnHpChange { get; private set; }
     public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
-
+    
     public int Id
     {
         get
@@ -163,24 +176,16 @@ public class PlayerCombatController : MonoBehaviour
         // overwrite current Stats in that type
         switch (type)
         {
-            case StatsType.Accuracy:
-                accuracy = overwrite?accuracy+value:value;
-                break;
-
-            case StatsType.Damage:
-                damage = overwrite?damage+value:value;
-                break;
-
-            case StatsType.Health:
-                maxHp = overwrite?maxHp+value:value;
-                break;
-
-            case StatsType.Defense:
-                defense = overwrite?defense+value:value;
-                break;
-
             case StatsType.Power:
                 power = overwrite?power+value:value;
+                break;
+
+            case StatsType.Dexterity:
+                dexterity = overwrite?dexterity+value:value;
+                break;
+
+            case StatsType.Wisdom:
+                wisdom = overwrite?wisdom+value:value;
                 break;
         }
     }
@@ -241,8 +246,11 @@ public class PlayerCombatController : MonoBehaviour
                     if (Input.GetButtonDown("Jump" + Id))
                         CurrentState = PlayerCombatState.InAir;
                     
-                    if (Input.GetButtonDown("Pick" + Id))
+                    if (Input.GetButtonDown("Pick" + Id)&&!inAbility)
                         GetItem();
+                    
+                    if (Input.GetButtonDown("Ability" + Id) && lastAbility + coolDown *(1-wisdom*0.1f) < Time.unscaledTime)
+                        Ability();
                 }
                 break;
 
@@ -304,6 +312,47 @@ public class PlayerCombatController : MonoBehaviour
 
     }
 
+
+    private void Ability()
+    {
+        lastAbility = Time.unscaledTime;
+        inAbility = true;
+        switch (type)
+        {
+                case HeroType.Knight:
+                    float temp = gunHolder.GetComponentInChildren<Gun>().reloadSpeed;
+                    
+                    StartCoroutine(resetReloadDelay(temp));
+                    break;
+                case HeroType.Nurse:
+                    GunManager._instance.generateHealDrop(transform);
+                    inAbility = false;
+                    break;
+                case HeroType.Fat:
+                    shield.SetActive(true);
+                    StartCoroutine(resetShieldDelay());
+                    break;
+        }
+    }
+    
+    
+    public void levelUp()
+    {
+        switch (type)
+        {
+            case HeroType.Knight:
+                dexterity++;
+                break;
+            case HeroType.Nurse:
+                wisdom++;
+                break;
+            case HeroType.Fat:
+                maxHp++;
+                break;
+        }
+        Hp = maxHp;
+    }
+
     private void GetItem()
     {
         var items = FindObjectsOfType<Item>();
@@ -316,15 +365,34 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         gunHolder.GetComponentInChildren<Gun>().Destroy();
                         item.GetComponent<Item>().Trigger(this);
-                    }else if (item.getType() == ItemTag.Heal && Hp < maxHp)
+                    }else if (item.getType() == ItemTag.Heal )
                     {
-                        Hp++;
+                        //Hp++;
+                        item.GetComponent<Item>().Trigger(this);
                         //TODO do UI update
                     }
                 }
         }
     }
 
+    IEnumerator resetReloadDelay(float val)
+    {
+        //simple animation
+        gunHolder.GetComponentInChildren<Gun>().reloadSpeed = 0;
+        gunHolder.GetComponentInChildren<Gun>().fireRate *= 0.5f;
+        yield return new WaitForSeconds(4f);
+        gunHolder.GetComponentInChildren<Gun>().reloadSpeed = val;
+        gunHolder.GetComponentInChildren<Gun>().fireRate /= 0.5f;
+        inAbility = false;
+    }
+    IEnumerator resetShieldDelay()
+    {
+        //simple animation
+        yield return new WaitForSeconds(6f);
+        shield.SetActive(false);
+        inAbility = false;
+    }
+    
     IEnumerator HurtDelay()
     {
         //simple animation

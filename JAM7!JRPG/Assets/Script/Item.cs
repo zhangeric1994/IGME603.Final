@@ -43,6 +43,7 @@ public class Item : MonoBehaviour
                 GunManager._instance.equipWeapon(target, gunType, level);
             }
         }
+        Destroy(gameObject);
     }
 
 

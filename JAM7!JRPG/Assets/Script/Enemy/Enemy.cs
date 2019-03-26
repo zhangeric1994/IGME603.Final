@@ -16,8 +16,8 @@ public abstract class Enemy : MonoBehaviour
 
     public Transform targetCharacter;
     private Transform targetJumpPoint;
-    private Animator enemy_anim;
-	private Rigidbody2D rb2d;
+    public Animator enemy_anim;
+	public Rigidbody2D rb2d;
 	public int health = 15;
 	public float speed = 1f;
 	public int Score_own = 5;
@@ -314,6 +314,34 @@ public abstract class Enemy : MonoBehaviour
 		knockStart = Time.unscaledTime;
 	}
 
+	
+	public void Hurt(int damage)
+	{
+			health -= damage;
+			//todo fix hp add
+			if (health < 0)
+			{
+				//dead
+				Destroy(gameObject);
+			}
+			else
+			{
+				StartCoroutine(HurtDelay());
+			}
+	}
+	
+	IEnumerator HurtDelay()
+	{
+		//simple animation
+		GetComponent<SpriteRenderer>().color = Color.gray;
+		yield return new WaitForSeconds(0.1f);
+		GetComponent<SpriteRenderer>().color = Color.white;
+		yield return new WaitForSeconds(0.1f);
+		GetComponent<SpriteRenderer>().color = Color.gray;
+		yield return new WaitForSeconds(0.1f);
+		GetComponent<SpriteRenderer>().color = Color.white;
+	}
+	
 	IEnumerator Jump()
 	{
 		yield return new WaitForSeconds(0.5f);

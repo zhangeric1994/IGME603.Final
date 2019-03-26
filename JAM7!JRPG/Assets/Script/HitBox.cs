@@ -22,5 +22,12 @@ public class HitBox : MonoBehaviour
                 // do dmg here
                 other.GetComponentInParent<PlayerCombatController>().Hurt();
             }
+        else if (other.tag == "Shield")
+        {
+            self.setIdle(0.5f);
+            var direction = (other.transform.position - self.transform.position).normalized;
+            transform.parent.GetComponent<Rigidbody2D>().AddForce(-direction * 40f);
+            transform.parent.GetComponent<Rigidbody2D>().AddForce(transform.up * 40f);
+        }
     }
 }

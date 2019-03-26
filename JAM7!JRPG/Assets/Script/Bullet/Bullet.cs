@@ -47,20 +47,22 @@ public class Bullet : PooledObject
                 case "Enemy":
                     //other.GetComponent<IDamageable>().ApplyDamage(rawDamage);
                     //if (--numHitsRemaining == 0)
+                    other.GetComponentInParent<Enemy>().Hurt(rawDamage);
                     Vector2 dir = (transform.position - other.transform.position).normalized;
                     var temp = Instantiate(FX,transform.position,Quaternion.identity);
                     temp.transform.right = -dir;
                     Destroy(temp,0.5f);
                     Die();
-
                     break;
+                
+
+                
                 case "Ground":
                     Vector2 dir1 = (transform.position - other.transform.position).normalized;
                     var temp1 = Instantiate(FX,transform.position,Quaternion.identity);
                     temp1.transform.right = -dir1;
                     Destroy(temp1,0.5f);
                     Die();
-
                     break;
             }
         else
@@ -77,6 +79,7 @@ public class Bullet : PooledObject
                     Die();
   
                     break;
+                
                 case "Ground":
                     Vector2 dir1 = (transform.position - other.transform.position).normalized;
                     var temp1 = Instantiate(FX,transform.position,Quaternion.identity);
@@ -84,6 +87,14 @@ public class Bullet : PooledObject
                     Destroy(temp1,0.5f);
                     Die();
 
+                    break;
+                
+                case "Shield":
+                    Vector2 dir2 = (transform.position - other.transform.position).normalized;
+                    var temp2 = Instantiate(FX,transform.position,Quaternion.identity);
+                    temp2.transform.right = -dir2;
+                    Destroy(temp2,0.5f);
+                    Die();
                     break;
             }
     }

@@ -46,7 +46,7 @@ public class Gun:MonoBehaviour
                         else
                         {
                             reloadingStart = time;
-                            reloadingDuration = reloadSpeed * 1.0f;
+                            reloadingDuration = reloadSpeed  / (1.0f + player.dexterity*0.1f);
                             reloading = true;
                             StartCoroutine(Reloading());
                         }
@@ -65,7 +65,7 @@ public class Gun:MonoBehaviour
                         else
                         {
                             reloadingStart = time;
-                            reloadingDuration = reloadSpeed * 1.0f;
+                            reloadingDuration = reloadSpeed  / (1.0f + player.dexterity*0.1f);
                             reloading = true;
                             StartCoroutine(Reloading());
                         }
@@ -79,7 +79,7 @@ public class Gun:MonoBehaviour
         if (Input.GetButtonDown("Reload" + player.Id) &&!reloading && bulletsFired != 0)
         {
             reloadingStart = time;
-            reloadingDuration = reloadSpeed * 1.0f;
+            reloadingDuration = reloadSpeed / (1.0f + player.dexterity*0.1f);
             reloading = true;
             StartCoroutine(Reloading());
         }
@@ -93,7 +93,7 @@ public class Gun:MonoBehaviour
         Bullet bullet = ObjectPool.Singleton.Pop<Bullet>(0);
         bullet.isFriendly = true;
         bullet.range = range;
-        float dmg = damage * 1.0f;
+        float dmg = damage * (1.0f + player.power*0.1f);
         bullet.rawDamage = (int) dmg;
         bullet.transform.rotation = Quaternion.identity;
         bullet.transform.right = dir;
@@ -129,7 +129,7 @@ public class Gun:MonoBehaviour
     public void Destroy()
     {
         gameObject.SetActive(false);
-        GunManager._instance.generateDrop(player.transform,type,level);
+        GunManager._instance.generateDrop(player.transform.position,type,level);
         Destroy(gameObject);
     }
 
