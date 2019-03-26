@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerExplorationWidgets:
   - {fileID: 729462892970500875}
-  - {fileID: 0}
+  - {fileID: 784186039518628512}
   playerCombatWidgets:
   - {fileID: 4108813363577301864}
   - {fileID: 4108813363577301864}

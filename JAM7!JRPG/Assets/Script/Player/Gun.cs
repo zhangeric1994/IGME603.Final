@@ -5,12 +5,11 @@ using System;
 //new stuff
 
 
-public class Gun:MonoBehaviour
+public class Gun : MonoBehaviour
 {
     public float damage, range, reloadSpeed, fireRate, magazineSize, bulletsFired;
     private bool SpreadFire = false;
     private bool canFire = true, reloading = false;
-
 
     private float reloadingStart, reloadingDuration;
     
@@ -37,7 +36,7 @@ public class Gun:MonoBehaviour
         switch (type)
         {
                 case GunType.MachineGun:
-                    if (Input.GetButton("Fire" + player.Id) && lastFire + fireRate < time)
+                    if (Input.GetButton("Fire" + player.PlayerID) && lastFire + fireRate < time)
                     {
                         if (bulletsFired < magazineSize)
                         {
@@ -56,7 +55,7 @@ public class Gun:MonoBehaviour
                     break;
                 
                 default:
-                    if (Input.GetButtonDown("Fire" + player.Id) && lastFire + fireRate < time)
+                    if (Input.GetButtonDown("Fire" + player.PlayerID) && lastFire + fireRate < time)
                     {
                         if (bulletsFired < magazineSize)
                         {
@@ -76,7 +75,7 @@ public class Gun:MonoBehaviour
         }
        
 
-        if (Input.GetButtonDown("Reload" + player.Id) &&!reloading && bulletsFired != 0)
+        if (Input.GetButtonDown("Reload" + player.PlayerID) &&!reloading && bulletsFired != 0)
         {
             reloadingStart = time;
             reloadingDuration = reloadSpeed / (1.0f + player.dexterity*0.1f);

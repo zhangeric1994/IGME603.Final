@@ -2,11 +2,12 @@
 
 public enum PlayerClass
 {
+    Knight,
 }
 
 public class Player
 {
-    private static List<Player> playerList = new List<Player>(2);
+    private static Dictionary<int, Player> playerList = new Dictionary<int, Player>();
 
     public static Player GetPlayer(int id)
     {
@@ -15,7 +16,7 @@ public class Player
 
     public static void CreatePlayer(int id)
     {
-        if (playerList[id] == null)
+        if (!playerList.ContainsKey(id))
             playerList[id] = new Player(id);
     }
 
