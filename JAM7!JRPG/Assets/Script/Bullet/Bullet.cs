@@ -9,13 +9,14 @@ public class Bullet : PooledObject
     public int rawDamage = 100;
     public float range = 0;
 
+    public GameObject bulletFxPrefab;
     private int numHitsRemaining;
     private LinearMovement linear;
 
     protected override void Die()
     {
         base.Die();
-
+        InitiateBulletDeath();
         // FX
     }
 
@@ -35,7 +36,6 @@ public class Bullet : PooledObject
             yield return null;
 
         Die();
-
         yield break;
     }
 
@@ -47,7 +47,10 @@ public class Bullet : PooledObject
                 case "Enemy":
                     //other.GetComponent<IDamageable>().ApplyDamage(rawDamage);
                     //if (--numHitsRemaining == 0)
-                        //Die();
+                    Die();
+                    break;
+                case "Ground":
+                    Die();
                     break;
             }
         else
@@ -59,5 +62,11 @@ public class Bullet : PooledObject
                         //Die();
                     break;
             }
+    }
+
+    private void InitiateBulletDeath()
+    {
+        Vector3 currentPos = new Vector3( transform.position.x, transform.position.y, transform.position.z);
+        GameObject bulletFX = Instantiate(bulletFxPrefab,currentPos,Quaternion.identity);
     }
 }

@@ -147,6 +147,8 @@ MonoBehaviour:
   numHits: 1
   rawDamage: 100
   range: 300
+  bulletFxPrefab: {fileID: 3095361251520849400, guid: 615c35ef7064f2243b4ce7ee5b3b05da,
+    type: 3}
 --- !u!50 &4747496122802955067
 Rigidbody2D:
   serializedVersion: 4

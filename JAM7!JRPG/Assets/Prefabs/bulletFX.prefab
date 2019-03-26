@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3699592630228488553}
   - component: {fileID: 6296090699660660051}
   - component: {fileID: 1552995666766132693}
+  - component: {fileID: 3935693841398836469}
   m_Layer: 0
   m_Name: bulletFX
   m_TagString: Untagged
@@ -99,3 +100,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3935693841398836469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095361251520849400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1c1c250afbe284a836c4953ada5ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
