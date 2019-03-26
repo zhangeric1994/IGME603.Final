@@ -1014,6 +1014,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 3043452697391804190, guid: 598a514cb43ad1147b2e617a3a957016,
+        type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 3043452697391804163, guid: 598a514cb43ad1147b2e617a3a957016,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1467,4 +1472,5 @@ MonoBehaviour:
   - {fileID: 68215682}
   maxEnemies: 20
   enemySpawns:
-  - {fileID: 3043452697391804190, guid: 598a514cb43ad1147b2e617a3a957016, type: 3}
+  - {fileID: 6615593641808843351, guid: 9abd6bc0fe868e2c4a1e9399e284f9c4, type: 3}
+  - {fileID: 8341065797757120147, guid: c14dce1dd3c24f9a083d241b31e87c51, type: 3}
