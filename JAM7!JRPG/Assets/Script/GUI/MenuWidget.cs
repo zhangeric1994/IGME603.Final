@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuWidget : GUIWidget
 {
     //[Header("References")]
     //[SerializeField] private Transform list;
 
-    PlayerController player;
-
+    private string playerID;
     private int maxIndex;
     private int choosenIndex;
 
@@ -14,30 +14,32 @@ public class MenuWidget : GUIWidget
 
     public override void Initialize(params object[] args)
     {
-        player = (PlayerController)args[0];
-
         maxIndex = transform.childCount;
+
+        playerID = ((PlayerController)args[0]).Id.ToString();
     }
 
     private void Update()
     {
-        string playerID = player ? player.Id.ToString() : "0";
-
-        if (Input.GetButtonDown("Up" + playerID))
-            choosenIndex = --choosenIndex % maxIndex;
-        else if (Input.GetButtonDown("Down" + playerID))
-            choosenIndex = ++choosenIndex % maxIndex;
-        else
+        if (widgetOpened)
         {
-            if (widgetOpened)
+            if (Input.GetButtonDown("Cancel" + playerID))
             {
-                if (Input.GetButtonDown("Cancel" + playerID))
-                    widgetOpened.Hide();
+                widgetOpened.GetComponent<Text>().color = Color.white;
+                widgetOpened.Hide();
             }
-            else if (Input.GetButtonDown("Submit" + playerID))
+        }
+        else if (Input.GetButtonDown("Submit" + playerID))
+        {
+            if (Input.GetButtonDown("Up" + playerID))
+                choosenIndex = --choosenIndex % maxIndex;
+            else if (Input.GetButtonDown("Down" + playerID))
+                choosenIndex = ++choosenIndex % maxIndex;
+            else
             {
                 widgetOpened = transform.GetChild(choosenIndex).GetComponent<GUIWidget>();
-                widgetOpened.Initialize(player);
+                widgetOpened.Initialize(playerID);
+                widgetOpened.GetComponent<Text>().color = Color.red;
                 widgetOpened.Show();
             }
         }
