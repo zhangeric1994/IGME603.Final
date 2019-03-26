@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public enum StatsType : int
 {
@@ -24,10 +25,13 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private int jumpPower;
     [SerializeField] private int maxMagazine;
     [SerializeField] private int maxHp;
+
     [SerializeField] private int power;
     [SerializeField] private int accuracy;
     [SerializeField] private int defense;
     [SerializeField] private int damage;
+
+    public Transform gunHolder;
 
     private int id;
     private PlayerCombatState currentState;
@@ -143,7 +147,13 @@ public class PlayerCombatController : MonoBehaviour
     {
         transform.position = pos;
     }
-    
+
+    public Vector2 GetAllignment()
+    {
+        return aimmingDirection;
+    }
+
+
     public void SetStats(int value, StatsType type, bool overwrite = false)
     {
         // overwrite current Stats in that type
@@ -202,20 +212,24 @@ public class PlayerCombatController : MonoBehaviour
                     float x = Input.GetAxis("Horizontal" + Id);
                     float y = Input.GetAxis("Vertical" + Id);
 
-                    if (x != 0 && y != 0)
+                    if (x != 0 || y != 0)
+                    {
                         aimmingDirection = new Vector2(x, Mathf.Clamp01(y)).normalized;
-
+                        gunHolder.right = aimmingDirection;
+                    }
                     //anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));
 
                     if (x > 0)
                     {
                         rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
                         renderer.flipX = false;
+                        gunHolder.GetComponentInChildren<SpriteRenderer>().flipY = false;
                     }
                     else if (x < 0)
                     {
                         rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
                         renderer.flipX = true;
+                        gunHolder.GetComponentInChildren<SpriteRenderer>().flipY = y != 0;
                     }
                     else
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
@@ -231,30 +245,56 @@ public class PlayerCombatController : MonoBehaviour
                     float x = Input.GetAxis("Horizontal" + Id);
                     float y = Input.GetAxis("Vertical" + Id);
 
-                    if (x != 0 && y != 0)
-                        aimmingDirection = new Vector2(x, y).normalized;
-
+                    if (x != 0 || y != 0)
+                    {
+                        aimmingDirection = new Vector2(x, Mathf.Clamp01(y)).normalized;
+                        gunHolder.right = aimmingDirection;
+                    }
                     //anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));
 
                     if (x > 0)
                     {
                         rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
                         renderer.flipX = false;
+                        gunHolder.GetComponentInChildren<SpriteRenderer>().flipY = false;
+                        //gunHolder.localScale = new Vector3(1.0f, 1.0f, 0.0f);
                     }
                     else if (x < 0)
                     {
                         rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
                         renderer.flipX = true;
+                        gunHolder.GetComponentInChildren<SpriteRenderer>().flipY = y != 0;
                     }
                     else
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 
-                    if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<Collider2D>()))
+                    if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>()))
                         CurrentState = PlayerCombatState.OnGround;
                     else
                         isInAir = true;
                 }
                 break;
+        }
+    }
+
+    private void getItem()
+    {
+        var items = FindObjectsOfType<Item>();
+        foreach (var item in items)
+        {
+                float distanceToItem = (item.transform.position - transform.position).sqrMagnitude;
+                if (distanceToItem <= 0.1f && item.gameObject.activeInHierarchy)
+                {
+                    if (item.getType() == ItemTag.Weapon)
+                    {
+                        gunHolder.GetComponentInChildren<Gun>().Destroy();
+                        item.GetComponent<Item>().Trigger(this);
+                    }else if (item.getType() == ItemTag.Heal && Hp < maxHp)
+                    {
+                        Hp++;
+                        //TODO do UI update
+                    }
+                }
         }
     }
 }

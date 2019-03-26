@@ -24,6 +24,19 @@ public class ObjectPool : MonoBehaviour
         return recyclable;
     }
 
+    public GameObject Pop(int id)
+    {
+        if (pooledObjects[id].Count > 0)
+            return pooledObjects[id].Pop().gameObject;
+
+        GameObject obj = Instantiate(prefabs[id].gameObject, stackingPlace, Quaternion.identity, transform.GetChild(id));
+
+        if (obj)
+            obj.GetComponent<PooledObject>().id = id;
+
+        return obj;
+    }
+
     public T Pop<T>(int id) where T : MonoBehaviour
     {
         if (pooledObjects[id].Count > 0)

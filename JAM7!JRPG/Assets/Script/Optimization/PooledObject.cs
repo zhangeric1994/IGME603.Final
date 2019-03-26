@@ -12,7 +12,7 @@ public class PooledObject : MonoBehaviour
             StartCoroutine(RecycleAfter(lifeSpan));
     }
 
-    protected void Die()
+    protected virtual void Die()
     {
         StopAllCoroutines();
         gameObject.SetActive(false);
