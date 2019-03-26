@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Ground
   - GameManager
+  - Enemy
+  - PlayerHitBox
+  - JumpPoint
+  - Shield
+  - Door
   layers:
   - Default
   - TransparentFX

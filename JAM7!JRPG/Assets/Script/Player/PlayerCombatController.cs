@@ -64,6 +64,7 @@ public class PlayerCombatController : MonoBehaviour
 
     [SerializeField] private GameObject shield;
 
+    public CombatManager Combat;
     private bool inAbility = false;
     public EventOnDataChange2<int> OnHpChange { get; private set; }
     public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
@@ -249,8 +250,17 @@ public class PlayerCombatController : MonoBehaviour
                     if (Input.GetButtonDown("Pick" + PlayerID) && !inAbility)
                         GetItem();
 
-                    if (Input.GetButtonDown("Ability" + PlayerID) && lastAbility + coolDown * (1 - wisdom * 0.1f) < Time.unscaledTime)
+                    if (Input.GetButtonDown("Ability" + PlayerID) && lastAbility + coolDown * (1 - wisdom * 0.1f) < Time.unscaledTime) {
                         Ability();
+                        var doors = GameObject.FindGameObjectsWithTag("Door");
+                        foreach (var door in doors) {
+                            if ((door.transform.position - transform.position).sqrMagnitude < 0.1f && door.activeInHierarchy) {
+                                Combat.endCombat();
+                                Combat = null;
+                            }
+                        }
+                    }
+                        
                 }
                 break;
 
