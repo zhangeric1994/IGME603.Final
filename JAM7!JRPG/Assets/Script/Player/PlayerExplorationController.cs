@@ -75,18 +75,35 @@ public class PlayerExplorationController : MonoBehaviour
                     case PlayerExplorationState.InCombat:
                         HUD.Singleton.HideExplorationUI(playerID);
                         HUD.Singleton.ShowCombatUI(playerID);
+
+                        gameObject.SetActive(false);
                         break;
                 }
             }
         }
     }
 
+    public void StartCombat(EnemyProxy enemy)
+    {
+        CurrentState = PlayerExplorationState.InCombat;
+
+        enemy.StartCombat(this);
+    }
+
+    public void EndCombat()
+    {
+        gameObject.SetActive(true);
+
+        CurrentState = PlayerExplorationState.Exploring;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (collision.gameObject.tag)
+        GameObject go = collision.gameObject;
+        switch (go.tag)
         {
             case "Enemy":
-                CurrentState = PlayerExplorationState.InCombat;
+                StartCombat(go.GetComponent<EnemyProxy>());
                 break;
         }
     }

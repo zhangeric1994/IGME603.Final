@@ -34,6 +34,10 @@ public class GameManager : MonoBehaviour
 
     private GameState currentGameState;
 
+    private List<PlayerExplorationController> playerExplorationControllers = new List<PlayerExplorationController>();
+    private List<PlayerCombatController> playerCombatControllers = new List<PlayerCombatController>();
+
+
     /// <summary>
     /// The current state of the game
     /// </summary>
@@ -91,6 +95,11 @@ public class GameManager : MonoBehaviour
     }
 
     private GameManager() { }
+
+    public void EndCombat(int combatID)
+    {
+
+    }
 
     /// <summary>
     /// Quit the game
