@@ -65,6 +65,7 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private GameObject shield;
 
     private bool inAbility = false;
+
     public EventOnDataChange2<int> OnHpChange { get; private set; }
     public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
 
@@ -162,25 +163,6 @@ public class PlayerCombatController : MonoBehaviour
     public Vector2 GetAllignment()
     {
         return aimmingDirection;
-    }
-
-    public void SetStats(int value, StatsType type, bool overwrite = false)
-    {
-        // overwrite current Stats in that type
-        switch (type)
-        {
-            case StatsType.Power:
-                power = overwrite ? power + value : value;
-                break;
-
-            case StatsType.Dexterity:
-                dexterity = overwrite ? dexterity + value : value;
-                break;
-
-            case StatsType.Wisdom:
-                wisdom = overwrite ? wisdom + value : value;
-                break;
-        }
     }
 
     private void Start()

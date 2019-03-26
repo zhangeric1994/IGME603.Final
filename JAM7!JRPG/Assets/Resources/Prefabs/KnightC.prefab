@@ -229,11 +229,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &6838570769005772869
 MonoBehaviour:
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 1
-  jumpPower: 1
+  jumpPower: 500
   maxMagazine: 0
   maxHp: 3
   power: 1
@@ -258,6 +258,7 @@ MonoBehaviour:
   type: 0
   coolDown: 10
   shield: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!95 &6838570769005772870
 Animator:
   serializedVersion: 3
