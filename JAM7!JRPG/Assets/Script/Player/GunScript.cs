@@ -46,13 +46,15 @@ public class GunScript:MonoBehaviour
         {
             case PlayerController.gun.Shotgun:
                 SetShotGun();
-                
+                myGun = currentgun.Shotgun;
                 break;
             case PlayerController.gun.Machinegun:
                 SetMachineGun();
-                break;
+                myGun = currentgun.Machinegun;
+                    break;
             case PlayerController.gun.Sniper:
                 SetSniper();
+                myGun = currentgun.Sniper;
                 break;
             default:
                 SetMachineGun();

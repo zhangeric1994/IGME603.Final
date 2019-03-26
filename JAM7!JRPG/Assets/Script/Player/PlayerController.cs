@@ -201,6 +201,9 @@ public class PlayerController : MonoBehaviour
         gunScript = GetComponentInChildren<GunScript>();
         hp = maxHp;
         gunScript.ChooseWeapon(guntype);
+        
+        //call the apply stats function here to pass in Power, Dexterity and Wisdom into the gunscript of the child object
+
         CurrentState = PlayerState.OnGround;
     }
 
