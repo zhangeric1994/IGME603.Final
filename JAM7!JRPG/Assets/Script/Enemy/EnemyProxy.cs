@@ -13,10 +13,15 @@ public class EnemyProxy : MonoBehaviour
         ID = id;
     }
 
-    public void StartCombat(PlayerExplorationController player)
+    public void StartCombat(PlayerExplorationController player, bool isBoss)
     {
         if (!level)
-            level = GameManager.Singleton.CreateCombat("Level/DebugLevel");
+        {
+            if (isBoss)
+                level = GameManager.Singleton.CreateCombat("Level/BossLevel");
+            else
+                level = GameManager.Singleton.CreateCombat("Level/NormalLevel");
+        }
         level.enemyProxy = this;
         players.Add(player);
 

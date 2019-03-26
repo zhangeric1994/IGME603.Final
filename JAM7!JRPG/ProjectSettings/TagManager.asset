@@ -12,6 +12,7 @@ TagManager:
   - Shield
   - Door
   - MusicCollider
+  - Boss
   layers:
   - Default
   - TransparentFX
