@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
                 {
                     case GameState.Loading:
                         LoadPlayer(0, PlayerClass.Knight);
-                        LoadPlayer(1, PlayerClass.Knight);
+                        LoadPlayer(1, PlayerClass.Heavy);
                         CurrentGameState = GameState.InGame;
                         break;
 
@@ -147,17 +147,42 @@ public class GameManager : MonoBehaviour
 
     private void LoadPlayer(int id, PlayerClass playerClass)
     {
-        Player.CreatePlayer(id);
-
         switch (playerClass)
         {
             case PlayerClass.Knight:
-                PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("KnightE"));
-                explorationController.Initialize(id);
-                playerExplorationControllers[id] = explorationController;
-                PlayerCombatController combatController = Instantiate(ResourceUtility.GetPrefab<PlayerCombatController>("KnightC"));
-                combatController.Initialize(id);
-                playerCombatControllers[id] = combatController;
+                {
+                    Player.CreatePlayer(id, 3, 1, 1, 1);
+                    PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("KnightE"));
+                    explorationController.Initialize(id);
+                    playerExplorationControllers[id] = explorationController;
+                    PlayerCombatController combatController = Instantiate(ResourceUtility.GetPrefab<PlayerCombatController>("KnightC"));
+                    combatController.Initialize(id);
+                    playerCombatControllers[id] = combatController;
+                }
+                break;
+
+            case PlayerClass.Heavy:
+                {
+                    Player.CreatePlayer(id, 6, 2, 1, 1);
+                    PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("HeavyE"));
+                    explorationController.Initialize(id);
+                    playerExplorationControllers[id] = explorationController;
+                    PlayerCombatController combatController = Instantiate(ResourceUtility.GetPrefab<PlayerCombatController>("HeavyC"));
+                    combatController.Initialize(id);
+                    playerCombatControllers[id] = combatController;
+                }
+                break;
+
+            case PlayerClass.Nurse:
+                {
+                    Player.CreatePlayer(id, 2, 1, 1, 1);
+                    PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("NurseE"));
+                    explorationController.Initialize(id);
+                    playerExplorationControllers[id] = explorationController;
+                    PlayerCombatController combatController = Instantiate(ResourceUtility.GetPrefab<PlayerCombatController>("NurseC"));
+                    combatController.Initialize(id);
+                    playerCombatControllers[id] = combatController;
+                }
                 break;
         }
 

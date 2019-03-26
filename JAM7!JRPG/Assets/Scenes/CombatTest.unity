@@ -850,6 +850,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heal
       objectReference: {fileID: 0}
+    - target: {fileID: 936589110859085269, guid: 76a7a33b6db739b44abd31f41e8f1c2c,
+        type: 3}
+      propertyPath: levelText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4182657504559136048, guid: 76a7a33b6db739b44abd31f41e8f1c2c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -904,11 +909,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 936589110859085269, guid: 76a7a33b6db739b44abd31f41e8f1c2c,
-        type: 3}
-      propertyPath: levelText
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76a7a33b6db739b44abd31f41e8f1c2c, type: 3}

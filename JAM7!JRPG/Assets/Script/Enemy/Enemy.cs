@@ -43,8 +43,7 @@ public abstract class Enemy : MonoBehaviour
     public EnemyState defaultState;
     public EnemyState currentState;
     public float damage;
-
-    public bool GenerateItem;
+    public bool boss;
 
     protected EnemyState CurrentState
     {
@@ -256,8 +255,7 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine(Destroy_delay());
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             deathCounted = true;
-            if (GenerateItem)
-                GunManager._instance.randomDrop(transform.position);
+           
         }
 
     }
@@ -335,6 +333,8 @@ public abstract class Enemy : MonoBehaviour
         if (health < 0)
         {
             //dead
+            int num = Random.Range(0, 100);
+            if(num <20||boss) GunManager._instance.randomDrop(transform.position);
             Destroy(gameObject);
         }
         else

@@ -64,7 +64,9 @@ public class PlayerCombatController : MonoBehaviour
 
     [SerializeField] private GameObject shield;
 
+    public CombatManager Combat;
     private bool inAbility = false;
+
     public EventOnDataChange2<int> OnHpChange { get; private set; }
     public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
 
@@ -164,25 +166,6 @@ public class PlayerCombatController : MonoBehaviour
         return aimmingDirection;
     }
 
-    public void SetStats(int value, StatsType type, bool overwrite = false)
-    {
-        // overwrite current Stats in that type
-        switch (type)
-        {
-            case StatsType.Power:
-                power = overwrite ? power + value : value;
-                break;
-
-            case StatsType.Dexterity:
-                dexterity = overwrite ? dexterity + value : value;
-                break;
-
-            case StatsType.Wisdom:
-                wisdom = overwrite ? wisdom + value : value;
-                break;
-        }
-    }
-
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
@@ -249,8 +232,17 @@ public class PlayerCombatController : MonoBehaviour
                     if (Input.GetButtonDown("Pick" + PlayerID) && !inAbility)
                         GetItem();
 
-                    if (Input.GetButtonDown("Ability" + PlayerID) && lastAbility + coolDown * (1 - wisdom * 0.1f) < Time.unscaledTime)
+                    if (Input.GetButtonDown("Ability" + PlayerID) && lastAbility + coolDown * (1 - wisdom * 0.1f) < Time.unscaledTime) {
                         Ability();
+                        var doors = GameObject.FindGameObjectsWithTag("Door");
+                        foreach (var door in doors) {
+                            if ((door.transform.position - transform.position).sqrMagnitude < 0.1f && door.activeInHierarchy) {
+                                Combat.endCombat();
+                                Combat = null;
+                            }
+                        }
+                    }
+                        
                 }
                 break;
 
