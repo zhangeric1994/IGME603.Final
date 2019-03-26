@@ -102,6 +102,14 @@ public class PlayerExplorationController : MonoBehaviour
             case "Enemy":
                 StartCombat(go.GetComponent<EnemyProxy>());
                 break;
+            case "MusicCollider":
+                if (PlayerID == 1) break;
+                string[] splitName = go.name.Split('_');
+                MusicManager.Instance.PlayMusic(splitName[1]);
+                GameObject another = go.GetComponent<mutual>().another;
+                go.SetActive(false);
+                another.SetActive(true);
+                break;
         }
     }
 

@@ -53,7 +53,6 @@ public class OverworldCamera : MonoBehaviour
         center = target.position;
 
         center.z = -10.0f;
-        print(center);
 
         transform.position = center;
 
