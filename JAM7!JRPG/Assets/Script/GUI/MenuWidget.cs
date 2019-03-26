@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class MenuWidget : GUIWidget
 {
-    //[Header("References")]
-    //[SerializeField] private Transform list;
+    [Header("References")]
+    [SerializeField] private GUIWidget[] widgets;
 
     private string playerID;
     private int maxIndex;
@@ -33,8 +33,8 @@ public class MenuWidget : GUIWidget
 
         playerID = id.ToString();
 
-        for (int i = 0; i < transform.childCount; ++i)
-            transform.GetChild(i).GetComponent<GUIWidget>().Initialize(id);
+        foreach (GUIWidget widget in widgets)
+            widget.Initialize(id);
     }
 
     public override void Show()
@@ -54,12 +54,12 @@ public class MenuWidget : GUIWidget
         }
         else if (Input.GetButtonDown("Submit" + playerID))
         {
-            widgetOpened = transform.GetChild(choosenIndex).GetComponent<GUIWidget>();
+            widgetOpened = transform.GetChild(choosenIndex).GetChild(0).GetComponent<GUIWidget>();
             widgetOpened.Show();
         }
         else if (Input.GetButtonDown("Up" + playerID))
-            ChoosenIndex = (choosenIndex - 1) % maxIndex;
+            ChoosenIndex = (choosenIndex - 1 + maxIndex) % maxIndex;
         else if (Input.GetButtonDown("Down" + playerID))
-            ChoosenIndex = (choosenIndex + 1) % maxIndex;
+            ChoosenIndex = (choosenIndex + 1 + maxIndex) % maxIndex;
     }
 }
