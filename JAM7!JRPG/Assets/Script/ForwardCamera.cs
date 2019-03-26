@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ForwardCamera : MonoBehaviour
 {
-    [SerializeField] private float index;
+    public int index;
     [SerializeField] private float smoothTimeY; // the smooth time for camera change the position on Y - axis, the larger number will slow the camera moving speed. 0 will be response instantly 
     [SerializeField] private float smoothTimeX; // the smooth time for camera change the position on X - axis, the larger number will slow the camera moving speed. 0 will be response instantly 
     private Vector2 velocity; // the speed reference for camera
@@ -20,12 +19,16 @@ public class ForwardCamera : MonoBehaviour
     {
         Initialize();
     }
-    public void Initialize() {
+    public void Initialize()
+    {
         var players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (var player in players) {
-            if (player.GetComponent<PlayerCombatController>().PlayerID  == index) {
-                target = player.transform;
-            }
+        foreach (var player in players)
+        {
+            if (player.GetComponent<PlayerCombatController>() != null)
+                if (player.GetComponent<PlayerCombatController>().PlayerID == index)
+                {
+                    target = player.transform;
+                }
         }
     }
 
@@ -33,6 +36,11 @@ public class ForwardCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null)
+        {
+            Initialize();
+            return;
+        }
         float x = 0;
         float y = 0;
         if (shaking)
@@ -42,7 +50,7 @@ public class ForwardCamera : MonoBehaviour
         }
 
         float posx = Mathf.SmoothDamp(transform.position.x, target.position.x, ref velocity.x, smoothTimeX);
-        float posy = Mathf.SmoothDamp(transform.position.y, target.position.y+0.7f, ref velocity.y, smoothTimeY);
+        float posy = Mathf.SmoothDamp(transform.position.y, target.position.y + 0.7f, ref velocity.y, smoothTimeY);
         transform.position = new Vector3(posx + x, posy + y, transform.position.z);
     }
 

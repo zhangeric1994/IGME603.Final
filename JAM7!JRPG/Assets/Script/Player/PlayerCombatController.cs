@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -60,14 +59,16 @@ public class PlayerCombatController : MonoBehaviour
 
     [SerializeField] private HeroType type;
 
-    [SerializeField]private float coolDown;
+    [SerializeField] private float coolDown;
     private float lastAbility;
 
-    [SerializeField]private GameObject shield;
+    [SerializeField] private GameObject shield;
 
     private bool inAbility = false;
     public EventOnDataChange2<int> OnHpChange { get; private set; }
     public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
+
+    public GameObject cam;
 
     public PlayerCombatState CurrentState
     {
@@ -169,15 +170,15 @@ public class PlayerCombatController : MonoBehaviour
         switch (type)
         {
             case StatsType.Power:
-                power = overwrite?power+value:value;
+                power = overwrite ? power + value : value;
                 break;
 
             case StatsType.Dexterity:
-                dexterity = overwrite?dexterity+value:value;
+                dexterity = overwrite ? dexterity + value : value;
                 break;
 
             case StatsType.Wisdom:
-                wisdom = overwrite?wisdom+value:value;
+                wisdom = overwrite ? wisdom + value : value;
                 break;
         }
     }
@@ -193,8 +194,25 @@ public class PlayerCombatController : MonoBehaviour
         CurrentState = PlayerCombatState.OnGround;
     }
 
+    public void GetCamera()
+    {
+        var cameras = GameObject.FindGameObjectsWithTag("MainCamera");
+        foreach (var camera in cameras)
+        {
+            if (camera.GetComponent<ForwardCamera>().index == PlayerID)
+            {
+                cam = camera;
+            }
+        }
+    }
+
     private void Update()
     {
+        if (cam == null)
+        {
+            GetCamera();
+            return;
+        }
         switch (currentState)
         {
             case PlayerCombatState.OnGround:
@@ -228,10 +246,10 @@ public class PlayerCombatController : MonoBehaviour
                     if (Input.GetButtonDown("Jump" + PlayerID))
                         CurrentState = PlayerCombatState.InAir;
 
-                    if (Input.GetButtonDown("Pick" + PlayerID)&&!inAbility)
+                    if (Input.GetButtonDown("Pick" + PlayerID) && !inAbility)
                         GetItem();
 
-                    if (Input.GetButtonDown("Ability" + PlayerID) && lastAbility + coolDown *(1-wisdom*0.1f) < Time.unscaledTime)
+                    if (Input.GetButtonDown("Ability" + PlayerID) && lastAbility + coolDown * (1 - wisdom * 0.1f) < Time.unscaledTime)
                         Ability();
                 }
                 break;
@@ -301,19 +319,19 @@ public class PlayerCombatController : MonoBehaviour
         inAbility = true;
         switch (type)
         {
-                case HeroType.Knight:
-                    float temp = gunHolder.GetComponentInChildren<Gun>().reloadSpeed;
+            case HeroType.Knight:
+                float temp = gunHolder.GetComponentInChildren<Gun>().reloadSpeed;
 
-                    StartCoroutine(resetReloadDelay(temp));
-                    break;
-                case HeroType.Nurse:
-                    GunManager._instance.generateHealDrop(transform);
-                    inAbility = false;
-                    break;
-                case HeroType.Fat:
-                    shield.SetActive(true);
-                    StartCoroutine(resetShieldDelay());
-                    break;
+                StartCoroutine(resetReloadDelay(temp));
+                break;
+            case HeroType.Nurse:
+                GunManager._instance.generateHealDrop(transform);
+                inAbility = false;
+                break;
+            case HeroType.Fat:
+                shield.SetActive(true);
+                StartCoroutine(resetShieldDelay());
+                break;
         }
     }
 
@@ -340,20 +358,21 @@ public class PlayerCombatController : MonoBehaviour
         var items = FindObjectsOfType<Item>();
         foreach (var item in items)
         {
-                float distanceToItem = (item.transform.position - transform.position).sqrMagnitude;
-                if (distanceToItem <= 0.1f && item.gameObject.activeInHierarchy)
+            float distanceToItem = (item.transform.position - transform.position).sqrMagnitude;
+            if (distanceToItem <= 0.1f && item.gameObject.activeInHierarchy)
+            {
+                if (item.getType() == ItemTag.Weapon)
                 {
-                    if (item.getType() == ItemTag.Weapon)
-                    {
-                        gunHolder.GetComponentInChildren<Gun>().Destroy();
-                        item.GetComponent<Item>().Trigger(this);
-                    }else if (item.getType() == ItemTag.Heal )
-                    {
-                        //Hp++;
-                        item.GetComponent<Item>().Trigger(this);
-                        //TODO do UI update
-                    }
+                    gunHolder.GetComponentInChildren<Gun>().Destroy();
+                    item.GetComponent<Item>().Trigger(this);
                 }
+                else if (item.getType() == ItemTag.Heal)
+                {
+                    //Hp++;
+                    item.GetComponent<Item>().Trigger(this);
+                    //TODO do UI update
+                }
+            }
         }
     }
 
@@ -378,7 +397,7 @@ public class PlayerCombatController : MonoBehaviour
     IEnumerator HurtDelay()
     {
         //simple animation
-        anim.SetBool("Hurt",true);
+        anim.SetBool("Hurt", true);
         renderer.color = Color.gray;
         yield return new WaitForSeconds(0.1f);
         renderer.color = Color.white;
@@ -386,6 +405,6 @@ public class PlayerCombatController : MonoBehaviour
         renderer.color = Color.gray;
         yield return new WaitForSeconds(0.1f);
         renderer.color = Color.white;
-        anim.SetBool("Hurt",false);
+        anim.SetBool("Hurt", false);
     }
 }
