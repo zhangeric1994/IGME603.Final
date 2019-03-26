@@ -524,6 +524,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1499882740100317352, guid: e65e676e273f71f4fbf6b1982f50fa48,
+        type: 3}
+      propertyPath: m_TagString
+      value: MusicCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 3930223796491665006, guid: e65e676e273f71f4fbf6b1982f50fa48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -539,6 +544,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7998540219936901427, guid: e65e676e273f71f4fbf6b1982f50fa48,
+        type: 3}
+      propertyPath: m_TagString
+      value: MusicCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 1347479342652518916, guid: e65e676e273f71f4fbf6b1982f50fa48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -548,6 +558,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 15.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446575593914402642, guid: e65e676e273f71f4fbf6b1982f50fa48,
+        type: 3}
+      propertyPath: m_TagString
+      value: MusicCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069636131976036247, guid: e65e676e273f71f4fbf6b1982f50fa48,
+        type: 3}
+      propertyPath: m_TagString
+      value: MusicCollider
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1101978290949740307, guid: e65e676e273f71f4fbf6b1982f50fa48, type: 3}
