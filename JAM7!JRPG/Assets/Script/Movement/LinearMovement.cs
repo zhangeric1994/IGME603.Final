@@ -10,7 +10,7 @@ public class LinearMovement : Movement
     private void OnEnable()
     {
         orientation = orientation.normalized;
-        transform.up = orientation;
+        //transform.up = orientation;
         transform.position = initialPosition;
 
         if (spawnTime == 0)
