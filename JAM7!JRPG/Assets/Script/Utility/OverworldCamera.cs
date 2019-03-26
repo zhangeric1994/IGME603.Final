@@ -22,7 +22,6 @@ public class OverworldCamera : MonoBehaviour
         Vector3 furthest = cam.WorldToViewportPoint(player.transform.position);
         Vector3 center = Vector3.zero;
 
-
         Vector3 toView = cam.WorldToViewportPoint(player.transform.position);
 
         if (Vector3.Distance(toView, new Vector3(0.5f, 0.5f, 0.0f)) >
@@ -34,7 +33,6 @@ public class OverworldCamera : MonoBehaviour
         center = player.transform.position;
 
         center.z = -10.0f;
-        print(center);
 
         transform.position = center;
 
