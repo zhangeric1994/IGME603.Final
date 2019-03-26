@@ -44,6 +44,8 @@ public abstract class Enemy : MonoBehaviour
     public EnemyState currentState;
     public float damage;
 
+    public bool GenerateItem;
+
     protected EnemyState CurrentState
     {
         // this allowed to triggger codes when the state switched
@@ -101,6 +103,7 @@ public abstract class Enemy : MonoBehaviour
         if (!targetCharacter)
         {
             setTarget();
+            return;
         }
 
         int seconds = (int)Time.fixedUnscaledTime;
@@ -189,7 +192,11 @@ public abstract class Enemy : MonoBehaviour
                     break;
 
                 case EnemyState.FindingJumpPoint:
-                    if (targetJumpPoint == null) findCloestJumpPoint();
+                    if (targetJumpPoint == null)
+                    {
+                        findCloestJumpPoint();
+                        return;
+                    }
 
                     direction = (targetJumpPoint.position - self.position).normalized;
                     float distanceToJump = (self.position - targetJumpPoint.position).sqrMagnitude;
@@ -244,10 +251,13 @@ public abstract class Enemy : MonoBehaviour
         if (health <= 0 && !deathCounted)
         {
             //died
+            Debug.Log(gameObject.name + " dead");
             enemy_anim.SetBool("Dead", true);
             StartCoroutine(Destroy_delay());
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             deathCounted = true;
+            if (GenerateItem)
+                GunManager._instance.randomDrop(transform.position);
         }
 
     }

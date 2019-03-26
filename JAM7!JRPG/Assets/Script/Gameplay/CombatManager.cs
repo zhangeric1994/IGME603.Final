@@ -5,6 +5,8 @@ public class CombatManager : MonoBehaviour
     [Header("Config")]
     [SerializeField] private Vector3[] playerSpawnPoints;
 
+    public EnemyProxy enemyProxy;
+
     private int id = -1;
 
     public int ID
@@ -35,5 +37,13 @@ public class CombatManager : MonoBehaviour
         if (playerSpawnPoints != null)
             for (int i = 0; i < playerSpawnPoints.Length; i++)
                 Gizmos.DrawSphere(transform.position + playerSpawnPoints[i], 0.1f);
+    }
+
+    void Update()
+    {
+        if (transform.Find("Enemy").childCount == 0)
+        { enemyProxy.EndCombat(); }
+
+
     }
 }
