@@ -16,7 +16,7 @@ public class EnemyProxy : MonoBehaviour
     public void StartCombat(PlayerExplorationController player)
     {
         if (!level)
-            level = GameManager.Singleton.CreateCombat("Level");
+            level = GameManager.Singleton.CreateCombat("Level/NormalLevel");
 
         players.Add(player);
 

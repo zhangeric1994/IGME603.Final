@@ -41,6 +41,8 @@ public class ForwardCamera : MonoBehaviour
             Initialize();
             return;
         }
+
+        GetComponent<Camera>().orthographicSize = 1.5f;
         float x = 0;
         float y = 0;
         if (shaking)
