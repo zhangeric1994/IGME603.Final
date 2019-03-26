@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public enum PlayerExplorationState
 {
@@ -13,23 +14,9 @@ public class PlayerExplorationController : MonoBehaviour
     [Header("Config")]
     [SerializeField] float walkSpeed = 1;
 
-    private int playerID;
+    public int PlayerID { get; private set; }
 
     private PlayerExplorationState currentState;
-
-    public int PlayerID
-    {
-        get
-        {
-            return playerID;
-        }
-
-        set
-        {
-            if (playerID < 0)
-                playerID = value;
-        }
-    }
 
     public PlayerExplorationState CurrentState
     {
@@ -50,13 +37,14 @@ public class PlayerExplorationController : MonoBehaviour
                 switch (currentState)
                 {
                     case PlayerExplorationState.InMenu:
-                        HUD.Singleton.HideMenu(playerID);
+                        HUD.Singleton.HideMenu(PlayerID);
                         break;
 
 
                     case PlayerExplorationState.InCombat:
-                        HUD.Singleton.ShowExplorationUI(playerID);
-                        HUD.Singleton.HideCombatUI(playerID);
+                        HUD.Singleton.ShowExplorationUI(PlayerID);
+                        HUD.Singleton.HideCombatUI(PlayerID);
+                        gameObject.SetActive(true);
                         break;
                 }
 
@@ -68,19 +56,25 @@ public class PlayerExplorationController : MonoBehaviour
                 switch (currentState)
                 {
                     case PlayerExplorationState.InMenu:
-                        HUD.Singleton.ShowMenu(playerID);
+                        HUD.Singleton.ShowMenu(PlayerID);
                         break;
 
 
                     case PlayerExplorationState.InCombat:
-                        HUD.Singleton.HideExplorationUI(playerID);
-                        HUD.Singleton.ShowCombatUI(playerID);
-
+                        HUD.Singleton.HideExplorationUI(PlayerID);
+                        HUD.Singleton.ShowCombatUI(PlayerID);
                         gameObject.SetActive(false);
                         break;
                 }
             }
         }
+    }
+
+    private PlayerExplorationController() { }
+
+    public void Initialize(int id)
+    {
+        PlayerID = id;
     }
 
     public void StartCombat(EnemyProxy enemy)
@@ -92,12 +86,10 @@ public class PlayerExplorationController : MonoBehaviour
 
     public void EndCombat()
     {
-        gameObject.SetActive(true);
-
         CurrentState = PlayerExplorationState.Exploring;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject go = collision.gameObject;
         switch (go.tag)
@@ -108,6 +100,11 @@ public class PlayerExplorationController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        CurrentState = PlayerExplorationState.Exploring;
+    }
+
     private void Update()
     {
         switch (currentState)
@@ -116,7 +113,7 @@ public class PlayerExplorationController : MonoBehaviour
                 if (Input.GetButtonDown("Start" + PlayerID))
                     CurrentState = PlayerExplorationState.InMenu;
                 else
-                    transform.Translate(walkSpeed * new Vector3(Input.GetAxis("Horizontal" + PlayerID), Input.GetAxis("Vertical" + PlayerID), 0));
+                    transform.Translate(Time.deltaTime * walkSpeed * new Vector3(Input.GetAxis("Horizontal" + PlayerID), Input.GetAxis("Vertical" + PlayerID), 0));
                 break;
         }
     }

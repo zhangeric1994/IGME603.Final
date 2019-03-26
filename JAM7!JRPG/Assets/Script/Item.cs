@@ -32,7 +32,7 @@ public class Item : MonoBehaviour
 	
     // Update is called once per frame
 
-    public void Trigger(PlayerController target)
+    public void Trigger(PlayerCombatController target)
     {
         if (!triggered && gameObject.activeInHierarchy)
         {

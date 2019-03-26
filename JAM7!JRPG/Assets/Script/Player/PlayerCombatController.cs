@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public enum StatsType : int
@@ -33,7 +34,8 @@ public class PlayerCombatController : MonoBehaviour
 
     public Transform gunHolder;
 
-    private int id;
+    public int PlayerID { get; private set; }
+
     private PlayerCombatState currentState;
 
     private Vector2 aimmingDirection;
@@ -49,20 +51,6 @@ public class PlayerCombatController : MonoBehaviour
 
     public EventOnDataChange2<int> OnHpChange { get; private set; }
     public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
-
-    public int Id
-    {
-        get
-        {
-            return id;
-        }
-
-        set
-        {
-            if (id < 0)
-                id = value;
-        }
-    }
 
     public PlayerCombatState CurrentState
     {
@@ -121,7 +109,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         get
         {
-            return Player.GetPlayer(id).MaxHp;
+            return Player.GetPlayer(PlayerID).MaxHp;
         }
     }
 
@@ -143,16 +131,20 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
-    public void TeleportTo(Vector3 pos)
+    private PlayerCombatController() { }
+
+    public void Initialize(int id)
     {
-        transform.position = pos;
+        PlayerID = id;
+
+        OnHpChange = new EventOnDataChange2<int>();
+        OnMagazineUpdate = new EventOnDataChange1<int>();
     }
 
     public Vector2 GetAllignment()
     {
         return aimmingDirection;
     }
-
 
     public void SetStats(int value, StatsType type, bool overwrite = false)
     {
@@ -181,17 +173,6 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
-    public override string ToString()
-    {
-        return id.ToString();
-    }
-
-    private void Awake()
-    {
-        OnHpChange = new EventOnDataChange2<int>();
-        OnMagazineUpdate = new EventOnDataChange1<int>();
-    }
-
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
@@ -209,14 +190,15 @@ public class PlayerCombatController : MonoBehaviour
         {
             case PlayerCombatState.OnGround:
                 {
-                    float x = Input.GetAxis("Horizontal" + Id);
-                    float y = Input.GetAxis("Vertical" + Id);
+                    float x = Input.GetAxis("Horizontal" + PlayerID);
+                    float y = Input.GetAxis("Vertical" + PlayerID);
 
                     if (x != 0 || y != 0)
                     {
                         aimmingDirection = new Vector2(x, Mathf.Clamp01(y)).normalized;
                         gunHolder.right = aimmingDirection;
                     }
+
                     //anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));
 
                     if (x > 0)
@@ -234,7 +216,7 @@ public class PlayerCombatController : MonoBehaviour
                     else
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 
-                    if (Input.GetButtonDown("Jump" + Id))
+                    if (Input.GetButtonDown("Jump" + PlayerID))
                         CurrentState = PlayerCombatState.InAir;
                 }
                 break;
@@ -242,8 +224,8 @@ public class PlayerCombatController : MonoBehaviour
 
             case PlayerCombatState.InAir:
                 {
-                    float x = Input.GetAxis("Horizontal" + Id);
-                    float y = Input.GetAxis("Vertical" + Id);
+                    float x = Input.GetAxis("Horizontal" + PlayerID);
+                    float y = Input.GetAxis("Vertical" + PlayerID);
 
                     if (x != 0 || y != 0)
                     {

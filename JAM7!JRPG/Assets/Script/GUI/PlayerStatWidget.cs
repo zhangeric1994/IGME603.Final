@@ -13,7 +13,7 @@ public class PlayerStatWidget : GUIWidget
 
     public override void Initialize(params object[] args)
     {
-        int id = int.Parse((string)args[0]);
+        int id = (int)args[0];
 
         player = Player.GetPlayer(id);
     }

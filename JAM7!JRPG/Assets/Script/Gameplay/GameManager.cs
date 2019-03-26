@@ -34,9 +34,13 @@ public class GameManager : MonoBehaviour
 
     private GameState currentGameState;
 
-    private List<PlayerExplorationController> playerExplorationControllers = new List<PlayerExplorationController>();
-    private List<PlayerCombatController> playerCombatControllers = new List<PlayerCombatController>();
+    private Dictionary<int, PlayerExplorationController> playerExplorationControllers = new Dictionary<int, PlayerExplorationController>();
+    private Dictionary<int, PlayerCombatController> playerCombatControllers = new Dictionary<int, PlayerCombatController>();
 
+    private int numOngoingCombats = 0;
+
+    private int maxNumCombat = 0;
+    private Stack<int> combatIDs = new Stack<int>(2);
 
     /// <summary>
     /// The current state of the game
@@ -68,12 +72,12 @@ public class GameManager : MonoBehaviour
                 //{
                 //}
 
-#if UNITY_EDITOR
-                Debug.Log(LogUtility.MakeLogStringFormat("GameManager", "{0} --> {1}", value));
-#endif
-
                 GameState previousGameState = CurrentGameState;
                 currentGameState = value;
+
+#if UNITY_EDITOR
+                Debug.Log(LogUtility.MakeLogStringFormat("GameManager", "{0} --> {1}", previousGameState, currentGameState));
+#endif
 
                 OnCurrentGameStateChange.Invoke(previousGameState, currentGameState);
 
@@ -81,13 +85,14 @@ public class GameManager : MonoBehaviour
                 switch (currentGameState)
                 {
                     case GameState.Loading:
-                        Player.CreatePlayer(0);
-                        Player.CreatePlayer(1);
+                        LoadPlayer(0, PlayerClass.Knight);
+                        LoadPlayer(1, PlayerClass.Knight);
+                        CurrentGameState = GameState.InGame;
                         break;
 
 
                     case GameState.InGame:
-                        GUIManager.Singleton.Open("HUD");
+                        GUIManager.Singleton.Open("HUD", playerCombatControllers[0], playerCombatControllers[1]);
                         break;
                 }
             }
@@ -96,9 +101,36 @@ public class GameManager : MonoBehaviour
 
     private GameManager() { }
 
-    public void EndCombat(int combatID)
+    public PlayerExplorationController GetPlayerExplorationController(int id)
     {
+        return playerExplorationControllers[id];
+    }
 
+    public PlayerCombatController GetPlayerCombatController(int id)
+    {
+        return playerCombatControllers[id];
+    }
+
+    public CombatManager CreateCombat(string name)
+    {
+        if (combatIDs.Count == 0)
+            combatIDs.Push(numOngoingCombats);
+
+        int id = combatIDs.Pop();
+
+        CombatManager combat = Instantiate(ResourceUtility.GetPrefab<CombatManager>(name), new Vector3((id + 1) * 1000, 0, 0), Quaternion.identity);
+        combat.ID = id;
+
+        return combat;
+    }
+
+    public void EndCombat(CombatManager combat)
+    {
+        combatIDs.Push(combat.ID);
+
+        Destroy(combat);
+
+        --numOngoingCombats;
     }
 
     /// <summary>
@@ -107,6 +139,24 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void LoadPlayer(int id, PlayerClass playerClass)
+    {
+        Player.CreatePlayer(id);
+
+        switch (playerClass)
+        {
+            case PlayerClass.Knight:
+                PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("KnightE"));
+                explorationController.Initialize(id);
+                playerExplorationControllers[id] = explorationController;
+                PlayerCombatController combatController = Instantiate(ResourceUtility.GetPrefab<PlayerCombatController>("KnightC"));
+                combatController.Initialize(id);
+                playerCombatControllers[id] = combatController;
+                break;
+        }
+        
     }
 
     private void Awake()
