@@ -1,14 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ExplorationWidget : GUIWidget
 {
     [Header("References")]
     [SerializeField] private MenuWidget menu;
 
+    public void ShowMenu()
+    {
+        menu.Show();
+    }
+
+    public void HideMenu()
+    {
+        menu.Hide();
+    }
+
     public override void Initialize(params object[] args)
     {
-        PlayerController player = (PlayerController)args[0];
+        menu.Initialize(args);
     }
 }

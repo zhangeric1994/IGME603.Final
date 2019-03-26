@@ -9,15 +9,20 @@ public class PlayerStatWidget : GUIWidget
     [SerializeField] private Text levelText;
     [SerializeField] private Text maxHpText;
 
-    private bool canPlayerLevelUp;
+    private Player player;
 
     public override void Initialize(params object[] args)
     {
         int id = int.Parse((string)args[0]);
 
-        Player player = Player.GetPlayer(id);
+        player = Player.GetPlayer(id);
+    }
 
-        UpdateAll(player);
+    public override void Show()
+    {
+        base.Show();
+
+        UpdateAll();
 
         player.OnExpChange.AddListener(UpdateLevelUpButton);
         player.OnLevelChange.AddListener(UpdateLevel);
@@ -25,7 +30,17 @@ public class PlayerStatWidget : GUIWidget
         player.OnMaxHpChange.AddListener(UpdateMaxHp);
     }
 
-    private void UpdateAll(Player player)
+    public override void Hide()
+    {
+        base.Hide();
+
+        player.OnExpChange.RemoveListener(UpdateLevelUpButton);
+        player.OnLevelChange.RemoveListener(UpdateLevel);
+        player.OnPromotionChange.RemoveListener(UpdatePromotionWidget);
+        player.OnMaxHpChange.RemoveListener(UpdateMaxHp);
+    }
+
+    private void UpdateAll()
     {
         UpdateLevelUpButton(player.CanLevelUp());
         UpdateLevel(player.Level);
@@ -55,5 +70,13 @@ public class PlayerStatWidget : GUIWidget
     private void UpdateMaxHp(int maxHp)
     {
         maxHpText.text = maxHp.ToString();
+    }
+
+    private void OnDestroy()
+    {
+        player.OnExpChange.RemoveListener(UpdateLevelUpButton);
+        player.OnLevelChange.RemoveListener(UpdateLevel);
+        player.OnPromotionChange.RemoveListener(UpdatePromotionWidget);
+        player.OnMaxHpChange.RemoveListener(UpdateMaxHp);
     }
 }

@@ -82,6 +82,16 @@ public class GUIManager : MonoBehaviour
         return uiWindowStack.Count != 0;
     }
 
+    public GUIWindow GetGUIWindow(string name)
+    {
+        return uiWindowsOpened[name];
+    }
+
+    public GUIWindow Open(string name, params object[] args)
+    {
+        return Open(name, UIMode.DEFAULT, args);
+    }
+
     /// <summary>
     /// Open a new UI window
     /// </summary>

@@ -10,14 +10,14 @@ public enum StatsType : int
     Damage
 }
 
-public enum PlayerState
+public enum PlayerCombatState
 {
     Default = 0,
     OnGround,
     InAir,
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerCombatController : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] private int walkSpeed;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int damage;
 
     private int id;
-    private PlayerState currentState;
+    private PlayerCombatState currentState;
 
     private Vector2 aimmingDirection;
 
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public PlayerState CurrentState
+    public PlayerCombatState CurrentState
     {
         // this allowed to triggger codes when the state switched
         get
@@ -76,18 +76,18 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                PlayerState previousState = currentState;
+                PlayerCombatState previousState = currentState;
                 currentState = value;
 
                 Debug.Log(LogUtility.MakeLogStringFormat("PlayerController", "{0} --> {1}", previousState, currentState));
 
                 switch (currentState)
                 {
-                    case PlayerState.OnGround:
+                    case PlayerCombatState.OnGround:
                         isInAir = false;
                         break;
 
-                    case PlayerState.InAir:
+                    case PlayerCombatState.InAir:
                         rb2d.AddForce(jumpPower * Vector2.up);
                         break;
                 }
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
             {
                 hp = value;
 
-                OnHpChange.Invoke(hp, maxHp);
+                OnHpChange.Invoke(hp, MaxHp);
             }
         }
     }
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            return maxHp;
+            return Player.GetPlayer(id).MaxHp;
         }
     }
 
@@ -190,14 +190,14 @@ public class PlayerController : MonoBehaviour
 
         hp = maxHp;
 
-        CurrentState = PlayerState.OnGround;
+        CurrentState = PlayerCombatState.OnGround;
     }
 
     private void Update()
     {
         switch (currentState)
         {
-            case PlayerState.OnGround:
+            case PlayerCombatState.OnGround:
                 {
                     float x = Input.GetAxis("Horizontal" + Id);
                     float y = Input.GetAxis("Vertical" + Id);
@@ -221,11 +221,12 @@ public class PlayerController : MonoBehaviour
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 
                     if (Input.GetButtonDown("Jump" + Id))
-                        CurrentState = PlayerState.InAir;
+                        CurrentState = PlayerCombatState.InAir;
                 }
                 break;
 
-            case PlayerState.InAir:
+
+            case PlayerCombatState.InAir:
                 {
                     float x = Input.GetAxis("Horizontal" + Id);
                     float y = Input.GetAxis("Vertical" + Id);
@@ -249,7 +250,7 @@ public class PlayerController : MonoBehaviour
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 
                     if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<Collider2D>()))
-                        CurrentState = PlayerState.OnGround;
+                        CurrentState = PlayerCombatState.OnGround;
                     else
                         isInAir = true;
                 }

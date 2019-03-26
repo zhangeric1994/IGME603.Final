@@ -12,11 +12,37 @@ public class MenuWidget : GUIWidget
 
     private GUIWidget widgetOpened;
 
+    private int ChoosenIndex
+    {
+        set
+        {
+            if (value != choosenIndex)
+            {
+                transform.GetChild(choosenIndex).GetComponent<Text>().color = Color.white;
+
+                choosenIndex = value;
+
+                transform.GetChild(choosenIndex).GetComponent<Text>().color = Color.red;
+            }
+        }
+    }
+
     public override void Initialize(params object[] args)
     {
-        maxIndex = transform.childCount;
+        int id = (int)args[0];
 
-        playerID = ((PlayerController)args[0]).Id.ToString();
+        playerID = id.ToString();
+
+        for (int i = 0; i < transform.childCount; ++i)
+            transform.GetChild(i).GetComponent<GUIWidget>().Initialize(id);
+    }
+
+    public override void Show()
+    {
+        base.Show();
+
+        maxIndex = transform.childCount;
+        ChoosenIndex = 0;
     }
 
     private void Update()
@@ -24,24 +50,16 @@ public class MenuWidget : GUIWidget
         if (widgetOpened)
         {
             if (Input.GetButtonDown("Cancel" + playerID))
-            {
-                widgetOpened.GetComponent<Text>().color = Color.white;
                 widgetOpened.Hide();
-            }
         }
         else if (Input.GetButtonDown("Submit" + playerID))
         {
-            if (Input.GetButtonDown("Up" + playerID))
-                choosenIndex = --choosenIndex % maxIndex;
-            else if (Input.GetButtonDown("Down" + playerID))
-                choosenIndex = ++choosenIndex % maxIndex;
-            else
-            {
-                widgetOpened = transform.GetChild(choosenIndex).GetComponent<GUIWidget>();
-                widgetOpened.Initialize(playerID);
-                widgetOpened.GetComponent<Text>().color = Color.red;
-                widgetOpened.Show();
-            }
+            widgetOpened = transform.GetChild(choosenIndex).GetComponent<GUIWidget>();
+            widgetOpened.Show();
         }
+        else if (Input.GetButtonDown("Up" + playerID))
+            ChoosenIndex = (choosenIndex - 1) % maxIndex;
+        else if (Input.GetButtonDown("Down" + playerID))
+            ChoosenIndex = (choosenIndex + 1) % maxIndex;
     }
 }

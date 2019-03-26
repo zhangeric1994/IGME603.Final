@@ -223,9 +223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e815de46b04dba943a58465ffc81da2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptyHeart: {fileID: 0}
-  halfHeart: {fileID: 0}
-  fullHeart: {fileID: 0}
+  emptyHeart: {fileID: 21300000, guid: e3c194fb8beea8d419e5fb3b71d1d3e6, type: 3}
+  halfHeart: {fileID: 21300000, guid: 28a40cdeb8a565940a7ef8974a88967a, type: 3}
+  fullHeart: {fileID: 21300000, guid: aa69a3e13e3f9544fa7294e752e5edd1, type: 3}
 --- !u!1 &1040865405
 GameObject:
   m_ObjectHideFlags: 0
