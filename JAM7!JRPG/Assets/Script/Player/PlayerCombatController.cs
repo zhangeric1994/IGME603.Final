@@ -223,7 +223,7 @@ public class PlayerCombatController : MonoBehaviour
                     if (Input.GetButtonDown("Jump" + PlayerID))
                         CurrentState = PlayerCombatState.InAir;
                     
-                    if (Input.GetButtonDown("Pick" + Id))
+                    if (Input.GetButtonDown("Pick" + PlayerID))
                         GetItem();
                 }
                 break;
