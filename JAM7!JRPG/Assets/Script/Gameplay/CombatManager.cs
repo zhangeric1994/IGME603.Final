@@ -4,7 +4,7 @@ public class CombatManager : MonoBehaviour
 {
     [Header("Config")]
     [SerializeField] private Vector3[] playerSpawnPoints;
-
+    [SerializeField] private GameObject Door;
     public EnemyProxy enemyProxy;
 
     private int id = -1;
@@ -26,6 +26,7 @@ public class CombatManager : MonoBehaviour
     public void SpawnPlayer(int id)
     {
         PlayerCombatController player = GameManager.Singleton.GetPlayerCombatController(id);
+        player.Combat = this;
         player.transform.position = transform.position + playerSpawnPoints[Random.Range(0, playerSpawnPoints.Length)];
         player.gameObject.SetActive(true);
     }
@@ -42,8 +43,12 @@ public class CombatManager : MonoBehaviour
     void Update()
     {
         if (transform.Find("Enemy").childCount == 0)
-        { enemyProxy.EndCombat(); }
+        {
+            Door.SetActive(true);
+        }
+    }
 
-
+    public void endCombat() {
+        enemyProxy.EndCombat();
     }
 }
