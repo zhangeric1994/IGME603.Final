@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
     private int hp;
     private int magazine;
 
-    public EventOnDataChange<int> OnHpChange { get; private set; }
-    public EventOnDataUpdate<int> OnMagazineUpdate { get; private set; }
+    public EventOnDataChange2<int> OnHpChange { get; private set; }
+    public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
 
     public int Id
     {
@@ -178,8 +178,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        OnHpChange = new EventOnDataChange<int>();
-        OnMagazineUpdate = new EventOnDataUpdate<int>();
+        OnHpChange = new EventOnDataChange2<int>();
+        OnMagazineUpdate = new EventOnDataChange1<int>();
     }
 
     private void Start()

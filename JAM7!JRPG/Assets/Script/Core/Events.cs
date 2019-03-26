@@ -1,4 +1,4 @@
 ﻿using UnityEngine.Events;
 
-public class EventOnDataUpdate<T> : UnityEvent<T> { }           // EventHandler(T current)
-public class EventOnDataChange<T> : UnityEvent<T, T> { }        // EventHandler(T current, T previous)
+public class EventOnDataChange1<T> : UnityEvent<T> { }           // EventHandler(T current)
+public class EventOnDataChange2<T> : UnityEvent<T, T> { }        // EventHandler(T current, T previous)
