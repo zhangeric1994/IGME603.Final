@@ -34,9 +34,30 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private int maxMagazine;
     [SerializeField] private int maxHp;
 
-    public int power;
-    public int dexterity;
-    public int wisdom;
+    public int Power
+    {
+        get
+        {
+            return Player.GetPlayer(PlayerID).Power;
+        }
+    }
+
+    public int Dexterity
+    {
+        get
+        {
+            return Player.GetPlayer(PlayerID).Dexterity;
+        }
+    }
+
+    public int Wisdom
+    {
+        get
+        {
+            return Player.GetPlayer(PlayerID).Wisdom;
+        }
+    }
+
     public Transform gunHolder;
 
     public int PlayerID { get; private set; }
@@ -232,7 +253,7 @@ public class PlayerCombatController : MonoBehaviour
                     if (Input.GetButtonDown("Pick" + PlayerID) && !inAbility)
                         GetItem();
 
-                    if (Input.GetButtonDown("Ability" + PlayerID) && lastAbility + coolDown * (1 - wisdom * 0.1f) < Time.unscaledTime) {
+                    if (Input.GetButtonDown("Ability" + PlayerID) && lastAbility + coolDown * (1 - Wisdom * 0.1f) < Time.unscaledTime) {
                         Ability();
                         var doors = GameObject.FindGameObjectsWithTag("Door");
                         foreach (var door in doors) {
@@ -325,24 +346,6 @@ public class PlayerCombatController : MonoBehaviour
                 StartCoroutine(resetShieldDelay());
                 break;
         }
-    }
-
-
-    public void levelUp()
-    {
-        switch (type)
-        {
-            case HeroType.Knight:
-                dexterity++;
-                break;
-            case HeroType.Nurse:
-                wisdom++;
-                break;
-            case HeroType.Fat:
-                maxHp++;
-                break;
-        }
-        Hp = maxHp;
     }
 
     private void GetItem()

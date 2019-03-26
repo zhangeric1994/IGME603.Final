@@ -1,12 +1,5 @@
 ﻿using System.Collections.Generic;
 
-public enum PlayerClass
-{
-    Knight,
-    Heavy,
-    Nurse,
-}
-
 public class Player
 {
     private static Dictionary<int, Player> playerList = new Dictionary<int, Player>();
@@ -23,7 +16,7 @@ public class Player
     }
 
     public readonly int id;
-    public readonly PlayerClass playerClass;
+    public readonly HeroType playerClass;
 
     private int level;
     private int exp;
@@ -197,6 +190,7 @@ public class Player
         level = 1;
         exp = 0;
         neededExp = 100;
+        promotion = 3;
 
         this.maxHp = maxHp;
         this.power = power;
@@ -213,22 +207,29 @@ public class Player
         OnWisdomChange = new EventOnDataChange1<int>();
     }
 
-    public void SetStats(int value, StatsType type, bool overwrite = false)
+    public void IncrementStats(StatsType type)
     {
-        // overwrite current Stats in that type
-        switch (type)
+        if (Promotion > 0)
         {
-            case StatsType.Power:
-                Power = overwrite ? power + value : value;
-                break;
+            // overwrite current Stats in that type
+            switch (type)
+            {
+                case StatsType.Power:
+                    Power++;
+                    break;
 
-            case StatsType.Dexterity:
-                Dexterity = overwrite ? dexterity + value : value;
-                break;
 
-            case StatsType.Wisdom:
-                Wisdom = overwrite ? wisdom + value : value;
-                break;
+                case StatsType.Dexterity:
+                    Dexterity++;
+                    break;
+
+
+                case StatsType.Wisdom:
+                    Wisdom++;
+                    break;
+            }
+
+            Promotion--;
         }
     }
 
@@ -244,6 +245,19 @@ public class Player
             Level++;
             Promotion++;
             NeededExp *= 2;
+
+            switch (playerClass)
+            {
+                case HeroType.Knight:
+                    dexterity++;
+                    break;
+                case HeroType.Nurse:
+                    wisdom++;
+                    break;
+                case HeroType.Fat:
+                    maxHp++;
+                    break;
+            }
 
             return CanLevelUp();
         }

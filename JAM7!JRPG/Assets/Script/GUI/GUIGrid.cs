@@ -10,7 +10,8 @@ public class GUIGrid : GUIWidget
     [SerializeField] private Vector2 itemSize;
     [SerializeField] private bool hideInactives = true;
 
-    public override void Initialize(params object[] args)
+    [ContextMenu("Refresh")]
+    public void Refresh()
     {
         int itemIndex = 0;
         int N = transform.childCount;
@@ -52,11 +53,5 @@ public class GUIGrid : GUIWidget
             rectTransform.sizeDelta = new Vector2(0, 0);
         else
             rectTransform.sizeDelta = new Vector2(margin.x + Math.Min(column, itemIndex) * ((itemSize.x == 0 ? maxX : itemSize.x) + margin.x), margin.y + ((itemIndex - 1) / column + 1) * ((itemSize.y == 0 ? maxY : itemSize.y) + margin.x));
-    }
-
-    [ContextMenu("Refresh")]
-    private void ResetName()
-    {
-        Initialize();
     }
 }

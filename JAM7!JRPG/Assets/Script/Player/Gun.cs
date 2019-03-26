@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour
                         else
                         {
                             reloadingStart = time;
-                            reloadingDuration = reloadSpeed  / (1.0f + player.dexterity*0.1f);
+                            reloadingDuration = reloadSpeed  / (1.0f + player.Dexterity*0.1f);
                             reloading = true;
                             StartCoroutine(Reloading());
                         }
@@ -64,7 +64,7 @@ public class Gun : MonoBehaviour
                         else
                         {
                             reloadingStart = time;
-                            reloadingDuration = reloadSpeed  / (1.0f + player.dexterity*0.1f);
+                            reloadingDuration = reloadSpeed  / (1.0f + player.Dexterity*0.1f);
                             reloading = true;
                             StartCoroutine(Reloading());
                         }
@@ -78,7 +78,7 @@ public class Gun : MonoBehaviour
         if (Input.GetButtonDown("Reload" + player.PlayerID) &&!reloading && bulletsFired != 0)
         {
             reloadingStart = time;
-            reloadingDuration = reloadSpeed / (1.0f + player.dexterity*0.1f);
+            reloadingDuration = reloadSpeed / (1.0f + player.Dexterity*0.1f);
             reloading = true;
             StartCoroutine(Reloading());
         }
@@ -92,7 +92,7 @@ public class Gun : MonoBehaviour
         Bullet bullet = ObjectPool.Singleton.Pop<Bullet>(0);
         bullet.isFriendly = true;
         bullet.range = range;
-        float dmg = damage * (1.0f + player.power*0.1f);
+        float dmg = damage * (1.0f + player.Power*0.1f);
         bullet.rawDamage = (int) dmg;
         bullet.transform.rotation = Quaternion.identity;
         bullet.transform.right = dir;

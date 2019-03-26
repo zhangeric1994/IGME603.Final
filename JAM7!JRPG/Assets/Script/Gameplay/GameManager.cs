@@ -85,8 +85,8 @@ public class GameManager : MonoBehaviour
                 switch (currentGameState)
                 {
                     case GameState.Loading:
-                        LoadPlayer(0, PlayerClass.Knight);
-                        LoadPlayer(1, PlayerClass.Heavy);
+                        LoadPlayer(0, HeroType.Knight);
+                        LoadPlayer(1, HeroType.Fat);
                         CurrentGameState = GameState.InGame;
                         break;
 
@@ -141,11 +141,11 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void LoadPlayer(int id, PlayerClass playerClass)
+    private void LoadPlayer(int id, HeroType playerClass)
     {
         switch (playerClass)
         {
-            case PlayerClass.Knight:
+            case HeroType.Knight:
                 {
                     Player.CreatePlayer(id, 3, 1, 1, 1);
                     PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("KnightE"));
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
 
-            case PlayerClass.Heavy:
+            case HeroType.Fat:
                 {
                     Player.CreatePlayer(id, 6, 2, 1, 1);
                     PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("HeavyE"));
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
 
-            case PlayerClass.Nurse:
+            case HeroType.Nurse:
                 {
                     Player.CreatePlayer(id, 2, 1, 1, 1);
                     PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("NurseE"));
