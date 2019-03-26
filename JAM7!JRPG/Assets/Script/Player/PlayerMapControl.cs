@@ -8,6 +8,9 @@ public class PlayerMapControl : MonoBehaviour
 	private Rigidbody2D rb2d;
 	private Animator anim;
 
+	[SerializeField]
+    private int id;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -19,30 +22,15 @@ public class PlayerMapControl : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		float x = Input.GetAxis("Horizontal" + Id);
-		float y = Input.GetAxis("Vertical" + Id);
-
-        if (x != 0 && y != 0)
-			aimmingDirection = new Vector2(x, Mathf.Clamp01(y)).normalized;
-
-		//anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));
+		float x = Input.GetAxis("Horizontal" + id);
+		float y = Input.GetAxis("Vertical" + id);
 
 		if (x > 0)
-		{
-			rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
 			renderer.flipX = false;
-		}
 
 		else if (x < 0)
-		{
-			rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
 			renderer.flipX = true;
-		}
 
-		else
-			rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-
-		if (Input.GetButtonDown("Jump" + Id))
-			CurrentState = PlayerState.InAir;
+		rb2d.velocity = new Vector2(Mathf.Lerp(0, x, 0.6f), Mathf.Lerp(0, y, 0.6f));
 	}
 }
