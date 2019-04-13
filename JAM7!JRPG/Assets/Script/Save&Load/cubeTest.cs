@@ -32,6 +32,4 @@ public class cubeTest : MonoBehaviour {
             //Debug.Log("Not blue");
         }
     }
-
-    
 }
