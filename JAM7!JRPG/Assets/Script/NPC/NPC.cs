@@ -15,8 +15,6 @@ public class NPC : MonoBehaviour {
 
     public Image img;
 
-
-
     void Start(){
         dialogueCNT = 0;
         isTalk = false;
