@@ -1,9 +1,25 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class AttributeSet : IAttributeCollection
+[Serializable] public struct Attribute
 {
-    private Dictionary<int, float> attributes;
+    public int id;
+    public float value;
+
+    public Attribute(KeyValuePair<int, float> pair)
+    {
+        id = pair.Key;
+        value = pair.Value;
+    }
+}
+
+[Serializable] public class AttributeSet : IAttributeCollection, ISerializationCallbackReceiver
+{
+    [SerializeField] Attribute[] serializedAttributes;
+
+    private Dictionary<int, float> attributes = new Dictionary<int, float>();
 
     public float this[int id]
     {
@@ -23,7 +39,7 @@ public class AttributeSet : IAttributeCollection
 
     public AttributeSet()
     {
-        attributes = new Dictionary<int, float>();
+        serializedAttributes = null;
     }
 
     public AttributeSet(params object[] args) : this()
@@ -99,6 +115,41 @@ public class AttributeSet : IAttributeCollection
     IEnumerator IEnumerable.GetEnumerator()
     {
         return attributes.GetEnumerator();
+    }
+
+    public void OnBeforeSerialize()
+    {
+#if UNITY_EDITOR
+        if (serializedAttributes == null || serializedAttributes.Length < attributes.Count)
+            serializedAttributes = new Attribute[attributes.Count];
+#else
+        serializedAttributes = new Attribute[attributes.Count];
+#endif
+
+        int i = 0;
+        foreach (KeyValuePair<int, float> attribute in attributes)
+            serializedAttributes[i++] = new Attribute(attribute);
+    }
+
+    public void OnAfterDeserialize()
+    {
+        if (serializedAttributes != null)
+        {
+            attributes.Clear();
+
+            for (int i = 0; i < serializedAttributes.Length; ++i)
+            {
+                Attribute attribute = serializedAttributes[i];
+
+                if (!attributes.ContainsKey(attribute.id))
+                    attributes.Add(attribute.id, attribute.value);
+            }
+
+#if UNITY_EDITOR
+#else
+            serializedAttributes = null;
+#endif
+        }
     }
 
     public override string ToString()
