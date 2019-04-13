@@ -326,9 +326,9 @@ public abstract class Enemy : MonoBehaviour
         setState(EnemyState.Idle);
     }
 
-    public void knockBack()
+    public void knockBack(float force)
     {
-        transform.GetComponent<Rigidbody2D>().AddForce(-direction * 40f);
+        transform.GetComponent<Rigidbody2D>().AddForce(-direction * force);
     }
 
     public void addKnock(float duration)
@@ -347,7 +347,7 @@ public abstract class Enemy : MonoBehaviour
         {
             //dead
             int num = Random.Range(0, 100);
-            if (num < 50 || boss) GunManager._instance.randomDrop(transform.position);
+            if (num < 50 || boss) WeaponManager._instance.randomDrop(transform.position);
             Destroy(gameObject);
         }
         else

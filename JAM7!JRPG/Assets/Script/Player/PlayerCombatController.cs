@@ -63,13 +63,16 @@ public class PlayerCombatController : MonoBehaviour
 
     public CombatManager Combat;
     private bool inAbility = false;
-
+    private Vector3 defaultScale;
+    
     public bool okToAttack;
 
     public EventOnDataChange2<int> OnHpChange { get; private set; }
     public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
 
     public GameObject cam;
+    
+    private float lastInput;
 
     public PlayerCombatState CurrentState
     {
@@ -170,7 +173,7 @@ public class PlayerCombatController : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
+        defaultScale = transform.localScale;
         hp = maxHp;
 
         CurrentState = PlayerCombatState.OnGround;
@@ -205,7 +208,8 @@ public class PlayerCombatController : MonoBehaviour
 
                     if (okToAttack && x != 0 || y != 0)
                     {
-                        transform.localScale = x < 0 ? new Vector3(-1,1,1) : new Vector3(1,1,1);
+                        transform.localScale = x < 0 ? new Vector3(-defaultScale.x,defaultScale.y,defaultScale.z) 
+                            : new Vector3(defaultScale.x,defaultScale.y,defaultScale.z);
                     }
 
                     //anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));
@@ -213,23 +217,31 @@ public class PlayerCombatController : MonoBehaviour
                     if (okToAttack && x > 0)
                     {
                         rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
+                        anim.SetFloat("Speed",walkSpeed);
                         //renderer.flipX = false;
                     }
                     else if (okToAttack && x < 0)
                     {
                         rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
+                        anim.SetFloat("Speed",walkSpeed);
                         //renderer.flipX = true;
                     }
                     else
+                    {
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                        anim.SetFloat("Speed",0f);
+                    }
 
-                    if (Input.GetButtonDown("Jump"))
+                    
+                    
+
+                    if (Input.GetButtonDown("Jump") && lastInput != Time.unscaledTime + 10f)
                         CurrentState = PlayerCombatState.InAir;
 
-                    if (Input.GetButtonDown("Pick") && !inAbility)
+                    if (Input.GetButtonDown("Pick") && !inAbility && lastInput != Time.unscaledTime + 10f)
                         GetItem();
 
-                    if (Input.GetButton("Fire") && okToAttack)
+                    if (Input.GetButton("Fire") && okToAttack && lastInput != Time.unscaledTime + 10f)
                     {
                         okToAttack = false;
                         anim.Play(weaponHolder.GetComponentInChildren<Weapon>().getAnimationName());
@@ -246,7 +258,8 @@ public class PlayerCombatController : MonoBehaviour
 
                     if (okToAttack && (x != 0 || y != 0))
                     {
-                        transform.localScale = x < 0 ? new Vector3(-1,1,1) : new Vector3(1,1,1);
+                        transform.localScale = x < 0 ? new Vector3(-defaultScale.x,defaultScale.y,defaultScale.z) 
+                            : new Vector3(defaultScale.x,defaultScale.y,defaultScale.z);
                     }
 
                     if (okToAttack && x > 0)
@@ -311,6 +324,11 @@ public class PlayerCombatController : MonoBehaviour
         {
             box.enabled = false;
         }
+
+        if (gameObject.GetComponentInChildren<Weapon>().type == WeaponType.Hammer)
+        {
+            ForwardCamera._instance.Shaking(0.05f,0.1f);
+        }
     }
     
     
@@ -339,27 +357,27 @@ public class PlayerCombatController : MonoBehaviour
         anim.speed = 1f;
     }
 
-    private void Ability()
-    {
-        lastAbility = Time.unscaledTime;
-        inAbility = true;
-        switch (type)
-        {
-            case HeroType.Knight:
-                float temp = weaponHolder.GetComponentInChildren<Gun>().reloadSpeed;
-
-                StartCoroutine(resetReloadDelay(temp));
-                break;
-            case HeroType.Nurse:
-                GunManager._instance.generateHealDrop(transform);
-                inAbility = false;
-                break;
-            case HeroType.Fat:
-                shield.SetActive(true);
-                StartCoroutine(resetShieldDelay());
-                break;
-        }
-    }
+//    private void Ability()
+//    {
+//        lastAbility = Time.unscaledTime;
+//        inAbility = true;
+//        switch (type)
+//        {
+//            case HeroType.Knight:
+////                float temp = weaponHolder.GetComponentInChildren<Gun>().reloadSpeed;
+//
+//                StartCoroutine(resetReloadDelay(temp));
+//                break;
+//            case HeroType.Nurse:
+//                GunManager._instance.generateHealDrop(transform);
+//                inAbility = false;
+//                break;
+//            case HeroType.Fat:
+//                shield.SetActive(true);
+//                StartCoroutine(resetShieldDelay());
+//                break;
+//        }
+//    }
 
 
 //    public void levelUp()
@@ -389,7 +407,7 @@ public class PlayerCombatController : MonoBehaviour
             {
                 if (item.getType() == ItemTag.Weapon)
                 {
-                    weaponHolder.GetComponentInChildren<Gun>().Destroy();
+                    weaponHolder.GetComponentInChildren<Weapon>().Destroy();
                     item.GetComponent<Item>().Trigger(this);
                 }
                 else if (item.getType() == ItemTag.Heal)
@@ -402,16 +420,16 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
-    IEnumerator resetReloadDelay(float val)
-    {
-        //simple animation
-        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = 0;
-        weaponHolder.GetComponentInChildren<Gun>().fireRate *= 0.5f;
-        yield return new WaitForSeconds(4f);
-        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = val;
-        weaponHolder.GetComponentInChildren<Gun>().fireRate /= 0.5f;
-        inAbility = false;
-    }
+//    IEnumerator resetReloadDelay(float val)
+//    {
+////        //simple animation
+////        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = 0;
+////        weaponHolder.GetComponentInChildren<Gun>().fireRate *= 0.5f;
+////        yield return new WaitForSeconds(4f);
+////        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = val;
+////        weaponHolder.GetComponentInChildren<Gun>().fireRate /= 0.5f;
+////        inAbility = false;
+//    }
     IEnumerator resetShieldDelay()
     {
         //simple animation

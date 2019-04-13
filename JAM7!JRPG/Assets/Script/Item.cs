@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
     [SerializeField] private ItemTag type;
     [SerializeField] private SpriteRenderer levelText;
     
-    [SerializeField] private GunType gunType;
+    [SerializeField] private WeaponType weaponType;
     [SerializeField] private int level;
     private float speed = 2.5f;
     // Use this for initialization
@@ -40,7 +40,7 @@ public class Item : MonoBehaviour
             triggered = true;
             if (type == ItemTag.Weapon)
             {
-                GunManager._instance.equipWeapon(target, gunType, level);
+                WeaponManager._instance.equipWeapon(target, weaponType, level);
             }
         }
         Destroy(gameObject);

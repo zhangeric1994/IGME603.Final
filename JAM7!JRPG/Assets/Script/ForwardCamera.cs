@@ -14,6 +14,8 @@ public class ForwardCamera : MonoBehaviour
     private bool refeshing;
 
     [SerializeField] private Transform target;
+
+    static public ForwardCamera _instance;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class ForwardCamera : MonoBehaviour
     }
     public void Initialize()
     {
+        _instance = this;
         var players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var player in players)
         {
