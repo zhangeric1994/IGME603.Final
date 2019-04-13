@@ -95,7 +95,7 @@ public class GunManager : MonoBehaviour
         var defaultPos = Guns[(int) type].transform.localPosition;
         var temp = Instantiate(Guns[(int) type]);
 
-        temp.transform.parent = player.gunHolder;
+        temp.transform.parent = player.weaponHolder;
         temp.transform.localPosition = defaultPos;
         temp.transform.right = player.GetComponent<SpriteRenderer>().flipX ? -Vector2.right : Vector2.right; 
         temp.GetComponent<Gun>().type = type;

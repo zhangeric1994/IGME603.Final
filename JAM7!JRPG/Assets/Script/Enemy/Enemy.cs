@@ -45,6 +45,8 @@ public abstract class Enemy : MonoBehaviour
     public float damage;
     public bool boss;
 
+    public int lastHitId;
+
     protected EnemyState CurrentState
     {
         // this allowed to triggger codes when the state switched
@@ -162,7 +164,7 @@ public abstract class Enemy : MonoBehaviour
                     if (distanceToEnemy > 0.5f && direction.y > 0.2f && Mathf.Abs(direction.x) > 0.1f && lastFindJump + 4f < Time.unscaledTime)
                     {
                         // uniform the direction vector
-                        findCloestJumpPoint();
+                        findClosestJumpPoint();
                         lastFindJump = secondsf;
                         currentState = EnemyState.FindingJumpPoint;
                     }
@@ -193,7 +195,7 @@ public abstract class Enemy : MonoBehaviour
                 case EnemyState.FindingJumpPoint:
                     if (targetJumpPoint == null)
                     {
-                        findCloestJumpPoint();
+                        findClosestJumpPoint();
                         return;
                     }
 
@@ -211,7 +213,7 @@ public abstract class Enemy : MonoBehaviour
                     {
                         if (distanceToJump > 0.5f && direction.y > 0.2f && Mathf.Abs(direction.x) > 0.1f)
                         {
-                            findCloestJumpPoint();
+                            findClosestJumpPoint();
                             lastFindJump = secondsf;
                             currentState = EnemyState.FindingJumpPoint;
                         }
@@ -253,7 +255,7 @@ public abstract class Enemy : MonoBehaviour
             Debug.Log(gameObject.name + " dead");
             enemy_anim.SetBool("Dead", true);
             StartCoroutine(Destroy_delay());
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             deathCounted = true;
 
         }
@@ -279,7 +281,7 @@ public abstract class Enemy : MonoBehaviour
     }
 
 
-    private void findCloestJumpPoint()
+    private void findClosestJumpPoint()
     {
         var JumpPoints = GameObject.FindGameObjectsWithTag("JumpPoint");
         float smallestDistance = 9999;
@@ -302,6 +304,12 @@ public abstract class Enemy : MonoBehaviour
         targetJumpPoint = cloestJumpPoint;
     }
 
+    public void getHit(int id , int dmg)
+    {
+        lastHitId = id;
+        Hurt(dmg);
+    }
+
     public void setState(EnemyState state)
     {
         CurrentState = state;
@@ -316,6 +324,11 @@ public abstract class Enemy : MonoBehaviour
         IdleDuration = duration;
         IdleStart = Time.unscaledTime;
         setState(EnemyState.Idle);
+    }
+
+    public void knockBack()
+    {
+        transform.GetComponent<Rigidbody2D>().AddForce(-direction * 40f);
     }
 
     public void addKnock(float duration)
