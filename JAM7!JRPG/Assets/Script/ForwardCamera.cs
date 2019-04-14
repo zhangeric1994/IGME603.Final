@@ -14,6 +14,8 @@ public class ForwardCamera : MonoBehaviour
     private bool refeshing;
 
     [SerializeField] private Transform target;
+
+    static public ForwardCamera _instance;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class ForwardCamera : MonoBehaviour
     }
     public void Initialize()
     {
+        _instance = this;
         var players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var player in players)
         {
@@ -42,7 +45,7 @@ public class ForwardCamera : MonoBehaviour
             return;
         }
 
-        GetComponent<Camera>().orthographicSize = 1.5f;
+        GetComponent<Camera>().orthographicSize = 1.0f;
         float x = 0;
         float y = 0;
         if (shaking)
@@ -52,7 +55,7 @@ public class ForwardCamera : MonoBehaviour
         }
 
         float posx = Mathf.SmoothDamp(transform.position.x, target.position.x, ref velocity.x, smoothTimeX);
-        float posy = Mathf.SmoothDamp(transform.position.y, target.position.y + 0.7f, ref velocity.y, smoothTimeY);
+        float posy = Mathf.SmoothDamp(transform.position.y, target.position.y + 0.5f, ref velocity.y, smoothTimeY);
         transform.position = new Vector3(posx + x, posy + y, transform.position.z);
     }
 

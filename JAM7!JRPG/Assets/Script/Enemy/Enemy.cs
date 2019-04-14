@@ -45,6 +45,8 @@ public abstract class Enemy : MonoBehaviour
     public float damage;
     public bool boss;
 
+    public int lastHitId;
+
     protected EnemyState CurrentState
     {
         // this allowed to triggger codes when the state switched
@@ -147,7 +149,6 @@ public abstract class Enemy : MonoBehaviour
                             if (x < 50)
                             {
                                 turnBacked = !turnBacked;
-                                print("turnBacked");
                             }
                             lastTurnSecond = seconds;
                         }
@@ -162,7 +163,7 @@ public abstract class Enemy : MonoBehaviour
                     if (distanceToEnemy > 0.5f && direction.y > 0.2f && Mathf.Abs(direction.x) > 0.1f && lastFindJump + 4f < Time.unscaledTime)
                     {
                         // uniform the direction vector
-                        findCloestJumpPoint();
+                        findClosestJumpPoint();
                         lastFindJump = secondsf;
                         currentState = EnemyState.FindingJumpPoint;
                     }
@@ -193,7 +194,7 @@ public abstract class Enemy : MonoBehaviour
                 case EnemyState.FindingJumpPoint:
                     if (targetJumpPoint == null)
                     {
-                        findCloestJumpPoint();
+                        findClosestJumpPoint();
                         return;
                     }
 
@@ -211,7 +212,7 @@ public abstract class Enemy : MonoBehaviour
                     {
                         if (distanceToJump > 0.5f && direction.y > 0.2f && Mathf.Abs(direction.x) > 0.1f)
                         {
-                            findCloestJumpPoint();
+                            findClosestJumpPoint();
                             lastFindJump = secondsf;
                             currentState = EnemyState.FindingJumpPoint;
                         }
@@ -250,12 +251,20 @@ public abstract class Enemy : MonoBehaviour
         if (health <= 0 && !deathCounted)
         {
             //died
-            Debug.Log(gameObject.name + " dead");
+            
             enemy_anim.SetBool("Dead", true);
+            
+            int num = Random.Range(0, 100);
+            Debug.Log("num:"+num);
+            if (num < 70 || boss)
+            {
+                WeaponManager._instance.randomDrop(transform.position);
+                Debug.Log("item!");
+            }
+           
             StartCoroutine(Destroy_delay());
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             deathCounted = true;
-
         }
 
     }
@@ -279,11 +288,11 @@ public abstract class Enemy : MonoBehaviour
     }
 
 
-    private void findCloestJumpPoint()
+    private void findClosestJumpPoint()
     {
         var JumpPoints = GameObject.FindGameObjectsWithTag("JumpPoint");
         float smallestDistance = 9999;
-        Transform cloestJumpPoint = null;
+        Transform closestJumpPoint = null;
         foreach (var jumpPoint in JumpPoints)
         {
             var direction = jumpPoint.transform.position - transform.position;
@@ -294,12 +303,19 @@ public abstract class Enemy : MonoBehaviour
                 {
 
                     smallestDistance = direction.sqrMagnitude;
-                    cloestJumpPoint = jumpPoint.transform;
+                    closestJumpPoint = jumpPoint.transform;
                 }
 
             }
         }
-        targetJumpPoint = cloestJumpPoint;
+        targetJumpPoint = closestJumpPoint;
+    }
+
+    public void getHit(int id , int dmg)
+    {
+        GUIManager.Singleton.CreateFloatingTextForDamage(dmg,transform.position);
+        lastHitId = id;
+        Hurt(dmg);
     }
 
     public void setState(EnemyState state)
@@ -318,6 +334,11 @@ public abstract class Enemy : MonoBehaviour
         setState(EnemyState.Idle);
     }
 
+    public void knockBack(float force)
+    {
+        transform.GetComponent<Rigidbody2D>().AddForce(-direction * force);
+    }
+
     public void addKnock(float duration)
     {
         knocking = true;
@@ -333,8 +354,6 @@ public abstract class Enemy : MonoBehaviour
         if (health < 0)
         {
             //dead
-            int num = Random.Range(0, 100);
-            if (num < 50 || boss) GunManager._instance.randomDrop(transform.position);
             Destroy(gameObject);
         }
         else

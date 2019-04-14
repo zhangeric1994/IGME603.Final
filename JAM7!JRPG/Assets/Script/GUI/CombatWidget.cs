@@ -18,9 +18,9 @@ public class CombatWidget : GUIWidget
     {
         base.Show();
 
-        UpdateMagazine(player.Magazine);
+        //UpdateMagazine(player.Magazine);
 
-        player.OnMagazineUpdate.AddListener(UpdateMagazine);
+        //player.OnMagazineUpdate.AddListener(UpdateMagazine);
         player.OnHpChange.AddListener(UpdateHealth);
     }
 
@@ -28,7 +28,7 @@ public class CombatWidget : GUIWidget
     {
         base.Hide();
 
-        player.OnMagazineUpdate.RemoveListener(UpdateMagazine);
+       // player.OnMagazineUpdate.RemoveListener(UpdateMagazine);
         player.OnHpChange.RemoveListener(UpdateHealth);
     }
 
@@ -55,7 +55,7 @@ public class CombatWidget : GUIWidget
 
     private void OnDestroy()
     {
-        player.OnMagazineUpdate.RemoveListener(UpdateMagazine);
+        //player.OnMagazineUpdate.RemoveListener(UpdateMagazine);
         player.OnHpChange.RemoveListener(UpdateHealth);
     }
 }
