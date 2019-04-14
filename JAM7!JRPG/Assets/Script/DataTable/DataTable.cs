@@ -14,11 +14,10 @@ public abstract class DataTable : ScriptableObject
 
 public abstract class DataTable<T> : DataTable, ISerializationCallbackReceiver where T : DataTableEntry
 {
-    
-    [SerializeField] private T[] entries;
+    [SerializeField] private T[] serializedEntries;
 
 
-    private Dictionary<int, T> dict = new Dictionary<int, T>();
+    private Dictionary<int, T> entries = new Dictionary<int, T>();
 
 
     /// <summary>
@@ -30,7 +29,7 @@ public abstract class DataTable<T> : DataTable, ISerializationCallbackReceiver w
     {
         get
         {
-            return dict[index];
+            return entries[index];
         }
     }
 
@@ -38,25 +37,25 @@ public abstract class DataTable<T> : DataTable, ISerializationCallbackReceiver w
     {
         get
         {
-            return dict.Count;
+            return entries.Count;
         }
     }
 
 
     void ISerializationCallbackReceiver.OnAfterDeserialize()
     {
-        if (entries != null)
+        if (serializedEntries != null)
         {
-            dict.Clear();
+            entries.Clear();
 
-            for (int i = 0; i < entries.Length; ++i)
+            for (int i = 0; i < serializedEntries.Length; ++i)
             {
-                T entry = entries[i];
+                T entry = serializedEntries[i];
 
                 int index = entry.Index;
 
-                if (!dict.ContainsKey(index))
-                    dict.Add(index, entry);
+                if (!entries.ContainsKey(index))
+                    entries.Add(index, entry);
             }
 
 #if UNITY_EDITOR
@@ -69,14 +68,14 @@ public abstract class DataTable<T> : DataTable, ISerializationCallbackReceiver w
     void ISerializationCallbackReceiver.OnBeforeSerialize()
     {
 #if UNITY_EDITOR
-        if (entries == null || entries.Length < dict.Count)
-            entries = new T[dict.Count];
+        if (serializedEntries == null || serializedEntries.Length < entries.Count)
+            serializedEntries = new T[entries.Count];
 #else
         entries = new Attribute[attributes.Count];
 #endif
 
         int i = 0;
-        foreach (KeyValuePair<int, T> pair in dict)
-            entries[i++] = pair.Value;
+        foreach (KeyValuePair<int, T> pair in entries)
+            serializedEntries[i++] = pair.Value;
     }
 }

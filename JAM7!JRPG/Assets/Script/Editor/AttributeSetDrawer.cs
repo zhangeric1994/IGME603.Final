@@ -8,11 +8,17 @@ public class AttributeSetDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        EditorGUI.BeginProperty(position, label, property);
+
+        Rect contentPosition = EditorGUI.PrefixLabel(position, label);
+
+        position.width = contentPosition.x - position.x;
         EditorGUI.PropertyField(position, property, GUIContent.none, false);
 
         SerializedProperty list = property.FindPropertyRelative("serializedAttributes");
 
-        Rect contentPosition = EditorGUI.PrefixLabel(position, label);
+        int indentLevel = EditorGUI.indentLevel;
+
         EditorGUI.indentLevel = 0;
 
         if (property.isExpanded)
@@ -43,5 +49,8 @@ public class AttributeSetDrawer : PropertyDrawer
         }
         else
             EditorGUI.LabelField(contentPosition, list.arraySize.ToString());
+
+        EditorGUI.indentLevel = indentLevel;
+        EditorGUI.EndProperty();
     }
 }

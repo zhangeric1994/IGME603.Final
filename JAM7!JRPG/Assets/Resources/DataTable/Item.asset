@@ -12,14 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d72974243583044a828985815ed3b0, type: 3}
   m_Name: Item
   m_EditorClassIdentifier: 
-  entries:
-  - id: 10
+  serializedEntries:
+  - id: 0
     name: 
     icon: {fileID: 0}
     sprite: {fileID: 0}
     attributes:
-      serializedAttributes:
-      - id: 0
-        value: 0
-      - id: 0
-        value: 0
+      serializedAttributes: []
