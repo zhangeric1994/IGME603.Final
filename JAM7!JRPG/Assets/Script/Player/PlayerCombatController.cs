@@ -10,12 +10,16 @@ public enum StatsType : int
     Wisdom
 }
 
-public enum HeroType : int
+public enum statsType : int
 {
-    // may move this part to stats manager or game manager
-    Knight,
-    Nurse,
-    Fat
+    WalkSpeed,
+    JumpPower,
+    MaxHp,
+    CriticalChance,
+    CriticalDamage,
+    BaseDamge,
+    attackSpeed,
+    
 }
 
 
@@ -29,9 +33,16 @@ public enum PlayerCombatState
 public class PlayerCombatController : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private int jumpPower;
-    [SerializeField] private int maxHp;
+    [SerializeField] public float walkSpeed;
+    [SerializeField] public int jumpPower;
+    [SerializeField] public int maxHp;
+
+    [SerializeField] public float criticalChance;
+    [SerializeField] public float criticalDamageFactor;
+
+    [SerializeField] public float damageFactor;
+    [SerializeField] public float attackSpeedFactor;
+    
 
     public Transform weaponHolder;
 
@@ -52,23 +63,18 @@ public class PlayerCombatController : MonoBehaviour
 
     private float invulnerableInterval = 0.3f;
     private float lastHit;
-
-    [SerializeField] private HeroType type;
-
-    [SerializeField] private float coolDown;
-    private float lastAbility;
+    
     
 
     [SerializeField] private GameObject shield;
 
     public CombatManager Combat;
-    private bool inAbility = false;
+    
     private Vector3 defaultScale;
     
     public bool okToAttack;
 
     public EventOnDataChange2<int> OnHpChange { get; private set; }
-    public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
 
     public GameObject cam;
     
@@ -135,24 +141,6 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
-    public int Magazine
-    {
-        get
-        {
-            return magazine;
-        }
-
-        private set
-        {
-            if (value != magazine)
-            {
-                magazine = value;
-
-                OnMagazineUpdate.Invoke(magazine);
-            }
-        }
-    }
-
     private PlayerCombatController() { }
 
     public void Initialize(int id)
@@ -160,12 +148,6 @@ public class PlayerCombatController : MonoBehaviour
         PlayerID = id;
 
         OnHpChange = new EventOnDataChange2<int>();
-        OnMagazineUpdate = new EventOnDataChange1<int>();
-    }
-
-    public Vector2 GetAllignment()
-    {
-        return aimmingDirection;
     }
 
     private void Start()
@@ -199,6 +181,7 @@ public class PlayerCombatController : MonoBehaviour
             GetCamera();
             return;
         }
+        
         switch (currentState)
         {
             case PlayerCombatState.OnGround:
@@ -232,25 +215,30 @@ public class PlayerCombatController : MonoBehaviour
                         anim.SetFloat("Speed",0f);
                     }
 
-                    
-                    
-
                     if (Input.GetButtonDown("Jump") && lastInput != Time.unscaledTime + 10f)
+                    {
                         CurrentState = PlayerCombatState.InAir;
+                        lastInput = Time.unscaledTime; 
+                    }
 
-                    if (Input.GetButtonDown("Pick") && !inAbility && lastInput != Time.unscaledTime + 10f)
+                    if (Input.GetButtonDown("Pick") && lastInput != Time.unscaledTime + 10f)
+                    {
                         GetItem();
+                        lastInput = Time.unscaledTime; 
+                    }
+                        
 
                     if (Input.GetButton("Fire") && okToAttack && lastInput != Time.unscaledTime + 10f)
                     {
                         okToAttack = false;
                         anim.Play(weaponHolder.GetComponentInChildren<Weapon>().getAnimationName());
+                        anim.speed = 1 / attackSpeedFactor;
+                        lastInput = Time.unscaledTime;
                     }
                         
                 }
                 break;
-
-
+            
             case PlayerCombatState.InAir:
                 {
                     float x = Input.GetAxis("Horizontal");
@@ -305,6 +293,43 @@ public class PlayerCombatController : MonoBehaviour
 
     }
 
+//    public void setStates(statsType type, float num)
+//    {
+//        switch (type)
+//        {
+//            case statsType.attackSpeed:
+//                attackSpeedFactor += num;
+//                break;
+//            
+//            case statsType.JumpPower:
+//                jumpPower += (int)num;
+//                break;
+//            
+//            case statsType.CriticalChance:
+//                criticalChance += num;
+//                break;
+//            
+//            case statsType.CriticalDamage:
+//                criticalDamageFactor += num;
+//                break;
+//            
+//            case statsType.MaxHp:
+//                maxHp += (int)num;
+//                hp += (int)num;
+//                break;
+//            
+//            case statsType.BaseDamge:
+//                damageFactor += num;
+//                break;
+//            
+//            case statsType.WalkSpeed:
+//                walkSpeed += num;
+//                break;
+//            
+//        }
+//        
+//    }
+
 
     public void activeAttackBox()
     {
@@ -343,6 +368,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.02f);
         okToAttack = true;
+        anim.speed = 1;
     }
 
     public void pauseAtkAnim(float hitStop)
@@ -354,7 +380,7 @@ public class PlayerCombatController : MonoBehaviour
     IEnumerator resetAtkAnim(float hitStop)
     {
         yield return new WaitForSeconds(hitStop);
-        anim.speed = 1f;
+        anim.speed = 1 / attackSpeedFactor;
     }
 
 //    private void Ability()
@@ -416,6 +442,43 @@ public class PlayerCombatController : MonoBehaviour
                     item.GetComponent<Item>().Trigger(this);
                     //TODO do UI update
                 }
+                else if (item.getType() == ItemTag.PowerUp)
+                {
+                    switch (item.getStatsType())
+                    {
+                        case statsType.attackSpeed:
+                            attackSpeedFactor += 0.1f;
+                            break;
+            
+                        case statsType.JumpPower:
+                            jumpPower += 10;
+                            break;
+            
+                        case statsType.CriticalChance:
+                            criticalChance += 5f;
+                            break;
+            
+                        case statsType.CriticalDamage:
+                            criticalDamageFactor += 0.1f;
+                            break;
+            
+                        case statsType.MaxHp:
+                            maxHp += 1;
+                            hp += 1;
+                            break;
+            
+                        case statsType.BaseDamge:
+                            damageFactor += 0.1f;
+                            break;
+            
+                        case statsType.WalkSpeed:
+                            walkSpeed += 0.05f;
+                            break;
+                    }
+                    
+                    item.GetComponent<Item>().Trigger(this);
+                    //TODO do UI update
+                }
             }
         }
     }
@@ -435,7 +498,6 @@ public class PlayerCombatController : MonoBehaviour
         //simple animation
         yield return new WaitForSeconds(6f);
         shield.SetActive(false);
-        inAbility = false;
     }
 
     IEnumerator HurtDelay()

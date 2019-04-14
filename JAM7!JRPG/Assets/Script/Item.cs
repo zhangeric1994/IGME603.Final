@@ -5,7 +5,8 @@ using UnityEngine.Experimental.XR.Interaction;
 public enum ItemTag : int
 {
     Weapon,
-    Heal
+    Heal,
+    PowerUp
 }
 
 public class Item : MonoBehaviour
@@ -20,6 +21,8 @@ public class Item : MonoBehaviour
     [SerializeField] private SpriteRenderer levelText;
     
     [SerializeField] private WeaponType weaponType;
+    
+    [SerializeField] private statsType statsType;
     [SerializeField] private int level;
     private float speed = 2.5f;
     // Use this for initialization
@@ -41,6 +44,9 @@ public class Item : MonoBehaviour
             if (type == ItemTag.Weapon)
             {
                 WeaponManager._instance.equipWeapon(target, weaponType, level);
+            }else if (type == ItemTag.PowerUp)
+            {
+               //
             }
         }
         Destroy(gameObject);
@@ -55,6 +61,12 @@ public class Item : MonoBehaviour
     public ItemTag getType()
     {
         return type;
+    }
+    
+    
+    public statsType getStatsType()
+    {
+        return statsType;
     }
 
     public SpriteRenderer getLevelSprite()

@@ -18,6 +18,8 @@ public class WeaponManager : MonoBehaviour
     
     [SerializeField] private GameObject[] WeaponsItem;
     
+    [SerializeField] private GameObject[] PowerUpItem;
+    
     [SerializeField] private GameObject Heal;
     
     [SerializeField] private Sprite[] levelTag;
@@ -101,11 +103,20 @@ public class WeaponManager : MonoBehaviour
         temp.transform.position = player;
     }
     
-    public void generateHealDrop(Transform player)
+    public void generateHealDrop(Vector3 pos)
     {
         var temp = Instantiate(Heal);
         //todo Add a parent to organize
-        temp.transform.position = player.position;
+        temp.transform.position = pos;
+    }
+    
+    
+    public void generatePowerDrop(Vector3 pos)
+    {
+        var index = Random.Range(0, PowerUpItem.Length);
+        //todo Add a parent to organize
+        var temp = Instantiate(PowerUpItem[index]);
+        temp.transform.position = pos;
     }
     
     
@@ -114,17 +125,24 @@ public class WeaponManager : MonoBehaviour
     {
         int random = Random.Range(0, 100);
         int type = Random.Range(0, 2);
-        if (random < 15)
+        if (random < 8)
         {
             //level three
             generateDrop(Pos, (WeaponType) type, 3);
-        }else if (random > 15 && random < 45)
+        }else if (random >= 8 && random < 18)
         {
             generateDrop(Pos, (WeaponType) type, 2);
         }
-        else
+        else if (random >= 18 && random < 38)
         {
             generateDrop(Pos, (WeaponType) type, 1);
+        }else if (random >= 38 && random < 55)
+        {
+            generateHealDrop(Pos);
+        }
+        else
+        {
+            generatePowerDrop(Pos);
         }
     }
 }

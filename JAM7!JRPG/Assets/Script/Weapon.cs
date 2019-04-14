@@ -80,13 +80,21 @@ public class Weapon : MonoBehaviour
             if (enemy && enemy.lastHitId != AtkId) 
             {
                 // new attack
-                enemy.getHit(AtkId,(int)damage);
+                // check for critical strike
+                if (Random.Range(0, 100) < player.criticalChance)
+                {
+                    //then critical 
+                    enemy.getHit(AtkId,(int)(damage * player.damageFactor * player.criticalDamageFactor));
+                }
+                else
+                {
+                    enemy.getHit(AtkId, (int) (damage * player.damageFactor * 1.0f));  
+                }
+                
                 enemy.knockBack(bouncingBackForce); 
                 player.pauseAtkAnim(hitStop);
             }
         }
     }
-    
-    
     
 }
