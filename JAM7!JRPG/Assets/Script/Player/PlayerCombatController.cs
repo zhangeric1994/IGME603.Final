@@ -10,12 +10,16 @@ public enum StatsType : int
     Wisdom
 }
 
-public enum HeroType : int
+public enum statsType : int
 {
-    // may move this part to stats manager or game manager
-    Knight,
-    Nurse,
-    Fat
+    WalkSpeed,
+    JumpPower,
+    MaxHp,
+    CriticalChance,
+    CriticalDamage,
+    BaseDamge,
+    attackSpeed,
+    
 }
 
 
@@ -28,10 +32,17 @@ public enum PlayerCombatState
 
 public class PlayerCombatController : MonoBehaviour
 {
-    [Header("Stats")]
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private int jumpPower;
-    [SerializeField] private int maxHp;
+    //[Header("Stats")]
+    //[SerializeField] public float walkSpeed;
+    //[SerializeField] public int jumpPower;
+    //[SerializeField] public int maxHp;
+
+    //[SerializeField] public float criticalChance;
+    //[SerializeField] public float criticalDamageFactor;
+
+    //[SerializeField] public float damageFactor;
+    //[SerializeField] public float attackSpeedFactor;
+    
 
     public Transform weaponHolder;
 
@@ -47,29 +58,36 @@ public class PlayerCombatController : MonoBehaviour
 
     private bool isInAir;
 
-    private int hp;
+    private float hp;
     private int magazine;
 
     private float invulnerableInterval = 0.3f;
     private float lastHit;
-
-    [SerializeField] private HeroType type;
-
-    [SerializeField] private float coolDown;
-    private float lastAbility;
+    
     
 
     [SerializeField] private GameObject shield;
 
     public CombatManager Combat;
-    private bool inAbility = false;
-
+    
+    private Vector3 defaultScale;
+    
     public bool okToAttack;
 
-    public EventOnDataChange2<int> OnHpChange { get; private set; }
-    public EventOnDataChange1<int> OnMagazineUpdate { get; private set; }
+    public EventOnDataChange2<float> OnHpChange { get; private set; }
 
     public GameObject cam;
+    
+    private float lastInput;
+
+
+    public Player Avatar
+    {
+        get
+        {
+            return Player.GetPlayer(PlayerID);
+        }
+    }
 
     public PlayerCombatState CurrentState
     {
@@ -99,14 +117,14 @@ public class PlayerCombatController : MonoBehaviour
                         break;
 
                     case PlayerCombatState.InAir:
-                        rb2d.AddForce(jumpPower * Vector2.up);
+                        rb2d.AddForce(Avatar.GetStatistic(Statistic.JumpPower) * Vector2.up);
                         break;
                 }
             }
         }
     }
 
-    public int Hp
+    public float Hp
     {
         get
         {
@@ -119,36 +137,11 @@ public class PlayerCombatController : MonoBehaviour
             {
                 hp = value;
 
-                OnHpChange.Invoke(hp, MaxHp);
+                OnHpChange.Invoke(hp, Avatar.GetStatistic(Statistic.MaxHp));
             }
         }
     }
 
-    public int MaxHp
-    {
-        get
-        {
-            return Player.GetPlayer(PlayerID).MaxHp;
-        }
-    }
-
-    public int Magazine
-    {
-        get
-        {
-            return magazine;
-        }
-
-        private set
-        {
-            if (value != magazine)
-            {
-                magazine = value;
-
-                OnMagazineUpdate.Invoke(magazine);
-            }
-        }
-    }
 
     private PlayerCombatController() { }
 
@@ -156,13 +149,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         PlayerID = id;
 
-        OnHpChange = new EventOnDataChange2<int>();
-        OnMagazineUpdate = new EventOnDataChange1<int>();
-    }
-
-    public Vector2 GetAllignment()
-    {
-        return aimmingDirection;
+        OnHpChange = new EventOnDataChange2<float>();
     }
 
     private void Start()
@@ -170,8 +157,8 @@ public class PlayerCombatController : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
-        hp = maxHp;
+        defaultScale = transform.localScale;
+        hp = Avatar.GetStatistic(Statistic.MaxHp);
 
         CurrentState = PlayerCombatState.OnGround;
         okToAttack = true;
@@ -196,6 +183,7 @@ public class PlayerCombatController : MonoBehaviour
             GetCamera();
             return;
         }
+        
         switch (currentState)
         {
             case PlayerCombatState.OnGround:
@@ -205,39 +193,56 @@ public class PlayerCombatController : MonoBehaviour
 
                     if (okToAttack && x != 0 || y != 0)
                     {
-                        transform.localScale = x < 0 ? new Vector3(-1,1,1) : new Vector3(1,1,1);
+                        transform.localScale = x < 0 ? new Vector3(-defaultScale.x,defaultScale.y,defaultScale.z) 
+                            : new Vector3(defaultScale.x,defaultScale.y,defaultScale.z);
                     }
 
                     //anim.SetFloat("Speed",Mathf.Abs(h)+Mathf.Abs(v));
 
                     if (okToAttack && x > 0)
                     {
+                        float walkSpeed = Avatar.GetStatistic(Statistic.WalkSpeed);
                         rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
+                        anim.SetFloat("Speed",walkSpeed);
                         //renderer.flipX = false;
                     }
                     else if (okToAttack && x < 0)
                     {
+                        float walkSpeed = Avatar.GetStatistic(Statistic.WalkSpeed);
                         rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
+                        anim.SetFloat("Speed",walkSpeed);
                         //renderer.flipX = true;
                     }
                     else
+                    {
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                        anim.SetFloat("Speed",0f);
+                    }
 
-                    if (Input.GetButtonDown("Jump"))
+                    if (Input.GetButtonDown("Jump") && lastInput != Time.time + 10f)
+                    {
                         CurrentState = PlayerCombatState.InAir;
+                        lastInput = Time.time;
+                    }
 
-                    if (Input.GetButtonDown("Pick") && !inAbility)
+                    if (Input.GetButtonDown("Pick") && lastInput != Time.time + 10f)
+                    {
                         GetItem();
+                        lastInput = Time.time;
+                    }
+                        
 
-                    if (Input.GetButton("Fire") && okToAttack)
+                    if (Input.GetButton("Fire") && okToAttack && lastInput != Time.time + 10f)
                     {
                         okToAttack = false;
                         anim.Play(weaponHolder.GetComponentInChildren<Weapon>().getAnimationName());
+                        anim.speed = 1 + Avatar.GetStatistic(Statistic.AttackSpeed);
+                        lastInput = Time.time;
                     }
                         
                 }
                 break;
-
+            
 
             case PlayerCombatState.InAir:
                 {
@@ -246,18 +251,19 @@ public class PlayerCombatController : MonoBehaviour
 
                     if (okToAttack && (x != 0 || y != 0))
                     {
-                        transform.localScale = x < 0 ? new Vector3(-1,1,1) : new Vector3(1,1,1);
+                        transform.localScale = x < 0 ? new Vector3(-defaultScale.x,defaultScale.y,defaultScale.z) 
+                            : new Vector3(defaultScale.x,defaultScale.y,defaultScale.z);
                     }
 
                     if (okToAttack && x > 0)
                     {
-                        rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
+                        rb2d.velocity = new Vector2(Avatar.GetStatistic(Statistic.WalkSpeed), rb2d.velocity.y);
                         //renderer.flipX = false;
                         //gunHolder.localScale = new Vector3(1.0f, 1.0f, 0.0f);
                     }
                     else if (okToAttack && x < 0)
                     {
-                        rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
+                        rb2d.velocity = new Vector2(-Avatar.GetStatistic(Statistic.WalkSpeed), rb2d.velocity.y);
                         //renderer.flipX = true;
                     }
                     else
@@ -292,6 +298,43 @@ public class PlayerCombatController : MonoBehaviour
 
     }
 
+//    public void setStates(statsType type, float num)
+//    {
+//        switch (type)
+//        {
+//            case statsType.attackSpeed:
+//                attackSpeedFactor += num;
+//                break;
+//            
+//            case statsType.JumpPower:
+//                jumpPower += (int)num;
+//                break;
+//            
+//            case statsType.CriticalChance:
+//                criticalChance += num;
+//                break;
+//            
+//            case statsType.CriticalDamage:
+//                criticalDamageFactor += num;
+//                break;
+//            
+//            case statsType.MaxHp:
+//                maxHp += (int)num;
+//                hp += (int)num;
+//                break;
+//            
+//            case statsType.BaseDamge:
+//                damageFactor += num;
+//                break;
+//            
+//            case statsType.WalkSpeed:
+//                walkSpeed += num;
+//                break;
+//            
+//        }
+//        
+//    }
+
 
     public void activeAttackBox()
     {
@@ -311,6 +354,11 @@ public class PlayerCombatController : MonoBehaviour
         {
             box.enabled = false;
         }
+
+        if (gameObject.GetComponentInChildren<Weapon>().type == WeaponType.Hammer)
+        {
+            ForwardCamera._instance.Shaking(0.05f,0.1f);
+        }
     }
     
     
@@ -325,41 +373,42 @@ public class PlayerCombatController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.02f);
         okToAttack = true;
+        anim.speed = 1;
     }
 
     public void pauseAtkAnim(float hitStop)
     {
-        anim.speed = 0.1f;
+        anim.speed /= 10;
         StartCoroutine(resetAtkAnim(hitStop));
     }
 
     IEnumerator resetAtkAnim(float hitStop)
     {
         yield return new WaitForSeconds(hitStop);
-        anim.speed = 1f;
+        anim.speed = 1 + Avatar.GetStatistic(Statistic.AttackSpeed);
     }
 
-    private void Ability()
-    {
-        lastAbility = Time.unscaledTime;
-        inAbility = true;
-        switch (type)
-        {
-            case HeroType.Knight:
-                float temp = weaponHolder.GetComponentInChildren<Gun>().reloadSpeed;
-
-                StartCoroutine(resetReloadDelay(temp));
-                break;
-            case HeroType.Nurse:
-                GunManager._instance.generateHealDrop(transform);
-                inAbility = false;
-                break;
-            case HeroType.Fat:
-                shield.SetActive(true);
-                StartCoroutine(resetShieldDelay());
-                break;
-        }
-    }
+//    private void Ability()
+//    {
+//        lastAbility = Time.unscaledTime;
+//        inAbility = true;
+//        switch (type)
+//        {
+//            case HeroType.Knight:
+////                float temp = weaponHolder.GetComponentInChildren<Gun>().reloadSpeed;
+//
+//                StartCoroutine(resetReloadDelay(temp));
+//                break;
+//            case HeroType.Nurse:
+//                GunManager._instance.generateHealDrop(transform);
+//                inAbility = false;
+//                break;
+//            case HeroType.Fat:
+//                shield.SetActive(true);
+//                StartCoroutine(resetShieldDelay());
+//                break;
+//        }
+//    }
 
 
 //    public void levelUp()
@@ -389,7 +438,7 @@ public class PlayerCombatController : MonoBehaviour
             {
                 if (item.getType() == ItemTag.Weapon)
                 {
-                    weaponHolder.GetComponentInChildren<Gun>().Destroy();
+                    weaponHolder.GetComponentInChildren<Weapon>().Destroy();
                     item.GetComponent<Item>().Trigger(this);
                 }
                 else if (item.getType() == ItemTag.Heal)
@@ -398,26 +447,65 @@ public class PlayerCombatController : MonoBehaviour
                     item.GetComponent<Item>().Trigger(this);
                     //TODO do UI update
                 }
+                else if (item.getType() == ItemTag.PowerUp)
+                {
+                    switch (item.getStatsType())
+                    {
+                        //TODO: Inventory
+
+                        //case statsType.attackSpeed:
+                        //    attackSpeedFactor += 0.1f;
+                        //    break;
+            
+                        //case statsType.JumpPower:
+                        //    jumpPower += 10;
+                        //    break;
+            
+                        //case statsType.CriticalChance:
+                        //    criticalChance += 5f;
+                        //    break;
+            
+                        //case statsType.CriticalDamage:
+                        //    criticalDamageFactor += 0.1f;
+                        //    break;
+            
+                        //case statsType.MaxHp:
+                        //    maxHp += 1;
+                        //    hp += 1;
+                        //    break;
+            
+                        //case statsType.BaseDamge:
+                        //    damageFactor += 0.1f;
+                        //    break;
+            
+                        //case statsType.WalkSpeed:
+                        //    walkSpeed += 0.05f;
+                        //    break;
+                    }
+                    
+                    item.GetComponent<Item>().Trigger(this);
+                    //TODO do UI update
+                }
             }
         }
     }
 
-    IEnumerator resetReloadDelay(float val)
-    {
-        //simple animation
-        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = 0;
-        weaponHolder.GetComponentInChildren<Gun>().fireRate *= 0.5f;
-        yield return new WaitForSeconds(4f);
-        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = val;
-        weaponHolder.GetComponentInChildren<Gun>().fireRate /= 0.5f;
-        inAbility = false;
-    }
+//    IEnumerator resetReloadDelay(float val)
+//    {
+////        //simple animation
+////        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = 0;
+////        weaponHolder.GetComponentInChildren<Gun>().fireRate *= 0.5f;
+////        yield return new WaitForSeconds(4f);
+////        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = val;
+////        weaponHolder.GetComponentInChildren<Gun>().fireRate /= 0.5f;
+////        inAbility = false;
+//    }
+
     IEnumerator resetShieldDelay()
     {
         //simple animation
         yield return new WaitForSeconds(6f);
         shield.SetActive(false);
-        inAbility = false;
     }
 
     IEnumerator HurtDelay()
