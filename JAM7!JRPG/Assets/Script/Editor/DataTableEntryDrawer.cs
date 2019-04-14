@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomPropertyDrawer(typeof(DataTableEntry), true)]
+//[CustomPropertyDrawer(typeof(DataTableEntry), true)]
 public class DataTableEntryDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

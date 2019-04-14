@@ -39,14 +39,6 @@ public class Player
     public EventOnDataChange2<float> OnAttackSpeedChange { get; private set; }
 
 
-    public float MaxHp
-    {
-        get
-        {
-            return stats[Statistic.MaxHp];
-        }
-    }
-
 
     private Player(int id, int maxHp, int power, int dexterity, int wisdom)
     {
@@ -94,47 +86,47 @@ public class Player
         OnWisdomChange = new EventOnDataChange1<int>();
     }
 
-    public float GetStatistic(Statistic statistic)
+    public float GetStatistic(StatisticType statistic)
     {
         return stats[statistic];
     }
 
 
-    private void DispatchStatisticChangeEvents(Statistic statistic, float previousValue, float currentValue)
+    private void DispatchStatisticChangeEvents(StatisticType statistic, float previousValue, float currentValue)
     {
         switch (statistic)
         {
-            case Statistic.WalkSpeed:
+            case StatisticType.WalkSpeed:
                 OnWalkSpeedChange.Invoke(previousValue, currentValue);
                 break;
 
 
-            case Statistic.JumpPower:
+            case StatisticType.JumpPower:
                 OnJumpPowerChange.Invoke(previousValue, currentValue);
                 break;
 
 
-            case Statistic.MaxHp:
+            case StatisticType.MaxHp:
                 OnMaxHpChange.Invoke(previousValue, currentValue);
                 break;
 
 
-            case Statistic.CriticalChance:
+            case StatisticType.CriticalChance:
                 OnCriticalChanceChange.Invoke(previousValue, currentValue);
                 break;
 
 
-            case Statistic.CriticalDamage:
+            case StatisticType.CriticalDamage:
                 OnCriticalDamageChange.Invoke(previousValue, currentValue);
                 break;
 
 
-            case Statistic.BaseDamage:
+            case StatisticType.BaseDamage:
                 OnBaseDamageChange.Invoke(previousValue, currentValue);
                 break;
 
 
-            case Statistic.AttackSpeed:
+            case StatisticType.AttackSpeed:
                 OnAttackSpeedChange.Invoke(previousValue, currentValue);
                 break;
         }

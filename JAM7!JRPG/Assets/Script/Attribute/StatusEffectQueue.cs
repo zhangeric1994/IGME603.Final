@@ -9,19 +9,19 @@ public class StatusEffectQueue : IAttributeCollection
     private List<StatusEffect> list;
     private int current;
 
-    public float this[int id]
-    {
-        get
-        {
-            return sumAttributes[id];
-        }
-    }
+    //public float this[int id]
+    //{
+    //    get
+    //    {
+    //        return sumAttributes[id];
+    //    }
+    //}
 
-    public float this[AttributeType attribute]
+    public float this[AttributeType type]
     {
         get
         {
-            return this[(int)attribute];
+            return sumAttributes[type];
         }
     }
 
@@ -57,12 +57,12 @@ public class StatusEffectQueue : IAttributeCollection
 
             if (!existedStatusEffect.ReachMaxNumStacks())
             {
-                foreach (KeyValuePair<int, float> attribute in existedStatusEffect)
+                foreach (KeyValuePair<AttributeType, float> attribute in existedStatusEffect)
                     sumAttributes.Add(attribute.Key, -attribute.Value);
 
                 existedStatusEffect.Stack(statusEffect);
 
-                foreach (KeyValuePair<int, float> attribute in existedStatusEffect)
+                foreach (KeyValuePair<AttributeType, float> attribute in existedStatusEffect)
                     sumAttributes.Add(attribute.Key, attribute.Value);
 
                 result = true;
@@ -83,7 +83,7 @@ public class StatusEffectQueue : IAttributeCollection
 
             map.Add(id, statusEffect);
 
-            foreach (KeyValuePair<int, float> attribute in statusEffect)
+            foreach (KeyValuePair<AttributeType, float> attribute in statusEffect)
                 sumAttributes.Add(attribute.Key, attribute.Value);
 
             result = true;
@@ -106,7 +106,7 @@ public class StatusEffectQueue : IAttributeCollection
 
         map.Remove(statusEffect.Id);
 
-        foreach (KeyValuePair<int, float> attribute in statusEffect)
+        foreach (KeyValuePair<AttributeType, float> attribute in statusEffect)
             sumAttributes.Add(attribute.Key, -attribute.Value);
 
         return statusEffect;
@@ -128,7 +128,7 @@ public class StatusEffectQueue : IAttributeCollection
 
             map.Remove(id);
 
-            foreach (KeyValuePair<int, float> attribute in statusEffect)
+            foreach (KeyValuePair<AttributeType, float> attribute in statusEffect)
                 sumAttributes.Add(attribute.Key, -attribute.Value);
         }
 
@@ -152,7 +152,7 @@ public class StatusEffectQueue : IAttributeCollection
             Insert(statusEffect, mid, end);
     }
 
-    public IEnumerator<KeyValuePair<int, float>> GetEnumerator()
+    public IEnumerator<KeyValuePair<AttributeType, float>> GetEnumerator()
     {
         return sumAttributes.GetEnumerator();
     }

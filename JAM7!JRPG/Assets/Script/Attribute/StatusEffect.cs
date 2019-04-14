@@ -29,19 +29,19 @@ public class StatusEffect : IAttributeCollection, IComparable
         }
     }
 
-    public float this[int id]
-    {
-        get
-        {
-            return attributes[id] * NumStacks;
-        }
-    }
+    //public float this[int id]
+    //{
+    //    get
+    //    {
+    //        return attributes[id] * NumStacks;
+    //    }
+    //}
 
-    public float this[AttributeType attribute]
+    public float this[AttributeType type]
     {
         get
         {
-            return attributes[(int)attribute] * NumStacks;
+            return attributes[type] * NumStacks;
         }
     }
 
@@ -82,7 +82,7 @@ public class StatusEffect : IAttributeCollection, IComparable
         return CompareTo((StatusEffect)obj);
     }
 
-    public IEnumerator<KeyValuePair<int, float>> GetEnumerator()
+    public IEnumerator<KeyValuePair<AttributeType, float>> GetEnumerator()
     {
         return new Enumerator(this);
     }
@@ -97,10 +97,10 @@ public class StatusEffect : IAttributeCollection, IComparable
         return string.Format("[{0}][x{1}/{2}] Id:{3} Name:{4} Attributes:{5}", EndTime, NumStacks, MaxNumStacks, Id, Data.Name, attributes);
     }
 
-    public class Enumerator : IEnumerator<KeyValuePair<int, float>>
+    public class Enumerator : IEnumerator<KeyValuePair<AttributeType, float>>
     {
         private int numStacks;
-        private IEnumerator<KeyValuePair<int, float>> attributeSetEnumerator;
+        private IEnumerator<KeyValuePair<AttributeType, float>> attributeSetEnumerator;
 
         public Enumerator(StatusEffect statusEffect)
         {
@@ -108,11 +108,11 @@ public class StatusEffect : IAttributeCollection, IComparable
             attributeSetEnumerator = statusEffect.attributes.GetEnumerator();
         }
 
-        public KeyValuePair<int, float> Current
+        public KeyValuePair<AttributeType, float> Current
         {
             get
             {
-                return new KeyValuePair<int, float>(attributeSetEnumerator.Current.Key, attributeSetEnumerator.Current.Value * numStacks);
+                return new KeyValuePair<AttributeType, float>(attributeSetEnumerator.Current.Key, attributeSetEnumerator.Current.Value * numStacks);
             }
         }
 

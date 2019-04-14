@@ -80,14 +80,14 @@ public class Weapon : MonoBehaviour
             {
                 // new attack
                 // check for critical strike
-                if (Random.value < player.Avatar.GetStatistic(Statistic.CriticalChance))
+                if (Random.value < player.Avatar.GetStatistic(StatisticType.CriticalChance))
                 {
                     //then critical
-                    enemy.getHit(AtkId,(int)(damage * player.Avatar.GetStatistic(Statistic.BaseDamage) * player.Avatar.GetStatistic(Statistic.CriticalDamage)));
+                    enemy.getHit(AtkId,(int)(damage * player.Avatar.GetStatistic(StatisticType.BaseDamage) * player.Avatar.GetStatistic(StatisticType.CriticalDamage)));
                 }
                 else
                 {
-                    enemy.getHit(AtkId, (int)(damage * player.Avatar.GetStatistic(Statistic.BaseDamage) * 1.0f));
+                    enemy.getHit(AtkId, (int)(damage * player.Avatar.GetStatistic(StatisticType.BaseDamage) * 1.0f));
                 }
                 
                 enemy.knockBack(bouncingBackForce); 

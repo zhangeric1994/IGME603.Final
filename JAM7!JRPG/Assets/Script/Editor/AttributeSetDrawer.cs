@@ -23,21 +23,25 @@ public class AttributeSetDrawer : PropertyDrawer
 
         if (property.isExpanded)
         {
+            int N = list.arraySize;
+
             float x = contentPosition.x;
             float width = contentPosition.width;
-            float height = contentPosition.height;
+            float height = contentPosition.height / (N + 1);
 
-            contentPosition.width = AttributeDrawer.idWidth;
+            contentPosition.height = height;
+
+            contentPosition.width = AttributeDrawer.typeWidth;
             EditorGUI.PropertyField(contentPosition, list.FindPropertyRelative("Array.size"), GUIContent.none);
 
-            contentPosition.x += AttributeDrawer.idWidth;
+            contentPosition.x += AttributeDrawer.typeWidth;
             contentPosition.width = buttonWidth;
             if (GUI.Button(contentPosition, "+"))
-                list.InsertArrayElementAtIndex(list.arraySize);
+                list.InsertArrayElementAtIndex(N);
 
             contentPosition.x += buttonWidth;
             if (GUI.Button(contentPosition, "-"))
-                list.DeleteArrayElementAtIndex(list.arraySize - 1);
+                list.DeleteArrayElementAtIndex(N - 1);
 
             contentPosition.x = x;
             contentPosition.width = width;
@@ -52,5 +56,11 @@ public class AttributeSetDrawer : PropertyDrawer
 
         EditorGUI.indentLevel = indentLevel;
         EditorGUI.EndProperty();
+    }
+
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        float height = EditorGUI.GetPropertyHeight(property.FindPropertyRelative("serializedAttributes"), label);
+        return property.isExpanded ? (1 + property.FindPropertyRelative("serializedAttributes").arraySize) * height : height; 
     }
 }

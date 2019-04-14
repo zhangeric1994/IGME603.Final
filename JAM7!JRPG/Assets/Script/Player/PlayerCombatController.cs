@@ -117,7 +117,7 @@ public class PlayerCombatController : MonoBehaviour
                         break;
 
                     case PlayerCombatState.InAir:
-                        rb2d.AddForce(Avatar.GetStatistic(Statistic.JumpPower) * Vector2.up);
+                        rb2d.AddForce(Avatar.GetStatistic(StatisticType.JumpPower) * Vector2.up);
                         break;
                 }
             }
@@ -137,7 +137,7 @@ public class PlayerCombatController : MonoBehaviour
             {
                 hp = value;
 
-                OnHpChange.Invoke(hp, Avatar.GetStatistic(Statistic.MaxHp));
+                OnHpChange.Invoke(hp, Avatar.GetStatistic(StatisticType.MaxHp));
             }
         }
     }
@@ -158,7 +158,7 @@ public class PlayerCombatController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         defaultScale = transform.localScale;
-        hp = Avatar.GetStatistic(Statistic.MaxHp);
+        hp = Avatar.GetStatistic(StatisticType.MaxHp);
 
         CurrentState = PlayerCombatState.OnGround;
         okToAttack = true;
@@ -201,14 +201,14 @@ public class PlayerCombatController : MonoBehaviour
 
                     if (okToAttack && x > 0)
                     {
-                        float walkSpeed = Avatar.GetStatistic(Statistic.WalkSpeed);
+                        float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
                         rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
                         anim.SetFloat("Speed",walkSpeed);
                         //renderer.flipX = false;
                     }
                     else if (okToAttack && x < 0)
                     {
-                        float walkSpeed = Avatar.GetStatistic(Statistic.WalkSpeed);
+                        float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
                         rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
                         anim.SetFloat("Speed",walkSpeed);
                         //renderer.flipX = true;
@@ -236,7 +236,7 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         okToAttack = false;
                         anim.Play(weaponHolder.GetComponentInChildren<Weapon>().getAnimationName());
-                        anim.speed = 1 + Avatar.GetStatistic(Statistic.AttackSpeed);
+                        anim.speed = 1 + Avatar.GetStatistic(StatisticType.AttackSpeed);
                         lastInput = Time.time;
                     }
                         
@@ -257,13 +257,13 @@ public class PlayerCombatController : MonoBehaviour
 
                     if (okToAttack && x > 0)
                     {
-                        rb2d.velocity = new Vector2(Avatar.GetStatistic(Statistic.WalkSpeed), rb2d.velocity.y);
+                        rb2d.velocity = new Vector2(Avatar.GetStatistic(StatisticType.WalkSpeed), rb2d.velocity.y);
                         //renderer.flipX = false;
                         //gunHolder.localScale = new Vector3(1.0f, 1.0f, 0.0f);
                     }
                     else if (okToAttack && x < 0)
                     {
-                        rb2d.velocity = new Vector2(-Avatar.GetStatistic(Statistic.WalkSpeed), rb2d.velocity.y);
+                        rb2d.velocity = new Vector2(-Avatar.GetStatistic(StatisticType.WalkSpeed), rb2d.velocity.y);
                         //renderer.flipX = true;
                     }
                     else
@@ -385,7 +385,7 @@ public class PlayerCombatController : MonoBehaviour
     IEnumerator resetAtkAnim(float hitStop)
     {
         yield return new WaitForSeconds(hitStop);
-        anim.speed = 1 + Avatar.GetStatistic(Statistic.AttackSpeed);
+        anim.speed = 1 + Avatar.GetStatistic(StatisticType.AttackSpeed);
     }
 
 //    private void Ability()
@@ -453,36 +453,43 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         //TODO: Inventory
 
-                        //case statsType.attackSpeed:
-                        //    attackSpeedFactor += 0.1f;
+
+                        //case statsType.WalkSpeed:
+                        //    walkSpeed += 0.05f;
                         //    break;
-            
+
+
                         //case statsType.JumpPower:
                         //    jumpPower += 10;
                         //    break;
-            
-                        //case statsType.CriticalChance:
-                        //    criticalChance += 5f;
-                        //    break;
-            
-                        //case statsType.CriticalDamage:
-                        //    criticalDamageFactor += 0.1f;
-                        //    break;
-            
+
+
                         //case statsType.MaxHp:
                         //    maxHp += 1;
                         //    hp += 1;
                         //    break;
-            
+
+
+                        //case statsType.CriticalChance:
+                        //    criticalChance += 5f;
+                        //    break;
+
+
+                        //case statsType.CriticalDamage:
+                        //    criticalDamageFactor += 0.1f;
+                        //    break;
+
+
                         //case statsType.BaseDamge:
                         //    damageFactor += 0.1f;
                         //    break;
-            
-                        //case statsType.WalkSpeed:
-                        //    walkSpeed += 0.05f;
+
+
+                        //case statsType.attackSpeed:
+                        //    attackSpeedFactor += 0.1f;
                         //    break;
                     }
-                    
+
                     item.GetComponent<Item>().Trigger(this);
                     //TODO do UI update
                 }

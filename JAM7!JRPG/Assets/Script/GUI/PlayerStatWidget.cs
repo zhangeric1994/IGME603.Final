@@ -44,7 +44,7 @@ public class PlayerStatWidget : GUIWidget
     {
         UpdateLevelUpButton(player.CanLevelUp());
         UpdateLevel(player.Level);
-        UpdateMaxHp(0, player.MaxHp);
+        UpdateMaxHp(0, player.GetStatistic(StatisticType.MaxHp));
     }
 
     private void UpdateLevelUpButton(int exp, int neededExp)
