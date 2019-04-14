@@ -236,7 +236,7 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         okToAttack = false;
                         anim.Play(weaponHolder.GetComponentInChildren<Weapon>().getAnimationName());
-                        anim.speed = 1 + Avatar.GetStatistic(StatisticType.AttackSpeed);
+                        anim.speed = Avatar.GetStatistic(StatisticType.AttackSpeed);
                         lastInput = Time.time;
                     }
                         
@@ -385,7 +385,7 @@ public class PlayerCombatController : MonoBehaviour
     IEnumerator resetAtkAnim(float hitStop)
     {
         yield return new WaitForSeconds(hitStop);
-        anim.speed = 1 + Avatar.GetStatistic(StatisticType.AttackSpeed);
+        anim.speed = Avatar.GetStatistic(StatisticType.AttackSpeed);
     }
 
 //    private void Ability()

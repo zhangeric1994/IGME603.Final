@@ -50,7 +50,9 @@ public class Player
         initialAttributes.Add(AttributeType.JumpPower_c0, 120);
         initialAttributes.Add(AttributeType.MaxHp_c0, 5);
         initialAttributes.Add(AttributeType.CriticalChance_cp0, 0.05f);
+        initialAttributes.Add(AttributeType.CriticalDamage_cp0, 1.5f);
         initialAttributes.Add(AttributeType.BaseDamage_cp0, 1);
+        initialAttributes.Add(AttributeType.AttackSpeed_cp0, 1);
 
         stats = new StatisticSystem(initialAttributes);
         UnityEngine.Debug.Log(stats);
