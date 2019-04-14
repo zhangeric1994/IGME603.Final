@@ -4,24 +4,72 @@ using UnityEngine.Events;
 
 public enum AttributeType : int
 {
+    WalkSpeed_c0 = 0x100,
+    JumpPower_c0 = 0x200,
+    MaxHp_c0 = 0x300,
+    CriticalChance_cp0 = 0x400,
+    CriticalDamage_cp0 = 0x500,
+    BaseDamage_cp0 = 0x600,
+    AttackSpeed_cp0 = 0x700,
 }
 
 public enum Statistic : int
 {
-    Hp = 1,
-    Strength = 2,
-    Agility = 3,
-    Intelligence = 4,
+    WalkSpeed = 1,
+    JumpPower = 2,
+    MaxHp = 3,
+    CriticalChance = 4,
+    CriticalDamage = 5,
+    BaseDamage = 6,
+    AttackSpeed = 7,
 }
 
 public class StatisticSystem
 {
+    public static float CalculateStatistic(Statistic statistic, params IAttributeCollection[] attributeSets)
+    {
+        switch (statistic)
+        {
+            case Statistic.WalkSpeed:
+                return AttributeSet.Sum(AttributeType.WalkSpeed_c0, attributeSets);
+
+
+            case Statistic.JumpPower:
+                return AttributeSet.Sum(AttributeType.JumpPower_c0, attributeSets);
+
+
+            case Statistic.MaxHp:
+                return AttributeSet.Sum(AttributeType.MaxHp_c0, attributeSets);
+
+
+            case Statistic.CriticalChance:
+                return AttributeSet.Sum(AttributeType.CriticalChance_cp0, attributeSets);
+
+
+            case Statistic.CriticalDamage:
+                return AttributeSet.Sum(AttributeType.CriticalDamage_cp0, attributeSets);
+
+
+            case Statistic.BaseDamage:
+                return AttributeSet.Sum(AttributeType.BaseDamage_cp0, attributeSets);
+
+
+            case Statistic.AttackSpeed:
+                return AttributeSet.Sum(AttributeType.AttackSpeed_cp0, attributeSets);
+
+
+            default:
+                return 0;
+        }
+    }
+
+
     public class EventOnStatisticChange : UnityEvent<Statistic, float, float> { }
 
     /// <summary>
     /// An event triggered whenever a certain statistic in this system changes 
     /// </summary>
-    public EventOnStatisticChange onStatisticChange = new EventOnStatisticChange();
+    public EventOnStatisticChange OnStatisticChange = new EventOnStatisticChange();
 
     public EventOnDataChange3<StatusEffect> onStatusEffectChange = new EventOnDataChange3<StatusEffect>(); 
 
@@ -31,9 +79,9 @@ public class StatisticSystem
     private Dictionary<Statistic, float> statistics = new Dictionary<Statistic, float>();
 
     /// <summary>
-    /// Attributes that will never change over time
+    /// Default values of attributes
     /// </summary>
-    private readonly AttributeSet talents;
+    private readonly AttributeSet initialValues;
 
     /// <summary>
     /// All status effects applied to this system in time order
@@ -65,39 +113,30 @@ public class StatisticSystem
             }
 
             if (hasChange)
-                onStatisticChange.Invoke(statistic, originalValue, statistics[statistic]);
+                OnStatisticChange.Invoke(statistic, originalValue, statistics[statistic]);
         }
     }
 
     private StatisticSystem()
     {
-        talents = new AttributeSet();
+        initialValues = new AttributeSet();
     }
 
-    public StatisticSystem(AttributeSet talents)
+    public StatisticSystem(AttributeSet initialValues)
     {
-        this.talents = talents;
+        this.initialValues = initialValues;
 
-        UpdateChangedStatistics(this.talents);
+        UpdateChangedStatistics(this.initialValues);
     }
 
     public float Sum(AttributeType attribute)
     {
-        return AttributeSet.Sum(attribute, talents, statusEffects);
+        return AttributeSet.Sum(attribute, initialValues, statusEffects);
     }
 
     public float CalculateStatistic(Statistic statistic)
     {
-        return CalculateStatistic(statistic, talents, statusEffects);
-    }
-
-    public static float CalculateStatistic(Statistic statistic, params IAttributeCollection[] attributeSets)
-    {
-        switch (statistic)
-        {
-            default:
-                return 0;
-        }
+        return CalculateStatistic(statistic, initialValues, statusEffects);
     }
 
     public bool AddStatusEffect(StatusEffect statusEffect)
@@ -136,46 +175,6 @@ public class StatisticSystem
         return statusEffect;
     }
 
-    //internal void HandleRoundNumberChange(int round)
-    //{
-    //    List<StatusEffect> pastStatusEffects = new List<StatusEffect>();
-
-    //    while (statusEffects.Top() != null && statusEffects.Top().EndRound == round)
-    //        pastStatusEffects.Add(statusEffects.Pop());
-
-    //    UpdateChangedStatistics(pastStatusEffects);
-
-    //    foreach (StatusEffect statusEffect in pastStatusEffects)
-    //        onStatusEffectChange.Invoke(-1, statusEffect);
-    //}
-
-    internal void UpdateChangedStatistics(IAttributeCollection attributes)
-    {
-        HashSet<int> changedStatistics = new HashSet<int>();
-        foreach (KeyValuePair<int, float> attribute in attributes)
-            changedStatistics.Add(attribute.Key / 10);
-
-        foreach (int id in changedStatistics)
-        {
-            Statistic statistic = (Statistic)id;
-            this[statistic] = CalculateStatistic(statistic);
-        }
-    }
-
-    internal void UpdateChangedStatistics(List<StatusEffect> statusEffects)
-    {
-        HashSet<int> changedStatistics = new HashSet<int>();
-        foreach (StatusEffect statusEffect in statusEffects)
-            foreach (KeyValuePair<int, float> attribute in statusEffect)
-                changedStatistics.Add(attribute.Key / 10);
-
-        foreach (int id in changedStatistics)
-        {
-            Statistic statistic = (Statistic)id;
-            this[statistic] = CalculateStatistic(statistic);
-        }
-    }
-
     public override string ToString()
     {
         string s = "";
@@ -183,6 +182,34 @@ public class StatisticSystem
         foreach (KeyValuePair<Statistic, float> statistic in statistics)
             s += ";" + statistic.Key + ":" + statistic.Value;
 
-        return string.Format("Stat: {0}\nTalent: {1}\n\n{2}", s.Substring(1), talents, statusEffects);
+        return string.Format("Stat: {0}\nTalent: {1}\n\n{2}", s.Substring(1), initialValues, statusEffects);
+    }
+
+
+    private void UpdateChangedStatistics(IAttributeCollection attributes)
+    {
+        HashSet<int> changedStatistics = new HashSet<int>();
+        foreach (KeyValuePair<int, float> attribute in attributes)
+            changedStatistics.Add(attribute.Key >> 8);
+
+        foreach (int id in changedStatistics)
+        {
+            Statistic statistic = (Statistic)id;
+            this[statistic] = CalculateStatistic(statistic);
+        }
+    }
+
+    private void UpdateChangedStatistics(List<StatusEffect> statusEffects)
+    {
+        HashSet<int> changedStatistics = new HashSet<int>();
+        foreach (StatusEffect statusEffect in statusEffects)
+            foreach (KeyValuePair<int, float> attribute in statusEffect)
+                changedStatistics.Add(attribute.Key >> 8);
+
+        foreach (int id in changedStatistics)
+        {
+            Statistic statistic = (Statistic)id;
+            this[statistic] = CalculateStatistic(statistic);
+        }
     }
 }

@@ -18,9 +18,6 @@ public class CombatWidget : GUIWidget
     {
         base.Show();
 
-        //UpdateMagazine(player.Magazine);
-
-        //player.OnMagazineUpdate.AddListener(UpdateMagazine);
         player.OnHpChange.AddListener(UpdateHealth);
     }
 
@@ -28,7 +25,6 @@ public class CombatWidget : GUIWidget
     {
         base.Hide();
 
-       // player.OnMagazineUpdate.RemoveListener(UpdateMagazine);
         player.OnHpChange.RemoveListener(UpdateHealth);
     }
 
@@ -37,9 +33,9 @@ public class CombatWidget : GUIWidget
         magazineText.text = n.ToString();
     }
 
-    private void UpdateHealth(int hp, int maxHp)
+    private void UpdateHealth(float hp, float maxHp)
     {
-        float p = (hp * 5) / (float)maxHp;
+        float p = (hp * 5) / maxHp;
 
         for (int i = 0; i < 5; ++i)
         {
@@ -55,7 +51,6 @@ public class CombatWidget : GUIWidget
 
     private void OnDestroy()
     {
-        //player.OnMagazineUpdate.RemoveListener(UpdateMagazine);
         player.OnHpChange.RemoveListener(UpdateHealth);
     }
 }

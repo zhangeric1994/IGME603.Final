@@ -12,7 +12,6 @@ public enum WeaponType
 
 public class Weapon : MonoBehaviour
 {
-
     public float damage;
 
     public float animationFactor;
@@ -81,14 +80,14 @@ public class Weapon : MonoBehaviour
             {
                 // new attack
                 // check for critical strike
-                if (Random.Range(0, 100) < player.criticalChance)
+                if (Random.value < player.Avatar.GetStatistic(Statistic.CriticalChance))
                 {
-                    //then critical 
-                    enemy.getHit(AtkId,(int)(damage * player.damageFactor * player.criticalDamageFactor));
+                    //then critical
+                    enemy.getHit(AtkId,(int)(damage * player.Avatar.GetStatistic(Statistic.BaseDamage) * player.Avatar.GetStatistic(Statistic.CriticalDamage)));
                 }
                 else
                 {
-                    enemy.getHit(AtkId, (int) (damage * player.damageFactor * 1.0f));  
+                    enemy.getHit(AtkId, (int)(damage * player.Avatar.GetStatistic(Statistic.BaseDamage) * 1.0f));
                 }
                 
                 enemy.knockBack(bouncingBackForce); 

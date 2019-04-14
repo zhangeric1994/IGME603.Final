@@ -94,6 +94,11 @@ using UnityEngine;
         return attributes[id];
     }
 
+    public void Add(AttributeType attribute, float value)
+    {
+        Add((int)attribute, value);
+    }
+
     public void Set(int id, float value)
     {
         if (!attributes.ContainsKey(id))
