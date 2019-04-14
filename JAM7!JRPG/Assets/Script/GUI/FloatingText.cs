@@ -51,16 +51,16 @@ public class FloatingText : GUIWidget
 
     private void Update()
     {
-        float alpha = (Time.time - t0) / lifeSpan;
+        float t = (Time.time - t0) / lifeSpan;
 
-        if (alpha > 1)
+        if (t > 1)
             GUIManager.Singleton.DestroyFloatingText(this);
         else
         {
-            transform.position = v0 + new Vector3(0, floatingHeight * alpha, 0);
+            transform.position = v0 + new Vector3(0, floatingHeight * t, 0);
 
             Color color = TextColor;
-            color.a = alpha;
+            color.a = 1 - t;
 
             uiText.color = color;
         }

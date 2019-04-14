@@ -185,10 +185,12 @@ public class GUIManager : MonoBehaviour
 
     public void CreateFloatingTextForDamage(float damage, Vector3 worldPosition)
     {
-        FloatingText floatingText = reusableFloatingTexts.Count > 0 ? reusableFloatingTexts.Pop() : Instantiate(ResourceUtility.GetGUIPrefab<FloatingText>("FloatingText"), transform);
+        Vector3 position = Camera.main.WorldToScreenPoint(worldPosition);
+
+        FloatingText floatingText = reusableFloatingTexts.Count > 0 ? reusableFloatingTexts.Pop() : Instantiate(ResourceUtility.GetGUIPrefab<FloatingText>("FloatingText"), position, Quaternion.identity, transform);
 
         floatingText.Text = Mathf.FloorToInt(damage).ToString();
-        floatingText.transform.position = Camera.main.WorldToScreenPoint(worldPosition);
+        floatingText.transform.position = position;
         floatingText.gameObject.SetActive(true);
     }
 
