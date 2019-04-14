@@ -155,10 +155,10 @@ MonoBehaviour:
   targetCharacter: {fileID: 0}
   enemy_anim: {fileID: 0}
   rb2d: {fileID: 0}
-  health: 15
+  health: 35
   speed: 0.15
   Score_own: 5
-  Death_delay: 15
+  Death_delay: 0
   disableFacing: 0
   turnBacked: 0
   defaultScale: {x: 0, y: 0, z: 0}
@@ -166,6 +166,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!1 &3358441239687179144
 GameObject:

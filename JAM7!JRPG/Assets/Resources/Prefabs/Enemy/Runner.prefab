@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4287550550548676019}
   m_Layer: 8
   m_Name: Runner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +207,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetCharacter: {fileID: 0}
-  health: 15
+  enemy_anim: {fileID: 0}
+  rb2d: {fileID: 0}
+  health: 50
   speed: 0.2
   Score_own: 5
   Death_delay: 15
@@ -218,6 +220,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!70 &4287550550548676019
 CapsuleCollider2D:

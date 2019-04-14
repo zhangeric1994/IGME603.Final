@@ -44,7 +44,7 @@ public class PlayerStatWidget : GUIWidget
     {
         UpdateLevelUpButton(player.CanLevelUp());
         UpdateLevel(player.Level);
-        UpdateMaxHp(player.MaxHp);
+        UpdateMaxHp(0, player.GetStatistic(StatisticType.MaxHp));
     }
 
     private void UpdateLevelUpButton(int exp, int neededExp)
@@ -67,9 +67,9 @@ public class PlayerStatWidget : GUIWidget
         levelText.text = level.ToString();
     }
 
-    private void UpdateMaxHp(int maxHp)
+    private void UpdateMaxHp(float previousValue, float currentValue)
     {
-        maxHpText.text = maxHp.ToString();
+        maxHpText.text = ((int)currentValue).ToString();
     }
 
     private void OnDestroy()
