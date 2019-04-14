@@ -16,6 +16,7 @@ public class PlayerExplorationController : MonoBehaviour
     public int PlayerID { get; private set; }
 
     private PlayerExplorationState currentState;
+    private Animator animator;
 
     public GameObject cam;
 
@@ -119,18 +120,16 @@ public class PlayerExplorationController : MonoBehaviour
     private void Start()
     {
         CurrentState = PlayerExplorationState.Exploring;
+        animator = GetComponent<Animator>();
     }
 
     public void GetCamera()
     {
         var cameras = GameObject.FindGameObjectsWithTag("MainCamera");
-        foreach (var camera in cameras)
-        {
-            if (camera.GetComponent<OverworldCamera>().index == PlayerID)
-            {
-                cam = camera;
-            }
-        }
+
+        if (cameras.Length != 0)
+            cam = cameras[0];
+
     }
 
     private void Update()
@@ -146,8 +145,37 @@ public class PlayerExplorationController : MonoBehaviour
                 if (Input.GetButtonDown("Start" + PlayerID))
                     CurrentState = PlayerExplorationState.InMenu;
                 else
-                    transform.Translate(Time.deltaTime * walkSpeed * new Vector3(Input.GetAxis("Horizontal" + PlayerID), Input.GetAxis("Vertical" + PlayerID), 0));
+                {
+                    float horizontal = Input.GetAxisRaw("Horizontal" + PlayerID);
+                    float vertical = Input.GetAxisRaw("Vertical" + PlayerID);
+                    animator.ResetTrigger("Right");
+                    animator.ResetTrigger("Left");
+                    animator.ResetTrigger("Up");
+                    animator.ResetTrigger("Down");
+                    if (Mathf.Abs(horizontal) > Mathf.Abs(vertical))
+                    {
+                        vertical = 0;
+                        if (horizontal > 0)
+                            animator.SetTrigger("Right");
+                        else if (horizontal < 0)
+                            animator.SetTrigger("Left");
+                    }
+                    else
+                    {
+                        horizontal = 0;
+                        if (vertical > 0)
+                            animator.SetTrigger("Up");
+                        else if (vertical < 0)
+                            animator.SetTrigger("Down");
+                    }
+                    Vector3 move = Time.deltaTime * walkSpeed * new Vector3(horizontal, vertical, 0);
+                    if (Input.GetKey(KeyCode.LeftShift)) move *= 2;
+                    transform.Translate(move);
+                    animator.SetBool("Moving", move.magnitude > 0.01f);
+                }
+
                 break;
         }
     }
+
 }
