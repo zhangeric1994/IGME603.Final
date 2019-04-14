@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable] public abstract class TableDataEntry
+[Serializable] public abstract class DataTableEntry
 {
-    abstract public int GetIndex();
+    abstract public int Index { get; }
 }
 
-public abstract class TableDataPage : ScriptableObject
+public abstract class DataTable : ScriptableObject
 {
+    abstract public int Count { get; }
 }
 
-public abstract class TableDataPage<T> : TableDataPage, ISerializationCallbackReceiver where T : TableDataEntry
+public abstract class DataTable<T> : DataTable, ISerializationCallbackReceiver where T : DataTableEntry
 {
     
     [SerializeField] private T[] entries;
@@ -33,11 +34,14 @@ public abstract class TableDataPage<T> : TableDataPage, ISerializationCallbackRe
         }
     }
 
-
-    public int CountRow()
+    public override int Count
     {
-        return dict.Count;
+        get
+        {
+            return dict.Count;
+        }
     }
+
 
     void ISerializationCallbackReceiver.OnAfterDeserialize()
     {
@@ -49,7 +53,7 @@ public abstract class TableDataPage<T> : TableDataPage, ISerializationCallbackRe
             {
                 T entry = entries[i];
 
-                int index = entry.GetIndex();
+                int index = entry.Index;
 
                 if (!dict.ContainsKey(index))
                     dict.Add(index, entry);
@@ -57,7 +61,7 @@ public abstract class TableDataPage<T> : TableDataPage, ISerializationCallbackRe
 
 #if UNITY_EDITOR
 #else
-            serializedAttributes = null;
+            entries = null;
 #endif
         }
     }
@@ -68,21 +72,11 @@ public abstract class TableDataPage<T> : TableDataPage, ISerializationCallbackRe
         if (entries == null || entries.Length < dict.Count)
             entries = new T[dict.Count];
 #else
-        serializedAttributes = new Attribute[attributes.Count];
+        entries = new Attribute[attributes.Count];
 #endif
 
         int i = 0;
         foreach (KeyValuePair<int, T> pair in dict)
             entries[i++] = pair.Value;
     }
-
-    ///// <summary>
-    ///// Add a entry at a given index
-    ///// </summary>
-    ///// <param name="index"> The index where to add the given data entry </param>
-    ///// <param name="entry"> The data entry to add </param>
-    //internal void AddEntry(int index, T entry)
-    //{
-    //    dict.Add(index, entry);
-    //}
 }

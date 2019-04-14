@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 922128848f87ffb4885c288217bc28fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 92d72974243583044a828985815ed3b0, type: 3}
   m_Name: Item
   m_EditorClassIdentifier: 
-  name: Item
   entries:
-  - id: 0
-    name: Test Item
+  - id: 10
+    name: 
     icon: {fileID: 0}
     sprite: {fileID: 0}
     attributes:
       serializedAttributes:
       - id: 0
-        value: 1
+        value: 0
+      - id: 0
+        value: 0

@@ -1,10 +1,10 @@
-﻿public class ItemDataPage : TableDataPage<ItemData>
+﻿public class ItemDataTable : DataTable<ItemData>
 {
 #if UNITY_EDITOR
     [UnityEditor.MenuItem("Assets/Create/DataPage/Item")]
     public static void CreateAsset()
     {
-        ScriptableObjectUtility.CreateAsset<ItemDataPage>();
+        ScriptableObjectUtility.CreateAsset<ItemDataTable>();
     }
 #endif
 }

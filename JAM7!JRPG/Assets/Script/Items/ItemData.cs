@@ -1,34 +1,44 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable] public class ItemData : TableDataEntry
+[Serializable] public class ItemData : DataTableEntry
 {
-    [SerializeField] public int id;
-    [SerializeField] public string name;
-    [SerializeField] public Sprite icon;
-    [SerializeField] public Sprite sprite;
-    [SerializeField] public AttributeSet attributes;
+    [SerializeField] private int id;
+    [SerializeField] private string name;
+    [SerializeField] private Sprite icon;
+    [SerializeField] private Sprite sprite;
+    [SerializeField] private AttributeSet attributes;
 
-    //public int Id
-    //{
-    //    get
-    //    {
-    //        return id;
-    //    }
-    //}
 
-    //public Sprite Icon
-    //{
-    //    get
-    //    {
-    //        return icon;
-    //    }
-    //}
-
-    //public AttributeSet Attributes { get; internal set; }
-
-    public override int GetIndex()
+    public override int Index
     {
-        return id;
+        get
+        {
+            return id;
+        }
+    }
+
+    public int Id
+    {
+        get
+        {
+            return id;
+        }
+    }
+
+    public Sprite Icon
+    {
+        get
+        {
+            return icon;
+        }
+    }
+
+    public AttributeSet Attributes
+    {
+        get
+        {
+            return attributes;
+        }
     }
 }
