@@ -59,7 +59,7 @@ MonoBehaviour:
     sprite: {fileID: 21300164, guid: e1734168993e9044a9ef2589a85cb2b2, type: 3}
     attributes:
       serializedAttributes:
-      - type: 1536
+      - type: 1552
         value: 0.1
   - id: 7
     name: Attack Speed

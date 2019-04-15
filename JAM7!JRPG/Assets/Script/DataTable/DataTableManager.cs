@@ -37,4 +37,9 @@ public class DataTableManager
     {
         return GetData<ItemData>("Item", id);
     }
+
+    public WeaponData GetWeaponData(int id)
+    {
+        return GetData<WeaponData>("Weapon", id);
+    }
 }

@@ -35,6 +35,11 @@ public class Loot : MonoBehaviour
         {
             return id;
         }
+
+        set
+        {
+            id = value;
+        }
     }
 
     public int Level
@@ -54,9 +59,23 @@ public class Loot : MonoBehaviour
     }
 
 
-    void Start()
+    void Awake()
     {
         chase = false;
+
+        if (type == LootType.Item)
+        {
+            triggered = true;
+
+            StartCoroutine(Activate(1));
+        }
+        else
+            triggered = false;
+    }
+
+    private IEnumerator Activate(float t)
+    {
+        yield return new WaitForSeconds(t);
         triggered = false;
     }
 	
@@ -64,22 +83,25 @@ public class Loot : MonoBehaviour
     {
         if (!triggered && gameObject.activeInHierarchy)
         {
-            gameObject.SetActive(false);
             triggered = true;
 
             switch (type)
             {
                 case LootType.Weapon:
-                    WeaponManager._instance.equipWeapon(playerController, (WeaponType)id, level);
+                    // WeaponManager._instance.equipWeapon(playerController, (WeaponType)id, level);
+                    WeaponData previousWeapon = WeaponManager._instance.EquipWeapon(playerController, DataTableManager.singleton.GetWeaponData(id));
+                    id = previousWeapon.Id;
+                    GetComponent<SpriteRenderer>().sprite = previousWeapon.Sprite;
+                    levelText.sprite = WeaponManager._instance.levelTag[previousWeapon.Level - 1];
+                    StartCoroutine(Activate(0.5f));
                     break;
 
 
                 case LootType.Potion:
                     playerController.Avatar.ApplyHealing(DataTableManager.singleton.GetItemData(id).Attributes);
+                    Destroy(gameObject);
                     break;
             }
-
-            Destroy(gameObject);
         }
     }
 

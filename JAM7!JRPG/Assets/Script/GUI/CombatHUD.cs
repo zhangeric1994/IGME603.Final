@@ -28,13 +28,6 @@ public class CombatHUD : GUIWindow
         {
             float d = p - i;
 
-            Debug.Log(list);
-            Debug.Log(list.GetChild(i));
-            Debug.Log(list.GetChild(i).GetComponent<Image>());
-            Debug.Log(list.GetChild(i).GetComponent<Image>().sprite);
-            Debug.Log(GUIManager.Singleton);
-            Debug.Log(GUIManager.Singleton.fullHeart);
-
             if (d > 0.5)
                 list.GetChild(i).GetComponent<Image>().sprite = GUIManager.Singleton.fullHeart;
             else if (d > 0)

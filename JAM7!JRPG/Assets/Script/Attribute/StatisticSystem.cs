@@ -9,7 +9,8 @@ public enum AttributeType : int
     MaxHp_c0 = 0x300,
     CriticalChance_cp0 = 0x400,
     CriticalDamage_cp0 = 0x500,
-    BaseDamage_cp0 = 0x600,
+    BaseDamage_c0 = 0x600,
+    BaseDamage_cp0 = 0x610,
     AttackSpeed_cp0 = 0x700,
 
     HealingPower_cp0 = 0xF10,
@@ -235,7 +236,6 @@ public class StatisticSystem
 
     private void UpdateChangedStatistics(AttributeType attributeType, float previousValue, float currentValue)
     {
-        UnityEngine.Debug.LogWarning(attributeType);
         StatisticType statisticType = (StatisticType)((int)attributeType >> 8);
         this[statisticType] = Calculate(statisticType, attributeSets);
     }

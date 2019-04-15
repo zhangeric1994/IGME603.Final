@@ -1,6 +1,79 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
+
+[System.Serializable] public class WeaponData : DataTableEntry
+{
+    [SerializeField] private int id;
+    [SerializeField] private WeaponType type;
+    [SerializeField] private int level;
+    [SerializeField] private Sprite sprite;
+    [SerializeField] private AnimationClip animation;
+    [SerializeField] private AttributeSet attributes;
+
+
+    public int Id
+    {
+        get
+        {
+            return id;
+        }
+    }
+
+    public WeaponType Type
+    {
+        get
+        {
+            return type;
+        }
+    }
+
+    public int Level
+    {
+        get
+        {
+            return level;
+        }
+    }
+
+    public Sprite Sprite
+    {
+        get
+        {
+            return sprite;
+        }
+    }
+
+    public AnimationClip Animation
+    {
+        get
+        {
+            return animation;
+        }
+    }
+
+    public AttributeSet Attributes
+    {
+        get
+        {
+            return attributes;
+        }
+    }
+
+    public override int Index
+    {
+        get
+        {
+            return id;
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        return id.GetHashCode();
+    }
+}
+
 
 public struct WeaponInfo
 {
@@ -10,6 +83,8 @@ public struct WeaponInfo
     public int[] magazineSize;
     public float[] fireRate;
 }
+
+
 public class WeaponManager : MonoBehaviour
 {
 
@@ -22,7 +97,7 @@ public class WeaponManager : MonoBehaviour
     
     [SerializeField] private GameObject Heal;
     
-    [SerializeField] private Sprite[] levelTag;
+    [SerializeField] public Sprite[] levelTag;
     public static WeaponManager _instance;
     
     // gun Info
@@ -59,7 +134,6 @@ public class WeaponManager : MonoBehaviour
         Hammer.fireRate = new float[] {0.5f,0.4f,0.3f};
     }
 
-
     public WeaponInfo getGunData(WeaponType type)
     {
         switch (type)
@@ -75,6 +149,14 @@ public class WeaponManager : MonoBehaviour
         return new WeaponInfo();
     }
 
+    public WeaponData EquipWeapon(PlayerCombatController player, WeaponData weapon)
+    {
+        WeaponData previousWeapon = player.Avatar.equipment.ChangeWeapon(weapon);
+
+        equipWeapon(player, weapon.Type, weapon.Level);
+
+        return previousWeapon;
+    }
 
     public void equipWeapon(PlayerCombatController player, WeaponType type, int level)
     {
@@ -94,13 +176,11 @@ public class WeaponManager : MonoBehaviour
         temp.GetComponent<Weapon>().AcquireGun(level);
     }
     
-    
-    public void generateDrop(Vector3 player, WeaponType type, int level)
+    public void generateDrop(Vector3 pos, WeaponType type, int level)
     {
-        var temp = Instantiate(WeaponsItem[(int) type]);
-        temp.GetComponent<Loot>().getLevelSprite().sprite = levelTag[level - 1];
-        //todo Add a parent to organize
-        temp.transform.position = player;
+        Loot loot = Instantiate(WeaponsItem[(int) type], pos, Quaternion.identity).GetComponent<Loot>();
+        loot.getLevelSprite().sprite = levelTag[level - 1];
+        loot.Id = ((int)type << 16) + level - 1;
     }
     
     public void generateHealDrop(Vector3 pos)
@@ -110,21 +190,18 @@ public class WeaponManager : MonoBehaviour
         temp.transform.position = pos;
     }
     
-    
     public void generatePowerDrop(Vector3 pos)
     {
         var index = Random.Range(0, PowerUpItem.Length);
         //todo Add a parent to organize
-        var temp = Instantiate(PowerUpItem[index]);
-        temp.transform.position = pos;
+        var temp = Instantiate(PowerUpItem[index], pos, Quaternion.identity);
     }
-    
-    
     
     public void randomDrop(Vector3 Pos)
     {
         int random = Random.Range(0, 100);
         int type = Random.Range(0, 2);
+
         if (random < 8)
         {
             //level three

@@ -12,15 +12,45 @@ public enum WeaponType : int
 
 public class Weapon : MonoBehaviour
 {
-    public float damage;
+    public float damage
+    {
+        get
+        {
+            return player.Avatar.equipment.Weapon.Attributes[AttributeType.BaseDamage_c0];
+        }
+
+        set
+        {
+        }
+    }
 
     public float animationFactor;
 
     public int AtkId = 0;
 
-    public WeaponType type;
+    public WeaponType type
+    {
+        get
+        {
+            return player.Avatar.equipment.Weapon.Type;
+        }
 
-    public AnimationClip animation;
+        set
+        {
+        }
+    }
+
+    public AnimationClip animation
+    {
+        get
+        {
+            return player.Avatar.equipment.Weapon.Animation;
+        }
+
+        set
+        {
+        }
+    }
     
     public float hitStop;
     
@@ -32,7 +62,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-         player = gameObject.GetComponentInParent<PlayerCombatController>();
+        player = gameObject.GetComponentInParent<PlayerCombatController>();
     }
 
     public void setAttackId()
@@ -66,7 +96,7 @@ public class Weapon : MonoBehaviour
     public void Destroy()
     {
         gameObject.SetActive(false);
-        WeaponManager._instance.generateDrop(player.transform.position,type,level);
+        //WeaponManager._instance.generateDrop(player.transform.position, type, level);
         Destroy(gameObject);
     }
     

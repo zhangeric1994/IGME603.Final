@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  id: 0
+  id: 65536
   level: 1
   levelText: {fileID: 2388682829329183704}
   triggered: 0

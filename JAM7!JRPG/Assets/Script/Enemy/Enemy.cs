@@ -351,12 +351,7 @@ public abstract class Enemy : MonoBehaviour
     {
         health -= damage;
         //todo fix hp add
-        if (health < 0)
-        {
-            //dead
-            Destroy(gameObject);
-        }
-        else
+        if (health > 0)
         {
             StartCoroutine(HurtDelay());
         }
