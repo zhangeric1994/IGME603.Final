@@ -172,6 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   id: 2
-  level: 0
+  level: 1
   levelText: {fileID: 0}
   triggered: 0

@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   id: 1
-  level: 0
+  level: 1
   levelText: {fileID: 0}
   triggered: 0
 --- !u!1 &8956616599951863577

@@ -38,6 +38,14 @@ public class Loot : MonoBehaviour
         }
     }
 
+    public int Level
+    {
+        get
+        {
+            return level;
+        }
+    }
+
     public LootType Type
     {
         get
