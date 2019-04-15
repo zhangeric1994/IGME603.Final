@@ -102,16 +102,16 @@ public class Player
 
     public void Loot(Loot loot)
     {
-        inventory.Add(loot.Id);
+        inventory.Add(loot.Id, loot.Level);
     }
 
     public float ApplyDamage(float rawDamage)
     {
-        float damagea = rawDamage;
+        float damage = rawDamage;
 
-        stats[StatisticType.Hp] = Mathf.Max(0, stats[StatisticType.Hp] - damagea);
+        stats[StatisticType.Hp] = Mathf.Max(0, stats[StatisticType.Hp] - damage);
 
-        return damagea;
+        return damage;
     }
 
     public float ApplyHealing(float rawHealing)

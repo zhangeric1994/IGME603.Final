@@ -208,10 +208,18 @@ public class PlayerExplorationController : MonoBehaviour
                     {
                         dialogue = hit.collider.gameObject.GetComponent<Dialogue>();
                     }
+
                     if (dialogue != null)
                     {
                         if (dialogue.StartDialog(this))
                             currentState = PlayerExplorationState.InTalking;
+
+                        Loot loot = dialogue.GetComponent<Loot>();
+                        if (loot && !loot.triggered)
+                        {
+                            Player.GetPlayer(0).Loot(loot);
+                            loot.triggered = true;
+                        }
                     }
                 }
                 else
