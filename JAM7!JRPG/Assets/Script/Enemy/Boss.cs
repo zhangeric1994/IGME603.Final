@@ -74,7 +74,7 @@ public class Boss : Enemy
         {
             if (player.GetComponent<PlayerCombatController>().CurrentState != PlayerCombatState.InAir)
             {
-                player.GetComponent<PlayerCombatController>().Hurt();
+                player.GetComponent<PlayerCombatController>().Hurt(1);
             }
         }
         var cameras = GameObject.FindGameObjectsWithTag("MainCamera");

@@ -20,7 +20,7 @@ public class HitBox : MonoBehaviour
                 transform.parent.GetComponent<Rigidbody2D>().AddForce(-direction * 20f);
                 transform.parent.GetComponent<Rigidbody2D>().AddForce(transform.up * 40f);
                 // do dmg here
-                other.GetComponentInParent<PlayerCombatController>().Hurt();
+                other.GetComponentInParent<PlayerCombatController>().Hurt(1);
             }
         else if (other.tag == "Shield")
         {

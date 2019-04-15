@@ -69,3 +69,11 @@ MonoBehaviour:
       serializedAttributes:
       - type: 1792
         value: 0.1
+  - id: 1000
+    name: Basic Potion
+    icon: {fileID: 21300000, guid: e6449e5ade947a94bb4210e0687878eb, type: 3}
+    sprite: {fileID: 21300000, guid: e6449e5ade947a94bb4210e0687878eb, type: 3}
+    attributes:
+      serializedAttributes:
+      - type: 3856
+        value: 3

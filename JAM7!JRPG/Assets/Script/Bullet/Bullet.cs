@@ -71,7 +71,7 @@ public class Bullet : PooledObject
                 case "PlayerHitBox":
                     //other.GetComponent<IDamageable>().ApplyDamage(rawDamage);
                     //if (--numHitsRemaining == 0)
-                    other.GetComponentInParent<PlayerCombatController>().Hurt();
+                    other.GetComponentInParent<PlayerCombatController>().Hurt(1);
                     Vector2 dir = (transform.position - other.transform.position).normalized;
                     var temp = Instantiate(FX,transform.position,Quaternion.identity);
                     temp.transform.right = -dir;

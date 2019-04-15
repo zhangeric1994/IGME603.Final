@@ -11,6 +11,8 @@ public enum AttributeType : int
     CriticalDamage_cp0 = 0x500,
     BaseDamage_cp0 = 0x600,
     AttackSpeed_cp0 = 0x700,
+
+    HealingPower_cp0 = 0xF10,
 }
 
 public enum StatisticType : int

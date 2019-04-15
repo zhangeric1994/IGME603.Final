@@ -50,7 +50,7 @@ public class Player
 
         talents.Add(AttributeType.WalkSpeed_c0, 0.8f);
         talents.Add(AttributeType.JumpPower_c0, 120);
-        talents.Add(AttributeType.MaxHp_c0, 5);
+        talents.Add(AttributeType.MaxHp_c0, 10);
         talents.Add(AttributeType.CriticalChance_cp0, 0.05f);
         talents.Add(AttributeType.CriticalDamage_cp0, 1.5f);
         talents.Add(AttributeType.BaseDamage_cp0, 1);
@@ -100,16 +100,34 @@ public class Player
     public void Loot(Loot loot)
     {
         inventory.Add(loot.Id);
-        UnityEngine.Debug.Log(stats);
+    }
+
+    public float ApplyDamage(float rawDamage)
+    {
+        float damagea = rawDamage;
+
+        stats[StatisticType.Hp] = Mathf.Max(0, stats[StatisticType.Hp] - damagea);
+
+        return damagea;
     }
 
     public float ApplyHealing(float rawHealing)
     {
         float healing = rawHealing;
 
-        stats[StatisticType.Hp] = Mathf.Max(stats[StatisticType.MaxHp], stats[StatisticType.Hp] + healing);
+        stats[StatisticType.Hp] = Mathf.Min(stats[StatisticType.MaxHp], stats[StatisticType.Hp] + healing);
 
         return healing;
+    }
+
+    public float ApplyHealing(params IAttributeCollection[] attributeSets)
+    {
+        float sum = 0;
+
+        foreach (IAttributeCollection attributeSet in attributeSets)
+            sum += attributeSet[AttributeType.HealingPower_cp0];
+
+        return ApplyHealing(sum);
     }
 
     private void DispatchStatisticChangeEvents(StatisticType statistic, float previousValue, float currentValue)

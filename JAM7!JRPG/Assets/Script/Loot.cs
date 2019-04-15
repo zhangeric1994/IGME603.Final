@@ -67,7 +67,7 @@ public class Loot : MonoBehaviour
 
 
                 case LootType.Potion:
-                    playerController.Avatar.ApplyHealing(1);
+                    playerController.Avatar.ApplyHealing(DataTableManager.singleton.GetItemData(id).Attributes);
                     break;
             }
 

@@ -61,7 +61,7 @@ public class GUIManager : MonoBehaviour
     private Stack<string> uiWindowStack = new Stack<string>();
     private Dictionary<string, GUIWindow> uiWindowsOpened = new Dictionary<string, GUIWindow>();
 
-    private Stack<FloatingText> reusableFloatingTexts;
+    private Stack<FloatingText> reusableFloatingTexts = new Stack<FloatingText>();
 
     /// <summary>
     /// Whether the UI window is opened in the viewport (not considering the UIMode)
@@ -204,11 +204,7 @@ public class GUIManager : MonoBehaviour
     private void Awake()
     {
         if (!Singleton)
-        {
             Singleton = this;
-
-            reusableFloatingTexts = new Stack<FloatingText>();
-        }
         else if (Singleton != this)
             Destroy(gameObject);
     }

@@ -83,7 +83,7 @@ public class Weapon : MonoBehaviour
                 if (Random.value < player.Avatar.GetStatistic(StatisticType.CriticalChance))
                 {
                     //then critical
-                    enemy.getHit(AtkId,(int)(damage * player.Avatar.GetStatistic(StatisticType.BaseDamage) * player.Avatar.GetStatistic(StatisticType.CriticalDamage)));
+                    enemy.getHit(AtkId, (int)(damage * player.Avatar.GetStatistic(StatisticType.BaseDamage) * player.Avatar.GetStatistic(StatisticType.CriticalDamage)));
                 }
                 else
                 {

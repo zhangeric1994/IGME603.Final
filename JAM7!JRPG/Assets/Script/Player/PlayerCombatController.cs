@@ -281,9 +281,9 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
-    public void Hurt()
+    public void Hurt(float rawDamage)
     {
-        if (lastHit + invulnerableInterval < Time.unscaledTime)
+        if (lastHit + invulnerableInterval < Time.time)
         {
             //Hp--;
             //todo fix hp add
@@ -293,10 +293,11 @@ public class PlayerCombatController : MonoBehaviour
             }
             else
             {
+                Avatar.ApplyDamage(rawDamage);
                 StartCoroutine(HurtDelay());
             }
 
-            lastHit = Time.unscaledTime;
+            lastHit = Time.time;
         }
 
     }
