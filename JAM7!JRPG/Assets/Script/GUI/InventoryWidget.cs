@@ -11,11 +11,9 @@ public class InventoryWidget : GUIAutoList<InventorySlotWidget, InventorySlot>
     {
         inventory = (Inventory)args[0];
 
-        List<InventorySlot> inventorySlots = new List<InventorySlot>();
         foreach (KeyValuePair<int, int> pair in (IEnumerable<KeyValuePair<int, int>>)inventory)
-            inventorySlots.Add(new InventorySlot(DataTableManager.singleton.GetItemData(pair.Key), pair.Value));
+            AddListItem(new InventorySlot(DataTableManager.singleton.GetItemData(pair.Key), pair.Value));
 
-        Refresh(inventorySlots);
         GetComponent<GUIGrid>().Refresh();
 
         inventory.OnItemNumChange.AddListener(UpdateItem);

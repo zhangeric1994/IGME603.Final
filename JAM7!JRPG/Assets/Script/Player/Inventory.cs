@@ -18,6 +18,16 @@ public struct InventorySlot
     {
         return itemData.GetHashCode();
     }
+
+    public bool Equals(InventorySlot other)
+    {
+        return itemData == other.itemData;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return Equals((InventorySlot)obj);
+    }
 }
 
 

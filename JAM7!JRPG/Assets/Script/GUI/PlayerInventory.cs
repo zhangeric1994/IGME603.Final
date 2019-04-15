@@ -24,6 +24,10 @@ public class PlayerInventory : GUIWindow
     {
         if (Input.GetButtonDown("Start"))
             Close();
+
+        for (int id = 1; id < 8; ++id)
+            if (Input.GetKeyDown(id.ToString()))
+                player.inventory.Add(id, 1);
     }
 
     private void OnDestroy()
