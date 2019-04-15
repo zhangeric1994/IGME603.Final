@@ -50,8 +50,8 @@ public class HUD : GUIWindow
 
         for (int id = 0; id < 2; ++id)
         {
-            playerExplorationWidgets[id].Initialize(id);
-            playerCombatWidgets[id].Initialize(args[id]);
+            playerExplorationWidgets[id].Refresh(id);
+            playerCombatWidgets[id].Refresh(args[id]);
         }
     }
 

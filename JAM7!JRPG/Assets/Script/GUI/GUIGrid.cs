@@ -10,7 +10,7 @@ public class GUIGrid : GUIWidget
     [SerializeField] private Vector2 itemSize;
     [SerializeField] private bool hideInactives = true;
 
-    public override void Initialize(params object[] args)
+    public override void Refresh(params object[] args)
     {
         int itemIndex = 0;
         int N = transform.childCount;
@@ -58,6 +58,6 @@ public class GUIGrid : GUIWidget
     [ContextMenu("Refresh")]
     private void ResetName()
     {
-        Initialize();
+        Refresh();
     }
 }

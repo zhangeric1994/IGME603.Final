@@ -9,7 +9,7 @@ public class CombatWidget : GUIWidget
 
     private PlayerCombatController player;
 
-    public override void Initialize(params object[] args)
+    public override void Refresh(params object[] args)
     {
         player = (PlayerCombatController)args[0];
     }

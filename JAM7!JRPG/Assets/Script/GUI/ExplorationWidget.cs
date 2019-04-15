@@ -15,8 +15,8 @@ public class ExplorationWidget : GUIWidget
         menu.Hide();
     }
 
-    public override void Initialize(params object[] args)
+    public override void Refresh(params object[] args)
     {
-        menu.Initialize(args);
+        menu.Refresh(args);
     }
 }

@@ -32,8 +32,8 @@ public class Player
     public readonly int id;
 
     private AttributeSet talents = new AttributeSet();
-    private Inventory inventory;
-    private StatisticSystem stats;
+    public readonly Inventory inventory;
+    public readonly StatisticSystem stats;
 
     public EventOnDataChange2<float> OnWalkSpeedChange { get; private set; }
     public EventOnDataChange2<float> OnJumpPowerChange { get; private set; }
@@ -57,6 +57,9 @@ public class Player
         talents.Add(AttributeType.AttackSpeed_cp0, 1);
 
         inventory = new Inventory();
+        inventory.Add(1, 1);
+        inventory.Add(2, 1);
+        inventory.Add(3, 1);
 
         stats = new StatisticSystem(talents, inventory);
         stats[StatisticType.Hp] = stats[StatisticType.MaxHp];

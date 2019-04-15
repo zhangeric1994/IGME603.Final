@@ -27,14 +27,14 @@ public class MenuWidget : GUIWidget
         }
     }
 
-    public override void Initialize(params object[] args)
+    public override void Refresh(params object[] args)
     {
         int id = (int)args[0];
 
         playerID = id.ToString();
 
         for (int i = 0; i < transform.childCount; ++i)
-            transform.GetChild(i).GetComponent<GUIWidget>().Initialize(id);
+            transform.GetChild(i).GetComponent<GUIWidget>().Refresh(id);
     }
 
     public override void Show()

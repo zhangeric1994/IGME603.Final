@@ -11,7 +11,7 @@ public class PlayerStatWidget : GUIWidget
 
     private Player player;
 
-    public override void Initialize(params object[] args)
+    public override void Refresh(params object[] args)
     {
         int id = (int)args[0];
 

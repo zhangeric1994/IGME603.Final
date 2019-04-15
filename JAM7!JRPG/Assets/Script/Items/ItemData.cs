@@ -41,4 +41,9 @@ using UnityEngine;
             return attributes;
         }
     }
+
+    public override int GetHashCode()
+    {
+        return id.GetHashCode();
+    }
 }
