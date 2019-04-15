@@ -28,10 +28,9 @@ public class ForwardCamera : MonoBehaviour
         foreach (var player in players)
         {
             if (player.GetComponent<PlayerCombatController>() != null)
-                if (player.GetComponent<PlayerCombatController>().PlayerID == index)
-                {
-                    target = player.transform;
-                }
+            {
+                target = player.transform;
+            }
         }
     }
 
