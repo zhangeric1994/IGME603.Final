@@ -89,7 +89,7 @@ public class Weapon : MonoBehaviour
                 {
                     enemy.getHit(AtkId, (int)(damage * player.Avatar.GetStatistic(StatisticType.BaseDamage) * 1.0f));
                 }
-                
+                AudioManager.Instance.PlaySoundEffect("HitBody");
                 enemy.knockBack(bouncingBackForce); 
                 player.pauseAtkAnim(hitStop);
             }

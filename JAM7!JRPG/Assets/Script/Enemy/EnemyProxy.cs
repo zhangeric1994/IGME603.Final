@@ -19,13 +19,18 @@ public class EnemyProxy : MonoBehaviour
         {
             if (isBoss)
                 level = GameManager.Singleton.CreateCombat("Level/BossLevel");
+
             else
                 level = GameManager.Singleton.CreateCombat("Level/NormalLevel");
+            
         }
         level.enemyProxy = this;
         players.Add(player);
 
         level.SpawnPlayer(player.PlayerID);
+
+
+        AudioManager.Instance.PlaySoundEffect("Suck", DelayTime:0.5f);
     }
 
     public void EndCombat()
@@ -39,4 +44,5 @@ public class EnemyProxy : MonoBehaviour
         GameManager.Singleton.EndCombat(level);
         Destroy(gameObject);
     }
+ 
 }

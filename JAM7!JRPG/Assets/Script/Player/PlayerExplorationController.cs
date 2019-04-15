@@ -206,7 +206,7 @@ public class PlayerExplorationController : MonoBehaviour
                     Dialogue dialogue = null;
                     if (hit)
                     {
-                        dialogue = hit.collider.gameObject.GetComponent<Dialogue>();
+                        dialogue = hit.collider.gameObject.GetComponent<Dialogue>();                       
                     }
                     if (dialogue != null)
                     {
@@ -228,11 +228,15 @@ public class PlayerExplorationController : MonoBehaviour
                         if (horizontal > 0)
                         {
                             animator.SetTrigger("Right");
+                            if(!AudioManager.Instance.IsPlayingClip("Walking"))
+                                AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Right;
                         }
                         else if (horizontal < 0)
                         {
                             animator.SetTrigger("Left");
+                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                                AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Left;
                         }
                     }
@@ -242,11 +246,15 @@ public class PlayerExplorationController : MonoBehaviour
                         if (vertical > 0)
                         {
                             animator.SetTrigger("Up");
+                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                                AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Up;
                         }
                         else if (vertical < 0)
                         {
                             animator.SetTrigger("Down");
+                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                                AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Down;
                         }
                     }
