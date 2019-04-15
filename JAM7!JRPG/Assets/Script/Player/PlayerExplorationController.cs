@@ -219,6 +219,9 @@ public class PlayerExplorationController : MonoBehaviour
                         {
                             Player.GetPlayer(0).Loot(loot);
                             loot.triggered = true;
+
+                            dialogue.GetComponent<ChestAnimation>().SetChestStat(true);
+                            
                         }
                     }
                 }
