@@ -255,12 +255,11 @@ public abstract class Enemy : MonoBehaviour
             enemy_anim.SetBool("Dead", true);
             
             int num = Random.Range(0, 100);
-            Debug.Log("num:"+num);
-            if (num < 70 || boss)
-            {
-                WeaponManager._instance.randomDrop(transform.position);
-                Debug.Log("item!");
-            }
+            WeaponManager._instance.randomDrop(transform.position);
+//            if (num < 100 || boss)
+//            {
+//                
+//            }
            
             StartCoroutine(Destroy_delay());
             gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
@@ -354,7 +353,7 @@ public abstract class Enemy : MonoBehaviour
         if (health < 0)
         {
             //dead
-            Destroy(gameObject);
+            
         }
         else
         {

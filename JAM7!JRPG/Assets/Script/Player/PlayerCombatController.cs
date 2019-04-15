@@ -375,10 +375,11 @@ public class PlayerCombatController : MonoBehaviour
         {
             box.enabled = false;
         }
-
-        if (gameObject.GetComponentInChildren<Weapon>().type == WeaponType.Hammer)
+        
+         if (gameObject.GetComponentInChildren<Weapon>().type == WeaponType.Hammer)
         {
             ForwardCamera._instance.Shaking(0.05f, 0.1f);
+            gameObject.GetComponentInChildren<Weapon>().ShowVFX();
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.XR.Interaction;
@@ -17,7 +18,7 @@ public class Loot : MonoBehaviour
     [Header("Config")]
     [SerializeField] private LootType type;
     [SerializeField] private int id;
-    [SerializeField] private int level;
+    public int level;
 
     [Header("References")]
     [SerializeField] private SpriteRenderer levelText;
@@ -54,9 +55,25 @@ public class Loot : MonoBehaviour
     }
 
 
-    void Start()
+    void Awake()
     {
         chase = false;
+
+        if (type == LootType.Item)
+        {
+            triggered = true;
+
+            StartCoroutine(Activate(2));
+        }
+        else
+        {
+            triggered = false;
+        }
+    }
+
+    private IEnumerator Activate(float t)
+    {
+        yield return new WaitForSeconds(t);
         triggered = false;
     }
 	

@@ -23,6 +23,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private GameObject Heal;
     
     [SerializeField] private Sprite[] levelTag;
+    
     public static WeaponManager _instance;
     
     // gun Info
@@ -45,7 +46,7 @@ public class WeaponManager : MonoBehaviour
         
         
         //LightSword Assignment
-        LightSword.damage = new int[] {5,10,15};
+        LightSword.damage = new int[] {10,15,20};
         LightSword.range = new int[] {5,6,7};
         LightSword.reloadSpeed = new float[] {1.2f,1.1f,1.0f};
         LightSword.magazineSize = new int[] {5,6,7};
@@ -91,7 +92,7 @@ public class WeaponManager : MonoBehaviour
         }
         
         temp.GetComponent<Weapon>().type = type;
-        temp.GetComponent<Weapon>().AcquireGun(level);
+        temp.GetComponent<Weapon>().AcquireWeapon(level);
     }
     
     
@@ -99,6 +100,7 @@ public class WeaponManager : MonoBehaviour
     {
         var temp = Instantiate(WeaponsItem[(int) type]);
         temp.GetComponent<Loot>().getLevelSprite().sprite = levelTag[level - 1];
+        temp.GetComponent<Loot>().level = level;
         //todo Add a parent to organize
         temp.transform.position = player;
     }
@@ -115,8 +117,8 @@ public class WeaponManager : MonoBehaviour
     {
         var index = Random.Range(0, PowerUpItem.Length);
         //todo Add a parent to organize
-        var temp = Instantiate(PowerUpItem[index]);
-        temp.transform.position = pos;
+        var temp = Instantiate(PowerUpItem[index],pos,Quaternion.identity);
+        //temp.transform.position = pos;
     }
     
     
@@ -129,6 +131,7 @@ public class WeaponManager : MonoBehaviour
         {
             //level three
             generateDrop(Pos, (WeaponType) type, 3);
+            
         }else if (random >= 8 && random < 18)
         {
             generateDrop(Pos, (WeaponType) type, 2);
@@ -144,5 +147,7 @@ public class WeaponManager : MonoBehaviour
         {
             generatePowerDrop(Pos);
         }
+        
+        
     }
 }

@@ -49,7 +49,7 @@ public class Player
         this.id = id;
 
         talents.Add(AttributeType.WalkSpeed_c0, 0.8f);
-        talents.Add(AttributeType.JumpPower_c0, 120);
+        talents.Add(AttributeType.JumpPower_c0, 150);
         talents.Add(AttributeType.MaxHp_c0, 10);
         talents.Add(AttributeType.CriticalChance_cp0, 0.05f);
         talents.Add(AttributeType.CriticalDamage_cp0, 1.5f);

@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3045250573394594747}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  id: 0
+  id: 2
   level: 1
   levelText: {fileID: 965642949039516207}
   triggered: 0
