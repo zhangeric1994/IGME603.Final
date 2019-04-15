@@ -22,7 +22,7 @@ public class IngameMenu : GUIWindow
 
                 choosenIndex = value;
 
-                list.GetChild(choosenIndex).GetComponent<Text>().color = Color.red;
+                list.GetChild(choosenIndex).GetComponent<Text>().color = Color.green;
             }
         }
     }
