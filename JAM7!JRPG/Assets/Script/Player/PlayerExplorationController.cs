@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public enum PlayerExplorationState
 {
@@ -36,21 +37,21 @@ public class PlayerExplorationController : MonoBehaviour
             }
             else
             {
-                switch (currentState)
-                {
-                    case PlayerExplorationState.InMenu:
-                        GUIManager.Singleton.Close("IngameMenu");
-                        break;
+                //switch (currentState)
+                //{
+                //    case PlayerExplorationState.InMenu:
+                //        GUIManager.Singleton.Close("IngameMenu");
+                //        break;
 
 
-                    case PlayerExplorationState.InCombat:
-                        //HUD.Singleton.ShowExplorationUI(PlayerID);
-                        //HUD.Singleton.HideCombatUI(PlayerID);
-                        //gameObject.SetActive(true);
-                        //cam.GetComponent<ForwardCamera>().enabled = false;
-                        //cam.GetComponent<OverworldCamera>().enabled = true;
-                        break;
-                }
+                //    case PlayerExplorationState.InCombat:
+                //        HUD.Singleton.ShowExplorationUI(PlayerID);
+                //        HUD.Singleton.HideCombatUI(PlayerID);
+                //        gameObject.SetActive(true);
+                //        cam.GetComponent<ForwardCamera>().enabled = false;
+                //        cam.GetComponent<OverworldCamera>().enabled = true;
+                //        break;
+                //}
 
                 PlayerExplorationState previousState = currentState;
                 currentState = value;
@@ -60,17 +61,17 @@ public class PlayerExplorationController : MonoBehaviour
                 switch (currentState)
                 {
                     case PlayerExplorationState.InMenu:
-                        GUIManager.Singleton.Open("IngameMenu");
+                        GUIManager.Singleton.Open("IngameMenu", (Action)ReturnToExploration);
                         break;
 
 
-                    case PlayerExplorationState.InCombat:
-                        //HUD.Singleton.HideExplorationUI(PlayerID);
-                        //HUD.Singleton.ShowCombatUI(PlayerID);
-                        //gameObject.SetActive(false);
-                        //cam.GetComponent<ForwardCamera>().enabled = true;
-                        //cam.GetComponent<OverworldCamera>().enabled = false;
-                        break;
+                    //case PlayerExplorationState.InCombat:
+                    //    HUD.Singleton.HideExplorationUI(PlayerID);
+                    //    HUD.Singleton.ShowCombatUI(PlayerID);
+                    //    gameObject.SetActive(false);
+                    //    cam.GetComponent<ForwardCamera>().enabled = true;
+                    //    cam.GetComponent<OverworldCamera>().enabled = false;
+                    //    break;
                 }
             }
         }
@@ -90,7 +91,7 @@ public class PlayerExplorationController : MonoBehaviour
         enemy.StartCombat(this, isBoss);
     }
 
-    public void EndCombat()
+    public void ReturnToExploration()
     {
         CurrentState = PlayerExplorationState.Exploring;
     }

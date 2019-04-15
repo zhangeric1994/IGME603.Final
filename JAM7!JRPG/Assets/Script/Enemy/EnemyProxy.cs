@@ -33,7 +33,7 @@ public class EnemyProxy : MonoBehaviour
         foreach (PlayerExplorationController player in players)
         {
             GameManager.Singleton.GetPlayerCombatController(player.PlayerID).gameObject.SetActive(false);
-            player.EndCombat();
+            player.ReturnToExploration();
         }
 
         GameManager.Singleton.EndCombat(level);

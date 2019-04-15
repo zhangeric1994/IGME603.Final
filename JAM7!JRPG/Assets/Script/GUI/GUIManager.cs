@@ -183,15 +183,33 @@ public class GUIManager : MonoBehaviour
         return new Vector3((position.x / Screen.width - 0.5f) * referenceResolution.x, (position.y / Screen.height - 0.5f) * referenceResolution.y, 0);
     }
 
-    public void CreateFloatingTextForDamage(float damage, Vector3 worldPosition)
+    public FloatingText CreateFloatingText(string message, Vector3 worldPosition)
+    {
+        Vector3 position = Camera.main.WorldToScreenPoint(worldPosition);
+
+        FloatingText floatingText = reusableFloatingTexts.Count > 0 ? reusableFloatingTexts.Pop() : Instantiate(ResourceUtility.GetGUIPrefab<FloatingText>("FloatingText"), position, Quaternion.identity, transform);
+
+        floatingText.Text = message;
+        floatingText.transform.position = position;
+        floatingText.gameObject.SetActive(true);
+
+        return floatingText;
+    }
+
+    public FloatingText CreateFloatingTextForDamage(float damage, Vector3 worldPosition, bool isCritical = false)
     {
         Vector3 position = Camera.main.WorldToScreenPoint(worldPosition);
 
         FloatingText floatingText = reusableFloatingTexts.Count > 0 ? reusableFloatingTexts.Pop() : Instantiate(ResourceUtility.GetGUIPrefab<FloatingText>("FloatingText"), position, Quaternion.identity, transform);
 
         floatingText.Text = Mathf.FloorToInt(damage).ToString();
+        floatingText.TextColor = isCritical ? Color.red : Color.yellow;
+
+
         floatingText.transform.position = position;
         floatingText.gameObject.SetActive(true);
+
+        return floatingText;
     }
 
     public void DestroyFloatingText(FloatingText floatingText)

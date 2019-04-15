@@ -44,6 +44,7 @@ public class PlayerStats : GUIWindow
     {
         //UpdateLevelUpButton(player.CanLevelUp());
         //UpdateLevel(player.Level);
+
         UpdateHp(player.GetStatistic(StatisticType.Hp), player.GetStatistic(StatisticType.MaxHp));
         UpdateBaseDamage(0, player.GetStatistic(StatisticType.BaseDamage));
         UpdateAttackSpeed(0, player.GetStatistic(StatisticType.AttackSpeed));
@@ -108,11 +109,20 @@ public class PlayerStats : GUIWindow
         jumpPowerText.text = ((int)currentValue).ToString();
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Start"))
+            Close();
+    }
+
     private void OnDestroy()
     {
         //player.OnExpChange.RemoveListener(UpdateLevelUpButton);
         //player.OnLevelChange.RemoveListener(UpdateLevel);
         //player.OnPromotionChange.RemoveListener(UpdatePromotionWidget);
+
+        closeCallback?.Invoke();
+
         player.OnHpChange.RemoveListener(UpdateHp);
         player.OnBaseDamageChange.RemoveListener(UpdateBaseDamage);
         player.OnAttackSpeedChange.RemoveListener(UpdateAttackSpeed);
