@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable] public struct Attribute
 {
@@ -15,11 +16,21 @@ using UnityEngine;
     }
 }
 
+public class EventOnAttributeChange : UnityEvent<AttributeType, float, float> { }
+
 [Serializable] public class AttributeSet : IAttributeCollection, ISerializationCallbackReceiver
 {
     [SerializeField] Attribute[] serializedAttributes;
 
     private Dictionary<AttributeType, float> attributes = new Dictionary<AttributeType, float>();
+
+    public EventOnAttributeChange OnAttributeChange
+    {
+        get
+        {
+            return null;
+        }
+    }
 
     //public float this[int id]
     //{
@@ -119,6 +130,81 @@ using UnityEngine;
         else
             attributes[type] = value;
     }
+
+    public void Set(AttributeType type, float value, EventOnAttributeChange onAttributeChange)
+    {
+        if (!attributes.ContainsKey(type))
+        {
+            if (value != 0)
+            {
+                attributes.Add(type, value);
+
+                onAttributeChange.Invoke(type, 0, value);
+            }
+        }
+        else
+        {
+            float previousValue = attributes[type];
+
+            if (value != previousValue)
+            {
+                attributes[type] = value;
+
+                onAttributeChange.Invoke(type, previousValue, value);
+            }
+        }
+    }
+
+    public void Modify(AttributeType type, float value, int t = 1)
+    {
+        if (!attributes.ContainsKey(type))
+            attributes.Add(type, value * t);
+        else
+            attributes[type] += value * t;
+    }
+
+    public void Modify(AttributeType type, float value, EventOnAttributeChange onAttributeChange, int t = 1)
+    {
+        float previousValue;
+
+        if (!attributes.ContainsKey(type))
+        {
+            previousValue = 0;
+            attributes.Add(type, value * t);
+        }
+        else
+        {
+            previousValue = attributes[type];
+            attributes[type] += value * t;
+        }
+
+        onAttributeChange.Invoke(type, previousValue, attributes[type]);
+    }
+
+    public void Increment(IAttributeCollection attributes, int t = 1)
+    {
+        foreach (KeyValuePair<AttributeType, float> attribute in attributes)
+            Modify(attribute.Key, attribute.Value, t);
+    }
+
+    public void Increment(IAttributeCollection attributes, EventOnAttributeChange onAttributeChange, int t = 1)
+    {
+        foreach (KeyValuePair<AttributeType, float> attribute in attributes)
+            Modify(attribute.Key, attribute.Value, onAttributeChange, t);
+    }
+
+    public void Decrement(IAttributeCollection attributes, int t = 1)
+    {
+        foreach (KeyValuePair<AttributeType, float> attribute in attributes)
+            Modify(attribute.Key, -attribute.Value, t);
+    }
+
+    public void Decrement(IAttributeCollection attributes, EventOnAttributeChange onAttributeChange, int t = 1)
+    {
+        foreach (KeyValuePair<AttributeType, float> attribute in attributes)
+            Modify(attribute.Key, -attribute.Value, onAttributeChange, t);
+    }
+
 
     public IEnumerator<KeyValuePair<AttributeType, float>> GetEnumerator()
     {

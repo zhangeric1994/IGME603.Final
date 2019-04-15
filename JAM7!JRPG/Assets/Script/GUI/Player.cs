@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public enum PlayerClass
 {
@@ -27,41 +28,44 @@ public class Player
             playerList.Add(id, new Player(id, maxHp, power, dexterity, wisdom));
     }
 
+
     public readonly int id;
+
+    private AttributeSet talents = new AttributeSet();
+    private Inventory inventory;
     private StatisticSystem stats;
 
     public EventOnDataChange2<float> OnWalkSpeedChange { get; private set; }
     public EventOnDataChange2<float> OnJumpPowerChange { get; private set; }
-    public EventOnDataChange2<float> OnMaxHpChange { get; private set; }
+    public EventOnDataChange2<float> OnHpChange { get; private set; }
     public EventOnDataChange2<float> OnCriticalChanceChange { get; private set; }
     public EventOnDataChange2<float> OnCriticalDamageChange { get; private set; }
     public EventOnDataChange2<float> OnBaseDamageChange { get; private set; }
     public EventOnDataChange2<float> OnAttackSpeedChange { get; private set; }
 
 
-
     private Player(int id, int maxHp, int power, int dexterity, int wisdom)
     {
         this.id = id;
 
+        talents.Add(AttributeType.WalkSpeed_c0, 0.8f);
+        talents.Add(AttributeType.JumpPower_c0, 120);
+        talents.Add(AttributeType.MaxHp_c0, 5);
+        talents.Add(AttributeType.CriticalChance_cp0, 0.05f);
+        talents.Add(AttributeType.CriticalDamage_cp0, 1.5f);
+        talents.Add(AttributeType.BaseDamage_cp0, 1);
+        talents.Add(AttributeType.AttackSpeed_cp0, 1);
 
-        AttributeSet initialAttributes = new AttributeSet();
-        initialAttributes.Add(AttributeType.WalkSpeed_c0, 0.8f);
-        initialAttributes.Add(AttributeType.JumpPower_c0, 120);
-        initialAttributes.Add(AttributeType.MaxHp_c0, 5);
-        initialAttributes.Add(AttributeType.CriticalChance_cp0, 0.05f);
-        initialAttributes.Add(AttributeType.CriticalDamage_cp0, 1.5f);
-        initialAttributes.Add(AttributeType.BaseDamage_cp0, 1);
-        initialAttributes.Add(AttributeType.AttackSpeed_cp0, 1);
+        inventory = new Inventory();
 
-        stats = new StatisticSystem(initialAttributes);
-        UnityEngine.Debug.Log(stats);
-        stats.OnStatisticChange.AddListener(DispatchStatisticChangeEvents);
+        stats = new StatisticSystem(talents, inventory);
+        stats[StatisticType.Hp] = stats[StatisticType.MaxHp];
+        stats.onStatisticChange.AddListener(DispatchStatisticChangeEvents);
 
 
         OnWalkSpeedChange = new EventOnDataChange2<float>();
         OnJumpPowerChange = new EventOnDataChange2<float>();
-        OnMaxHpChange = new EventOnDataChange2<float>();
+        OnHpChange = new EventOnDataChange2<float>();
         OnCriticalChanceChange = new EventOnDataChange2<float>();
         OnCriticalDamageChange = new EventOnDataChange2<float>();
         OnBaseDamageChange = new EventOnDataChange2<float>();
@@ -93,9 +97,27 @@ public class Player
         return stats[statistic];
     }
 
+    public void Loot(Loot loot)
+    {
+        inventory.Add(loot.Id);
+        UnityEngine.Debug.Log(stats);
+    }
+
+    public float ApplyHealing(float rawHealing)
+    {
+        float healing = rawHealing;
+
+        stats[StatisticType.Hp] = Mathf.Max(stats[StatisticType.MaxHp], stats[StatisticType.Hp] + healing);
+
+        return healing;
+    }
 
     private void DispatchStatisticChangeEvents(StatisticType statistic, float previousValue, float currentValue)
     {
+#if UNITY_EDITOR
+        Debug.Log(LogUtility.MakeLogStringFormat("Player", "{0}: {1} ==> {2}", statistic, previousValue, currentValue));
+#endif
+
         switch (statistic)
         {
             case StatisticType.WalkSpeed:
@@ -109,7 +131,7 @@ public class Player
 
 
             case StatisticType.MaxHp:
-                OnMaxHpChange.Invoke(previousValue, currentValue);
+                stats[StatisticType.Hp] += currentValue - previousValue;
                 break;
 
 
@@ -130,6 +152,11 @@ public class Player
 
             case StatisticType.AttackSpeed:
                 OnAttackSpeedChange.Invoke(previousValue, currentValue);
+                break;
+
+
+            case StatisticType.Hp:
+                OnHpChange.Invoke(currentValue, stats[StatisticType.MaxHp]);
                 break;
         }
     }

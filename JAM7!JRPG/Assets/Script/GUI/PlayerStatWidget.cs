@@ -27,7 +27,7 @@ public class PlayerStatWidget : GUIWidget
         player.OnExpChange.AddListener(UpdateLevelUpButton);
         player.OnLevelChange.AddListener(UpdateLevel);
         player.OnPromotionChange.AddListener(UpdatePromotionWidget);
-        player.OnMaxHpChange.AddListener(UpdateMaxHp);
+        player.OnHpChange.AddListener(UpdateMaxHp);
     }
 
     public override void Hide()
@@ -37,7 +37,7 @@ public class PlayerStatWidget : GUIWidget
         player.OnExpChange.RemoveListener(UpdateLevelUpButton);
         player.OnLevelChange.RemoveListener(UpdateLevel);
         player.OnPromotionChange.RemoveListener(UpdatePromotionWidget);
-        player.OnMaxHpChange.RemoveListener(UpdateMaxHp);
+        player.OnHpChange.RemoveListener(UpdateMaxHp);
     }
 
     private void UpdateAll()
@@ -77,6 +77,6 @@ public class PlayerStatWidget : GUIWidget
         player.OnExpChange.RemoveListener(UpdateLevelUpButton);
         player.OnLevelChange.RemoveListener(UpdateLevel);
         player.OnPromotionChange.RemoveListener(UpdatePromotionWidget);
-        player.OnMaxHpChange.RemoveListener(UpdateMaxHp);
+        player.OnHpChange.RemoveListener(UpdateMaxHp);
     }
 }

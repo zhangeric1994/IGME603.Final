@@ -98,7 +98,7 @@ public class WeaponManager : MonoBehaviour
     public void generateDrop(Vector3 player, WeaponType type, int level)
     {
         var temp = Instantiate(WeaponsItem[(int) type]);
-        temp.GetComponent<Item>().getLevelSprite().sprite = levelTag[level - 1];
+        temp.GetComponent<Loot>().getLevelSprite().sprite = levelTag[level - 1];
         //todo Add a parent to organize
         temp.transform.position = player;
     }

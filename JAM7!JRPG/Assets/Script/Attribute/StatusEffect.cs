@@ -29,6 +29,8 @@ public class StatusEffect : IAttributeCollection, IComparable
         }
     }
 
+    public EventOnAttributeChange OnAttributeChange => new EventOnAttributeChange();
+
     //public float this[int id]
     //{
     //    get

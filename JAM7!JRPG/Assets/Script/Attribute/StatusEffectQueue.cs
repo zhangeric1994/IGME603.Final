@@ -9,6 +9,8 @@ public class StatusEffectQueue : IAttributeCollection
     private List<StatusEffect> list;
     private int current;
 
+    public EventOnAttributeChange OnAttributeChange => new EventOnAttributeChange();
+
     //public float this[int id]
     //{
     //    get

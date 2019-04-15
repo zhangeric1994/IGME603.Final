@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -79,6 +80,8 @@ public class PlayerCombatController : MonoBehaviour
     public GameObject cam;
     
     private float lastInput;
+
+    private HashSet<Loot> loots = new HashSet<Loot>();
 
 
     public Player Avatar
@@ -227,7 +230,7 @@ public class PlayerCombatController : MonoBehaviour
 
                     if (Input.GetButtonDown("Pick") && lastInput != Time.time + 10f)
                     {
-                        GetItem();
+                        Loot();
                         lastInput = Time.time;
                     }
                         
@@ -428,85 +431,158 @@ public class PlayerCombatController : MonoBehaviour
 //        Hp = maxHp;
 //    }
 
-    private void GetItem()
+    private void Loot()
     {
-        var items = FindObjectsOfType<Item>();
-        foreach (var item in items)
+        if (loots.Count > 0)
         {
-            float distanceToItem = (item.transform.position - transform.position).sqrMagnitude;
-            if (distanceToItem <= 0.1f && item.gameObject.activeInHierarchy)
+            float minDistance = float.MaxValue;
+            Loot targetLoot = null;
+
+            float x = gameObject.transform.position.x;
+            foreach (Loot loot in loots)
             {
-                if (item.getType() == ItemTag.Weapon)
+                float distance = Mathf.Abs(loot.gameObject.transform.position.x - x);
+
+                if (distance < minDistance)
                 {
+                    minDistance = distance;
+                    targetLoot = loot;
+                }
+            }
+
+            loots.Remove(targetLoot);
+
+            switch (targetLoot.Type)
+            {
+                case LootType.Weapon:
                     weaponHolder.GetComponentInChildren<Weapon>().Destroy();
-                    item.GetComponent<Item>().Trigger(this);
-                }
-                else if (item.getType() == ItemTag.Heal)
-                {
-                    //Hp++;
-                    item.GetComponent<Item>().Trigger(this);
-                    //TODO do UI update
-                }
-                else if (item.getType() == ItemTag.PowerUp)
-                {
-                    switch (item.getStatsType())
+                    break;
+            }
+
+            targetLoot.Trigger(this);
+        }
+
+        //var items = FindObjectsOfType<Loot>();
+        //foreach (var item in items)
+        //{
+        //    float distanceToItem = (item.transform.position - transform.position).sqrMagnitude;
+        //    if (distanceToItem <= 0.1f && item.gameObject.activeInHierarchy)
+        //    {
+        //        if (item.Type() == LootType.Weapon)
+        //        {
+        //            weaponHolder.GetComponentInChildren<Weapon>().Destroy();
+        //            item.GetComponent<Loot>().Trigger(this);
+        //        }
+        //        else if (item.Type() == LootType.Potion)
+        //        {
+        //            //Hp++;
+        //            item.GetComponent<Loot>().Trigger(this);
+        //            //TODO do UI update
+        //        }
+        //        else if (item.Type() == LootType.Item)
+        //        {
+        //            switch (item.getStatsType())
+        //            {
+        //                //TODO: Inventory
+
+
+        //                //case statsType.WalkSpeed:
+        //                //    walkSpeed += 0.05f;
+        //                //    break;
+
+
+        //                //case statsType.JumpPower:
+        //                //    jumpPower += 10;
+        //                //    break;
+
+
+        //                //case statsType.MaxHp:
+        //                //    maxHp += 1;
+        //                //    hp += 1;
+        //                //    break;
+
+
+        //                //case statsType.CriticalChance:
+        //                //    criticalChance += 5f;
+        //                //    break;
+
+
+        //                //case statsType.CriticalDamage:
+        //                //    criticalDamageFactor += 0.1f;
+        //                //    break;
+
+
+        //                //case statsType.BaseDamge:
+        //                //    damageFactor += 0.1f;
+        //                //    break;
+
+
+        //                //case statsType.attackSpeed:
+        //                //    attackSpeedFactor += 0.1f;
+        //                //    break;
+        //            }
+
+        //            item.GetComponent<Loot>().Trigger(this);
+        //            //TODO do UI update
+        //        }
+        //    }
+        //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Loot loot = other.GetComponent<Loot>();
+
+        if (loot)
+        {
+            switch (loot.Type)
+            {
+                case LootType.Item:
+                    if (!loot.triggered)
                     {
-                        //TODO: Inventory
-
-
-                        //case statsType.WalkSpeed:
-                        //    walkSpeed += 0.05f;
-                        //    break;
-
-
-                        //case statsType.JumpPower:
-                        //    jumpPower += 10;
-                        //    break;
-
-
-                        //case statsType.MaxHp:
-                        //    maxHp += 1;
-                        //    hp += 1;
-                        //    break;
-
-
-                        //case statsType.CriticalChance:
-                        //    criticalChance += 5f;
-                        //    break;
-
-
-                        //case statsType.CriticalDamage:
-                        //    criticalDamageFactor += 0.1f;
-                        //    break;
-
-
-                        //case statsType.BaseDamge:
-                        //    damageFactor += 0.1f;
-                        //    break;
-
-
-                        //case statsType.attackSpeed:
-                        //    attackSpeedFactor += 0.1f;
-                        //    break;
+                        Avatar.Loot(loot);
+                        loot.triggered = true;
+                        Destroy(loot.gameObject);
                     }
+                    break;
 
-                    item.GetComponent<Item>().Trigger(this);
-                    //TODO do UI update
-                }
+
+                default:
+                    loots.Add(loot);
+                    break;
             }
         }
     }
 
-//    IEnumerator resetReloadDelay(float val)
-//    {
-////        //simple animation
-////        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = 0;
-////        weaponHolder.GetComponentInChildren<Gun>().fireRate *= 0.5f;
-////        yield return new WaitForSeconds(4f);
-////        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = val;
-////        weaponHolder.GetComponentInChildren<Gun>().fireRate /= 0.5f;
-////        inAbility = false;
-//    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Loot loot = other.GetComponent<Loot>();
+
+        if (loot)
+        {
+            switch (loot.Type)
+            {
+                case LootType.Item:
+                    break;
+
+
+                default:
+                    loots.Remove(loot);
+                    break;
+            }
+        }
+    }
+
+    //    IEnumerator resetReloadDelay(float val)
+    //    {
+    ////        //simple animation
+    ////        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = 0;
+    ////        weaponHolder.GetComponentInChildren<Gun>().fireRate *= 0.5f;
+    ////        yield return new WaitForSeconds(4f);
+    ////        weaponHolder.GetComponentInChildren<Gun>().reloadSpeed = val;
+    ////        weaponHolder.GetComponentInChildren<Gun>().fireRate /= 0.5f;
+    ////        inAbility = false;
+    //    }
 
     IEnumerator resetShieldDelay()
     {

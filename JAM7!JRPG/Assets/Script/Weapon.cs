@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType
+public enum WeaponType : int
 {
     GiantSword,
     LightSword,

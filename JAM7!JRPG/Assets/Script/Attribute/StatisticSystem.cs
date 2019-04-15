@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine.Events;
 
 public enum AttributeType : int
@@ -15,18 +15,22 @@ public enum AttributeType : int
 
 public enum StatisticType : int
 {
-    WalkSpeed = 1,
-    JumpPower = 2,
-    MaxHp = 3,
-    CriticalChance = 4,
-    CriticalDamage = 5,
-    BaseDamage = 6,
-    AttackSpeed = 7,
+    WalkSpeed = 0x1,
+    JumpPower = 0x2,
+    MaxHp = 0x3,
+    CriticalChance = 0x4,
+    CriticalDamage = 0x5,
+    BaseDamage = 0x6,
+    AttackSpeed = 0x7,
+
+    Hp = 0xF0,
 }
+
+public class EventOnStatisticChange : UnityEvent<StatisticType, float, float> { }
 
 public class StatisticSystem
 {
-    public static float CalculateStatistic(StatisticType type, params IAttributeCollection[] attributeSets)
+    public static float Calculate(StatisticType type, params IAttributeCollection[] attributeSets)
     {
         switch (type)
         {
@@ -63,15 +67,30 @@ public class StatisticSystem
         }
     }
 
+    public static Dictionary<StatisticType, float> CalculateAll(params IAttributeCollection[] attributeSets)
+    {
+        HashSet<int> ids = new HashSet<int>();
+        foreach (IAttributeCollection attributes in attributeSets)
+            foreach (KeyValuePair<AttributeType, float> attribute in attributes)
+                ids.Add((int)attribute.Key >> 8);
 
-    public class EventOnStatisticChange : UnityEvent<StatisticType, float, float> { }
+        Dictionary<StatisticType, float> statistics = new Dictionary<StatisticType, float>();
+
+        foreach (int id in ids)
+        {
+            StatisticType statistic = (StatisticType)id;
+            statistics.Add(statistic, Calculate(statistic, attributeSets));
+        }
+
+        return statistics;
+    }
 
     /// <summary>
     /// An event triggered whenever a certain statistic in this system changes 
     /// </summary>
-    public EventOnStatisticChange OnStatisticChange = new EventOnStatisticChange();
+    public readonly EventOnStatisticChange onStatisticChange = new EventOnStatisticChange();
 
-    public EventOnDataChange3<StatusEffect> onStatusEffectChange = new EventOnDataChange3<StatusEffect>(); 
+    //public EventOnDataChange3<StatusEffect> onStatusEffectChange = new EventOnDataChange3<StatusEffect>(); 
 
     /// <summary>
     /// 
@@ -79,101 +98,109 @@ public class StatisticSystem
     private Dictionary<StatisticType, float> statistics = new Dictionary<StatisticType, float>();
 
     /// <summary>
-    /// Default values of attributes
+    /// Related attribute sets
     /// </summary>
-    private readonly AttributeSet initialValues;
+    private IAttributeCollection[] attributeSets;
 
-    /// <summary>
-    /// All status effects applied to this system in time order
-    /// </summary>
-    private StatusEffectQueue statusEffects = new StatusEffectQueue();
+    ///// <summary>
+    ///// All status effects applied to this system in time order
+    ///// </summary>
+    //private StatusEffectQueue statusEffects = new StatusEffectQueue();
 
     public float this[StatisticType type]
     {
         get
         {
-            return statistics.ContainsKey(type) ? CalculateStatistic(type) : 0;
+            return statistics.ContainsKey(type) ? statistics[type] : 0;
         }
 
         set
         {
-            bool hasChange = true;
-            float originalValue = 0;
-
             if (!statistics.ContainsKey(type))
-                statistics.Add(type, value);
+            {
+                if (value != 0)
+                {
+                    statistics.Add(type, value);
+
+                    onStatisticChange.Invoke(type, 0, value);
+                }
+            }
             else
             {
-                originalValue = statistics[type];
+                float previousValue = statistics[type];
 
-                if (value != originalValue)
+                if (value != previousValue)
+                {
                     statistics[type] = value;
-                else
-                    hasChange = false;
-            }
 
-            if (hasChange)
-                OnStatisticChange.Invoke(type, originalValue, statistics[type]);
+                    onStatisticChange.Invoke(type, previousValue, value);
+                }
+            }
         }
     }
 
     private StatisticSystem()
     {
-        initialValues = new AttributeSet();
     }
 
-    public StatisticSystem(AttributeSet initialValues)
+    public StatisticSystem(params IAttributeCollection[] attributeSets)
     {
-        this.initialValues = initialValues;
+        this.attributeSets = attributeSets;
 
-        UpdateChangedStatistics(this.initialValues);
+        foreach (IAttributeCollection attributeSet in attributeSets)
+            if (attributeSet.OnAttributeChange != null)
+                attributeSet.OnAttributeChange.AddListener(UpdateChangedStatistics);
+
+        UpdateChangedStatistics(this.attributeSets);
+    }
+
+    ~StatisticSystem()
+    {
+        foreach (IAttributeCollection attributeSet in attributeSets)
+            if (attributeSet != null && attributeSet.OnAttributeChange != null)
+                attributeSet.OnAttributeChange.RemoveListener(UpdateChangedStatistics);
     }
 
     public float Sum(AttributeType type)
     {
-        return AttributeSet.Sum(type, initialValues, statusEffects);
+        return AttributeSet.Sum(type, attributeSets); //, statusEffects);
     }
 
-    public float CalculateStatistic(StatisticType type)
-    {
-        return CalculateStatistic(type, initialValues, statusEffects);
-    }
+    //    public bool AddStatusEffect(StatusEffect statusEffect)
+    //    {
+    //        bool isExisted = statusEffects.Contains(statusEffect);
 
-    public bool AddStatusEffect(StatusEffect statusEffect)
-    {
-        bool isExisted = statusEffects.Contains(statusEffect);
+    //        if (statusEffects.Push(statusEffect))
+    //        {
+    //#if UNITY_EDITOR
+    //            Debug.Log(LogUtility.MakeLogString("StatisticSystem", "Add " + statusEffect + "\n" + ToString()));
+    //#endif
 
-        if (statusEffects.Push(statusEffect))
-        {
-#if UNITY_EDITOR
-            Debug.Log(LogUtility.MakeLogString("StatisticSystem", "Add " + statusEffect + "\n" + ToString()));
-#endif
+    //            UpdateChangedStatistics(statusEffect);
+    //            onStatusEffectChange.Invoke(isExisted ? 0 : 1, statusEffect);
 
-            UpdateChangedStatistics(statusEffect);
-            onStatusEffectChange.Invoke(isExisted ? 0 : 1, statusEffect);
+    //            return true;
+    //        }
 
-            return true;
-        }
+    //        return false;
+    //    }
 
-        return false;
-    }
+    //    public StatusEffect RemoveStatusEffect(int id)
+    //    {
+    //        StatusEffect statusEffect = statusEffects.Remove(id);
 
-    public StatusEffect RemoveStatusEffect(int id)
-    {
-        StatusEffect statusEffect = statusEffects.Remove(id);
+    //        if (statusEffect != null)
+    //        {
+    //#if UNITY_EDITOR
+    //            Debug.Log(LogUtility.MakeLogString("StatisticSystem", "Remove " + statusEffect + "\n" + ToString()));
+    //#endif
 
-        if (statusEffect != null)
-        {
-#if UNITY_EDITOR
-            Debug.Log(LogUtility.MakeLogString("StatisticSystem", "Remove " + statusEffect + "\n" + ToString()));
-#endif
+    //            UpdateChangedStatistics(statusEffect);
+    //            onStatusEffectChange.Invoke(-1, statusEffect);
+    //        }
 
-            UpdateChangedStatistics(statusEffect);
-            onStatusEffectChange.Invoke(-1, statusEffect);
-        }
-
-        return statusEffect;
-    }
+    //        return statusEffect;
+    //    }
 
     public override string ToString()
     {
@@ -182,22 +209,62 @@ public class StatisticSystem
         foreach (KeyValuePair<StatisticType, float> statistic in statistics)
             s += ";" + statistic.Key + ":" + statistic.Value;
 
-        return string.Format("Stat: {0}\nTalent: {1}\n\n{2}", s.Substring(1), initialValues, statusEffects);
+        return string.Format("Stat: {0}\nTalent: {1}\n\n", s.Substring(1), attributeSets); //, statusEffects);
+    }
+
+    public float CalculateModified(StatisticType type, params IAttributeCollection[] modifiers)
+    {
+        IAttributeCollection[] args = new IAttributeCollection[attributeSets.Length + modifiers.Length];
+        Array.Copy(attributeSets, args, attributeSets.Length);
+        Array.Copy(modifiers, 0, args, attributeSets.Length, modifiers.Length);
+
+        return Calculate(type, args);
+    }
+
+    public Dictionary<StatisticType, float> CalculateAllModified(params IAttributeCollection[] modifiers)
+    {
+        IAttributeCollection[] args = new IAttributeCollection[attributeSets.Length + modifiers.Length];
+        Array.Copy(attributeSets, args, attributeSets.Length);
+        Array.Copy(modifiers, 0, args, attributeSets.Length, modifiers.Length);
+
+        return CalculateAll(args);
     }
 
 
-    private void UpdateChangedStatistics(IAttributeCollection attributes)
+    private void UpdateChangedStatistics(AttributeType attributeType, float previousValue, float currentValue)
+    {
+        UnityEngine.Debug.LogWarning(attributeType);
+        StatisticType statisticType = (StatisticType)((int)attributeType >> 8);
+        this[statisticType] = Calculate(statisticType, attributeSets);
+    }
+
+    private void UpdateChangedStatistics(params IAttributeCollection[] attributeSets)
     {
         HashSet<int> changedStatistics = new HashSet<int>();
-        foreach (KeyValuePair<AttributeType, float> attribute in attributes)
-            changedStatistics.Add((int)attribute.Key >> 8);
+        foreach (IAttributeCollection attributeSet in attributeSets)
+            foreach (KeyValuePair<AttributeType, float> attribute in attributeSet)
+                changedStatistics.Add((int)attribute.Key >> 8);
 
         foreach (int id in changedStatistics)
         {
-            StatisticType statistic = (StatisticType)id;
-            this[statistic] = CalculateStatistic(statistic);
+            StatisticType statisticType = (StatisticType)id;
+            this[statisticType] = Calculate(statisticType, attributeSets);
         }
     }
+
+    //private void UpdateChangedStatistics(List<IAttributeCollection> attributeSets)
+    //{
+    //    HashSet<int> changedStatistics = new HashSet<int>();
+    //    foreach (IAttributeCollection attributes in attributeSets)
+    //        foreach (KeyValuePair<AttributeType, float> attribute in attributes)
+    //            changedStatistics.Add((int)attribute.Key >> 8);
+
+    //    foreach (int id in changedStatistics)
+    //    {
+    //        StatisticType statistic = (StatisticType)id;
+    //        this[statistic] = CalculateStatistic(statistic);
+    //    }
+    //}
 
     private void UpdateChangedStatistics(List<StatusEffect> statusEffects)
     {
@@ -208,8 +275,8 @@ public class StatisticSystem
 
         foreach (int id in changedStatistics)
         {
-            StatisticType statistic = (StatisticType)id;
-            this[statistic] = CalculateStatistic(statistic);
+            StatisticType statisticType = (StatisticType)id;
+            this[statisticType] = Calculate(statisticType, attributeSets);
         }
     }
 }
