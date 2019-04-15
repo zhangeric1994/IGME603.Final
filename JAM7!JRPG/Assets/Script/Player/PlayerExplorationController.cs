@@ -39,16 +39,16 @@ public class PlayerExplorationController : MonoBehaviour
                 switch (currentState)
                 {
                     case PlayerExplorationState.InMenu:
-                        HUD.Singleton.HideMenu(PlayerID);
+                        GUIManager.Singleton.Close("IngameMenu");
                         break;
 
 
                     case PlayerExplorationState.InCombat:
-                        HUD.Singleton.ShowExplorationUI(PlayerID);
-                        HUD.Singleton.HideCombatUI(PlayerID);
-                        gameObject.SetActive(true);
-                        cam.GetComponent<ForwardCamera>().enabled = false;
-                        cam.GetComponent<OverworldCamera>().enabled = true;
+                        //HUD.Singleton.ShowExplorationUI(PlayerID);
+                        //HUD.Singleton.HideCombatUI(PlayerID);
+                        //gameObject.SetActive(true);
+                        //cam.GetComponent<ForwardCamera>().enabled = false;
+                        //cam.GetComponent<OverworldCamera>().enabled = true;
                         break;
                 }
 
@@ -60,16 +60,16 @@ public class PlayerExplorationController : MonoBehaviour
                 switch (currentState)
                 {
                     case PlayerExplorationState.InMenu:
-                        HUD.Singleton.ShowMenu(PlayerID);
+                        GUIManager.Singleton.Open("IngameMenu");
                         break;
 
 
                     case PlayerExplorationState.InCombat:
-                        HUD.Singleton.HideExplorationUI(PlayerID);
-                        HUD.Singleton.ShowCombatUI(PlayerID);
-                        gameObject.SetActive(false);
-                        cam.GetComponent<ForwardCamera>().enabled = true;
-                        cam.GetComponent<OverworldCamera>().enabled = false;
+                        //HUD.Singleton.HideExplorationUI(PlayerID);
+                        //HUD.Singleton.ShowCombatUI(PlayerID);
+                        //gameObject.SetActive(false);
+                        //cam.GetComponent<ForwardCamera>().enabled = true;
+                        //cam.GetComponent<OverworldCamera>().enabled = false;
                         break;
                 }
             }
@@ -166,12 +166,12 @@ public class PlayerExplorationController : MonoBehaviour
         switch (currentState)
         {
             case PlayerExplorationState.Exploring:
-                if (Input.GetButtonDown("Start" + PlayerID))
+                if (Input.GetButtonDown("Start"))
                     CurrentState = PlayerExplorationState.InMenu;
                 else
                 {
-                    float horizontal = Input.GetAxisRaw("Horizontal" + PlayerID);
-                    float vertical = Input.GetAxisRaw("Vertical" + PlayerID);
+                    float horizontal = Input.GetAxisRaw("Horizontal");
+                    float vertical = Input.GetAxisRaw("Vertical");
                     animator.ResetTrigger("Right");
                     animator.ResetTrigger("Left");
                     animator.ResetTrigger("Up");

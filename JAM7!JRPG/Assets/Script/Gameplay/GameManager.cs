@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 
 
                     case GameState.InGame:
-                        //GUIManager.Singleton.Open("HUD", playerCombatControllers[0], playerCombatControllers[1]);
+                        //GUIManager.Singleton.Open("HUD", Player.GetPlayer(0));
                         break;
                 }
             }

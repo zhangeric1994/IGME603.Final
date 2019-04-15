@@ -99,7 +99,7 @@ public class GUIManager : MonoBehaviour
     /// <param name="mode"> The mode to be used to open the UI window </param>
     /// <param name="args"> Extra arguments passed to UIWindow.OnOpen() </param>
     /// <returns></returns>
-    public GUIWindow Open(string name, UIMode mode = UIMode.DEFAULT, params object[] args)
+    public GUIWindow Open(string name, UIMode mode, params object[] args)
     {
 #if UNITY_EDITOR
         Debug.Log(LogUtility.MakeLogStringFormat("UI", IsInViewport(name) ? name + " is already in viewport" : "Open " + name));
