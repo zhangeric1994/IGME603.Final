@@ -126,6 +126,9 @@ MonoBehaviour:
   animation: {fileID: 7400000, guid: 1775006a06d325d4d8aa335b18cbbda2, type: 2}
   hitStop: 0.05
   bouncingBackForce: 0
+  level: 1
+  VFX: {fileID: 0}
+  hitPos: {fileID: 0}
 --- !u!1 &510960051156847531
 GameObject:
   m_ObjectHideFlags: 0

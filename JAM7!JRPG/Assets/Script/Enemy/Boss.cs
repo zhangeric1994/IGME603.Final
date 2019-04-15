@@ -29,17 +29,18 @@ public class Boss : Enemy
     // Update is called once per frame
     void Update()
     {
-        if ((findCloestPlayer().position - transform.position).sqrMagnitude < 8f&&idle && health > 0)
+        if (idle && health > 0)
         {
             idle = false;
-            int behaviourId = Random.Range(0, 4);
+            int behaviourId = Random.Range(0, 3);
             while (lastBehaviourId == behaviourId)
             {
-                behaviourId = Random.Range(0, 4);
+                behaviourId = Random.Range(0, 3);
             }
             
             lastBehaviourId = behaviourId;
             executeBehavior((BossBehaviour) behaviourId);
+            Debug.LogWarning(behaviourId);
         }
     }
     

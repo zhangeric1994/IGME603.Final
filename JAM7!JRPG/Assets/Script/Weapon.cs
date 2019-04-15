@@ -26,9 +26,11 @@ public class Weapon : MonoBehaviour
     
     public float bouncingBackForce;
 
-    private int level = 1;
+    public int level;
 
     private PlayerCombatController player;
+    [SerializeField] private GameObject VFX;
+    [SerializeField] private Transform hitPos;
 
     private void Start()
     {
@@ -50,7 +52,7 @@ public class Weapon : MonoBehaviour
     }
     
     
-    public void AcquireGun(int _level)
+    public void AcquireWeapon(int _level)
     {
         player = gameObject.GetComponentInParent<PlayerCombatController>();
         WeaponInfo info = WeaponManager._instance.getGunData(type);
@@ -84,16 +86,44 @@ public class Weapon : MonoBehaviour
                 {
                     //then critical
                     enemy.getHit(AtkId, (int)(damage * player.Avatar.GetStatistic(StatisticType.BaseDamage) * player.Avatar.GetStatistic(StatisticType.CriticalDamage)));
+                    if (type == WeaponType.LightSword)
+                    {
+                        ShowVFX(enemy.transform.position);
+                        ForwardCamera._instance.Shaking(0.03f, 0.05f);
+                    }
                 }
                 else
                 {
                     enemy.getHit(AtkId, (int)(damage * player.Avatar.GetStatistic(StatisticType.BaseDamage) * 1.0f));
+                    if (type == WeaponType.LightSword)
+                    {
+                        ShowVFX(enemy.transform.position);
+                        ForwardCamera._instance.Shaking(0.01f, 0.05f);
+                    }
                 }
                 
+
                 enemy.knockBack(bouncingBackForce); 
                 player.pauseAtkAnim(hitStop);
             }
         }
     }
+
+    public void ShowVFX()
+    {
+        Destroy(Instantiate(VFX, hitPos.position, Quaternion.identity),1.0f);
+    }
     
+    public void ShowVFX(Vector3 pos)
+    {
+        var direction = pos - player.transform.position;
+        var obj = Instantiate(VFX, pos, Quaternion.identity);
+        if (direction.x < 0)
+        {
+            obj.transform.localScale = new Vector3(-obj.transform.localScale.x,obj.transform.localScale.y,obj.transform.localScale.z);
+        }
+
+        Destroy(obj,1.0f);
+    }
+
 }
