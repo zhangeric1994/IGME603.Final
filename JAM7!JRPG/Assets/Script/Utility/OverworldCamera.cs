@@ -10,11 +10,12 @@ public class OverworldCamera : MonoBehaviour
     float camMax;
     Camera cam;
 
+    private float size;
     // Start is called before the first frame update
     void Start()
     {
         cam = GetComponent<Camera>();
-
+        size = cam.orthographicSize;
         Initialize();
     }
 
@@ -41,7 +42,7 @@ public class OverworldCamera : MonoBehaviour
         var center = target.position;
 
         center.z = -10.0f;
-
+        cam.orthographicSize = size;
         transform.position = center;
 
     }
