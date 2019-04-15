@@ -22,8 +22,8 @@ public class PlayerMapControl : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		float x = Input.GetAxis("Horizontal" + id);
-		float y = Input.GetAxis("Vertical" + id);
+		float x = Input.GetAxis("Horizontal");
+		float y = Input.GetAxis("Vertical");
 
 		if (x > 0)
 			renderer.flipX = false;

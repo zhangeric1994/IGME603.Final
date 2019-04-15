@@ -48,7 +48,9 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void endCombat() {
+    public void endCombat()
+    {
         enemyProxy.EndCombat();
+        Destroy(gameObject);
     }
 }

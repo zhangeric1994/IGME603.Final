@@ -7,7 +7,17 @@ public enum PlayerExplorationState
     Exploring = 1,
     InMenu = 2,
     InCombat = 3,
+    InTalking = 4,
 }
+
+public enum Heading
+{
+    Up,
+    Down,
+    Left,
+    Right,
+}
+
 
 public class PlayerExplorationController : MonoBehaviour
 {
@@ -21,6 +31,8 @@ public class PlayerExplorationController : MonoBehaviour
 
     public GameObject cam;
 
+    private Heading heading;
+
     public PlayerExplorationState CurrentState
     {
         // this allowed to triggger codes when the state switched
@@ -29,7 +41,7 @@ public class PlayerExplorationController : MonoBehaviour
             return currentState;
         }
 
-        private set
+        set
         {
             if (value == currentState)
             {
@@ -37,21 +49,22 @@ public class PlayerExplorationController : MonoBehaviour
             }
             else
             {
-                //switch (currentState)
-                //{
+                switch (currentState)
+                {
                 //    case PlayerExplorationState.InMenu:
                 //        GUIManager.Singleton.Close("IngameMenu");
                 //        break;
 
 
-                //    case PlayerExplorationState.InCombat:
-                //        HUD.Singleton.ShowExplorationUI(PlayerID);
-                //        HUD.Singleton.HideCombatUI(PlayerID);
-                //        gameObject.SetActive(true);
-                //        cam.GetComponent<ForwardCamera>().enabled = false;
-                //        cam.GetComponent<OverworldCamera>().enabled = true;
-                //        break;
-                //}
+                    case PlayerExplorationState.InCombat:
+                        //HUD.Singleton.ShowExplorationUI(PlayerID);
+                        //HUD.Singleton.HideCombatUI(PlayerID);
+                        gameObject.SetActive(true);
+                        cam.GetComponent<ForwardCamera>().enabled = false;
+                        cam.GetComponent<OverworldCamera>().enabled = true;
+                        GUIManager.Singleton.Close("CombatHUD");
+                        break;
+                }
 
                 PlayerExplorationState previousState = currentState;
                 currentState = value;
@@ -61,17 +74,19 @@ public class PlayerExplorationController : MonoBehaviour
                 switch (currentState)
                 {
                     case PlayerExplorationState.InMenu:
+                        //HUD.Singleton.ShowMenu(PlayerID);
                         GUIManager.Singleton.Open("IngameMenu", (Action)ReturnToExploration);
                         break;
 
 
-                    //case PlayerExplorationState.InCombat:
-                    //    HUD.Singleton.HideExplorationUI(PlayerID);
-                    //    HUD.Singleton.ShowCombatUI(PlayerID);
-                    //    gameObject.SetActive(false);
-                    //    cam.GetComponent<ForwardCamera>().enabled = true;
-                    //    cam.GetComponent<OverworldCamera>().enabled = false;
-                    //    break;
+                    case PlayerExplorationState.InCombat:
+                        //HUD.Singleton.HideExplorationUI(PlayerID);
+                        //HUD.Singleton.ShowCombatUI(PlayerID);
+                        gameObject.SetActive(false);
+                        cam.GetComponent<ForwardCamera>().enabled = true;
+                        cam.GetComponent<OverworldCamera>().enabled = false;
+                        GUIManager.Singleton.Open("CombatHUD");
+                        break;
                 }
             }
         }
@@ -169,6 +184,36 @@ public class PlayerExplorationController : MonoBehaviour
             case PlayerExplorationState.Exploring:
                 if (Input.GetButtonDown("Start"))
                     CurrentState = PlayerExplorationState.InMenu;
+                else if (Input.GetButtonDown("Submit"))
+                {
+                    Vector2 direction = Vector2.zero;
+                    switch (heading)
+                    {
+                        case Heading.Down:
+                            direction = Vector2.down;
+                            break;
+                        case Heading.Left:
+                            direction = Vector2.left;
+                            break;
+                        case Heading.Right:
+                            direction = Vector2.right;
+                            break;
+                        case Heading.Up:
+                            direction = Vector2.up;
+                            break;
+                    }
+                    RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, direction, 2f);
+                    Dialogue dialogue = null;
+                    if (hit)
+                    {
+                        dialogue = hit.collider.gameObject.GetComponent<Dialogue>();
+                    }
+                    if (dialogue != null)
+                    {
+                        if (dialogue.StartDialog(this))
+                            currentState = PlayerExplorationState.InTalking;
+                    }
+                }
                 else
                 {
                     float horizontal = Input.GetAxisRaw("Horizontal");
@@ -181,17 +226,29 @@ public class PlayerExplorationController : MonoBehaviour
                     {
                         vertical = 0;
                         if (horizontal > 0)
+                        {
                             animator.SetTrigger("Right");
+                            heading = Heading.Right;
+                        }
                         else if (horizontal < 0)
+                        {
                             animator.SetTrigger("Left");
+                            heading = Heading.Left;
+                        }
                     }
                     else
                     {
                         horizontal = 0;
                         if (vertical > 0)
+                        {
                             animator.SetTrigger("Up");
+                            heading = Heading.Up;
+                        }
                         else if (vertical < 0)
+                        {
                             animator.SetTrigger("Down");
+                            heading = Heading.Down;
+                        }
                     }
                     Vector3 move = Time.deltaTime * walkSpeed * new Vector3(horizontal, vertical, 0);
                     if (Input.GetKey(KeyCode.LeftShift)) move *= 2;
