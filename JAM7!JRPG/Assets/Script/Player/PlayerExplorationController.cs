@@ -98,6 +98,30 @@ public class PlayerExplorationController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject go = collision.gameObject;
+        Debug.Log("OnTriggerEnter2D, other: " + go.name);
+        switch (go.tag)
+        {
+            case "Enemy":
+                StartCombat(go.GetComponent<EnemyProxy>());
+                break;
+            case "Boss":
+                StartCombat(go.GetComponent<EnemyProxy>(), true);
+                break;
+            case "MusicCollider":
+                if (PlayerID == 1) break;
+                string[] splitName = go.name.Split('_');
+                MusicManager.Instance.PlayMusic(splitName[1]);
+                GameObject another = go.GetComponent<mutual>().another;
+                go.SetActive(false);
+                another.SetActive(true);
+                break;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject go = collision.collider.gameObject;
+        Debug.Log("OnCollisionEnter2D, other: " + go.name);
         switch (go.tag)
         {
             case "Enemy":
