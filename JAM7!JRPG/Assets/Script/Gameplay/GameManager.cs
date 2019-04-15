@@ -11,6 +11,7 @@ using UnityEngine;
 public enum GameState : int
 {
     Start = 1,
+    MainMenu,
     Loading,
     InGame,
 }
@@ -68,9 +69,12 @@ public class GameManager : MonoBehaviour
             else
             {
                 // Before leaving the previous state
-                //switch (currentGameState)
-                //{
-                //}
+                switch (currentGameState)
+                {
+                    case GameState.MainMenu:
+                        GUIManager.Singleton.Close("MainMenu");
+                        break;
+                }
 
                 GameState previousGameState = CurrentGameState;
                 currentGameState = value;
@@ -84,6 +88,16 @@ public class GameManager : MonoBehaviour
                 // After entering the new state
                 switch (currentGameState)
                 {
+                    case GameState.Start:
+                        Debug.Assert(DataTableManager.singleton != null);
+                        break;
+
+
+                    case GameState.MainMenu:
+                        GUIManager.Singleton.Open("MainMenu");
+                        break;
+
+
                     case GameState.Loading:
                         LoadPlayer(0);
                         CurrentGameState = GameState.InGame;
@@ -134,6 +148,11 @@ public class GameManager : MonoBehaviour
         --numOngoingCombats;
 
         MusicManager.Instance.inBattle = numOngoingCombats > 0;
+    }
+
+    public void StartGame()
+    {
+        CurrentGameState = GameState.Loading;
     }
 
     /// <summary>

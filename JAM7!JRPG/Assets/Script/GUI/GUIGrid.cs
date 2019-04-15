@@ -20,6 +20,7 @@ public class GUIGrid : GUIWidget
         float maxX = -1;
         float maxY = -1;
 
+        Vector2 anchor = (Vector2.one - direction) * 0.5f;
         for (int childIndex = 0; childIndex < N; childIndex++)
         {
             RectTransform item = transform.GetChild(childIndex).GetComponent<RectTransform>();
@@ -33,11 +34,11 @@ public class GUIGrid : GUIWidget
             if (row > 0 && y > row)
                 break;
 
-            item.anchorMin = rectTransform.anchorMin;
-            item.anchorMax = rectTransform.anchorMax;
+            item.anchorMin = anchor;
+            item.anchorMax = anchor;
 
             item.pivot = new Vector2Int(-(direction.x - 1) / 2, -(direction.y - 1) / 2);
-            item.localPosition = new Vector3(direction.x * ((itemSize.x + margin.x) * x + margin.x), direction.y * ((itemSize.y + margin.y) * y + margin.y), 0);
+            item.anchoredPosition = new Vector3(direction.x * ((itemSize.x + margin.x) * x + margin.x), direction.y * ((itemSize.y + margin.y) * y + margin.y), 0);
 
             if (item.sizeDelta.x > maxX)
                 maxX = item.sizeDelta.x;
