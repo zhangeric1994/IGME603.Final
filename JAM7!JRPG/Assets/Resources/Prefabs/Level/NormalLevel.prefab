@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1011013932920659642}
   m_Layer: 8
   m_Name: Runner (7)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!70 &1011013932920659642
 CapsuleCollider2D:
@@ -394,7 +395,7 @@ GameObject:
   - component: {fileID: 1556775025993425197}
   m_Layer: 8
   m_Name: Runner (5)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -528,7 +529,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!70 &1556775025993425197
 CapsuleCollider2D:
@@ -712,7 +714,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!1 &3757429980355832262
 GameObject:
@@ -9530,7 +9533,7 @@ GameObject:
   - component: {fileID: 4986159101049115389}
   m_Layer: 8
   m_Name: Runner (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9664,7 +9667,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!70 &4986159101049115389
 CapsuleCollider2D:
@@ -9848,7 +9852,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!1 &5861480059468866628
 GameObject:
@@ -9866,7 +9871,7 @@ GameObject:
   - component: {fileID: 5861480059468866626}
   m_Layer: 8
   m_Name: Runner (6)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10000,7 +10005,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!70 &5861480059468866626
 CapsuleCollider2D:
@@ -55444,7 +55450,7 @@ GameObject:
   - component: {fileID: 6802331100875423474}
   m_Layer: 8
   m_Name: Runner (3)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55578,7 +55584,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!70 &6802331100875423474
 CapsuleCollider2D:
@@ -55785,7 +55792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpawnPoints:
   - {x: 2, y: 2, z: 0}
-  Door: {fileID: 0}
+  Door: {fileID: 5953559128350749441}
   enemyProxy: {fileID: 0}
 --- !u!1 &7664576254181234563
 GameObject:
@@ -56158,7 +56165,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!1 &7664576254872022964
 GameObject:
@@ -56176,7 +56184,7 @@ GameObject:
   - component: {fileID: 7664576254872022962}
   m_Layer: 8
   m_Name: Runner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56310,7 +56318,8 @@ MonoBehaviour:
   defaultState: 0
   currentState: 0
   damage: 0
-  GenerateItem: 0
+  boss: 0
+  lastHitId: 0
   self: {fileID: 0}
 --- !u!70 &7664576254872022962
 CapsuleCollider2D:
@@ -56437,11 +56446,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7664576254102026779}
     m_Modifications:
-    - target: {fileID: 2455833553634166338, guid: 56cba452bea818643a1a4bdf78f8b1de,
-        type: 3}
-      propertyPath: m_Name
-      value: Door
-      objectReference: {fileID: 0}
     - target: {fileID: 2455833553634166332, guid: 56cba452bea818643a1a4bdf78f8b1de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -56497,8 +56501,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2455833553634166338, guid: 56cba452bea818643a1a4bdf78f8b1de,
+        type: 3}
+      propertyPath: m_Name
+      value: Door
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56cba452bea818643a1a4bdf78f8b1de, type: 3}
+--- !u!1 &5953559128350749441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2455833553634166338, guid: 56cba452bea818643a1a4bdf78f8b1de,
+    type: 3}
+  m_PrefabInstance: {fileID: 8109740348105356611}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5953559128350749567 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2455833553634166332, guid: 56cba452bea818643a1a4bdf78f8b1de,

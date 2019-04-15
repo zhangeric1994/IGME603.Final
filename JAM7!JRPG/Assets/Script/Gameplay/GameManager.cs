@@ -151,9 +151,9 @@ public class GameManager : MonoBehaviour
         PlayerExplorationController explorationController = Instantiate(ResourceUtility.GetPrefab<PlayerExplorationController>("PlayerE"));
         explorationController.Initialize(id);
         playerExplorationControllers[id] = explorationController;
-        //PlayerCombatController combatController = Instantiate(ResourceUtility.GetPrefab<PlayerCombatController>("KnightC"));
-        //combatController.Initialize(id);
-        //playerCombatControllers[id] = combatController;
+        PlayerCombatController combatController = Instantiate(ResourceUtility.GetPrefab<PlayerCombatController>("PlayerCombat"));
+        combatController.Initialize(id);
+        playerCombatControllers[id] = combatController;
 
     }
 
