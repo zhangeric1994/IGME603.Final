@@ -33,6 +33,7 @@ public class Dialogue : MonoBehaviour
                 return;
             }
             DialogueBox.instance.Text = currentDialogues[currentDialogIndex];
+            AudioManager.Instance.PlaySoundEffect("Text", false, false);
         }
     }
 
@@ -49,6 +50,7 @@ public class Dialogue : MonoBehaviour
         active = true;
         DialogueBox.instance.Show();
         DialogueBox.instance.Text = currentDialogues[currentDialogIndex];
+        AudioManager.Instance.PlaySoundEffect("Text", false, false);
         return true;
     }
        

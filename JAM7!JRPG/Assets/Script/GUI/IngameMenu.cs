@@ -58,19 +58,25 @@ public class IngameMenu : GUIWindow
         {
             if (Input.GetButtonDown("Jump"))
             {
-                GUIManager.Singleton.Open(list.GetChild(choosenIndex).name, (Action)StartToCheckForPlayerInput);
+                GUIManager.Singleton.Open(list.GetChild(choosenIndex).name, (Action)StartToCheckForPlayerInput);               
                 yield break;
             }
             else if (Input.GetButtonDown("Start"))
             {
+                //AudioManager.Instance.PlaySoundEffect("ClickDown");
                 Close();
                 yield break;
             }
             else if (Input.GetButtonDown("Up"))
+            {
                 ChoosenIndex = (maxIndex + choosenIndex - 1) % maxIndex;
+                //AudioManager.Instance.PlaySoundEffect("Click");
+            }
             else if (Input.GetButtonDown("Down"))
+            {
                 ChoosenIndex = (maxIndex + choosenIndex + 1) % maxIndex;
-
+                //AudioManager.Instance.PlaySoundEffect("Click");
+            }
             yield return null;
         }
     }
