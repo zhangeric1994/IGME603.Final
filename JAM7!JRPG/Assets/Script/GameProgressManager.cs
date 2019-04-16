@@ -15,6 +15,8 @@ public class GameProgressManager : MonoBehaviour
     private GameObject TeleportOverlay;
     [SerializeField]
     private Transform TeleportationPoint;
+    [SerializeField]
+    private GameObject EvilMiko;
 
     private GameObject player;
 
@@ -53,6 +55,11 @@ public class GameProgressManager : MonoBehaviour
             return;
         }
         StartCoroutine(TeleportEffects());
+    }
+
+    public void BeatDevil()
+    {
+        EvilMiko.SetActive(true);
     }
 
     private IEnumerator TeleportEffects()
