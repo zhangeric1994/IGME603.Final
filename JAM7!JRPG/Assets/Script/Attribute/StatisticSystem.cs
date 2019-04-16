@@ -235,7 +235,6 @@ public class StatisticSystem
 
     private void UpdateChangedStatistics(AttributeType attributeType, float previousValue, float currentValue)
     {
-        UnityEngine.Debug.LogWarning(attributeType);
         StatisticType statisticType = (StatisticType)((int)attributeType >> 8);
         this[statisticType] = Calculate(statisticType, attributeSets);
     }
