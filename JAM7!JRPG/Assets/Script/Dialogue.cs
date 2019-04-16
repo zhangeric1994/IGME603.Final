@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Dialogue : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Dialogue : MonoBehaviour
     private bool active;
     private bool alternative;
     private PlayerExplorationController playerInTalking;
+    public UnityEvent eventAfterDialog;
     void Start()
     {
         currentDialogIndex = 0;
@@ -31,6 +33,7 @@ public class Dialogue : MonoBehaviour
                 DialogueBox.instance.Hide();
                 playerInTalking.CurrentState = PlayerExplorationState.Exploring;
                 active = false;
+                eventAfterDialog?.Invoke();
                 return;
             }
             DialogueBox.instance.Text = alternative ? alternativeDialogues[currentDialogIndex] : dialogues[currentDialogIndex];

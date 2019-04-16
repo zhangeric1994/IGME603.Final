@@ -17,7 +17,7 @@ public class GameProgressManager : MonoBehaviour
     private Transform TeleportationPoint;
     [SerializeField]
     private GameObject EvilMiko;
-
+    private Dialogue dialogue;
     private GameObject player;
 
     public bool TownDestroyed;
@@ -30,11 +30,15 @@ public class GameProgressManager : MonoBehaviour
     void Start()
     {
         TownDestroyed = false;
+        dialogue = gameObject.GetComponent<Dialogue>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+            player = GameObject.Find("PlayerE(Clone)");
 
     }
 
@@ -48,7 +52,6 @@ public class GameProgressManager : MonoBehaviour
 
     public void TeleportToMaouCity()
     {
-        player = GameObject.Find("PlayerE(Clone)");
         if (player == null)
         {
             Debug.LogError("Error when getting player object");
@@ -64,7 +67,44 @@ public class GameProgressManager : MonoBehaviour
 
     public void HitByEvilMiko()
     {
+        StartCoroutine(BeingHit());
+    }
 
+    private IEnumerator BeingHit()
+    {
+        TeleportOverlay.SetActive(true);
+        Image FlashImage = TeleportOverlay.GetComponent<Image>();
+        float a = 0;
+        while (a < 1)
+        {
+            a += (Time.deltaTime*2);
+            FlashImage.color = new Color(1, 1, 1, a);
+            yield return null;
+        }
+
+        while (a > 0)
+        {
+            a -= (Time.deltaTime);
+            FlashImage.color = new Color(a, a, a, 1);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        FlashImage.color = new Color(1, 1, 1, 1);
+        AudioManager.Instance.PlaySoundEffect("Punch");
+        yield return new WaitForSeconds(0.2f);
+        FlashImage.color = new Color(0, 0, 0, 1);
+        yield return new WaitForSeconds(0.5f);
+
+
+
+        if (dialogue.StartDialog(player.GetComponent<PlayerExplorationController>()))
+            player.GetComponent<PlayerExplorationController>().CurrentState = PlayerExplorationState.InTalking;
+    }
+
+    public void RemoveMiko()
+    {
+        EvilMiko.SetActive(false);
     }
 
     private IEnumerator TeleportEffects()
