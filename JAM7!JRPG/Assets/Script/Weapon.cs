@@ -91,6 +91,11 @@ public class Weapon : MonoBehaviour
                         ShowVFX(enemy.transform.position);
                         ForwardCamera._instance.Shaking(0.03f, 0.05f);
                     }
+                    else if (type == WeaponType.GiantSword)
+                    {
+                        ShowVFX(enemy.transform.position);
+                        ForwardCamera._instance.Shaking(0.05f, 0.02f);
+                    }
                 }
                 else
                 {
@@ -99,6 +104,11 @@ public class Weapon : MonoBehaviour
                     {
                         ShowVFX(enemy.transform.position);
                         ForwardCamera._instance.Shaking(0.01f, 0.05f);
+                    }
+                    else if (type == WeaponType.GiantSword)
+                    {
+                        ShowVFX(enemy.transform.position);
+                        ForwardCamera._instance.Shaking(0.02f, 0.02f);
                     }
                 }
                 AudioManager.Instance.PlaySoundEffect("HitBody");
