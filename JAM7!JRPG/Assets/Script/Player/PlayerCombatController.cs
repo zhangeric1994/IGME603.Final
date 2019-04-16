@@ -249,8 +249,8 @@ public class PlayerCombatController : MonoBehaviour
                         float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
                         rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
                         anim.SetFloat("Speed", walkSpeed);
-                        if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                            AudioManager.Instance.PlaySoundEffect("Walking");
+//                        if (!AudioManager.Instance.IsPlayingClip("Walking"))
+//                            AudioManager.Instance.PlaySoundEffect("Walking");
                         //renderer.flipX = true;
                     }
                     else

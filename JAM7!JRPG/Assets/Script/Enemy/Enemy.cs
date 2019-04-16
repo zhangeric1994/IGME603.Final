@@ -9,6 +9,7 @@ public enum EnemyState : int
     FindingJumpPoint,
     Idle
 }
+
 public abstract class Enemy : MonoBehaviour
 {
 
