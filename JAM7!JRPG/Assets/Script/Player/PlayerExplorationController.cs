@@ -298,7 +298,10 @@ public class PlayerExplorationController : MonoBehaviour
                     if (dialogue != null)
                     {
                         if (dialogue.StartDialog(this))
+                        {
+                            animator.SetBool("Moving", false);
                             currentState = PlayerExplorationState.InTalking;
+                        }
 
                         Loot loot = dialogue.GetComponent<Loot>();
                         if (loot && !loot.triggered)
