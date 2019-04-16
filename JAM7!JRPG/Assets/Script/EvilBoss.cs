@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum EvilBehaviour : int
 {
-    Generate = 0,
+    Idle = 0,
+    Generate,
     Dash,
     Shake
 }
@@ -28,26 +29,26 @@ public class EvilBoss : Enemy
         idle = true;
         boss = true;
         triggered = false;
+        executeBehavior(EvilBehaviour.Idle);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((findClosestPlayer().position -transform.position).sqrMagnitude <8f && idle && health > 0)
+        if ((findClosestPlayer().position -transform.position).sqrMagnitude <8f && idle)
         {
             idle = false;
-            int behaviourId = Random.Range(0, 3);
+            int behaviourId = Random.Range(0, 4);
             while (lastBehaviourId == behaviourId)
             {
-                behaviourId = Random.Range(0, 3);
+                behaviourId = Random.Range(0, 4);
             }
             
             lastBehaviourId = behaviourId;
             executeBehavior((EvilBehaviour) behaviourId);
-            Debug.LogWarning(behaviourId);
         }
 
-        if (health < 10 && ! triggered)
+        if (health < 100 && ! triggered)
         {
             triggered = true;
             StartCoroutine(SpawnBoss());
@@ -60,6 +61,9 @@ public class EvilBoss : Enemy
         //GetComponent<Animator>().speed = 0;
         switch (behaviour)
         {
+            case EvilBehaviour.Idle:
+                StartCoroutine(Idle());
+                break;
             case EvilBehaviour.Generate:
                 GetComponent<SpriteRenderer>().color = Color.blue;
                 StartCoroutine(spawnDummy(4f, defaultColor));
@@ -77,6 +81,17 @@ public class EvilBoss : Enemy
                 break;
         }
 
+    }
+    
+    private IEnumerator Idle()
+    {
+        idle = false; 
+        var temp = speed;
+        speed = 0;
+        yield return new WaitForSeconds(1.0f);
+        speed = temp;
+        yield return new WaitForSeconds(2f);
+        idle = true;
     }
     
     void shake()
@@ -99,7 +114,7 @@ public class EvilBoss : Enemy
     {
         var temp = speed;
         speed = 0;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         var direction = findClosestPlayer().position - transform.position;
         direction = direction.x < 0 ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0); 
         damage = 2;
@@ -108,7 +123,7 @@ public class EvilBoss : Enemy
         damage = 1;
         GetComponent<SpriteRenderer>().color = defaultColor;
         speed = temp;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         idle = true;
     }
     //spawn boss after animation finished 
@@ -120,18 +135,8 @@ public class EvilBoss : Enemy
         gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
         yield return new WaitForSeconds(0.2f);
         gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
-        yield return new WaitForSeconds(0.2f);
-        gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
-        yield return new WaitForSeconds(0.2f);
-        gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
         yield return new WaitForSeconds(0.5f);
         //GameObject _boss = Instantiate(boss, gameObject.transform.position, Quaternion.identity);
-        bossObj.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
-        bossObj.transform.position = transform.position;  
-
-        bossObj.GetComponent<FinalBoss>().isEnterStage0 = true;
-
-        Destroy(gameObject);
     }
     
 
