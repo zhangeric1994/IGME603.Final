@@ -117,9 +117,9 @@ public class AudioManager : MonoBehaviour
                 Debug.Log("[AudioManager]: SoundFX Match Failure ");
             int index = Random.Range(0, clips.Count);
             tempSource.clip = clips[index];
-            if(DelayTime != 0)
+            if (DelayTime != 0)
             {
-                StartCoroutine(DelayPlay(tempSource,DelayTime));
+                StartCoroutine(DelayPlay(tempSource, DelayTime));
             }
             else
                 tempSource.Play();
@@ -183,7 +183,7 @@ public class AudioManager : MonoBehaviour
     public void SetGobalBGMVolume(float volume)
     {
         GlobalBGMVoume = volume;
-        BGMSource.volume = volume;
+        //BGMSource.volume = volume;
     }
 
     private void FadeOut(AudioSource audioSource, float fadeOutTime)
@@ -193,7 +193,7 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator DelayPlay(AudioSource audiosource, float time)
     {
-        while(time > 0)
+        while (time > 0)
         {
             time -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
