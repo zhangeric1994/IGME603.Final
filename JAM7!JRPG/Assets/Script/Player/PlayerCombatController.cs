@@ -59,6 +59,9 @@ public class PlayerCombatController : MonoBehaviour
 
     private TilemapCollider2D groundCollider;
     private ContactFilter2D groundContactFilter;
+    private ContactFilter2D rightWallContactFilter;
+    private ContactFilter2D leftWallContactFilter;
+    private int jumpCounter = 0;
     private bool isInAir;
 
     private float hp;
@@ -110,6 +113,14 @@ public class PlayerCombatController : MonoBehaviour
             }
             else
             {
+                switch (currentState)
+                {
+                    case PlayerCombatState.InAir:
+                        isInAir = false;
+                        jumpCounter = 0;
+                        break;
+                }
+
                 PlayerCombatState previousState = currentState;
                 currentState = value;
 
@@ -117,12 +128,9 @@ public class PlayerCombatController : MonoBehaviour
 
                 switch (currentState)
                 {
-                    case PlayerCombatState.OnGround:
-                        isInAir = false;
-                        break;
-
                     case PlayerCombatState.InAir:
                         rb2d.AddForce(Avatar.GetStatistic(StatisticType.JumpPower) * Vector2.up);
+                        jumpCounter = 1;
                         break;
                 }
             }
@@ -164,8 +172,15 @@ public class PlayerCombatController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         groundCollider = GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>();
+
         groundContactFilter = new ContactFilter2D();
         groundContactFilter.SetNormalAngle(30, 150);
+
+        rightWallContactFilter = new ContactFilter2D();
+        rightWallContactFilter.SetNormalAngle(170, 190);
+
+        leftWallContactFilter = new ContactFilter2D();
+        leftWallContactFilter.SetNormalAngle(-10, 10);
 
         defaultScale = transform.localScale;
         hp = Avatar.GetStatistic(StatisticType.MaxHp);
@@ -258,7 +273,6 @@ public class PlayerCombatController : MonoBehaviour
                             if ((transform.position - door.transform.position).magnitude < 2.0f)
                                 Combat.endCombat();
                         }
-
                     }
 
                 }
@@ -267,35 +281,108 @@ public class PlayerCombatController : MonoBehaviour
 
             case PlayerCombatState.InAir:
                 {
-                    float x = Input.GetAxis("Horizontal");
-                    float y = Input.GetAxis("Vertical");
-
-                    if (okToAttack && (x != 0 || y != 0))
-                    {
-                        transform.localScale = x < 0 ? new Vector3(-defaultScale.x, defaultScale.y, defaultScale.z)
-                            : new Vector3(defaultScale.x, defaultScale.y, defaultScale.z);
-                    }
-
-                    if (okToAttack && x > 0)
-                    {
-                        rb2d.velocity = new Vector2(Avatar.GetStatistic(StatisticType.WalkSpeed), rb2d.velocity.y);
-                        //renderer.flipX = false;
-                        //gunHolder.localScale = new Vector3(1.0f, 1.0f, 0.0f);
-                    }
-                    else if (okToAttack && x < 0)
-                    {
-                        rb2d.velocity = new Vector2(-Avatar.GetStatistic(StatisticType.WalkSpeed), rb2d.velocity.y);
-                        //renderer.flipX = true;
-                    }
-                    else
-                        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-
                     bool isTouchingGround = rb2d.IsTouching(groundCollider, groundContactFilter);
 
-                    if (isInAir && isTouchingGround)
-                        CurrentState = PlayerCombatState.OnGround;
-                    else if (!isInAir && !isTouchingGround)
+                    if (isInAir)
+                    {
+                        if (isTouchingGround)
+                            CurrentState = PlayerCombatState.OnGround;
+                    }
+                    else if (!isTouchingGround)
                         isInAir = true;
+
+                    if (rb2d.IsTouching(groundCollider, rightWallContactFilter))
+                    {
+                        if (Input.GetButtonDown("Jump") && jumpCounter != 2)
+                        {
+                            jumpCounter = 2;
+                            rb2d.velocity = Vector2.zero;
+                            rb2d.AddForce(0.5f * Avatar.GetStatistic(StatisticType.JumpPower) * new Vector2(-1, 2));
+                            transform.localScale = new Vector3(-defaultScale.x, defaultScale.y, defaultScale.z);
+                        }
+
+                        float x = Input.GetAxis("Horizontal");
+                        float y = Input.GetAxis("Vertical");
+
+                        if (okToAttack && (x != 0 || y != 0))
+                        {
+                            transform.localScale = x < 0 ? new Vector3(-defaultScale.x, defaultScale.y, defaultScale.z)
+                                : new Vector3(defaultScale.x, defaultScale.y, defaultScale.z);
+                        }
+
+                        if (okToAttack && x < 0)
+                        {
+                            float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
+                            rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
+                            anim.SetFloat("Speed", walkSpeed);
+                            //renderer.flipX = true;
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                            anim.SetFloat("Speed", 0);
+                        }
+                    }
+                    else if (rb2d.IsTouching(groundCollider, leftWallContactFilter))
+                    {
+                        if (Input.GetButtonDown("Jump") && jumpCounter != 3)
+                        {
+                            jumpCounter = 3;
+                            rb2d.velocity = Vector2.zero;
+                            rb2d.AddForce(0.5f * Avatar.GetStatistic(StatisticType.JumpPower) * new Vector2(1, 2));
+                            transform.localScale = new Vector3(defaultScale.x, defaultScale.y, defaultScale.z);
+                        }
+
+                        float x = Input.GetAxis("Horizontal");
+                        float y = Input.GetAxis("Vertical");
+
+                        if (okToAttack && (x != 0 || y != 0))
+                        {
+                            transform.localScale = x < 0 ? new Vector3(-defaultScale.x, defaultScale.y, defaultScale.z)
+                                : new Vector3(defaultScale.x, defaultScale.y, defaultScale.z);
+                        }
+
+                        if (okToAttack && x > 0)
+                        {
+                            float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
+                            rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
+                            anim.SetFloat("Speed", walkSpeed);
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                            anim.SetFloat("Speed", 0);
+                        }
+                    }
+                    else
+                    {
+                        float x = Input.GetAxis("Horizontal");
+                        float y = Input.GetAxis("Vertical");
+
+                        if (okToAttack && (x != 0 || y != 0))
+                        {
+                            transform.localScale = x < 0 ? new Vector3(-defaultScale.x, defaultScale.y, defaultScale.z)
+                                : new Vector3(defaultScale.x, defaultScale.y, defaultScale.z);
+                        }
+
+                        if (okToAttack && x > 0)
+                        {
+                            float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
+                            rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
+                            anim.SetFloat("Speed", walkSpeed);
+                        }
+                        else if (okToAttack && x < 0)
+                        {
+                            float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
+                            rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
+                            anim.SetFloat("Speed", walkSpeed);
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                            anim.SetFloat("Speed", 0);
+                        }
+                    }
                 }
                 break;
         }
