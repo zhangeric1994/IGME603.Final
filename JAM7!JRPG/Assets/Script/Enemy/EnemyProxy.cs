@@ -36,6 +36,13 @@ public class EnemyProxy : MonoBehaviour
             player.ReturnToExploration();
         }
 
+        var items = GameObject.FindGameObjectsWithTag("Item");
+        
+        foreach (var item  in items)
+        {
+            DestroyImmediate(item);
+        }
+        
         GameManager.Singleton.EndCombat(level);
         Destroy(gameObject);
     }

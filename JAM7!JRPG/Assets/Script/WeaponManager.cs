@@ -88,7 +88,14 @@ public class WeaponManager : MonoBehaviour
         temp.transform.rotation = defaultRot;
         if (player.transform.localScale.x < 0)
         {
-            temp.transform.eulerAngles = new Vector3(0,0,360 - temp.transform.eulerAngles.z);
+            if (temp.transform.eulerAngles.z == 0)
+            {
+                temp.transform.eulerAngles = new Vector3(0,180,0);
+            }
+            else
+            {
+                temp.transform.eulerAngles = new Vector3(0,0,360 - temp.transform.eulerAngles.z);  
+            }
         }
         
         temp.GetComponent<Weapon>().type = type;

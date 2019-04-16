@@ -63,7 +63,7 @@ public class Loot : MonoBehaviour
         {
             triggered = true;
 
-            StartCoroutine(Activate(2));
+            StartCoroutine(Activate(1));
         }
         else
         {
