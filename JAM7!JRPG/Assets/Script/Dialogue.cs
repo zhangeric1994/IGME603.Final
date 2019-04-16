@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Dialogue : MonoBehaviour
@@ -7,14 +6,14 @@ public class Dialogue : MonoBehaviour
     // Start is called before the first frame update
     public List<string> dialogues;
     public List<string> alternativeDialogues;
-    private List<string> currentDialogues;
     private int currentDialogIndex;
     private bool active;
+    private bool alternative;
     private PlayerExplorationController playerInTalking;
     void Start()
     {
         currentDialogIndex = 0;
-        currentDialogues = dialogues;
+        alternative = false;
     }
 
     // Update is called once per frame
@@ -24,15 +23,17 @@ public class Dialogue : MonoBehaviour
         if (Input.GetButtonDown("Submit"))
         {
             ++currentDialogIndex;
-            if (currentDialogIndex == currentDialogues.Count)
+            int count;
+            if (alternative) count = alternativeDialogues.Count;
+            else count = dialogues.Count;
+            if (currentDialogIndex == count)
             {
                 DialogueBox.instance.Hide();
                 playerInTalking.CurrentState = PlayerExplorationState.Exploring;
                 active = false;
-                currentDialogues = alternativeDialogues;
                 return;
             }
-            DialogueBox.instance.Text = currentDialogues[currentDialogIndex];
+            DialogueBox.instance.Text = alternative ? alternativeDialogues[currentDialogIndex] : dialogues[currentDialogIndex];
             AudioManager.Instance.PlaySoundEffect("Text", false, false);
         }
     }
@@ -42,6 +43,7 @@ public class Dialogue : MonoBehaviour
         if (currentDialogIndex > 0)
         {
             currentDialogIndex = 0;
+            alternative = true;
             return false;
         }
         Debug.Log(player.name + " started dialog.");
@@ -49,9 +51,9 @@ public class Dialogue : MonoBehaviour
         playerInTalking = player;
         active = true;
         DialogueBox.instance.Show();
-        DialogueBox.instance.Text = currentDialogues[currentDialogIndex];
+        DialogueBox.instance.Text = alternative ? alternativeDialogues[0] : dialogues[0];
         AudioManager.Instance.PlaySoundEffect("Text", false, false);
         return true;
     }
-       
+
 }

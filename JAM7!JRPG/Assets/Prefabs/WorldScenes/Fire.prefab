@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3595267603288131003}
   - component: {fileID: 3595267603288131002}
   - component: {fileID: 3595267603288131005}
-  - component: {fileID: 7553814730285649544}
+  - component: {fileID: 1042711725}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -100,7 +100,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &7553814730285649544
+--- !u!82 &1042711725
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 3
-  MaxDistance: 9
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -131,8 +131,8 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0.92760277
+      time: 0.40694046
+      value: 0.6816082
       inSlope: 0.1414141
       outSlope: 0.1414141
       tangentMode: 0
@@ -140,8 +140,8 @@ AudioSource:
       inWeight: 0
       outWeight: 0.15566659
     - serializedVersion: 3
-      time: 0.98095703
-      value: 0
+      time: 0.56770325
+      value: 0.009277344
       inSlope: -0.15016037
       outSlope: -0.15016037
       tangentMode: 0
