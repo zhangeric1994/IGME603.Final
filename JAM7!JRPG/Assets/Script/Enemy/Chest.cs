@@ -20,7 +20,6 @@ public class Chest : MonoBehaviour {
 
     IEnumerator DestroyMyself(){
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("enemy");
         enemy.transform.position = gameObject.transform.position;
         Destroy(gameObject);
     }

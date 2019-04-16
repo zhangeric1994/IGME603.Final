@@ -78,15 +78,7 @@ public class FinalBoss : MonoBehaviour {
     void Start(){
         defaultStage = BossStage.Stage0;
         currentStage = defaultStage;
-        Debug.Log("Default stage is: " + defaultStage.ToString());
-
-        //------ test boss positions ----
-        //Stage1
-        foreach(Transform t in Stage1Positions){
-            Debug.Log("Stage 1 positions: " + t.position);
-        }
-
-        //-------------------------------
+        //Debug.Log("Default stage is: " + defaultStage.ToString());
 
         //------ load prefabs -----------
         chest = (GameObject)Resources.Load("Prefabs/FinalBoss/Stage1/chest");
@@ -131,36 +123,36 @@ public class FinalBoss : MonoBehaviour {
         //------ test for boss functions --------
 
         //switch stage
-        if (Input.GetKeyDown(KeyCode.Tab)){
-            switchStage();
-            Debug.Log("Test for switch boss stage: current stage is: " + currentStage);
-        }
+        // if (Input.GetKeyDown(KeyCode.Tab)){
+        //     switchStage();
+        //     Debug.Log("Test for switch boss stage: current stage is: " + currentStage);
+        // }
 
-        //throw chest
-        if (Input.GetKeyDown(KeyCode.E)) {
-            GenerateChest();
-        }
+        // //throw chest
+        // if (Input.GetKeyDown(KeyCode.E)) {
+        //     GenerateChest();
+        // }
 
-        //generate fire ball
-        if (Input.GetKeyDown(KeyCode.R)){
-            GenerateFireBall();
-        }
+        // //generate fire ball
+        // if (Input.GetKeyDown(KeyCode.R)){
+        //     GenerateFireBall();
+        // }
 
-        if (Input.GetKeyDown(KeyCode.T)){
-            GenerateMissle();
-        }
+        // if (Input.GetKeyDown(KeyCode.T)){
+        //     GenerateMissle();
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Y)){
-            Debug.Log(gameObject.transform.position.y);
-        }
+        // if (Input.GetKeyDown(KeyCode.Y)){
+        //     Debug.Log(gameObject.transform.position.y);
+        // }
 
         if (Input.GetKeyDown(KeyCode.U)){
             DestroyCurrentEnemy();
         }
 
-        if (Input.GetKeyDown(KeyCode.I)){
-            GenerateStage3();
-        }
+        // if (Input.GetKeyDown(KeyCode.I)){
+        //     GenerateStage3();
+        // }
 
         //-------------------------------------
 

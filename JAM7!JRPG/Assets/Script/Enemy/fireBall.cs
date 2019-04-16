@@ -28,6 +28,5 @@ public class fireBall : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        //Debug.Log(other.name);
     }
 }
