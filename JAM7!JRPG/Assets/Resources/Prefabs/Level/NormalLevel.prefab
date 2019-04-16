@@ -11602,7 +11602,7 @@ GameObject:
   - component: {fileID: 6946527788963499100}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44306,11 +44306,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7664576254102026779}
     m_Modifications:
-    - target: {fileID: 5996266416797557997, guid: 4cc5f74d1adb9ae448593f67c1ba1c52,
-        type: 3}
-      propertyPath: m_Name
-      value: Hammer
-      objectReference: {fileID: 0}
     - target: {fileID: 2068912823737647966, guid: 4cc5f74d1adb9ae448593f67c1ba1c52,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44365,6 +44360,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5996266416797557997, guid: 4cc5f74d1adb9ae448593f67c1ba1c52,
+        type: 3}
+      propertyPath: m_Name
+      value: Hammer
       objectReference: {fileID: 0}
     - target: {fileID: 3045250573394594747, guid: 4cc5f74d1adb9ae448593f67c1ba1c52,
         type: 3}
