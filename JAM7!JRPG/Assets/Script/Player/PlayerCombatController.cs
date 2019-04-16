@@ -57,6 +57,8 @@ public class PlayerCombatController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator anim;
 
+    private TilemapCollider2D groundCollider;
+    private ContactFilter2D groundContactFilter;
     private bool isInAir;
 
     private float hp;
@@ -160,6 +162,11 @@ public class PlayerCombatController : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        groundCollider = GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>();
+        groundContactFilter = new ContactFilter2D();
+        groundContactFilter.SetNormalAngle(30, 150);
+
         defaultScale = transform.localScale;
         hp = Avatar.GetStatistic(StatisticType.MaxHp);
 
@@ -250,7 +257,6 @@ public class PlayerCombatController : MonoBehaviour
                         {
                             if ((transform.position - door.transform.position).magnitude < 2.0f)
                                 Combat.endCombat();
-
                         }
 
                     }
@@ -284,9 +290,11 @@ public class PlayerCombatController : MonoBehaviour
                     else
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 
-                    if (isInAir && rb2d.IsTouching(GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>()))
+                    bool isTouchingGround = rb2d.IsTouching(groundCollider, groundContactFilter);
+
+                    if (isInAir && isTouchingGround)
                         CurrentState = PlayerCombatState.OnGround;
-                    else
+                    else if (!isInAir && !isTouchingGround)
                         isInAir = true;
                 }
                 break;
