@@ -172,9 +172,6 @@ public class PlayerCombatController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        groundCollider = GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>();
-        wallCollider = GameObject.FindGameObjectWithTag("Wall").GetComponent<TilemapCollider2D>();
-
         groundContactFilter = new ContactFilter2D();
         groundContactFilter.SetNormalAngle(30, 150);
 
@@ -208,6 +205,18 @@ public class PlayerCombatController : MonoBehaviour
         if (cam == null)
         {
             GetCamera();
+            return;
+        }
+
+        if (groundCollider == null)
+        {
+            groundCollider = GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>();
+            return;
+        }
+
+        if (wallCollider == null)
+        {
+            wallCollider = GameObject.FindGameObjectWithTag("Wall").GetComponent<TilemapCollider2D>();
             return;
         }
 
