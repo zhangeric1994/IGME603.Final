@@ -62,6 +62,11 @@ public class GameProgressManager : MonoBehaviour
         EvilMiko.SetActive(true);
     }
 
+    public void HitByEvilMiko()
+    {
+
+    }
+
     private IEnumerator TeleportEffects()
     {
         TeleportOverlay.SetActive(true);
