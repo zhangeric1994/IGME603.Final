@@ -287,7 +287,10 @@ public class PlayerCombatController : MonoBehaviour
                         if (door != null)
                         {
                             if ((transform.position - door.transform.position).magnitude < 2.0f)
+                            {
+                                ClearLoots();
                                 Combat.endCombat();
+                            }
                         }
                     }
 
@@ -652,6 +655,11 @@ public class PlayerCombatController : MonoBehaviour
         //        }
         //    }
         //}
+    }
+
+    public void ClearLoots()
+    {
+        loots.Clear();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
