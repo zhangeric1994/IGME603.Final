@@ -51,9 +51,9 @@ public class PlayerExplorationController : MonoBehaviour
             {
                 switch (currentState)
                 {
-                //    case PlayerExplorationState.InMenu:
-                //        GUIManager.Singleton.Close("IngameMenu");
-                //        break;
+                    //    case PlayerExplorationState.InMenu:
+                    //        GUIManager.Singleton.Close("IngameMenu");
+                    //        break;
 
 
                     case PlayerExplorationState.InCombat:
@@ -206,7 +206,7 @@ public class PlayerExplorationController : MonoBehaviour
                     Dialogue dialogue = null;
                     if (hit)
                     {
-                        dialogue = hit.collider.gameObject.GetComponent<Dialogue>();                       
+                        dialogue = hit.collider.gameObject.GetComponent<Dialogue>();
                     }
 
                     if (dialogue != null)
@@ -221,7 +221,7 @@ public class PlayerExplorationController : MonoBehaviour
                             loot.triggered = true;
 
                             dialogue.GetComponent<ChestAnimation>().SetChestStat(true);
-                            
+
                         }
                     }
                 }
@@ -239,7 +239,7 @@ public class PlayerExplorationController : MonoBehaviour
                         if (horizontal > 0)
                         {
                             animator.SetTrigger("Right");
-                            if(!AudioManager.Instance.IsPlayingClip("Walking"))
+                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
                                 AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Right;
                         }
@@ -276,6 +276,27 @@ public class PlayerExplorationController : MonoBehaviour
                 }
 
                 break;
+        }
+
+
+        if (transform.position.x > 50)
+        {
+            MusicManager.Instance.PlayMusic("field");
+        }
+        else if (transform.position.x < -50)
+        {
+            MusicManager.Instance.PlayMusic("AnotherWorldP");
+        }
+        else
+        {
+            if (GameProgressManager.instance.TownDestroyed)
+            {
+                MusicManager.Instance.PlayMusic("RuinTown");
+            }
+            else
+            {
+                MusicManager.Instance.PlayMusic("town");
+            }
         }
     }
 

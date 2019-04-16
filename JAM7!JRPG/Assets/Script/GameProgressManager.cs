@@ -17,7 +17,8 @@ public class GameProgressManager : MonoBehaviour
     private Transform TeleportationPoint;
 
     private GameObject player;
-    
+
+    public bool TownDestroyed;
 
     void Awake()
     {
@@ -26,7 +27,7 @@ public class GameProgressManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        TownDestroyed = false;
     }
 
     // Update is called once per frame
@@ -40,6 +41,7 @@ public class GameProgressManager : MonoBehaviour
         City.SetActive(false);
         RuinCity.SetActive(true);
         DuskOverlay.SetActive(true);
+        TownDestroyed = true;
     }
 
     public void TeleportToMaouCity()
@@ -84,7 +86,7 @@ public class GameProgressManager : MonoBehaviour
         }
         TeleportOverlay.SetActive(false);
         yield return null;
-        
+
 
 
     }
