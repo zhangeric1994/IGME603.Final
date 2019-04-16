@@ -23,6 +23,7 @@ public class MainMenu : GUIWindow
                 choosenIndex = value;
 
                 list.GetChild(choosenIndex).GetComponent<Text>().color = Color.green;
+                AudioManager.Instance.PlaySoundEffect("Click", pitch: false);
             }
         }
     }
@@ -49,19 +50,23 @@ public class MainMenu : GUIWindow
         {
             if (Input.GetButtonDown("Jump"))
             {
+                AudioManager.Instance.PlaySoundEffect("Confirm");
                 switch (choosenIndex)
                 {
                     case 0:
+                       
                         GameManager.Singleton.StartGame();
                         break;
 
 
                     case 1:
+
                         //TODO: Load saves
                         break;
 
 
                     case 2:
+
                         GameManager.Singleton.QuitGame();
                         break;
                 }
@@ -69,11 +74,16 @@ public class MainMenu : GUIWindow
                 yield break;
             }
             else if (Input.GetButtonDown("Up"))
-                ChoosenIndex = (maxIndex + choosenIndex - 1) % maxIndex;
+            {
+                ChoosenIndex = (maxIndex + choosenIndex - 1) % maxIndex;                
+            }
             else if (Input.GetButtonDown("Down"))
+            {
                 ChoosenIndex = (maxIndex + choosenIndex + 1) % maxIndex;
+                
+            }
 
-            yield return null;
+                yield return null;
         }
     }
 }
