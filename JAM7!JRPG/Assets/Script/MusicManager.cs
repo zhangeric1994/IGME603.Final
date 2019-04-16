@@ -7,6 +7,7 @@ public class MusicManager : MonoBehaviour
     private string currentMusic;
     private AudioSource source;
     private bool stopped;
+    public bool finalBoss;
     public bool inBattle
     {
         set
@@ -14,7 +15,7 @@ public class MusicManager : MonoBehaviour
             if (value)
             {
                 lastMusic = currentMusic;
-                PlayMusic("battle");
+                PlayMusic(finalBoss ? "FinalBossBattle" : "battle");
             }
             else
             {
@@ -26,6 +27,7 @@ public class MusicManager : MonoBehaviour
     {
         Instance = this;
         stopped = false;
+        finalBoss = false;
     }
     public void Close()
     {

@@ -134,8 +134,8 @@ public class GameManager : MonoBehaviour
         CombatManager combat = Instantiate(ResourceUtility.GetPrefab<CombatManager>(name), new Vector3((id + 1) * 1000, 0, 0), Quaternion.identity);
         combat.ID = id;
         ++numOngoingCombats;
+        MusicManager.Instance.finalBoss = name == "Level/FinalLevel";
         MusicManager.Instance.inBattle = numOngoingCombats > 0;
-
         return combat;
     }
 

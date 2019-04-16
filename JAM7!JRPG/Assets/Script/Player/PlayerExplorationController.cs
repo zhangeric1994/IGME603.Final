@@ -99,11 +99,11 @@ public class PlayerExplorationController : MonoBehaviour
         PlayerID = id;
     }
 
-    public void StartCombat(EnemyProxy enemy, bool isBoss = false)
+    public void StartCombat(EnemyProxy enemy, string desiredLevel)
     {
         CurrentState = PlayerExplorationState.InCombat;
 
-        enemy.StartCombat(this, isBoss);
+        enemy.StartCombat(this, desiredLevel);
     }
 
     public void ReturnToExploration()
@@ -118,10 +118,13 @@ public class PlayerExplorationController : MonoBehaviour
         switch (go.tag)
         {
             case "Enemy":
-                StartCombat(go.GetComponent<EnemyProxy>());
+                StartCombat(go.GetComponent<EnemyProxy>(), "NormalLevel");
                 break;
             case "Boss":
-                StartCombat(go.GetComponent<EnemyProxy>(), true);
+                StartCombat(go.GetComponent<EnemyProxy>(), "BossLevel");
+                break;
+            case "FinalBoss":
+                StartCombat(go.GetComponent<EnemyProxy>(), "FinalLevel");
                 break;
             case "MusicCollider":
                 if (PlayerID == 1) break;
@@ -141,10 +144,13 @@ public class PlayerExplorationController : MonoBehaviour
         switch (go.tag)
         {
             case "Enemy":
-                StartCombat(go.GetComponent<EnemyProxy>());
+                StartCombat(go.GetComponent<EnemyProxy>(), "NormalLevel");
                 break;
             case "Boss":
-                StartCombat(go.GetComponent<EnemyProxy>(), true);
+                StartCombat(go.GetComponent<EnemyProxy>(), "BossLevel");
+                break;
+            case "FinalBoss":
+                StartCombat(go.GetComponent<EnemyProxy>(), "FinalLevel");
                 break;
             case "MusicCollider":
                 if (PlayerID == 1) break;
