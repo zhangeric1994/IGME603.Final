@@ -60,7 +60,7 @@ public abstract class DataTable<T> : DataTable, ISerializationCallbackReceiver w
 
 #if UNITY_EDITOR
 #else
-            entries = null;
+            serializedEntries = null;
 #endif
         }
     }
