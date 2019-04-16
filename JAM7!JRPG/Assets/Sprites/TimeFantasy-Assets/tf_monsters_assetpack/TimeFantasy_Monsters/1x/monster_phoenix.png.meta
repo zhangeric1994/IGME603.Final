@@ -1,7 +1,31 @@
 fileFormatVersion: 2
 guid: b051ac4ed7a5e964aa749831be175639
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: monster_phoenix_0
+    21300002: monster_phoenix_1
+    21300004: monster_phoenix_2
+    21300006: monster_phoenix_3
+    21300008: monster_phoenix_4
+    21300010: monster_phoenix_5
+    21300012: monster_phoenix_6
+    21300014: monster_phoenix_7
+    21300016: monster_phoenix_8
+    21300018: monster_phoenix_9
+    21300020: monster_phoenix_10
+    21300022: monster_phoenix_11
+    21300024: monster_phoenix_12
+    21300026: monster_phoenix_13
+    21300028: monster_phoenix_14
+    21300030: monster_phoenix_15
+    21300032: monster_phoenix_16
+    21300034: monster_phoenix_17
+    21300036: monster_phoenix_18
+    21300038: monster_phoenix_19
+    21300040: monster_phoenix_20
+    21300042: monster_phoenix_21
+    21300044: monster_phoenix_22
+    21300046: monster_phoenix_23
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -82,7 +106,247 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: monster_phoenix_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41be02645f4a35848bd8fae607496f7b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_1
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 171
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0cf1773a7e6a1341a11014d113de706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_2
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 171
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcf5eb108e807d04c9cad0b9a470b125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 114
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fabe5561b01787c43af2ba4ecd1d475e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_4
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 114
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d20e5897110dff940b1f3350980ce21e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_5
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 114
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dff9e3d429b1be4f9ca2453f23c06dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 57
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f88601f7e4904a46a9b0348334cc9ff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_7
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 57
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6353ea83487d3d340a05dd73185c4dd2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_8
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 57
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3568a39d018a1348aa9f2ddff6a7347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5933708e8849b94eb95b75ce6c4bc3a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_10
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 0
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1b1086599c5cb344937a5505ec09745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_phoenix_11
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 0
+        width: 61
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d711c6be35dabdb418f07fd49dfa762c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
