@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
@@ -32,11 +30,8 @@ public class MusicManager : MonoBehaviour
         if (music == currentMusic) return;
         Debug.Log("Play " + music);
         source.Stop();
-        if (music != "boss")
-        {
-            source.clip = Resources.Load<AudioClip>("Audio/" + music);
-            source.Play();
-        }
+        source.clip = Resources.Load<AudioClip>("Audio/" + music);
+        source.Play();
         currentMusic = music;
     }
     // Start is called before the first frame update
@@ -46,6 +41,9 @@ public class MusicManager : MonoBehaviour
         Resources.Load<AudioClip>("Audio/town");
         Resources.Load<AudioClip>("Audio/field");
         Resources.Load<AudioClip>("Audio/battle");
+        Resources.Load<AudioClip>("Audio/AnotherWorldP");
+        Resources.Load<AudioClip>("Audio/RuinTown");
+        Resources.Load<AudioClip>("Audio/FinalBossBattle");
         PlayMusic("town");
     }
 

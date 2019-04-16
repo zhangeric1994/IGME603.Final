@@ -51,9 +51,9 @@ public class PlayerExplorationController : MonoBehaviour
             {
                 switch (currentState)
                 {
-                //    case PlayerExplorationState.InMenu:
-                //        GUIManager.Singleton.Close("IngameMenu");
-                //        break;
+                    //    case PlayerExplorationState.InMenu:
+                    //        GUIManager.Singleton.Close("IngameMenu");
+                    //        break;
 
 
                     case PlayerExplorationState.InCombat:
@@ -219,6 +219,9 @@ public class PlayerExplorationController : MonoBehaviour
                         {
                             Player.GetPlayer(0).Loot(loot);
                             loot.triggered = true;
+
+                            dialogue.GetComponent<ChestAnimation>().SetChestStat(true);
+
                         }
                     }
                 }
@@ -236,11 +239,15 @@ public class PlayerExplorationController : MonoBehaviour
                         if (horizontal > 0)
                         {
                             animator.SetTrigger("Right");
+                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                                AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Right;
                         }
                         else if (horizontal < 0)
                         {
                             animator.SetTrigger("Left");
+                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                                AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Left;
                         }
                     }
@@ -250,11 +257,15 @@ public class PlayerExplorationController : MonoBehaviour
                         if (vertical > 0)
                         {
                             animator.SetTrigger("Up");
+                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                                AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Up;
                         }
                         else if (vertical < 0)
                         {
                             animator.SetTrigger("Down");
+                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                                AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Down;
                         }
                     }
@@ -265,6 +276,27 @@ public class PlayerExplorationController : MonoBehaviour
                 }
 
                 break;
+        }
+
+
+        if (transform.position.x > 50)
+        {
+            MusicManager.Instance.PlayMusic("field");
+        }
+        else if (transform.position.x < -50)
+        {
+            MusicManager.Instance.PlayMusic("AnotherWorldP");
+        }
+        else
+        {
+            if (GameProgressManager.instance.TownDestroyed)
+            {
+                MusicManager.Instance.PlayMusic("RuinTown");
+            }
+            else
+            {
+                MusicManager.Instance.PlayMusic("town");
+            }
         }
     }
 

@@ -111,8 +111,7 @@ public class Weapon : MonoBehaviour
                         ForwardCamera._instance.Shaking(0.02f, 0.02f);
                     }
                 }
-                
-
+                AudioManager.Instance.PlaySoundEffect("HitBody");
                 enemy.knockBack(bouncingBackForce); 
                 player.pauseAtkAnim(hitStop);
             }
