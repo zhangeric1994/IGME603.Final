@@ -184,47 +184,6 @@ public class PlayerExplorationController : MonoBehaviour
             case PlayerExplorationState.Exploring:
                 if (Input.GetButtonDown("Start"))
                     CurrentState = PlayerExplorationState.InMenu;
-                else if (Input.GetButtonDown("Submit"))
-                {
-                    Vector2 direction = Vector2.zero;
-                    switch (heading)
-                    {
-                        case Heading.Down:
-                            direction = Vector2.down;
-                            break;
-                        case Heading.Left:
-                            direction = Vector2.left;
-                            break;
-                        case Heading.Right:
-                            direction = Vector2.right;
-                            break;
-                        case Heading.Up:
-                            direction = Vector2.up;
-                            break;
-                    }
-                    RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, direction, 2f);
-                    Dialogue dialogue = null;
-                    if (hit)
-                    {
-                        dialogue = hit.collider.gameObject.GetComponent<Dialogue>();
-                    }
-
-                    if (dialogue != null)
-                    {
-                        if (dialogue.StartDialog(this))
-                            currentState = PlayerExplorationState.InTalking;
-
-                        Loot loot = dialogue.GetComponent<Loot>();
-                        if (loot && !loot.triggered)
-                        {
-                            Player.GetPlayer(0).Loot(loot);
-                            loot.triggered = true;
-
-                            dialogue.GetComponent<ChestAnimation>().SetChestStat(true);
-
-                        }
-                    }
-                }
                 else
                 {
                     float horizontal = Input.GetAxisRaw("Horizontal");
@@ -300,4 +259,53 @@ public class PlayerExplorationController : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        switch (currentState)
+        {
+            case PlayerExplorationState.Exploring:
+                if (Input.GetButtonDown("Submit"))
+                {
+                    Vector2 direction = Vector2.zero;
+                    switch (heading)
+                    {
+                        case Heading.Down:
+                            direction = Vector2.down;
+                            break;
+                        case Heading.Left:
+                            direction = Vector2.left;
+                            break;
+                        case Heading.Right:
+                            direction = Vector2.right;
+                            break;
+                        case Heading.Up:
+                            direction = Vector2.up;
+                            break;
+                    }
+                    RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, direction, 2f);
+                    Dialogue dialogue = null;
+                    if (hit)
+                    {
+                        dialogue = hit.collider.gameObject.GetComponent<Dialogue>();
+                    }
+
+                    if (dialogue != null)
+                    {
+                        if (dialogue.StartDialog(this))
+                            currentState = PlayerExplorationState.InTalking;
+
+                        Loot loot = dialogue.GetComponent<Loot>();
+                        if (loot && !loot.triggered)
+                        {
+                            Player.GetPlayer(0).Loot(loot);
+                            loot.triggered = true;
+
+                            dialogue.GetComponent<ChestAnimation>().SetChestStat(true);
+
+                        }
+                    }
+                }
+                break;
+        }
+    }
 }

@@ -12,8 +12,7 @@ public class DialogueBox : MonoBehaviour
         set
         {
             TextObject.text = value;
-            AudioManager.Instance.StopSoundEffect("FastTalk", false);
-            AudioManager.Instance.PlaySoundEffect("FastTalk", pitch:true);
+            
         }
     }
 
