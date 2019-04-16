@@ -58,6 +58,7 @@ public class PlayerCombatController : MonoBehaviour
     private Animator anim;
 
     private TilemapCollider2D groundCollider;
+    private TilemapCollider2D wallCollider;
     private ContactFilter2D groundContactFilter;
     private ContactFilter2D rightWallContactFilter;
     private ContactFilter2D leftWallContactFilter;
@@ -172,6 +173,7 @@ public class PlayerCombatController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         groundCollider = GameObject.FindGameObjectWithTag("Ground").GetComponent<TilemapCollider2D>();
+        wallCollider = GameObject.FindGameObjectWithTag("Wall").GetComponent<TilemapCollider2D>();
 
         groundContactFilter = new ContactFilter2D();
         groundContactFilter.SetNormalAngle(30, 150);
@@ -291,7 +293,7 @@ public class PlayerCombatController : MonoBehaviour
                     else if (!isTouchingGround)
                         isInAir = true;
 
-                    if (rb2d.IsTouching(groundCollider, rightWallContactFilter))
+                    if (rb2d.IsTouching(wallCollider, rightWallContactFilter))
                     {
                         if (Input.GetButtonDown("Jump") && jumpCounter != 2)
                         {
@@ -323,7 +325,7 @@ public class PlayerCombatController : MonoBehaviour
                             anim.SetFloat("Speed", 0);
                         }
                     }
-                    else if (rb2d.IsTouching(groundCollider, leftWallContactFilter))
+                    else if (rb2d.IsTouching(wallCollider, leftWallContactFilter))
                     {
                         if (Input.GetButtonDown("Jump") && jumpCounter != 3)
                         {
