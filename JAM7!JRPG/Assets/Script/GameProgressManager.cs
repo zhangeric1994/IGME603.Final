@@ -17,6 +17,8 @@ public class GameProgressManager : MonoBehaviour
     private Transform TeleportationPoint;
     [SerializeField]
     private GameObject EvilMiko;
+    [SerializeField]
+    private GameObject Credits;
     private Dialogue dialogue;
     private GameObject player;
 
@@ -105,9 +107,23 @@ public class GameProgressManager : MonoBehaviour
     public void RemoveMiko()
     {
         EvilMiko.SetActive(false);
+
+        StartCoroutine(MoveCredits());
     }
 
-    private IEnumerator TeleportEffects()
+    private IEnumerator MoveCredits()
+    {
+        Credits.SetActive(true);
+        MusicManager.Instance.PlayMusic("town");
+        MusicManager.Instance.Close();
+        while (true)
+        {
+            Credits.transform.position += Time.deltaTime * Vector3.up * 100;
+            yield return null;
+        }
+    }
+
+        private IEnumerator TeleportEffects()
     {
         TeleportOverlay.SetActive(true);
         Image FlashImage = TeleportOverlay.GetComponent<Image>();

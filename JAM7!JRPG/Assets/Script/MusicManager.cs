@@ -6,6 +6,7 @@ public class MusicManager : MonoBehaviour
     private string lastMusic;
     private string currentMusic;
     private AudioSource source;
+    private bool stopped;
     public bool inBattle
     {
         set
@@ -24,10 +25,16 @@ public class MusicManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        stopped = false;
+    }
+    public void Close()
+    {
+        stopped = true;
     }
     public void PlayMusic(string music)
     {
         if (music == currentMusic) return;
+        if (stopped) return;
         Debug.Log("Play " + music);
         source.Stop();
         source.clip = Resources.Load<AudioClip>("Audio/" + music);
