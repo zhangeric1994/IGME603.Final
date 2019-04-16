@@ -41,7 +41,7 @@ public abstract class GUIAutoList<ListItemType, ListItemDataType> : GUIWidget wh
                 ListItemType listItem = reusableListItems.Count == 0 ? listItem = Instantiate(prefab, transform) : reusableListItems.Pop();
 
                 listItem.gameObject.SetActive(true);
-                Debug.Log(listItemData.GetHashCode());
+
                 listItems.Add(listItemData, listItem);
                 listItemsByOrder.Add(listItem);
 
