@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class GameProgressManager : MonoBehaviour
 {
@@ -10,7 +12,12 @@ public class GameProgressManager : MonoBehaviour
     [SerializeField]
     private GameObject DuskOverlay;
     [SerializeField]
+    private GameObject TeleportOverlay;
+    [SerializeField]
     private Transform TeleportationPoint;
+
+    private GameObject player;
+    
 
     void Awake()
     {
@@ -37,14 +44,48 @@ public class GameProgressManager : MonoBehaviour
 
     public void TeleportToMaouCity()
     {
-        GameObject player = GameObject.Find("PlayerE(Clone)");
+        player = GameObject.Find("PlayerE(Clone)");
         if (player == null)
         {
             Debug.LogError("Error when getting player object");
             return;
         }
-        DuskOverlay.SetActive(false);
+        StartCoroutine(TeleportEffects());
+    }
 
+    private IEnumerator TeleportEffects()
+    {
+        TeleportOverlay.SetActive(true);
+        Image FlashImage = TeleportOverlay.GetComponent<Image>();
+        FlashImage.color = new Color(1, 1, 1, 0.7f);
+        yield return new WaitForSeconds(0.2f);
+        FlashImage.color = new Color(1, 1, 1, 0);
+        yield return new WaitForSeconds(0.2f);
+        FlashImage.color = new Color(1, 1, 1, 0.7f);
+        yield return new WaitForSeconds(0.2f);
+        FlashImage.color = new Color(1, 1, 1, 0);
+        yield return new WaitForSeconds(0.2f);
+
+        float a = 0;
+
+        while (a < 1)
+        {
+            a += Time.deltaTime;
+            FlashImage.color = new Color(1, 1, 1, a);
+            yield return null;
+        }
+        DuskOverlay.SetActive(false);
         player.transform.position = TeleportationPoint.position;
+        while (a > 0)
+        {
+            a -= Time.deltaTime;
+            FlashImage.color = new Color(1, 1, 1, a);
+            yield return null;
+        }
+        TeleportOverlay.SetActive(false);
+        yield return null;
+        
+
+
     }
 }
