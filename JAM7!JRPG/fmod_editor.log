@@ -2,9 +2,10 @@
 [LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
 [LOG] SystemI::init                            : Initialize version=11012 (101101), maxchannels=256, flags=0x00020000
 [LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=44100, nAvgBytesPerSec=352800, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
 [LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
-[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] OutputWASAPI::init                       : Output buffer size: 3760 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[WRN] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
 [LOG] AsyncManager::init                       : manager 000000006A848798 isAsync 0 updatePeriod 0.02
@@ -15,346 +16,104 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Thread::initThread                       : Init FMOD profiler thread (recv). Priority: 0, Stack Size: 131072, Semaphore: No, Sleep Time: 0, Looping: No.
+[LOG] Thread::initThread                       : Init FMOD profiler thread (send). Priority: 0, Stack Size: 131072, Semaphore: No, Sleep Time: 0, Looping: No.
+[LOG] LiveUpdate::clientConnected              : client = 0000000053AECB98
+[LOG] LiveUpdate::readPacket                   : Accepting init message for client 0000000053AECB98
+[LOG] LiveUpdate::transitionToConnected        : 
+[LOG] Manager::sendConnectTimeHash             : 
+[LOG] LiveUpdate::sendBankHash                 : 
+[LOG] LiveUpdate::sendBankHash                 : 
+[LOG] LiveUpdate::sendBankHash                 : 
+[LOG] LiveUpdate::acceptInitPacket             : Client 0000000053AECB98 connected, entering connected state
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = fmod:///remote/C:/Users/Yiyan Wang/Desktop/JRPG/Assets/field.mp3 : mode 0201c082
+[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 0000000048E0C0C8 : node = 00000000681EE930
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000040F05BD8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000048E0C0C8
-[LOG] SystemI::createSoundInternal             :     Create name='fmod:///remote/C:/Users/Yiyan Wang/Desktop/JRPG/Assets/field.mp3', mode=0x0201C082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] ProfileRemoteFile::fileOpen              :     Attemping to open remote file 'C:/Users/Yiyan Wang/Desktop/JRPG/Assets/field.mp3'
-[LOG] SystemI::createSoundInternal             :     Stream: name='(null)', format=2, channels=2, frequency=48000, lengthbytes=2274240, lengthpcm=3841920, pcmblocksize=1152, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.000000.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000048E0C0C8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000048E0C0C8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000048E0C0C8
-[LOG] SoundI::release                          : town.mp3 (000000003E804158)
-[LOG] SoundI::release                          :     (null) (0000000040F048A8)
-[LOG] Codec::release                           : Free PCM Buffer
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSoundInternal             : Create name='fmod:///remote/C:/Users/Yiyan Wang/Desktop/JRPG/Assets/Suck.mp3', mode=0x0200C202
-[LOG] SystemI::createSound                     : filename = fmod:///remote/C:/Users/Yiyan Wang/Desktop/JRPG/Assets/battle.mp3 : mode 0201c082
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/Desktop/JRPG/Assets/Suck.mp3'
-[LOG] SystemI::createSound                     : setdata soundi = 0000000048E0B858 : node = 000000003EE60630
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000040F05BD8.  list count = 0
+[LOG] SystemI::createSound                     : setdata soundi = 0000000048E0B858 : node = 0000000048BA9B00
+[LOG] SystemI::createSound                     : add node to async list : head = 00000000186478A8.  list count = 0
 [LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000048E0B858
-[LOG] SystemI::createSoundInternal             :     Create name='fmod:///remote/C:/Users/Yiyan Wang/Desktop/JRPG/Assets/battle.mp3', mode=0x0201C082
+[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22304
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000000048BA9C18
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] ProfileRemoteFile::fileOpen              :     Attemping to open remote file 'C:/Users/Yiyan Wang/Desktop/JRPG/Assets/battle.mp3'
-[LOG] SystemI::DSPCodecPoolRegister            :     register codec pool for pool type 3
-[LOG] SystemI::createSoundInternal             :     Sample 0/0: name='(null)', format=2, channels=2, frequency=48000, lengthbytes=11648, lengthpcm=23040, pcmblocksize=1152, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.000000.
-[LOG] SystemI::createSoundInternal             :     Stream: name='(null)', format=2, channels=2, frequency=48000, lengthbytes=2095008, lengthpcm=3745152, pcmblocksize=1152, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.000000.
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='field', format=2, channels=2, frequency=48000, lengthbytes=1060704, lengthpcm=3841920, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.824493.
 [LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000048E0B858
-[LOG] SoundI::release                          : field.mp3 (0000000048E0C0C8)
-[LOG] SoundI::release                          :     (null) (000000006C43C558)
-[LOG] Codec::release                           : Free PCM Buffer
+[LOG] SoundI::getSubSound                      : sound 0000000048E0B858.  Subsound index 0 / 1
+[LOG] SoundI::release                          : town (0000000048E0BA08)
+[LOG] SoundI::release                          :     town (0000000018646718)
+[LOG] SoundI::release                          :     town (0000000048E0C428)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[LOG] SoundI::release                          : battle.mp3 (0000000048E0B858)
-[LOG] SoundI::release                          :     (null) (000000006C43D3F8)
-[LOG] Codec::release                           : Free PCM Buffer
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'Forest')
-[WRN] TimelineInstance::performScheduling      : 101 instantaneous transitions encountered; bailing out to avoid scheduler hang (last transition was to 'NormalBattle')
-[LOG] SoundI::release                          :  (0000000018377518)
-[LOG] SoundI::release                          :     Suck (0000000040F04708)
-[LOG] SoundI::release                          : Suck.mp3 (000000006C43C3B8)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-2HmFWZ/hotswap_880.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-2HmFWZ/hotswap_880.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000000532A6CA8 : node = 0000000015A6E820
+[LOG] SystemI::createSound                     : add node to async list : head = 00000000186478A8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000532A6CA8
+[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22304
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000000015A6E938
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='RuinTown', format=2, channels=2, frequency=48000, lengthbytes=2385056, lengthpcm=9017856, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.465149.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000532A6CA8
+[LOG] SoundI::getSubSound                      : sound 00000000532A6CA8.  Subsound index 0 / 1
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SoundI::release                          : field (0000000048E0B858)
+[LOG] SoundI::release                          :     field (00000000183D8598)
+[LOG] SoundI::release                          :     field (0000000048E0D1A8)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000000532A6948 : node = 0000000015A6E580
+[LOG] SystemI::createSound                     : add node to async list : head = 00000000186478A8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000532A6948
+[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22304
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000000015A6E698
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='AnotherWorldP', format=2, channels=2, frequency=48000, lengthbytes=780064, lengthpcm=2881152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.553192.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000532A6948
+[LOG] SoundI::getSubSound                      : sound 00000000532A6948.  Subsound index 0 / 1
+[LOG] SoundI::release                          : RuinTown (00000000532A6CA8)
+[LOG] SoundI::release                          :     RuinTown (0000000018647A98)
+[LOG] SoundI::release                          :     RuinTown (00000000532A7368)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SoundI::release                          : AnotherWorldP (00000000532A6948)
+[LOG] SoundI::release                          :     AnotherWorldP (0000000018647DD8)
+[LOG] SoundI::release                          :     AnotherWorldP (00000000532A6438)
+[LOG] SoundI::release                          :  (0000000018376F58)
+[LOG] SoundI::release                          :     Suck (00000000186475B8)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] ProfileClient::markForDead               : Closing client connection
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] FMOD_OS_Net_Read                         : Interrupted.[LOG] Thread::callback                         : FMOD profiler thread (send) finished.
-[ERR] ProfileClient::recvThreadLoopFunction    : Recv thread loop returned 16
+[LOG] Thread::callback                         : FMOD profiler thread (send) finished.
+[LOG] FMOD_OS_Net_Read                         : Interrupted.[ERR] ProfileClient::recvThreadLoopFunction    : Recv thread loop returned 16
 [LOG] Thread::callback                         : FMOD profiler thread (recv) finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -362,13 +121,4 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.
 [LOG] SystemI::close                           : Closed.

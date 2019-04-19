@@ -32,6 +32,7 @@ public class PlayerExplorationController : MonoBehaviour
     public GameObject cam;
 
     private Heading heading;
+    FMODUnity.StudioEventEmitter emitter;
 
     public PlayerExplorationState CurrentState
     {
@@ -244,24 +245,34 @@ public class PlayerExplorationController : MonoBehaviour
         }
 
 
+
         if (transform.position.x > 50)
         {
             //MusicManager.Instance.PlayMusic("field");
+            emitter.SetParameter("Forest", 1);
+            emitter.SetParameter("NormalTown", 0);
+            emitter.SetParameter("RuinedTown", 0);
         }
         else if (transform.position.x < -50)
         {
+            emitter.SetParameter("DarkDimension", 1);
+            emitter.SetParameter("NormalTown", 0);
+            emitter.SetParameter("RuinedTown", 0);
             //MusicManager.Instance.PlayMusic("AnotherWorldP");
         }
         else
         {
-            //if (GameProgressManager.instance.TownDestroyed)
-            //{
-            //    //MusicManager.Instance.PlayMusic("RuinTown");
-            //}
-            //else
-            //{
-            //   // MusicManager.Instance.PlayMusic("town");
-            //}
+            if (GameProgressManager.instance.TownDestroyed)
+            {
+                //MusicManager.Instance.PlayMusic("RuinTown");
+                emitter.SetParameter("RuinedTown", 1);
+                emitter.SetParameter("Forest", 0);
+            }
+            else
+            {
+                emitter.SetParameter("NormalTown", 1);
+                emitter.SetParameter("Forest", 0);
+            }
         }
     }
 
@@ -316,5 +327,10 @@ public class PlayerExplorationController : MonoBehaviour
                 }
                 break;
         }
+    }
+    void OnEnable()
+    {
+        var target = GameObject.Find("BackgroundMusic");
+        emitter = target.GetComponent<FMODUnity.StudioEventEmitter>();
     }
 }
