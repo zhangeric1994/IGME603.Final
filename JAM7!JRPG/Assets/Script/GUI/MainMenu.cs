@@ -50,7 +50,7 @@ public class MainMenu : GUIWindow
         {
             if (Input.GetButtonDown("Jump"))
             {
-                AudioManager.Instance.PlaySoundEffect("Confirm");
+                //AudioManager.Instance.PlaySoundEffect("Confirm");
                 switch (choosenIndex)
                 {
                     case 0:

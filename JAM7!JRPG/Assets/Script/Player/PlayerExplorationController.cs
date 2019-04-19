@@ -129,7 +129,7 @@ public class PlayerExplorationController : MonoBehaviour
             case "MusicCollider":
                 if (PlayerID == 1) break;
                 string[] splitName = go.name.Split('_');
-                MusicManager.Instance.PlayMusic(splitName[1]);
+                //MusicManager.Instance.PlayMusic(splitName[1]);
                 GameObject another = go.GetComponent<mutual>().another;
                 go.SetActive(false);
                 another.SetActive(true);
@@ -155,7 +155,7 @@ public class PlayerExplorationController : MonoBehaviour
             case "MusicCollider":
                 if (PlayerID == 1) break;
                 string[] splitName = go.name.Split('_');
-                MusicManager.Instance.PlayMusic(splitName[1]);
+                //MusicManager.Instance.PlayMusic(splitName[1]);
                 GameObject another = go.GetComponent<mutual>().another;
                 go.SetActive(false);
                 another.SetActive(true);
@@ -204,15 +204,15 @@ public class PlayerExplorationController : MonoBehaviour
                         if (horizontal > 0)
                         {
                             animator.SetTrigger("Right");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
+                            //if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                            //    AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Right;
                         }
                         else if (horizontal < 0)
                         {
                             animator.SetTrigger("Left");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
+                            //if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                            //    AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Left;
                         }
                     }
@@ -222,15 +222,15 @@ public class PlayerExplorationController : MonoBehaviour
                         if (vertical > 0)
                         {
                             animator.SetTrigger("Up");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
+                            //if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                            //    AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Up;
                         }
                         else if (vertical < 0)
                         {
                             animator.SetTrigger("Down");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
+                            //if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                            //    AudioManager.Instance.PlaySoundEffect("Walking");
                             heading = Heading.Down;
                         }
                     }
@@ -246,22 +246,22 @@ public class PlayerExplorationController : MonoBehaviour
 
         if (transform.position.x > 50)
         {
-            MusicManager.Instance.PlayMusic("field");
+            //MusicManager.Instance.PlayMusic("field");
         }
         else if (transform.position.x < -50)
         {
-            MusicManager.Instance.PlayMusic("AnotherWorldP");
+            //MusicManager.Instance.PlayMusic("AnotherWorldP");
         }
         else
         {
-            if (GameProgressManager.instance.TownDestroyed)
-            {
-                MusicManager.Instance.PlayMusic("RuinTown");
-            }
-            else
-            {
-                MusicManager.Instance.PlayMusic("town");
-            }
+            //if (GameProgressManager.instance.TownDestroyed)
+            //{
+            //    //MusicManager.Instance.PlayMusic("RuinTown");
+            //}
+            //else
+            //{
+            //   // MusicManager.Instance.PlayMusic("town");
+            //}
         }
     }
 
