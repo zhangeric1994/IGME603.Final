@@ -8,7 +8,7 @@
 [WRN] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000000055C54378 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000000005E7043A8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,269 +16,94 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07C188 : node = 000000004A1538F0
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07C188
+[LOG] SystemI::createSound                     : setdata soundi = 0000000055AF2298 : node = 0000000055125050
+[LOG] SystemI::createSound                     : add node to async list : head = 000000005C0C5ED8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000055AF2298
 [LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 7156864
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 24736
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153A08
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='field', format=2, channels=2, frequency=48000, lengthbytes=1060704, lengthpcm=3841920, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.824493.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07C188
-[LOG] SoundI::getSubSound                      : sound 000000003F07C188.  Subsound index 0 / 1
-[LOG] SoundI::release                          : town (0000000024B0FF28)
-[LOG] SoundI::release                          :     town (0000000047B7ED38)
-[LOG] SoundI::release                          :     town (0000000024B10798)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07B258 : node = 000000004A153A40
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07B258
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153B58
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='battle', format=2, channels=2, frequency=48000, lengthbytes=1021472, lengthpcm=3745152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.931427.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07B258
-[LOG] SoundI::getSubSound                      : sound 000000003F07B258.  Subsound index 0 / 1
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SoundI::release                          : field (000000003F07C188)
-[LOG] SoundI::release                          :     field (000000004033E178)
-[LOG] SoundI::release                          :     field (000000003F07B0A8)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07B918 : node = 000000004A153260
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07B918
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153378
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='field', format=2, channels=2, frequency=48000, lengthbytes=1060704, lengthpcm=3841920, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.824493.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07B918
-[LOG] SoundI::getSubSound                      : sound 000000003F07B918.  Subsound index 0 / 1
-[LOG] SoundI::release                          : battle (000000003F07B258)
-[LOG] SoundI::release                          :     battle (000000004033C778)
-[LOG] SoundI::release                          :     battle (000000003F07B408)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07B258 : node = 000000004A1533B0
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07B258
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A1534C8
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='battle', format=2, channels=2, frequency=48000, lengthbytes=1021472, lengthpcm=3745152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.931427.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07B258
-[LOG] SoundI::getSubSound                      : sound 000000003F07B258.  Subsound index 0 / 1
-[LOG] SoundI::release                          : field (000000003F07B918)
-[LOG] SoundI::release                          :     field (0000000047B7E378)
-[LOG] SoundI::release                          :     field (000000003F07C188)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07B918 : node = 000000004A153260
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07B918
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153378
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='field', format=2, channels=2, frequency=48000, lengthbytes=1060704, lengthpcm=3841920, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.824493.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07B918
-[LOG] SoundI::getSubSound                      : sound 000000003F07B918.  Subsound index 0 / 1
-[LOG] SoundI::release                          : battle (000000003F07B258)
-[LOG] SoundI::release                          :     battle (0000000024A4ED58)
-[LOG] SoundI::release                          :     battle (000000003F07C4E8)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07C188 : node = 000000004A153B90
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07C188
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153CA8
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='battle', format=2, channels=2, frequency=48000, lengthbytes=1021472, lengthpcm=3745152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.931427.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07C188
-[LOG] SoundI::getSubSound                      : sound 000000003F07C188.  Subsound index 0 / 1
-[LOG] SoundI::release                          : field (000000003F07B918)
-[LOG] SoundI::release                          :     field (0000000024A51FB8)
-[LOG] SoundI::release                          :     field (000000003F07BC78)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07BC78 : node = 000000004A153260
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07BC78
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153378
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='field', format=2, channels=2, frequency=48000, lengthbytes=1060704, lengthpcm=3841920, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.824493.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07BC78
-[LOG] SoundI::getSubSound                      : sound 000000003F07BC78.  Subsound index 0 / 1
-[LOG] SoundI::release                          : battle (000000003F07C188)
-[LOG] SoundI::release                          :     battle (0000000024A4ED58)
-[LOG] SoundI::release                          :     battle (000000003F07C4E8)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07C188 : node = 000000004A153110
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07C188
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153228
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000000055125168
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='RuinTown', format=2, channels=2, frequency=48000, lengthbytes=2385056, lengthpcm=9017856, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.465149.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07C188
-[LOG] SoundI::getSubSound                      : sound 000000003F07C188.  Subsound index 0 / 1
-[LOG] SoundI::release                          : field (000000003F07BC78)
-[LOG] SoundI::release                          :     field (0000000024A51FB8)
-[LOG] SoundI::release                          :     field (000000003F07B258)
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000055AF2298
+[LOG] SoundI::getSubSound                      : sound 0000000055AF2298.  Subsound index 0 / 1
+[LOG] SoundI::release                          : town (0000000055845C88)
+[LOG] SoundI::release                          :     town (000000005C0C5708)
+[LOG] SoundI::release                          :     town (000000003F07C188)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SystemI::createSoundInternal             : Create name='fmod:///remote/C:/Users/Yiyan Wang/Desktop/JRPG/Assets/Suck_Long.mp3', mode=0x0200C202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/Desktop/JRPG/Assets/Suck_Long.mp3'
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 3
+[LOG] SystemI::createSoundInternal             : Sample 0/0: name='(null)', format=2, channels=2, frequency=48000, lengthbytes=22016, lengthpcm=43776, pcmblocksize=1152, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.000000.
+[LOG] SystemI::createSoundInternal             : Create name='fmod:///remote/C:/Users/Yiyan Wang/Desktop/JRPG/Assets/Suck.mp3', mode=0x0200C202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/Desktop/JRPG/Assets/Suck.mp3'
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 3
+[LOG] SystemI::createSoundInternal             : Sample 0/0: name='(null)', format=2, channels=2, frequency=48000, lengthbytes=11648, lengthpcm=23040, pcmblocksize=1152, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.000000.
 [LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07BC78 : node = 000000004A1533B0
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07BC78
+[LOG] SystemI::createSound                     : setdata soundi = 0000000055AF0AF8 : node = 0000000055125440
+[LOG] SystemI::createSound                     : add node to async list : head = 000000005C0C5ED8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000055AF0AF8
 [LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 7156864
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 24736
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A1534C8
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000000055125558
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='AnotherWorldP', format=2, channels=2, frequency=48000, lengthbytes=780064, lengthpcm=2881152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.553192.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07BC78
-[LOG] SoundI::getSubSound                      : sound 000000003F07BC78.  Subsound index 0 / 1
-[LOG] SoundI::release                          : RuinTown (000000003F07C188)
-[LOG] SoundI::release                          :     RuinTown (0000000024A4ED58)
-[LOG] SoundI::release                          :     RuinTown (000000003F07C4E8)
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000055AF0AF8
+[LOG] SoundI::getSubSound                      : sound 0000000055AF0AF8.  Subsound index 0 / 1
+[LOG] SoundI::release                          : RuinTown (0000000055AF2298)
+[LOG] SoundI::release                          :     RuinTown (000000005C0C5F28)
+[LOG] SoundI::release                          :     RuinTown (0000000055AF25F8)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07B408 : node = 000000004A153A40
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07B408
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153B58
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='FinalBossBattle', format=2, channels=2, frequency=48000, lengthbytes=691616, lengthpcm=2562048, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.581940.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07B408
-[LOG] SoundI::getSubSound                      : sound 000000003F07B408.  Subsound index 0 / 1
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SoundI::release                          : AnotherWorldP (000000003F07BC78)
-[LOG] SoundI::release                          :     AnotherWorldP (0000000024A51FB8)
-[LOG] SoundI::release                          :     AnotherWorldP (000000003F07B258)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SystemI::createSound                     : filename = C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000000003F07BC78 : node = 000000004A153110
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000047B7F368.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003F07BC78
-[LOG] SystemI::createSoundInternal             :     Create name='C:\Users\Yiyan Wang\Desktop\JRPG\Build\Desktop/Master Bank.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6882464
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 22432
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000004A153228
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='AnotherWorldP', format=2, channels=2, frequency=48000, lengthbytes=780064, lengthpcm=2881152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.553192.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003F07BC78
-[LOG] SoundI::getSubSound                      : sound 000000003F07BC78.  Subsound index 0 / 1
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SoundI::release                          : FinalBossBattle (000000003F07B408)
-[LOG] SoundI::release                          :     FinalBossBattle (0000000024A4EEF8)
-[LOG] SoundI::release                          :     FinalBossBattle (000000003F07B918)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SoundI::release                          : AnotherWorldP (000000003F07BC78)
-[LOG] SoundI::release                          :     AnotherWorldP (0000000024A51FB8)
-[LOG] SoundI::release                          :     AnotherWorldP (000000003F07C188)
-[LOG] SoundI::release                          :  (00000000478AB218)
-[LOG] SoundI::release                          :     Suck (0000000047B7D9B8)
+[LOG] SoundI::release                          : AnotherWorldP (0000000055AF0AF8)
+[LOG] SoundI::release                          :     AnotherWorldP (000000005C0C75E8)
+[LOG] SoundI::release                          :     AnotherWorldP (0000000055AF11B8)
+[LOG] SoundI::release                          :  (0000000024F9A338)
+[LOG] SoundI::release                          :     Suck (000000005C0C8E48)
+[LOG] SoundI::release                          : Suck.mp3 (000000005C0C60C8)
+[LOG] SoundI::release                          : Suck_Long.mp3 (000000005C0C5708)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] ProfileClient::markForDead               : Closing client connection
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD profiler thread (send) finished.
+[LOG] FMOD_OS_Net_Read                         : Interrupted.[ERR] ProfileClient::recvThreadLoopFunction    : Recv thread loop returned 16
+[LOG] Thread::callback                         : FMOD profiler thread (recv) finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
 [LOG] SystemI::close                           : Closed.

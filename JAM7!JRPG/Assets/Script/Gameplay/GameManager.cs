@@ -162,8 +162,17 @@ public class GameManager : MonoBehaviour
 
         if(combat.enemyProxy.gameObject.transform.position.x > 50)
         {
-            emitter.SetParameter("Forest", 1);
-            emitter.SetParameter("NormalBattle", 0);
+            if (combat.gameObject.name.Contains("BossLevel"))
+            {
+                emitter.SetParameter("Forest", 0.99f);
+                emitter.SetParameter("NormalBattle", 0);
+                emitter.SetParameter("Dusk", 1);
+            }
+            else
+            {
+                emitter.SetParameter("Forest", 1);
+                emitter.SetParameter("NormalBattle", 0);
+            }
         }
         else if(combat.enemyProxy.gameObject.transform.position.x < 50)
         {
