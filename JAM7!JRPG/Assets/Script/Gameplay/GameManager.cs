@@ -136,8 +136,19 @@ public class GameManager : MonoBehaviour
         CombatManager combat = Instantiate(ResourceUtility.GetPrefab<CombatManager>(name), new Vector3((id + 1) * 1000, 0, 0), Quaternion.identity);
         combat.ID = id;
         ++numOngoingCombats;
-        //MusicManager.Instance.finalBoss = name == "Level/FinalLevel";
-        //MusicManager.Instance.inBattle = numOngoingCombats > 0;
+
+        if (name == "Level/FinalLevel")
+        {
+            emitter.SetParameter("FinalBossBattle", 1);
+            emitter.SetParameter("DarkDimension", 0);
+            emitter.SetParameter("Forest", 0);
+        }
+        else
+        {
+            emitter.SetParameter("NormalBattle", 1);
+            emitter.SetParameter("DarkDimension", 0);
+            emitter.SetParameter("Forest", 0);
+        }
         return combat;
     }
 
@@ -149,8 +160,18 @@ public class GameManager : MonoBehaviour
 
         --numOngoingCombats;
 
-        emitter.SetParameter("Forest", 1);
-        emitter.SetParameter("NormalBattle", 0);
+        if(combat.enemyProxy.gameObject.transform.position.x > 50)
+        {
+            emitter.SetParameter("Forest", 1);
+            emitter.SetParameter("NormalBattle", 0);
+        }
+        else if(combat.enemyProxy.gameObject.transform.position.x < 50)
+        {
+            emitter.SetParameter("DarkDimension", 1);
+            emitter.SetParameter("FinalBossBattle", 0);
+        }
+
+
         //MusicManager.Instance.inBattle = numOngoingCombats > 0;
     }
 
