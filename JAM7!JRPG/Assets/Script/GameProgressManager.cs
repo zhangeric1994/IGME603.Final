@@ -48,7 +48,7 @@ public class GameProgressManager : MonoBehaviour
     {
         City.SetActive(false);
         RuinCity.SetActive(true);
-        DuskOverlay.SetActive(true);
+        if (DuskOverlay != null) DuskOverlay.SetActive(true);
         TownDestroyed = true;
     }
 
