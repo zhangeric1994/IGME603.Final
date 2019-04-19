@@ -265,8 +265,12 @@ public class PlayerExplorationController : MonoBehaviour
             if (GameProgressManager.instance.TownDestroyed)
             {
                 //MusicManager.Instance.PlayMusic("RuinTown");
+                var target = GameObject.Find("Fire");
+                FMODUnity.StudioEventEmitter fire = target.GetComponent<FMODUnity.StudioEventEmitter>();
+                fire.SetParameter("MixFire", 1);
                 emitter.SetParameter("RuinedTown", 1);
                 emitter.SetParameter("Forest", 0);
+                
             }
             else
             {
