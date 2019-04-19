@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     private int maxNumCombat = 0;
     private Stack<int> combatIDs = new Stack<int>(2);
 
+    FMODUnity.StudioEventEmitter emitter;
+
     /// <summary>
     /// The current state of the game
     /// </summary>
@@ -147,12 +149,20 @@ public class GameManager : MonoBehaviour
 
         --numOngoingCombats;
 
+        emitter.SetParameter("Forest", 1);
+        emitter.SetParameter("NormalBattle", 0);
         //MusicManager.Instance.inBattle = numOngoingCombats > 0;
     }
 
     public void StartGame()
     {
         CurrentGameState = GameState.Loading;
+    }
+
+    void OnEnable()
+    {
+        var target = GameObject.Find("BackgroundMusic");
+        emitter = target.GetComponent<FMODUnity.StudioEventEmitter>();
     }
 
     /// <summary>
