@@ -240,8 +240,8 @@ public class PlayerCombatController : MonoBehaviour
                         float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
                         rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
                         anim.SetFloat("Speed", walkSpeed);
-                        if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                            AudioManager.Instance.PlaySoundEffect("Walking");
+                        //if (!AudioManager.Instance.IsPlayingClip("Walking"))
+                        //    AudioManager.Instance.PlaySoundEffect("Walking");
                         //renderer.flipX = false;
                     }
                     else if (okToAttack && x < 0)
@@ -263,7 +263,7 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         CurrentState = PlayerCombatState.InAir;
                         lastInput = Time.time;
-                        AudioManager.Instance.PlaySoundEffect("Jump");
+                        //AudioManager.Instance.PlaySoundEffect("Jump");
                     }
 
                     if (Input.GetButtonDown("Pick") && lastInput != Time.time + 10f)

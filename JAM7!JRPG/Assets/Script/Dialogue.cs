@@ -37,7 +37,7 @@ public class Dialogue : MonoBehaviour
                 return;
             }
             DialogueBox.instance.Text = alternative ? alternativeDialogues[currentDialogIndex] : dialogues[currentDialogIndex];
-            AudioManager.Instance.PlaySoundEffect("Text", false, false);
+            //AudioManager.Instance.PlaySoundEffect("Text", false, false);
         }
     }
 
@@ -55,7 +55,7 @@ public class Dialogue : MonoBehaviour
         active = true;
         DialogueBox.instance.Show();
         DialogueBox.instance.Text = alternative ? alternativeDialogues[0] : dialogues[0];
-        AudioManager.Instance.PlaySoundEffect("Text", false, false);
+        //AudioManager.Instance.PlaySoundEffect("Text", false, false);
         return true;
     }
 
