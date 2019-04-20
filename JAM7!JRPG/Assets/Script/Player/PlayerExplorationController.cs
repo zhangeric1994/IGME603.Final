@@ -33,6 +33,7 @@ public class PlayerExplorationController : MonoBehaviour
 
     private Heading heading;
     FMODUnity.StudioEventEmitter emitter;
+    FMODUnity.StudioEventEmitter PlayerFootstepEmitter;
 
     public PlayerExplorationState CurrentState
     {
@@ -167,6 +168,7 @@ public class PlayerExplorationController : MonoBehaviour
     private void Start()
     {
         CurrentState = PlayerExplorationState.Exploring;
+        PlayerFootstepEmitter = null;
         animator = GetComponent<Animator>();
     }
 
@@ -185,6 +187,11 @@ public class PlayerExplorationController : MonoBehaviour
         {
             GetCamera();
             return;
+        }
+        if(PlayerFootstepEmitter == null)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            PlayerFootstepEmitter = player.GetComponent<FMODUnity.StudioEventEmitter>();
         }
         switch (currentState)
         {
@@ -205,16 +212,19 @@ public class PlayerExplorationController : MonoBehaviour
                         if (horizontal > 0)
                         {
                             animator.SetTrigger("Right");
-                            //if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                            //    AudioManager.Instance.PlaySoundEffect("Walking");
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Right;
                         }
                         else if (horizontal < 0)
                         {
                             animator.SetTrigger("Left");
-                            //if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                            //    AudioManager.Instance.PlaySoundEffect("Walking");
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Left;
+                        }
+                        else
+                        {
+                            PlayerFootstepEmitter.SetParameter("Speed", 0);
+                            PlayerFootstepEmitter.SetParameter("Grass", 0);
                         }
                     }
                     else
@@ -223,17 +233,21 @@ public class PlayerExplorationController : MonoBehaviour
                         if (vertical > 0)
                         {
                             animator.SetTrigger("Up");
-                            //if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                            //    AudioManager.Instance.PlaySoundEffect("Walking");
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Up;
                         }
                         else if (vertical < 0)
                         {
                             animator.SetTrigger("Down");
-                            //if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                            //    AudioManager.Instance.PlaySoundEffect("Walking");
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Down;
                         }
+                        else
+                        {
+                            PlayerFootstepEmitter.SetParameter("Speed", 0);
+                            PlayerFootstepEmitter.SetParameter("Grass", 0);
+                        }
+
                     }
                     Vector3 move = Time.deltaTime * walkSpeed * new Vector3(horizontal, vertical, 0);
                     if (Input.GetKey(KeyCode.LeftShift)) move *= 2;

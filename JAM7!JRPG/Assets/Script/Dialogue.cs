@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using FMODUnity;
 
 public class Dialogue : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Dialogue : MonoBehaviour
     private bool alternative;
     private PlayerExplorationController playerInTalking;
     public UnityEvent eventAfterDialog;
+    private StudioEventEmitter emitter;
     void Start()
     {
         currentDialogIndex = 0;
@@ -37,6 +39,7 @@ public class Dialogue : MonoBehaviour
                 return;
             }
             DialogueBox.instance.Text = alternative ? alternativeDialogues[currentDialogIndex] : dialogues[currentDialogIndex];
+            emitter.Play();
             //AudioManager.Instance.PlaySoundEffect("Text", false, false);
         }
     }
@@ -55,8 +58,13 @@ public class Dialogue : MonoBehaviour
         active = true;
         DialogueBox.instance.Show();
         DialogueBox.instance.Text = alternative ? alternativeDialogues[0] : dialogues[0];
+        emitter.Play();
         //AudioManager.Instance.PlaySoundEffect("Text", false, false);
         return true;
     }
-
+    void OnEnable()
+    {
+        var target = GameObject.Find("DialogueClick");
+        emitter = target.GetComponent<FMODUnity.StudioEventEmitter>();
+    }
 }

@@ -17,6 +17,7 @@ TagManager:
   - Item
   - Wall
   - FinalBoss
+  - Grass
   layers:
   - Default
   - TransparentFX
