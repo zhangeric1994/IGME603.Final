@@ -71,7 +71,7 @@ public class PlayerCombatController : MonoBehaviour
     private float invulnerableInterval = 0.3f;
     private float lastHit;
 
-
+    public FMODUnity.StudioEventEmitter PlayerFootstepEmitter;
 
     [SerializeField] private GameObject shield;
 
@@ -186,6 +186,8 @@ public class PlayerCombatController : MonoBehaviour
 
         CurrentState = PlayerCombatState.OnGround;
         okToAttack = true;
+
+        PlayerFootstepEmitter = null;
     }
 
     public void GetCamera()
@@ -220,6 +222,12 @@ public class PlayerCombatController : MonoBehaviour
             return;
         }
 
+        if (PlayerFootstepEmitter == null)
+        {
+            var player = GameObject.Find("WeaponHolder");
+            PlayerFootstepEmitter = player.GetComponent<FMODUnity.StudioEventEmitter>();
+        }
+
         switch (currentState)
         {
             case PlayerCombatState.OnGround:
@@ -240,8 +248,8 @@ public class PlayerCombatController : MonoBehaviour
                         float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
                         rb2d.velocity = new Vector2(walkSpeed, rb2d.velocity.y);
                         anim.SetFloat("Speed", walkSpeed);
-                        //if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                        //    AudioManager.Instance.PlaySoundEffect("Walking");
+                        PlayerFootstepEmitter.SetParameter("Speed", 1);
+                        PlayerFootstepEmitter.SetParameter("Grass", 1);
                         //renderer.flipX = false;
                     }
                     else if (okToAttack && x < 0)
@@ -249,14 +257,16 @@ public class PlayerCombatController : MonoBehaviour
                         float walkSpeed = Avatar.GetStatistic(StatisticType.WalkSpeed);
                         rb2d.velocity = new Vector2(-walkSpeed, rb2d.velocity.y);
                         anim.SetFloat("Speed", walkSpeed);
-//                        if (!AudioManager.Instance.IsPlayingClip("Walking"))
-//                            AudioManager.Instance.PlaySoundEffect("Walking");
+                        PlayerFootstepEmitter.SetParameter("Speed", 1);
+                        PlayerFootstepEmitter.SetParameter("Grass", 1);
                         //renderer.flipX = true;
                     }
                     else
                     {
                         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
                         anim.SetFloat("Speed", 0f);
+                        PlayerFootstepEmitter.SetParameter("Speed", 0);
+                        PlayerFootstepEmitter.SetParameter("Grass", 0);
                     }
 
                     if (Input.GetButtonDown("Jump") && lastInput != Time.time + 10f)
@@ -264,6 +274,8 @@ public class PlayerCombatController : MonoBehaviour
                         CurrentState = PlayerCombatState.InAir;
                         lastInput = Time.time;
                         //AudioManager.Instance.PlaySoundEffect("Jump");
+                        FMOD.Studio.EventInstance jumpSound = FMODUnity.RuntimeManager.CreateInstance("event:/Jump");
+                        jumpSound.start();
                     }
 
                     if (Input.GetButtonDown("Pick") && lastInput != Time.time + 10f)
@@ -279,6 +291,11 @@ public class PlayerCombatController : MonoBehaviour
                         anim.Play(weaponHolder.GetComponentInChildren<Weapon>().getAnimationName());
                         anim.speed = Avatar.GetStatistic(StatisticType.AttackSpeed);
                         lastInput = Time.time;
+                        FMOD.Studio.EventInstance attackSound = FMODUnity.RuntimeManager.CreateInstance("event:/Attack");
+                        //attackSound.setPitch()
+                        weaponHolder.GetComponentInChildren<Weapon>().attackSound = attackSound;
+                        attackSound.setParameterValue("Hit", 0);
+                        attackSound.start();
                     }
 
                     if (Input.GetButtonDown("Vertical") && lastInput != Time.time + 10f)
