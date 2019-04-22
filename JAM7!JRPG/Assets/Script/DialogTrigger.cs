@@ -25,6 +25,12 @@ public class DialogTrigger : MonoBehaviour
             player.GetComponent<PlayerExplorationController>().CurrentState = PlayerExplorationState.InTalking;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (dialog.StartDialog(player.GetComponent<PlayerExplorationController>()))
+            player.GetComponent<PlayerExplorationController>().CurrentState = PlayerExplorationState.InTalking;
+    }
+
     public void DestroySelf()
     {
         Destroy(gameObject);

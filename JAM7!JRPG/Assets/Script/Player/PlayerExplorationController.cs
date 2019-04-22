@@ -335,11 +335,13 @@ public class PlayerExplorationController : MonoBehaviour
                             direction = Vector2.up;
                             break;
                     }
-                    RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, direction, 2f);
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(gameObject.transform.position, direction, 2f);
                     Dialogue dialogue = null;
-                    if (hit)
+                    foreach (RaycastHit2D hit in hits)
                     {
                         dialogue = hit.collider.gameObject.GetComponent<Dialogue>();
+                        if (dialogue != null)
+                            break;
                     }
 
                     if (dialogue != null)
