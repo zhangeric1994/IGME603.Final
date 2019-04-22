@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameProgressManager : MonoBehaviour
@@ -19,10 +21,20 @@ public class GameProgressManager : MonoBehaviour
     private GameObject EvilMiko;
     [SerializeField]
     private GameObject Credits;
+    [SerializeField]
+    private GameObject Logos;
+    [SerializeField]
+    private GameObject ToBeContinued;
+    [SerializeField]
+    private GameObject Canvas;
     private Dialogue dialogue;
     private GameObject player;
 
     public bool TownDestroyed;
+    private RectTransform creditsRectTransform;
+    private RectTransform canvasRectTransform;
+    private Image[] images;
+    private Text toBeContinuedText;
 
     void Awake()
     {
@@ -31,6 +43,10 @@ public class GameProgressManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        toBeContinuedText = ToBeContinued.GetComponent<Text>();
+        images = Logos.transform.GetComponentsInChildren<Image>();
+        canvasRectTransform = Canvas.GetComponent<RectTransform>();
+        creditsRectTransform = Credits.GetComponent<RectTransform>();
         TownDestroyed = false;
         dialogue = gameObject.GetComponent<Dialogue>();
 
@@ -118,11 +134,77 @@ public class GameProgressManager : MonoBehaviour
         Credits.SetActive(true);
         //MusicManager.Instance.PlayMusic("town");
         //MusicManager.Instance.Close();
-        while (true)
+        while (creditsRectTransform.anchoredPosition.y < 
+               creditsRectTransform.sizeDelta.y * 2 + canvasRectTransform.sizeDelta.y)
         {
             Credits.transform.position += Time.deltaTime * Vector3.up * 100;
             yield return null;
         }
+        
+        Logos.SetActive(true);
+        float alpha = 0;
+
+        while (alpha < 1.0f)
+        {
+            foreach (var image in images)
+            {
+                var color = image.color;
+                color = new Color(color.r, color.g, color.b, alpha);
+                image.color = color;
+            }
+
+            alpha += Time.deltaTime;
+            yield return null;
+        }
+
+        alpha = 1.0f;
+        
+        yield return new WaitForSeconds(1.5f);
+        
+        while (alpha > 0.0f)
+        {
+            foreach (var image in images)
+            {
+                var color = image.color;
+                color = new Color(color.r, color.g, color.b, alpha);
+                image.color = color;
+            }
+
+            alpha -= Time.deltaTime;
+            yield return null;
+        }
+        
+        Logos.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        ToBeContinued.SetActive(true);
+        alpha = 0;
+
+        while (alpha < 1.0f)
+        {
+            var color = toBeContinuedText.color;
+            color = new Color(color.r, color.g, color.b, alpha);
+            toBeContinuedText.color = color;
+                
+            alpha += Time.deltaTime;
+            yield return null;
+        }
+
+        alpha = 1.0f;
+        
+        yield return new WaitForSeconds(1.5f);
+        
+        while (alpha > 0.0f)
+        {
+            var color = toBeContinuedText.color;
+            color = new Color(color.r, color.g, color.b, alpha);
+            toBeContinuedText.color = color;
+
+            alpha -= Time.deltaTime;
+            yield return null;
+        }
+        ToBeContinued.SetActive(false);
+        
+        yield return null;
     }
 
         private IEnumerator TeleportEffects()
