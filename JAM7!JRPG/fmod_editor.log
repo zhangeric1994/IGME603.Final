@@ -452,3 +452,9 @@
 [LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_801.bank
 [LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_801.bank'
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[ERR] ProfileClient::recvThreadLoopFunction    : Recv thread loop returned 16
+[LOG] ProfileClient::markForDead               : Closing client connection
+[LOG] Thread::callback                         : FMOD profiler thread (recv) finished.
+[LOG] Thread::callback                         : FMOD profiler thread (send) finished.
+[LOG] LiveUpdate::clientDisconnected           : client = 000000006DB8D0B8
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
