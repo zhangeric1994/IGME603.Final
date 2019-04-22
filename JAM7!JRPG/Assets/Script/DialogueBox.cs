@@ -44,7 +44,5 @@ public class DialogueBox : MonoBehaviour
     {
         TextObject.gameObject.SetActive(false);
         gameObject.SetActive(false);
-        //AudioManager.Instance.PlaySoundEffect("Text", false, false);
-        //AudioManager.Instance.StopSoundEffect("FastTalk", false);
     }
 }

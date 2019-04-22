@@ -84,6 +84,8 @@ public class Loot : MonoBehaviour
             gameObject.SetActive(false);
             triggered = true;
 
+
+
             switch (type)
             {
                 case LootType.Weapon:

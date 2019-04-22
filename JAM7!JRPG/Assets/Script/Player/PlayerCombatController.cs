@@ -273,7 +273,6 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         CurrentState = PlayerCombatState.InAir;
                         lastInput = Time.time;
-                        //AudioManager.Instance.PlaySoundEffect("Jump");
                         FMOD.Studio.EventInstance jumpSound = FMODUnity.RuntimeManager.CreateInstance("event:/Jump");
                         jumpSound.start();
                     }
@@ -282,6 +281,8 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         Loot();
                         lastInput = Time.time;
+                        FMOD.Studio.EventInstance pickSound = FMODUnity.RuntimeManager.CreateInstance("event:/Pick");
+                        pickSound.start();
                     }
 
 
@@ -291,11 +292,8 @@ public class PlayerCombatController : MonoBehaviour
                         anim.Play(weaponHolder.GetComponentInChildren<Weapon>().getAnimationName());
                         anim.speed = Avatar.GetStatistic(StatisticType.AttackSpeed);
                         lastInput = Time.time;
-                        FMOD.Studio.EventInstance attackSound = FMODUnity.RuntimeManager.CreateInstance("event:/Attack");
-                        //attackSound.setPitch()
-                        weaponHolder.GetComponentInChildren<Weapon>().attackSound = attackSound;
-                        attackSound.setParameterValue("Hit", 0);
-                        attackSound.start();
+                        PlayWeaponSound();
+                       
                     }
 
                     if (Input.GetButtonDown("Vertical") && lastInput != Time.time + 10f)
@@ -335,6 +333,8 @@ public class PlayerCombatController : MonoBehaviour
                             rb2d.velocity = Vector2.zero;
                             rb2d.AddForce(0.5f * Avatar.GetStatistic(StatisticType.JumpPower) * new Vector2(-1, 2));
                             transform.localScale = new Vector3(-defaultScale.x, defaultScale.y, defaultScale.z);
+                            FMOD.Studio.EventInstance jumpSound = FMODUnity.RuntimeManager.CreateInstance("event:/Jump");
+                            jumpSound.start();
                         }
 
                         float x = Input.GetAxis("Horizontal");
@@ -693,10 +693,20 @@ public class PlayerCombatController : MonoBehaviour
                         Avatar.Loot(loot);
                         loot.triggered = true;
                         Destroy(loot.gameObject);
+                        FMOD.Studio.EventInstance lootSound = FMODUnity.RuntimeManager.CreateInstance("event:/AutoLoot");
+                        lootSound.start();
                     }
                     break;
-
-
+                case LootType.Potion:
+                    if (!loot.triggered)
+                    {
+                        Avatar.Loot(loot);
+                        loot.triggered = true;
+                        Destroy(loot.gameObject);
+                        FMOD.Studio.EventInstance potionSound = FMODUnity.RuntimeManager.CreateInstance("event:/Drinking");
+                        potionSound.start();
+                    }
+                    break;
                 default:
                     loots.Add(loot);
                     break;
@@ -765,5 +775,27 @@ public class PlayerCombatController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         renderer.color = Color.white;
         anim.SetBool("Hurt", false);
+    }
+
+    private void PlayWeaponSound()
+    {
+        WeaponType type = weaponHolder.GetComponentInChildren<Weapon>().type;
+
+        if (type == WeaponType.GiantSword)
+        {
+            FMOD.Studio.EventInstance attackSound = FMODUnity.RuntimeManager.CreateInstance("event:/Attack");
+            //attackSound.setPitch()
+            weaponHolder.GetComponentInChildren<Weapon>().attackSound = attackSound;
+            attackSound.setParameterValue("Hit", 0);
+            attackSound.start();
+        }
+        else
+        {
+            FMOD.Studio.EventInstance attackSound = FMODUnity.RuntimeManager.CreateInstance("event:/SpearSword");
+            //attackSound.setPitch()
+            weaponHolder.GetComponentInChildren<Weapon>().attackSound = attackSound;
+            attackSound.setParameterValue("Hit", 0);
+            attackSound.start();
+        }
     }
 }

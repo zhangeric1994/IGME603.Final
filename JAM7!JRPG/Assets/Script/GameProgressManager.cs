@@ -94,6 +94,8 @@ public class GameProgressManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         FlashImage.color = new Color(1, 1, 1, 1);
         //AudioManager.Instance.PlaySoundEffect("Punch");
+        FMOD.Studio.EventInstance punchSound = FMODUnity.RuntimeManager.CreateInstance("event:/Punch");
+        punchSound.start();
         yield return new WaitForSeconds(0.2f);
         FlashImage.color = new Color(0, 0, 0, 1);
         yield return new WaitForSeconds(0.5f);

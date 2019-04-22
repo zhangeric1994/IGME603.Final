@@ -40,7 +40,6 @@ public class Dialogue : MonoBehaviour
             }
             DialogueBox.instance.Text = alternative ? alternativeDialogues[currentDialogIndex] : dialogues[currentDialogIndex];
             emitter.Play();
-            //AudioManager.Instance.PlaySoundEffect("Text", false, false);
         }
     }
 
@@ -59,7 +58,6 @@ public class Dialogue : MonoBehaviour
         DialogueBox.instance.Show();
         DialogueBox.instance.Text = alternative ? alternativeDialogues[0] : dialogues[0];
         emitter.Play();
-        //AudioManager.Instance.PlaySoundEffect("Text", false, false);
         return true;
     }
     void OnEnable()
