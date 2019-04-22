@@ -65,4 +65,9 @@ public class Dialogue : MonoBehaviour
         var target = GameObject.Find("DialogueClick");
         emitter = target.GetComponent<FMODUnity.StudioEventEmitter>();
     }
+
+    public void DestroySelf()
+    {
+        Destroy(this);
+    }
 }
