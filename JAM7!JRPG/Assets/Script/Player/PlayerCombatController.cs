@@ -281,8 +281,6 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         Loot();
                         lastInput = Time.time;
-                        FMOD.Studio.EventInstance pickSound = FMODUnity.RuntimeManager.CreateInstance("event:/Pick");
-                        pickSound.start();
                     }
 
 
@@ -596,6 +594,8 @@ public class PlayerCombatController : MonoBehaviour
             }
 
             loots.Remove(targetLoot);
+            FMOD.Studio.EventInstance pickSound = FMODUnity.RuntimeManager.CreateInstance("event:/Pick");
+            pickSound.start();
 
             switch (targetLoot.Type)
             {

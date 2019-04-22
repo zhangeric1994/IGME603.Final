@@ -36,7 +36,7 @@ public class GameProgressManager : MonoBehaviour
     private Image[] images;
     private Text toBeContinuedText;
 
-    public FMODUnity.StudioEventEmitter emitter;
+    FMODUnity.StudioEventEmitter emitter;
 
     void Awake()
     {
@@ -127,8 +127,10 @@ public class GameProgressManager : MonoBehaviour
     public void RemoveMiko()
     {
         EvilMiko.SetActive(false);
-        emitter.SetParameter("NormalTown", 1);
-        emitter.SetParameter("DarkDimension", 0);
+        emitter.Stop();
+        FMOD.Studio.EventInstance music = FMODUnity.RuntimeManager.CreateInstance("event:/BackgroundMusic");
+        music.setParameterValue("NormalTown", 1f);
+        music.start();
         StartCoroutine(MoveCredits());
     }
 
