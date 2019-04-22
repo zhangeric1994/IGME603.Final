@@ -82,6 +82,8 @@ public class PlayerExplorationController : MonoBehaviour
                 {
                     case PlayerExplorationState.InMenu:
                         //HUD.Singleton.ShowMenu(PlayerID);
+                        PlayerFootstepEmitter.SetParameter("Speed", 0);
+                        PlayerFootstepEmitter.SetParameter("Grass", 0);
                         animator.SetBool(Moving, false);
                         GUIManager.Singleton.Open("IngameMenu", (Action)ReturnToExploration);
                         break;
@@ -97,6 +99,8 @@ public class PlayerExplorationController : MonoBehaviour
                         break;
                     
                     case PlayerExplorationState.InTalking:
+                        PlayerFootstepEmitter.SetParameter("Speed", 0);
+                        PlayerFootstepEmitter.SetParameter("Grass", 0);
                         animator.SetBool(Moving, false);
                         break;
                 }
@@ -266,6 +270,10 @@ public class PlayerExplorationController : MonoBehaviour
                 }
 
                 break;
+            default:
+                PlayerFootstepEmitter.SetParameter("Speed", 0);
+                PlayerFootstepEmitter.SetParameter("Grass", 0);
+                break;
         }
 
 
@@ -338,6 +346,8 @@ public class PlayerExplorationController : MonoBehaviour
                     {
                         if (dialogue.StartDialog(this))
                         {
+                            PlayerFootstepEmitter.SetParameter("Speed", 0);
+                            PlayerFootstepEmitter.SetParameter("Grass", 0);
                             animator.SetBool(Moving, false);
                             currentState = PlayerExplorationState.InTalking;
                         }
