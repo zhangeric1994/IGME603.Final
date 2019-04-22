@@ -34,6 +34,11 @@ public class PlayerExplorationController : MonoBehaviour
     private Heading heading;
     FMODUnity.StudioEventEmitter emitter;
     FMODUnity.StudioEventEmitter PlayerFootstepEmitter;
+    private static readonly int Moving = Animator.StringToHash("Moving");
+    private static readonly int Right = Animator.StringToHash("Right");
+    private static readonly int Left = Animator.StringToHash("Left");
+    private static readonly int Up = Animator.StringToHash("Up");
+    private static readonly int Down = Animator.StringToHash("Down");
 
     public PlayerExplorationState CurrentState
     {
@@ -77,6 +82,7 @@ public class PlayerExplorationController : MonoBehaviour
                 {
                     case PlayerExplorationState.InMenu:
                         //HUD.Singleton.ShowMenu(PlayerID);
+                        animator.SetBool(Moving, false);
                         GUIManager.Singleton.Open("IngameMenu", (Action)ReturnToExploration);
                         break;
 
@@ -91,7 +97,7 @@ public class PlayerExplorationController : MonoBehaviour
                         break;
                     
                     case PlayerExplorationState.InTalking:
-                        animator.SetBool("Moving", false);
+                        animator.SetBool(Moving, false);
                         break;
                 }
             }
@@ -215,13 +221,13 @@ public class PlayerExplorationController : MonoBehaviour
                         vertical = 0;
                         if (horizontal > 0)
                         {
-                            animator.SetTrigger("Right");
+                            animator.SetTrigger(Right);
                             PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Right;
                         }
                         else if (horizontal < 0)
                         {
-                            animator.SetTrigger("Left");
+                            animator.SetTrigger(Left);
                             PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Left;
                         }
@@ -236,13 +242,13 @@ public class PlayerExplorationController : MonoBehaviour
                         horizontal = 0;
                         if (vertical > 0)
                         {
-                            animator.SetTrigger("Up");
+                            animator.SetTrigger(Up);
                             PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Up;
                         }
                         else if (vertical < 0)
                         {
-                            animator.SetTrigger("Down");
+                            animator.SetTrigger(Down);
                             PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Down;
                         }
@@ -256,7 +262,7 @@ public class PlayerExplorationController : MonoBehaviour
                     Vector3 move = Time.deltaTime * walkSpeed * new Vector3(horizontal, vertical, 0);
                     if (Input.GetKey(KeyCode.LeftShift)) move *= 2;
                     transform.Translate(move);
-                    animator.SetBool("Moving", move.magnitude > 0.01f);
+                    animator.SetBool(Moving, move.magnitude > 0.01f);
                 }
 
                 break;
@@ -332,7 +338,7 @@ public class PlayerExplorationController : MonoBehaviour
                     {
                         if (dialogue.StartDialog(this))
                         {
-                            animator.SetBool("Moving", false);
+                            animator.SetBool(Moving, false);
                             currentState = PlayerExplorationState.InTalking;
                         }
 

@@ -48,7 +48,7 @@ public class MainMenu : GUIWindow
 
         for (;;)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Submit"))
             {
                 //AudioManager.Instance.PlaySoundEffect("Confirm");
                 switch (choosenIndex)
