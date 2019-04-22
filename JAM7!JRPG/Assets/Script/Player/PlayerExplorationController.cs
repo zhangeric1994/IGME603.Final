@@ -89,6 +89,10 @@ public class PlayerExplorationController : MonoBehaviour
                         cam.GetComponent<OverworldCamera>().enabled = false;
                         GUIManager.Singleton.Open("CombatHUD");
                         break;
+                    
+                    case PlayerExplorationState.InTalking:
+                        animator.SetBool("Moving", false);
+                        break;
                 }
             }
         }
