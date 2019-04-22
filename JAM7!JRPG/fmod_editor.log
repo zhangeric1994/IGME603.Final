@@ -1,0 +1,460 @@
+[LOG] System::create                           : Header version = 1.10.12. Current version = 1.10.12.
+[LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
+[LOG] SystemI::init                            : Initialize version=11012 (101101), maxchannels=256, flags=0x00020000
+[LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=44100, nAvgBytesPerSec=352800, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 3760 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[WRN] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
+[LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncManager::init                       : manager 0000000044BA7D98 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : done
+[LOG] PlaybackSystem::init                     : 
+[LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] PlaybackSystem::init                     : done
+[LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] Manager::init                            : done.
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_661.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_661.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_662.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_662.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_663.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_663.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_664.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_664.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_665.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_665.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_666.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_666.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_667.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_667.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_668.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_668.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_669.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_669.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_670.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_670.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_671.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_671.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_672.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_672.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_673.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_673.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_674.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_674.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_675.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_675.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_676.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_676.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_677.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_677.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_678.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_678.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_679.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_679.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_680.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_680.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_681.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_681.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_682.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_682.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_683.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_683.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_684.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_684.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_685.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_685.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_686.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_686.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_687.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_687.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_688.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_688.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_689.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_689.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_690.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_690.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_691.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_691.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_692.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_692.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_693.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_693.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_694.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_694.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_695.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_695.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_696.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_696.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_697.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_697.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_698.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_698.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_699.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_699.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_700.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_700.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_701.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_701.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_702.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_702.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_703.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_703.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_704.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_704.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_705.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_705.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_706.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_706.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_707.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_707.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_708.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_708.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_709.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_709.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_710.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_710.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_711.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_711.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_712.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_712.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_713.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_713.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_714.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_714.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_715.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_715.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_716.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_716.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_717.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_717.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_718.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_718.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_719.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_719.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_720.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_720.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_721.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_721.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_722.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_722.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_723.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_723.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_724.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_724.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_725.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_725.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_726.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_726.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_727.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_727.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_728.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_728.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_729.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_729.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_730.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_730.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_731.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_731.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_732.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_732.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_733.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_733.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_734.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_734.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_735.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_735.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_736.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_736.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_737.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_737.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_738.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_738.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_739.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_739.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_740.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_740.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_741.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_741.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_742.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_742.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_743.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_743.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_744.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_744.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_745.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_745.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_746.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_746.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_747.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_747.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_748.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_748.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_749.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_749.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_750.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_750.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_751.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_751.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_752.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_752.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_753.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_753.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_754.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_754.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_755.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_755.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_756.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_756.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_757.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_757.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_758.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_758.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_759.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_759.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_760.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_760.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_761.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_761.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_762.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_762.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_763.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_763.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_764.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_764.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_765.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_765.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_766.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_766.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_767.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_767.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_768.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_768.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_769.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_769.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_770.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_770.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_771.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_771.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_772.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_772.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_773.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_773.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_774.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_774.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_775.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_775.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_776.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_776.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_777.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_777.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_778.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_778.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_779.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_779.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_780.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_780.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_781.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_781.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_782.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_782.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_783.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_783.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_784.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_784.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_785.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_785.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_786.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_786.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_787.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_787.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_788.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_788.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_789.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_789.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_790.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_790.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_791.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_791.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_792.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_792.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_793.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_793.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_794.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_794.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_795.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_795.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_796.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_796.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_797.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_797.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_798.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_798.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_799.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_799.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_800.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_800.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_801.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/Yiyan Wang/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-ElF2mF/hotswap_801.bank'
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[ERR] ProfileClient::recvThreadLoopFunction    : Recv thread loop returned 16
+[LOG] ProfileClient::markForDead               : Closing client connection
+[LOG] Thread::callback                         : FMOD profiler thread (recv) finished.
+[LOG] Thread::callback                         : FMOD profiler thread (send) finished.
+[LOG] LiveUpdate::clientDisconnected           : client = 000000006DB8D0B8
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)

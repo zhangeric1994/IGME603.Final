@@ -25,8 +25,6 @@ public class EnemyProxy : MonoBehaviour
 
         level.SpawnPlayer(player.PlayerID);
 
-
-        AudioManager.Instance.PlaySoundEffect("Suck", DelayTime: 0.5f);
     }
 
     public void EndCombat()

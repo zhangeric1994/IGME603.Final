@@ -32,6 +32,8 @@ public class PlayerExplorationController : MonoBehaviour
     public GameObject cam;
 
     private Heading heading;
+    FMODUnity.StudioEventEmitter emitter;
+    FMODUnity.StudioEventEmitter PlayerFootstepEmitter;
 
     public PlayerExplorationState CurrentState
     {
@@ -129,7 +131,7 @@ public class PlayerExplorationController : MonoBehaviour
             case "MusicCollider":
                 if (PlayerID == 1) break;
                 string[] splitName = go.name.Split('_');
-                MusicManager.Instance.PlayMusic(splitName[1]);
+                //MusicManager.Instance.PlayMusic(splitName[1]);
                 GameObject another = go.GetComponent<mutual>().another;
                 go.SetActive(false);
                 another.SetActive(true);
@@ -155,7 +157,7 @@ public class PlayerExplorationController : MonoBehaviour
             case "MusicCollider":
                 if (PlayerID == 1) break;
                 string[] splitName = go.name.Split('_');
-                MusicManager.Instance.PlayMusic(splitName[1]);
+                //MusicManager.Instance.PlayMusic(splitName[1]);
                 GameObject another = go.GetComponent<mutual>().another;
                 go.SetActive(false);
                 another.SetActive(true);
@@ -166,6 +168,7 @@ public class PlayerExplorationController : MonoBehaviour
     private void Start()
     {
         CurrentState = PlayerExplorationState.Exploring;
+        PlayerFootstepEmitter = null;
         animator = GetComponent<Animator>();
     }
 
@@ -184,6 +187,11 @@ public class PlayerExplorationController : MonoBehaviour
         {
             GetCamera();
             return;
+        }
+        if(PlayerFootstepEmitter == null)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            PlayerFootstepEmitter = player.GetComponent<FMODUnity.StudioEventEmitter>();
         }
         switch (currentState)
         {
@@ -204,16 +212,19 @@ public class PlayerExplorationController : MonoBehaviour
                         if (horizontal > 0)
                         {
                             animator.SetTrigger("Right");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Right;
                         }
                         else if (horizontal < 0)
                         {
                             animator.SetTrigger("Left");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Left;
+                        }
+                        else
+                        {
+                            PlayerFootstepEmitter.SetParameter("Speed", 0);
+                            PlayerFootstepEmitter.SetParameter("Grass", 0);
                         }
                     }
                     else
@@ -222,17 +233,21 @@ public class PlayerExplorationController : MonoBehaviour
                         if (vertical > 0)
                         {
                             animator.SetTrigger("Up");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Up;
                         }
                         else if (vertical < 0)
                         {
                             animator.SetTrigger("Down");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
                             heading = Heading.Down;
                         }
+                        else
+                        {
+                            PlayerFootstepEmitter.SetParameter("Speed", 0);
+                            PlayerFootstepEmitter.SetParameter("Grass", 0);
+                        }
+
                     }
                     Vector3 move = Time.deltaTime * walkSpeed * new Vector3(horizontal, vertical, 0);
                     if (Input.GetKey(KeyCode.LeftShift)) move *= 2;
@@ -244,23 +259,37 @@ public class PlayerExplorationController : MonoBehaviour
         }
 
 
+
         if (transform.position.x > 50)
         {
-            MusicManager.Instance.PlayMusic("field");
+            //MusicManager.Instance.PlayMusic("field");
+            emitter.SetParameter("Forest", 1);
+            emitter.SetParameter("NormalTown", 0);
+            emitter.SetParameter("RuinedTown", 0);
         }
         else if (transform.position.x < -50)
         {
-            MusicManager.Instance.PlayMusic("AnotherWorldP");
+            emitter.SetParameter("DarkDimension", 1);
+            emitter.SetParameter("NormalTown", 0);
+            emitter.SetParameter("RuinedTown", 0);
+            //MusicManager.Instance.PlayMusic("AnotherWorldP");
         }
         else
         {
             if (GameProgressManager.instance.TownDestroyed)
             {
-                MusicManager.Instance.PlayMusic("RuinTown");
+                //MusicManager.Instance.PlayMusic("RuinTown");
+                var target = GameObject.Find("Fire");
+                FMODUnity.StudioEventEmitter fire = target.GetComponent<FMODUnity.StudioEventEmitter>();
+                fire.SetParameter("MixFire", 1);
+                emitter.SetParameter("RuinedTown", 1);
+                emitter.SetParameter("Forest", 0);
+                
             }
             else
             {
-                MusicManager.Instance.PlayMusic("town");
+                emitter.SetParameter("NormalTown", 1);
+                emitter.SetParameter("Forest", 0);
             }
         }
     }
@@ -316,5 +345,10 @@ public class PlayerExplorationController : MonoBehaviour
                 }
                 break;
         }
+    }
+    void OnEnable()
+    {
+        var target = GameObject.Find("BackgroundMusic");
+        emitter = target.GetComponent<FMODUnity.StudioEventEmitter>();
     }
 }

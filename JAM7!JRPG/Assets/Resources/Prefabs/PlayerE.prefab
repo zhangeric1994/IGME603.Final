@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1665704070376361959}
   - component: {fileID: 5015797123506837412}
   - component: {fileID: 647009002}
+  - component: {fileID: 5549674062275666633}
+  - component: {fileID: 2427999422698479622}
   m_Layer: 2
   m_Name: PlayerE
   m_TagString: Player
@@ -70,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 101
   m_Sprite: {fileID: 21300104, guid: 10ea4ad6c810cbd4498c92b056f5d67e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,3 +155,39 @@ CircleCollider2D:
   m_Offset: {x: -0.034282684, y: -0.6239457}
   serializedVersion: 2
   m_Radius: 0.5079113
+--- !u!114 &5549674062275666633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665704070815771507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Footsteps
+  PlayEvent: 11
+  StopEvent: 12
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!114 &2427999422698479622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665704070815771507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cf754a8c38a1b4893c8223b6748315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitter: {fileID: 5549674062275666633}

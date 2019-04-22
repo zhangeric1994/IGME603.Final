@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300150, guid: 10ea4ad6c810cbd4498c92b056f5d67e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 510960052661200672}
+  PlayerFootstepEmitter: {fileID: 0}
   shield: {fileID: 0}
   Combat: {fileID: 0}
   okToAttack: 0
@@ -167,6 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 510960052661200672}
+  - component: {fileID: 8449107290036346186}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -189,6 +191,31 @@ Transform:
   m_Father: {fileID: 510960050875274643}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8449107290036346186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510960052661200671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Footsteps
+  PlayEvent: 11
+  StopEvent: 12
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params:
+  - Name: Speed
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &6480733277286960074
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +330,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2305797377796476793, guid: 9dffaae79eef496458b1b92b782e20b3,
+        type: 3}
+      propertyPath: emitter
+      value: 
+      objectReference: {fileID: 5652383521170917960}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dffaae79eef496458b1b92b782e20b3, type: 3}
 --- !u!4 &6964088613929111860 stripped
@@ -311,3 +343,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3126568438596765158}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5652383521170917960 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7283026142828171182, guid: 9dffaae79eef496458b1b92b782e20b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3126568438596765158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

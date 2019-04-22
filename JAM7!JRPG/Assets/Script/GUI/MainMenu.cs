@@ -23,7 +23,7 @@ public class MainMenu : GUIWindow
                 choosenIndex = value;
 
                 list.GetChild(choosenIndex).GetComponent<Text>().color = Color.green;
-                AudioManager.Instance.PlaySoundEffect("Click", pitch: false);
+                //AudioManager.Instance.PlaySoundEffect("Click", pitch: false);
             }
         }
     }
@@ -50,7 +50,7 @@ public class MainMenu : GUIWindow
         {
             if (Input.GetButtonDown("Jump"))
             {
-                AudioManager.Instance.PlaySoundEffect("Confirm");
+                //AudioManager.Instance.PlaySoundEffect("Confirm");
                 switch (choosenIndex)
                 {
                     case 0:

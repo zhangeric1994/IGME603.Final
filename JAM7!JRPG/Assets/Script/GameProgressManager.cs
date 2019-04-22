@@ -93,7 +93,9 @@ public class GameProgressManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         FlashImage.color = new Color(1, 1, 1, 1);
-        AudioManager.Instance.PlaySoundEffect("Punch");
+        //AudioManager.Instance.PlaySoundEffect("Punch");
+        FMOD.Studio.EventInstance punchSound = FMODUnity.RuntimeManager.CreateInstance("event:/Punch");
+        punchSound.start();
         yield return new WaitForSeconds(0.2f);
         FlashImage.color = new Color(0, 0, 0, 1);
         yield return new WaitForSeconds(0.5f);
@@ -114,8 +116,8 @@ public class GameProgressManager : MonoBehaviour
     private IEnumerator MoveCredits()
     {
         Credits.SetActive(true);
-        MusicManager.Instance.PlayMusic("town");
-        MusicManager.Instance.Close();
+        //MusicManager.Instance.PlayMusic("town");
+        //MusicManager.Instance.Close();
         while (true)
         {
             Credits.transform.position += Time.deltaTime * Vector3.up * 100;

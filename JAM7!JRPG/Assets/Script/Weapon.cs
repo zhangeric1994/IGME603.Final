@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD;
+using FMODUnity;
 
 public enum WeaponType : int
 {
@@ -29,12 +31,15 @@ public class Weapon : MonoBehaviour
     public int level;
 
     private PlayerCombatController player;
+    public FMOD.Studio.EventInstance attackSound;
     [SerializeField] private GameObject VFX;
     [SerializeField] private Transform hitPos;
+
 
     private void Start()
     {
          player = gameObject.GetComponentInParent<PlayerCombatController>();
+
     }
 
     public void setAttackId()
@@ -71,7 +76,9 @@ public class Weapon : MonoBehaviour
         WeaponManager._instance.generateDrop(player.transform.position,type,level);
         Destroy(gameObject);
     }
-    
+    private void Update()
+    {
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -111,7 +118,9 @@ public class Weapon : MonoBehaviour
                         ForwardCamera._instance.Shaking(0.02f, 0.02f);
                     }
                 }
-                AudioManager.Instance.PlaySoundEffect("HitBody");
+
+                attackSound.setParameterValue("Hit", 1);
+
                 enemy.knockBack(bouncingBackForce); 
                 player.pauseAtkAnim(hitStop);
             }
