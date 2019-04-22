@@ -36,6 +36,8 @@ public class GameProgressManager : MonoBehaviour
     private Image[] images;
     private Text toBeContinuedText;
 
+    public FMODUnity.StudioEventEmitter emitter;
+
     void Awake()
     {
         instance = this;
@@ -125,13 +127,16 @@ public class GameProgressManager : MonoBehaviour
     public void RemoveMiko()
     {
         EvilMiko.SetActive(false);
-
+        emitter.SetParameter("NormalTown", 1);
+        emitter.SetParameter("DarkDimension", 0);
         StartCoroutine(MoveCredits());
     }
 
     private IEnumerator MoveCredits()
     {
-        Credits.SetActive(true);
+        Credits.SetActive(true); 
+
+        yield return new WaitForSeconds(0.5f);
         //MusicManager.Instance.PlayMusic("town");
         //MusicManager.Instance.Close();
         while (creditsRectTransform.anchoredPosition.y < 
@@ -141,6 +146,8 @@ public class GameProgressManager : MonoBehaviour
             yield return null;
         }
         
+        Credits.SetActive(false);
+
         Logos.SetActive(true);
         float alpha = 0;
 
@@ -241,5 +248,11 @@ public class GameProgressManager : MonoBehaviour
 
 
 
+    }
+
+    void OnEnable()
+    {
+        var target = GameObject.Find("BackgroundMusic");
+        emitter = target.GetComponent<FMODUnity.StudioEventEmitter>();
     }
 }
