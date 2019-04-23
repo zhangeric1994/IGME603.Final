@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{67a5f673-b9ac-4588-a06a-909eae615b49}">
+        <property name="assetPath">
+            <value>FouthWalkingStyle1.mp3</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.31346938775510202</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{f93ad093-b3e2-44f5-b7b6-f34ed094c85d}</destination>
+        </relationship>
+    </object>
+</objects>
