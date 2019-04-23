@@ -32,6 +32,13 @@ public class PlayerExplorationController : MonoBehaviour
     public GameObject cam;
 
     private Heading heading;
+    FMODUnity.StudioEventEmitter emitter;
+    FMODUnity.StudioEventEmitter PlayerFootstepEmitter;
+    private static readonly int Moving = Animator.StringToHash("Moving");
+    private static readonly int Right = Animator.StringToHash("Right");
+    private static readonly int Left = Animator.StringToHash("Left");
+    private static readonly int Up = Animator.StringToHash("Up");
+    private static readonly int Down = Animator.StringToHash("Down");
 
     public PlayerExplorationState CurrentState
     {
@@ -75,6 +82,9 @@ public class PlayerExplorationController : MonoBehaviour
                 {
                     case PlayerExplorationState.InMenu:
                         //HUD.Singleton.ShowMenu(PlayerID);
+                        PlayerFootstepEmitter.SetParameter("Speed", 0);
+                        PlayerFootstepEmitter.SetParameter("Grass", 0);
+                        animator.SetBool(Moving, false);
                         GUIManager.Singleton.Open("IngameMenu", (Action)ReturnToExploration);
                         break;
 
@@ -86,6 +96,12 @@ public class PlayerExplorationController : MonoBehaviour
                         cam.GetComponent<ForwardCamera>().enabled = true;
                         cam.GetComponent<OverworldCamera>().enabled = false;
                         GUIManager.Singleton.Open("CombatHUD");
+                        break;
+                    
+                    case PlayerExplorationState.InTalking:
+                        PlayerFootstepEmitter.SetParameter("Speed", 0);
+                        PlayerFootstepEmitter.SetParameter("Grass", 0);
+                        animator.SetBool(Moving, false);
                         break;
                 }
             }
@@ -99,11 +115,11 @@ public class PlayerExplorationController : MonoBehaviour
         PlayerID = id;
     }
 
-    public void StartCombat(EnemyProxy enemy, bool isBoss = false)
+    public void StartCombat(EnemyProxy enemy, string desiredLevel)
     {
         CurrentState = PlayerExplorationState.InCombat;
 
-        enemy.StartCombat(this, isBoss);
+        enemy.StartCombat(this, desiredLevel);
     }
 
     public void ReturnToExploration()
@@ -118,15 +134,18 @@ public class PlayerExplorationController : MonoBehaviour
         switch (go.tag)
         {
             case "Enemy":
-                StartCombat(go.GetComponent<EnemyProxy>());
+                StartCombat(go.GetComponent<EnemyProxy>(), "NormalLevel");
                 break;
             case "Boss":
-                StartCombat(go.GetComponent<EnemyProxy>(), true);
+                StartCombat(go.GetComponent<EnemyProxy>(), "BossLevel");
+                break;
+            case "FinalBoss":
+                StartCombat(go.GetComponent<EnemyProxy>(), "FinalLevel");
                 break;
             case "MusicCollider":
                 if (PlayerID == 1) break;
                 string[] splitName = go.name.Split('_');
-                MusicManager.Instance.PlayMusic(splitName[1]);
+                //MusicManager.Instance.PlayMusic(splitName[1]);
                 GameObject another = go.GetComponent<mutual>().another;
                 go.SetActive(false);
                 another.SetActive(true);
@@ -141,15 +160,18 @@ public class PlayerExplorationController : MonoBehaviour
         switch (go.tag)
         {
             case "Enemy":
-                StartCombat(go.GetComponent<EnemyProxy>());
+                StartCombat(go.GetComponent<EnemyProxy>(), "NormalLevel");
                 break;
             case "Boss":
-                StartCombat(go.GetComponent<EnemyProxy>(), true);
+                StartCombat(go.GetComponent<EnemyProxy>(), "BossLevel");
+                break;
+            case "FinalBoss":
+                StartCombat(go.GetComponent<EnemyProxy>(), "FinalLevel");
                 break;
             case "MusicCollider":
                 if (PlayerID == 1) break;
                 string[] splitName = go.name.Split('_');
-                MusicManager.Instance.PlayMusic(splitName[1]);
+                //MusicManager.Instance.PlayMusic(splitName[1]);
                 GameObject another = go.GetComponent<mutual>().another;
                 go.SetActive(false);
                 another.SetActive(true);
@@ -160,6 +182,7 @@ public class PlayerExplorationController : MonoBehaviour
     private void Start()
     {
         CurrentState = PlayerExplorationState.Exploring;
+        PlayerFootstepEmitter = null;
         animator = GetComponent<Animator>();
     }
 
@@ -179,12 +202,122 @@ public class PlayerExplorationController : MonoBehaviour
             GetCamera();
             return;
         }
+        if(PlayerFootstepEmitter == null)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            PlayerFootstepEmitter = player.GetComponent<FMODUnity.StudioEventEmitter>();
+        }
         switch (currentState)
         {
             case PlayerExplorationState.Exploring:
                 if (Input.GetButtonDown("Start"))
                     CurrentState = PlayerExplorationState.InMenu;
-                else if (Input.GetButtonDown("Submit"))
+                else
+                {
+                    float horizontal = Input.GetAxisRaw("Horizontal");
+                    float vertical = Input.GetAxisRaw("Vertical");
+                    animator.ResetTrigger("Right");
+                    animator.ResetTrigger("Left");
+                    animator.ResetTrigger("Up");
+                    animator.ResetTrigger("Down");
+                    if (Mathf.Abs(horizontal) > Mathf.Abs(vertical))
+                    {
+                        vertical = 0;
+                        if (horizontal > 0)
+                        {
+                            animator.SetTrigger(Right);
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
+                            heading = Heading.Right;
+                        }
+                        else if (horizontal < 0)
+                        {
+                            animator.SetTrigger(Left);
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
+                            heading = Heading.Left;
+                        }
+                        else
+                        {
+                            PlayerFootstepEmitter.SetParameter("Speed", 0);
+                            PlayerFootstepEmitter.SetParameter("Grass", 0);
+                        }
+                    }
+                    else
+                    {
+                        horizontal = 0;
+                        if (vertical > 0)
+                        {
+                            animator.SetTrigger(Up);
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
+                            heading = Heading.Up;
+                        }
+                        else if (vertical < 0)
+                        {
+                            animator.SetTrigger(Down);
+                            PlayerFootstepEmitter.SetParameter("Speed", 1);
+                            heading = Heading.Down;
+                        }
+                        else
+                        {
+                            PlayerFootstepEmitter.SetParameter("Speed", 0);
+                            PlayerFootstepEmitter.SetParameter("Grass", 0);
+                        }
+
+                    }
+                    Vector3 move = Time.deltaTime * walkSpeed * new Vector3(horizontal, vertical, 0);
+                    if (Input.GetKey(KeyCode.LeftShift)) move *= 2;
+                    transform.Translate(move);
+                    animator.SetBool(Moving, move.magnitude > 0.01f);
+                }
+
+                break;
+            default:
+                PlayerFootstepEmitter.SetParameter("Speed", 0);
+                PlayerFootstepEmitter.SetParameter("Grass", 0);
+                break;
+        }
+
+
+
+        if (transform.position.x > 50)
+        {
+            //MusicManager.Instance.PlayMusic("field");
+            emitter.SetParameter("Forest", 1);
+            emitter.SetParameter("NormalTown", 0);
+            emitter.SetParameter("RuinedTown", 0);
+        }
+        else if (transform.position.x < -50)
+        {
+            emitter.SetParameter("DarkDimension", 1);
+            emitter.SetParameter("NormalTown", 0);
+            emitter.SetParameter("RuinedTown", 0);
+            //MusicManager.Instance.PlayMusic("AnotherWorldP");
+        }
+        else
+        {
+            if (GameProgressManager.instance.TownDestroyed)
+            {
+                //MusicManager.Instance.PlayMusic("RuinTown");
+                var target = GameObject.Find("Fire");
+                FMODUnity.StudioEventEmitter fire = target.GetComponent<FMODUnity.StudioEventEmitter>();
+                fire.SetParameter("MixFire", 1);
+                emitter.SetParameter("RuinedTown", 1);
+                emitter.SetParameter("Forest", 0);
+                
+            }
+            else
+            {
+                emitter.SetParameter("NormalTown", 1);
+                emitter.SetParameter("Forest", 0);
+            }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        switch (currentState)
+        {
+            case PlayerExplorationState.Exploring:
+                if (Input.GetButtonDown("Submit"))
                 {
                     Vector2 direction = Vector2.zero;
                     switch (heading)
@@ -202,17 +335,24 @@ public class PlayerExplorationController : MonoBehaviour
                             direction = Vector2.up;
                             break;
                     }
-                    RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, direction, 2f);
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(gameObject.transform.position, direction, 2f);
                     Dialogue dialogue = null;
-                    if (hit)
+                    foreach (RaycastHit2D hit in hits)
                     {
                         dialogue = hit.collider.gameObject.GetComponent<Dialogue>();
+                        if (dialogue != null)
+                            break;
                     }
 
                     if (dialogue != null)
                     {
                         if (dialogue.StartDialog(this))
+                        {
+                            PlayerFootstepEmitter.SetParameter("Speed", 0);
+                            PlayerFootstepEmitter.SetParameter("Grass", 0);
+                            animator.SetBool(Moving, false);
                             currentState = PlayerExplorationState.InTalking;
+                        }
 
                         Loot loot = dialogue.GetComponent<Loot>();
                         if (loot && !loot.triggered)
@@ -225,79 +365,12 @@ public class PlayerExplorationController : MonoBehaviour
                         }
                     }
                 }
-                else
-                {
-                    float horizontal = Input.GetAxisRaw("Horizontal");
-                    float vertical = Input.GetAxisRaw("Vertical");
-                    animator.ResetTrigger("Right");
-                    animator.ResetTrigger("Left");
-                    animator.ResetTrigger("Up");
-                    animator.ResetTrigger("Down");
-                    if (Mathf.Abs(horizontal) > Mathf.Abs(vertical))
-                    {
-                        vertical = 0;
-                        if (horizontal > 0)
-                        {
-                            animator.SetTrigger("Right");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
-                            heading = Heading.Right;
-                        }
-                        else if (horizontal < 0)
-                        {
-                            animator.SetTrigger("Left");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
-                            heading = Heading.Left;
-                        }
-                    }
-                    else
-                    {
-                        horizontal = 0;
-                        if (vertical > 0)
-                        {
-                            animator.SetTrigger("Up");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
-                            heading = Heading.Up;
-                        }
-                        else if (vertical < 0)
-                        {
-                            animator.SetTrigger("Down");
-                            if (!AudioManager.Instance.IsPlayingClip("Walking"))
-                                AudioManager.Instance.PlaySoundEffect("Walking");
-                            heading = Heading.Down;
-                        }
-                    }
-                    Vector3 move = Time.deltaTime * walkSpeed * new Vector3(horizontal, vertical, 0);
-                    if (Input.GetKey(KeyCode.LeftShift)) move *= 2;
-                    transform.Translate(move);
-                    animator.SetBool("Moving", move.magnitude > 0.01f);
-                }
-
                 break;
         }
-
-
-        if (transform.position.x > 50)
-        {
-            MusicManager.Instance.PlayMusic("field");
-        }
-        else if (transform.position.x < -50)
-        {
-            MusicManager.Instance.PlayMusic("AnotherWorldP");
-        }
-        else
-        {
-            if (GameProgressManager.instance.TownDestroyed)
-            {
-                MusicManager.Instance.PlayMusic("RuinTown");
-            }
-            else
-            {
-                MusicManager.Instance.PlayMusic("town");
-            }
-        }
     }
-
+    void OnEnable()
+    {
+        var target = GameObject.Find("BackgroundMusic");
+        emitter = target.GetComponent<FMODUnity.StudioEventEmitter>();
+    }
 }

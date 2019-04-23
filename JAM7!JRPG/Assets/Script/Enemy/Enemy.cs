@@ -20,7 +20,7 @@ public abstract class Enemy : MonoBehaviour
     public int health = 15;
     public float speed = 1f;
     public int Score_own = 5;
-    public float Death_delay = 15;
+    private float Death_delay = 0;
     public bool disableFacing;
 
     private Vector3 direction;

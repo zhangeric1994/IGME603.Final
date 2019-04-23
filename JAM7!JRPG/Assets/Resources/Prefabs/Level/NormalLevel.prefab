@@ -776,7 +776,7 @@ MonoBehaviour:
   health: 15
   speed: 0.15
   Score_own: 5
-  Death_delay: 15
+  Death_delay: 0
   disableFacing: 0
   turnBacked: 0
   defaultScale: {x: 0, y: 0, z: 0}
@@ -14013,7 +14013,7 @@ MonoBehaviour:
   health: 15
   speed: 0.15
   Score_own: 5
-  Death_delay: 15
+  Death_delay: 0
   disableFacing: 0
   turnBacked: 0
   defaultScale: {x: 0, y: 0, z: 0}
@@ -43799,7 +43799,7 @@ MonoBehaviour:
   health: 15
   speed: 0.15
   Score_own: 5
-  Death_delay: 15
+  Death_delay: 0
   disableFacing: 0
   turnBacked: 0
   defaultScale: {x: 0, y: 0, z: 0}

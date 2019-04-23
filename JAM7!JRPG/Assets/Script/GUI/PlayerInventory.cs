@@ -22,7 +22,7 @@ public class PlayerInventory : GUIWindow
 
     private void Update()
     {
-        if (Input.GetButtonDown("Start"))
+        if (Input.GetButtonDown("Cancel"))
             Close();
 
         for (int id = 1; id < 8; ++id)

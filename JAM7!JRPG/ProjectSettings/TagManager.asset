@@ -16,6 +16,9 @@ TagManager:
   - Weapon
   - Item
   - Wall
+  - FinalBoss
+  - Grass
+  - fireball
   layers:
   - Default
   - TransparentFX

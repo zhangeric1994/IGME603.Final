@@ -24,7 +24,9 @@ public class FinalBoss : MonoBehaviour {
 
     public Transform stage2Position;
 
-    public GameObject player;
+    public GameObject shield;
+
+    private GameObject player;
 
     private GameObject missle;
 
@@ -75,6 +77,12 @@ public class FinalBoss : MonoBehaviour {
     public Transform skullPoint;
 
     private GameObject currentSkull;
+
+    public GameObject crackup;
+    public GameObject crackdown;
+
+    public bool isInCrack;
+
     void Start(){
         defaultStage = BossStage.Stage0;
         currentStage = defaultStage;
@@ -94,6 +102,8 @@ public class FinalBoss : MonoBehaviour {
         stage3 = (GameObject)Resources.Load("Prefabs/FinalBoss/Stage3/stage3");
         if (!stage3) Debug.Log("Stage3 not loaded");
 
+        
+
         //-------------------------------
 
         //------ initialize param--------
@@ -106,16 +116,27 @@ public class FinalBoss : MonoBehaviour {
         isInStage1Move = false;
         currentPosition = Random.Range(0, 3);
         fireBallCnt = 0;
-        stage2HP = 1;
+        stage2HP = 3;
         isFireBall = false;
         stage3HP = 6;
         missleCnt = 0;
         isMissle = false;
         isstage3Silent = false;
+        isInCrack = false;
         
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (!player) Debug.Log("Player not found");
+
+        player.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+
         s1EnemiesNum = enemiesS1.Count;
 
         if (s1EnemiesNum == 0) Debug.Log("No enemy loaded.");
+
+        crackup.SetActive(false);
+        crackdown.SetActive(false);
+        shield.SetActive(false);
         //-------------------------------
     }
 
@@ -154,6 +175,11 @@ public class FinalBoss : MonoBehaviour {
         //     GenerateStage3();
         // }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1)){
+            Debug.Log(1);
+            shield.SetActive(true);
+        }
+
         //-------------------------------------
 
         //------ movement for boss in different stages ------
@@ -167,7 +193,14 @@ public class FinalBoss : MonoBehaviour {
             Instage1Move(Stage1Positions[currentPosition].position);
         }
 
-        
+        if (currentStage == BossStage.End){
+            gameObject.transform.position += new Vector3(0, Time.deltaTime, 0);
+            
+        }
+
+        if (gameObject.transform.position.y > 2.0f){
+            Destroy(gameObject);
+        }
 
         StageSwitch();
         //---------------------------------------------------
@@ -213,6 +246,17 @@ public class FinalBoss : MonoBehaviour {
                     isFireBall = true;
                     StartCoroutine(GenerateFireBall());
                 }
+
+                if (isInCrack){
+                    if (Input.GetKeyDown(KeyCode.Alpha2)){
+                        //enable shield
+                        enableShield();
+                        isInCrack = false;
+                        StartCoroutine(shieldDelay());
+                    }
+                    
+                }
+
                 return;
 
             case BossStage.Stage3:
@@ -287,6 +331,36 @@ public class FinalBoss : MonoBehaviour {
         stage2HP--;
     }
 
+    public void enableCrackUp(){
+        crackup.SetActive(true);
+    }
+
+    public void disableCrackUp(){
+        crackup.SetActive(false);
+    }
+
+    public void enableCrackDown(){
+        crackdown.SetActive(true);
+    }
+
+    public void disableCrackDown(){
+        crackdown.SetActive(false);
+    }
+
+    private void enableShield(){
+        shield.SetActive(true);
+    }
+
+    private void disableShield(){
+        shield.SetActive(false);
+    }
+
+    IEnumerator shieldDelay(){
+        yield return new WaitForSeconds(0.1f);
+        disableShield();
+        isInCrack = true;
+    }
+
     //todo:
     //2. how to defend fire ball
 
@@ -348,20 +422,22 @@ public class FinalBoss : MonoBehaviour {
             Debug.Log("In stage switch: switch stage 0 to stage 1");
         }
 
-        if (currentStage == BossStage.Stage1 & enemiesS1.Count == 0){
-            currentStage++;
+        if (currentStage == BossStage.Stage1 & enemiesS1.Count == 0 & currentS1emermy == null){
+            currentStage = BossStage.Stage2;
             isEnterStage2 = true;
+            crackdown.SetActive(true);
             Debug.Log("In stage switch: switch stage 1 to stage2");
         }
 
         if (currentStage == BossStage.Stage2 & stage2HP == 0){
-            currentStage++;
+            currentStage = BossStage.Stage3;
             Debug.Log("In stage switch: switch stage 2 to stage3");
         }
 
         if (currentStage == BossStage.Stage3 & stage3HP <= 0){
             currentStage = BossStage.End;
             Debug.Log("Congratulations");
+
         }
     }
     //----------------------------------------

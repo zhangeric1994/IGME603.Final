@@ -111,7 +111,7 @@ public class PlayerStats : GUIWindow
 
     private void Update()
     {
-        if (Input.GetButtonDown("Start"))
+        if (Input.GetButtonDown("Cancel"))
             Close();
     }
 

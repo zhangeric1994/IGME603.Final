@@ -25,7 +25,7 @@ public class ChessBoss : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         Debug.Log(other.name);
-        if (other.name == "PlayerCombat"){
+        if (other.tag == "Player"){
             //todo: freeze player movement
 
             chessAnim.SetBool("isOpened", true);

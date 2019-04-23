@@ -60,7 +60,7 @@ public abstract class DataTable<T> : DataTable, ISerializationCallbackReceiver w
 
 #if UNITY_EDITOR
 #else
-            entries = null;
+            serializedEntries = null;
 #endif
         }
     }
@@ -71,7 +71,7 @@ public abstract class DataTable<T> : DataTable, ISerializationCallbackReceiver w
         if (serializedEntries == null || serializedEntries.Length < entries.Count)
             serializedEntries = new T[entries.Count];
 #else
-        entries = new Attribute[attributes.Count];
+        serializedEntries = new T[entries.Count];
 #endif
 
         int i = 0;

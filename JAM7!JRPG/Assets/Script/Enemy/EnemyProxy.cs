@@ -13,24 +13,18 @@ public class EnemyProxy : MonoBehaviour
         ID = id;
     }
 
-    public void StartCombat(PlayerExplorationController player, bool isBoss)
+    public void StartCombat(PlayerExplorationController player, string desiredLevel)
     {
         if (!level)
         {
-            if (isBoss)
-                level = GameManager.Singleton.CreateCombat("Level/BossLevel");
+            level = GameManager.Singleton.CreateCombat("Level/" + desiredLevel);
 
-            else
-                level = GameManager.Singleton.CreateCombat("Level/NormalLevel");
-            
         }
         level.enemyProxy = this;
         players.Add(player);
 
         level.SpawnPlayer(player.PlayerID);
 
-
-        AudioManager.Instance.PlaySoundEffect("Suck", DelayTime:0.5f);
     }
 
     public void EndCombat()
@@ -42,14 +36,14 @@ public class EnemyProxy : MonoBehaviour
         }
 
         var items = GameObject.FindGameObjectsWithTag("Item");
-        
-        foreach (var item  in items)
+
+        foreach (var item in items)
         {
             DestroyImmediate(item);
         }
-        
+
         GameManager.Singleton.EndCombat(level);
         Destroy(gameObject);
     }
- 
+
 }

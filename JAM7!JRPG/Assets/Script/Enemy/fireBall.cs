@@ -12,14 +12,20 @@ public class fireBall : MonoBehaviour {
         gameObject.transform.position -= new Vector3(Time.deltaTime, 0.0f, 0.0f) * move;
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.name == "Hitbox"){
-            move = -1;
-            return;
-        }
+    public void setMove(){
+        move = -1;
+    }
 
-        if (other.name == "PlayerCombat"){
+    void OnTriggerEnter2D(Collider2D other) {
+        // if (other.name == "Hitbox"){
+        //     move = -1;
+        //     return;
+        // }
+
+        if (other.name == "Hitbox"){
             Debug.Log("Player gets damage.");
+            other.gameObject.GetComponentInParent<PlayerCombatController>().Hurt(4);
+            Destroy(gameObject);
             return;
         }
 
@@ -27,6 +33,14 @@ public class fireBall : MonoBehaviour {
             other.GetComponent<FinalBoss>().fireballDamage();
             Destroy(gameObject);
         }
+        
+        Debug.Log(other.name);
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.name == "Wall"){
+            Destroy(gameObject);
+        }
     }
 }

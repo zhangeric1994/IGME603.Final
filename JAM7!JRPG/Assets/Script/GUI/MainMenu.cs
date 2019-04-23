@@ -23,7 +23,7 @@ public class MainMenu : GUIWindow
                 choosenIndex = value;
 
                 list.GetChild(choosenIndex).GetComponent<Text>().color = Color.green;
-                AudioManager.Instance.PlaySoundEffect("Click", pitch: false);
+                //AudioManager.Instance.PlaySoundEffect("Click", pitch: false);
             }
         }
     }
@@ -48,9 +48,9 @@ public class MainMenu : GUIWindow
 
         for (;;)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Submit"))
             {
-                AudioManager.Instance.PlaySoundEffect("Confirm");
+                //AudioManager.Instance.PlaySoundEffect("Confirm");
                 switch (choosenIndex)
                 {
                     case 0:

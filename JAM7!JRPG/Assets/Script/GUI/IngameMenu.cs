@@ -56,12 +56,12 @@ public class IngameMenu : GUIWindow
 
         for (;;)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Submit"))
             {
                 GUIManager.Singleton.Open(list.GetChild(choosenIndex).name, (Action)StartToCheckForPlayerInput);               
                 yield break;
             }
-            else if (Input.GetButtonDown("Start"))
+            else if (Input.GetButtonDown("Cancel"))
             {
                 //AudioManager.Instance.PlaySoundEffect("ClickDown");
                 Close();
