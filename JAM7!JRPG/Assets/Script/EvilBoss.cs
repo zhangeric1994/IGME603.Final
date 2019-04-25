@@ -58,7 +58,7 @@ public class EvilBoss : Enemy
         if (health < 1000 && ! triggered)
         {
             triggered = true;
-            StartCoroutine(SpawnBoss());
+            //StartCoroutine(SpawnBoss());
         }
         
     }
@@ -139,9 +139,9 @@ public class EvilBoss : Enemy
         //destroy this one
         //small animation here
         gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
         yield return new WaitForSeconds(0.5f);
         //GameObject _boss = Instantiate(boss, gameObject.transform.position, Quaternion.identity);
