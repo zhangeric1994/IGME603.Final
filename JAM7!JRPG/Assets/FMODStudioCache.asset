@@ -33,7 +33,7 @@ MonoBehaviour:
   - {fileID: 114410870025001374}
   StringsBanks:
   - {fileID: 114809473630268158}
-  stringsBankWriteTime: 636917426956503978
+  stringsBankWriteTime: 636917473058356766
   cacheVersion: 3
 --- !u!114 &114000851115314128
 MonoBehaviour:
@@ -1061,8 +1061,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114057525798642710}
-  - {fileID: 114864862876858422}
+  - {fileID: 114396341799780900}
+  - {fileID: 114304623681320506}
   MinDistance: 0
   MaxDistance: 0
   Length: 930
@@ -1917,6 +1917,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: DarkDimension
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114192302744782862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Hit
   Min: 0
   Max: 1
   Default: 0
@@ -3134,6 +3150,22 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114304623681320506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114305675978039318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3298,7 +3330,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114483960286273880}
+  - {fileID: 114739812536441180}
   MinDistance: 0
   MaxDistance: 0
   Length: 805
@@ -3704,7 +3736,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114983517090240260}
+  - {fileID: 114950085138722388}
   MinDistance: 0
   MaxDistance: 14
   Length: 10800
@@ -3964,6 +3996,22 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114372095558895938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: NormalTown
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114373554251999220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4073,6 +4121,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: NormalTown
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114381037852865330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: FinalBossBattle
   Min: 0
   Max: 1
   Default: 0
@@ -4259,6 +4323,22 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114396341799780900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Grass
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114398671765649692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4368,7 +4448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: E:\final-project\JAM7!JRPG\Assets\JRPG\Build\Desktop\Master Bank.bank
-  lastModified: 636917426956483969
+  lastModified: 636917473058336814
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -5475,6 +5555,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 136
+--- !u!114 &114519326673103408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: NormalBattle
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114521336374151706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5651,6 +5747,22 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114537997335747530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: DarkDimension
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114538126587256786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5792,6 +5904,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: RuinedTown
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114553668175134102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Hit
   Min: 0
   Max: 1
   Default: 0
@@ -6295,14 +6423,14 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114555803590288416}
-  - {fileID: 114679787020527066}
-  - {fileID: 114720551888265390}
-  - {fileID: 114088853275772762}
-  - {fileID: 114850771497195926}
-  - {fileID: 114418964600419680}
-  - {fileID: 114470804403415370}
-  - {fileID: 114250297462578794}
+  - {fileID: 114372095558895938}
+  - {fileID: 114519326673103408}
+  - {fileID: 114381037852865330}
+  - {fileID: 114647086111131864}
+  - {fileID: 114553668175134102}
+  - {fileID: 114537997335747530}
+  - {fileID: 114702600908524550}
+  - {fileID: 114763461559783236}
   MinDistance: 0
   MaxDistance: 0
   Length: 582872
@@ -6670,6 +6798,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: FinalBossBattle
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114647086111131864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Dusk
   Min: 0
   Max: 1
   Default: 0
@@ -7220,6 +7364,22 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114702600908524550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Forest
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114703307333187840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7540,6 +7700,22 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114739812536441180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Hit
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114744023862409918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7729,6 +7905,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: DarkDimension
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114763461559783236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: RuinedTown
   Min: 0
   Max: 1
   Default: 0
@@ -8193,7 +8385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\JRPG\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636917426956503978
+  lastModified: 636917473058356766
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -9589,6 +9781,22 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114950085138722388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MixFire
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114950252625373650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9801,7 +10009,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114283088762415354}
+  - {fileID: 114192302744782862}
   MinDistance: 0
   MaxDistance: 0
   Length: 660
