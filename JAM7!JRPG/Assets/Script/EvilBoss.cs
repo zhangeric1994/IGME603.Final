@@ -18,17 +18,24 @@ public class EvilBoss : Enemy
     
     public GameObject bossObj;
 
+    private List<GameObject> enemies;
+
     [SerializeField] private GameObject dummy;
     private bool triggered;
+
+    private bool isDeleted;
     // Start is called before the first frame update
     void Start()
     {
-        defaultState = EnemyState.ChaseMove;
+        defaultState = EnemyState.CircleMove;
+        distanceConstraint = 0.5f;
         setState(defaultState);
         health = health * 1;
+        health = 100;
         idle = true;
         boss = true;
         triggered = false;
+        isDeleted = false;
         executeBehavior(EvilBehaviour.Idle);
     }
 
@@ -48,11 +55,12 @@ public class EvilBoss : Enemy
             executeBehavior((EvilBehaviour) behaviourId);
         }
 
-        if (health < 100 && ! triggered)
+        if (health < 1000 && ! triggered)
         {
             triggered = true;
-            StartCoroutine(SpawnBoss());
+            //StartCoroutine(SpawnBoss());
         }
+        
     }
     
     private void executeBehavior(EvilBehaviour behaviour)
@@ -131,9 +139,9 @@ public class EvilBoss : Enemy
         //destroy this one
         //small animation here
         gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,0.2f);
         yield return new WaitForSeconds(0.5f);
         //GameObject _boss = Instantiate(boss, gameObject.transform.position, Quaternion.identity);

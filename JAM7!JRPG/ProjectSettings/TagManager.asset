@@ -18,6 +18,8 @@ TagManager:
   - Wall
   - FinalBoss
   - Grass
+  - fireball
+  - chessBoss
   layers:
   - Default
   - TransparentFX

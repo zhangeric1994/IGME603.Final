@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 1403385637375493884}
   m_Layer: 8
   m_Name: BossOriginalStage
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,11 +187,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCharacter: {fileID: 0}
   enemy_anim: {fileID: 1403385637375493881}
-  rb2d: {fileID: 0}
+  rb2d: {fileID: 1403385637375493887}
   health: 300
   speed: 0.1
   Score_own: 5
-  Death_delay: 15
   disableFacing: 0
   turnBacked: 0
   defaultScale: {x: 0, y: 0, z: 0}

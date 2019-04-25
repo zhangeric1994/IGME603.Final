@@ -34,6 +34,14 @@ public class ForwardCamera : MonoBehaviour
         }
     }
 
+    public static ForwardCamera getInstance(){
+        return _instance;
+    }
+
+    public void setTarget(Transform t){
+        target = t;
+    }
+
 
     // Update is called once per frame
     void Update()

@@ -20,7 +20,8 @@ public class Chest : MonoBehaviour {
 
     IEnumerator DestroyMyself(){
         yield return new WaitForSeconds(0.5f);
-        enemy.transform.position = gameObject.transform.position;
+        GameObject runner = Instantiate(enemy, gameObject.transform.position, Quaternion.identity);
+        runner.transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
         Destroy(gameObject);
     }
 }

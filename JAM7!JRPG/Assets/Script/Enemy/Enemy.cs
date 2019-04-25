@@ -20,7 +20,7 @@ public abstract class Enemy : MonoBehaviour
     public int health = 15;
     public float speed = 1f;
     public int Score_own = 5;
-    public float Death_delay = 15;
+    private float Death_delay = 0;
     public bool disableFacing;
 
     private Vector3 direction;
@@ -39,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
     private float lastFacingRight;
     private float lastFindJump;
     // Use this for initialization
-    public int distanceConstraint;
+    public float distanceConstraint;
 
     public EnemyState defaultState;
     public EnemyState currentState;
@@ -141,7 +141,7 @@ public abstract class Enemy : MonoBehaviour
                     }
                     else
                     {
-                        enemy_anim.SetFloat("Speed", 1f);
+                        if (enemy_anim) enemy_anim.SetFloat("Speed", 1f);
                         transform.position += direction * speed * Time.deltaTime;
 
                         if (seconds % 6 == 0 && lastTurnSecond != seconds)
@@ -253,7 +253,7 @@ public abstract class Enemy : MonoBehaviour
         {
             //died
             
-            enemy_anim.SetBool("Dead", true);
+            if(enemy_anim)    enemy_anim.SetBool("Dead", true);
             
             int num = Random.Range(0, 100);
             WeaponManager._instance.randomDrop(transform.position);
@@ -261,9 +261,9 @@ public abstract class Enemy : MonoBehaviour
             {
                 WeaponManager._instance.randomDrop(transform.position);
             }
-           
+
             StartCoroutine(Destroy_delay());
-            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            //gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             deathCounted = true;
         }
 
