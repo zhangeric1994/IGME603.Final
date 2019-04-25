@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum BossStage : int {
     Stage0,
@@ -11,77 +12,74 @@ public enum BossStage : int {
 
     End
 }
-public class FinalBoss : MonoBehaviour {
+
+public enum bossMovement: int {
+    Idle = 0,
+    MiniFireballs,
+    Dash,
+    chest,
+    missle,
+    NumStatus
+}
+public class FinalBoss : Enemy {
 
     private BossStage currentStage;
     private BossStage defaultStage;
-
     private GameObject chest;
-
     private GameObject fireBall;
-
     public Transform[] Stage1Positions;
-
     public Transform stage2Position;
-
     public GameObject shield;
-
     private GameObject player;
-
     private GameObject missle;
-
     private GameObject stage3;
-
     public Transform misslePosition;
-
     private bool stage2isMove;
     private bool isSmall;
-
     public bool isEnterStage0;
     private bool isEnterStage2;
     private bool isInStage1Move;
-
     private float showUpDistance;
-
-    //stage 1 enemies
     public List<GameObject> enemiesS1;
-
     private GameObject currentS1emermy;
-
     private int s1EnemiesNum;
-
     private bool isShowUp;
-
     private int currentPosition;
-
     private int fireBallCnt;
-
     public Transform fireBallPoint;
-
     private int stage2HP;
-
     private GameObject currentFireBall;
-
     private bool isFireBall;
-
     private int missleCnt;
-
     private int stage3HP;
-
     private GameObject currentMissle;
-
     private bool isMissle;
-
     private bool isstage3Silent;
-
     public Transform skullPoint;
-
     private GameObject currentSkull;
-
     public GameObject crackup;
     public GameObject crackdown;
-
     public bool isInCrack;
+
+    //------- new features ----------
+    private Vector3 dashPlayerPosition;
+    private GameObject miniFireball;
+
+    private bool isFreezeStage;
+
+    private bool isIdle;
+    private bool isDash;
+
+    private Transform currentBossPosition;
+    private Transform groud;
+
+    //-------------------------------
+
+    //------- test param ------------
+    public Transform wallLeft;
+    public Transform wallRight;
+
+    //-------------------------------
 
     void Start(){
         defaultStage = BossStage.Stage0;
@@ -102,7 +100,9 @@ public class FinalBoss : MonoBehaviour {
         stage3 = (GameObject)Resources.Load("Prefabs/FinalBoss/Stage3/stage3");
         if (!stage3) Debug.Log("Stage3 not loaded");
 
-        
+        miniFireball = (GameObject)Resources.Load("Prefabs/FinalBoss/miniFireball");
+        if (!miniFireball) Debug.Log("mini fire ball not loaded");
+        miniFireball.transform.localScale = new Vector3(0.04f, 0.04f, 1.0f);
 
         //-------------------------------
 
@@ -125,9 +125,7 @@ public class FinalBoss : MonoBehaviour {
         isInCrack = false;
         
         player = GameObject.FindGameObjectWithTag("Player");
-
         if (!player) Debug.Log("Player not found");
-
         player.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
         s1EnemiesNum = enemiesS1.Count;
@@ -137,7 +135,35 @@ public class FinalBoss : MonoBehaviour {
         crackup.SetActive(false);
         crackdown.SetActive(false);
         shield.SetActive(false);
-        //-------------------------------
+
+        //-------- new features ---------------
+        dashPlayerPosition = player.transform.position;
+        isFreezeStage = false;
+        isIdle = true;
+        isDash = false;
+        currentBossPosition = gameObject.transform;
+        groud = player.transform;
+        Debug.Log(groud.position.y);
+        groud.position = new Vector3(groud.position.x, groud.position.y + 1.0f, 0);
+        Debug.Log(groud.position.y);
+
+        //-------------------------------------
+
+        //-------------------------------------
+
+        //-------- test param -----------------
+        Debug.Log("Wall left position: " + wallLeft.position);
+        Debug.Log("Wall right position: " + wallRight.position);
+
+        Debug.Log("Level distance between right and left: " + Vector2.Distance(wallLeft.position, wallRight.position));
+
+        //-------------------------------------
+
+        //-------- Inherit from enemy class ---
+        defaultState = EnemyState.Idle;
+        setState(defaultState);
+        health = 100;
+        //-------------------------------------
     }
 
     void Update(){
@@ -176,126 +202,207 @@ public class FinalBoss : MonoBehaviour {
         // }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)){
-            Debug.Log(1);
-            shield.SetActive(true);
+            throwMultiFireballs();
         }
 
         //-------------------------------------
 
         //------ movement for boss in different stages ------
-        BossMovement();
+        // BossMovement();
 
-        if (isEnterStage0) ShowUp();
+        // if (isEnterStage0) ShowUp();
 
-        if (isEnterStage2) StartCoroutine(Stage1toStage2Move());
+        // if (isEnterStage2) StartCoroutine(Stage1toStage2Move());
 
-        if (isInStage1Move) {
-            Instage1Move(Stage1Positions[currentPosition].position);
-        }
+        // if (isInStage1Move) {
+        //     Instage1Move(Stage1Positions[currentPosition].position);
+        // }
 
-        if (currentStage == BossStage.End){
-            gameObject.transform.position += new Vector3(0, Time.deltaTime, 0);
+        // if (currentStage == BossStage.End){
+        //     gameObject.transform.position += new Vector3(0, Time.deltaTime, 0);
             
-        }
+        // }
 
-        if (gameObject.transform.position.y > 2.0f){
-            Destroy(gameObject);
-        }
+        // if (gameObject.transform.position.y > 2.0f){
+        //     Destroy(gameObject);
+        // }
 
-        StageSwitch();
+        // StageSwitch();
         //---------------------------------------------------
-    }
+        if (isIdle & isShowUp){
+            isIdle = false;
+            BossMovement();
+        }
 
-    //------- test function for switch satge -----
-    void switchStage(){
-        if (currentStage == BossStage.Stage4) return;
-        currentStage += 1;
+        if (isDash){
+            Dash();
+        }
+
+        if (!isShowUp & !GameObject.FindGameObjectWithTag("chessBoss")){
+            ShowUp();
+            currentBossPosition = gameObject.transform;
+        }
+
+        //Dash();
     }
 
     //------- Boss Movement Controller ---------
     //In each stage, boss will move differently
     void BossMovement(){
-        switch(currentStage){
-            case BossStage.Stage0:
-                return;
+        // switch(currentStage){
+        //     case BossStage.Stage0:
+        //         return;
 
-            case BossStage.Stage1:
-                //todo : 
-                //1. determine how frequently change boss's position
-                //2. Make boss move to the position not teleport to it
-                
-                //gameObject.transform.position = Stage1Positions[currentPosition].position;
+        //     case BossStage.Stage1:
+        //         //spawn chest
+        //         if (!currentS1emermy & !isInStage1Move & enemiesS1.Count > 0){
+        //             isInStage1Move = true;
+        //             currentS1emermy = enemiesS1[0];
+        //             enemiesS1.RemoveAt(0);
 
+        //             StartCoroutine(GenerateChest());
+        //         }
+        //         return;
 
-                //spawn chest
-                if (!currentS1emermy & !isInStage1Move){
-                    isInStage1Move = true;
-                   // gameObject.transform.position = Stage1Positions[currentPosition].position;
+        //     case BossStage.Stage2:
+
+        //         float distance = Vector2.Distance(gameObject.transform.position, stage2Position.position);
+        //         if (!currentFireBall & distance < 0.1f & !isFireBall & stage2HP > 0){
+        //             isFireBall = true;
+        //             StartCoroutine(GenerateFireBall());
+        //         }
+
+        //         if (isInCrack){
+        //             if (Input.GetKeyDown(KeyCode.Alpha2)){
+        //                 //enable shield
+        //                 enableShield();
+        //                 isInCrack = false;
+        //                 StartCoroutine(shieldDelay());
+        //             }
+                    
+        //         }
+
+        //         return;
+
+        //     case BossStage.Stage3:
+        //         if (!currentMissle & !isMissle & !isstage3Silent){
+        //             isMissle = true;
+
+        //             if (missleCnt >= 3){
+        //                 missleCnt = 0;
+        //                 stage3HP--;
+        //             }
+        //             StartCoroutine(fireMissle());
+        //         }
+        //         return;
+
+        //     case BossStage.Stage4:
+        //         if (!isSmall) {
+        //             gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+        //             gameObject.transform.position = new Vector3(gameObject.transform.position.x, 0.843f, 0);
+        //             isSmall = true;
+        //         }
+        //         return;
+        //     case BossStage.End:
+        //         return;
+        //     default:
+        //         Debug.Log("In boss movement: boss has an unknown stage.");
+        //         return;
+        // }
+        var bossMoveCnt = (int)bossMovement.NumStatus;
+        
+        int randomMove = Random.Range(0, bossMoveCnt);
+
+        switch((bossMovement) randomMove){
+            case bossMovement.Idle:
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y, 0);
+                StartCoroutine(Idle());
+                break;
+
+            case bossMovement.MiniFireballs:
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y, 0);
+                StartCoroutine(shootMiniFireballs());
+                break;
+
+            case bossMovement.Dash:
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y, 0);
+                dashPlayerPosition = new Vector3(player.transform.position.x, gameObject.transform.position.y, 0);
+                isDash = true;
+                break;
+            
+            case bossMovement.chest:
+                if (enemiesS1.Count > 0){
                     currentS1emermy = enemiesS1[0];
                     enemiesS1.RemoveAt(0);
 
-                   
+                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y + 1.0f, 0.0f);
                     StartCoroutine(GenerateChest());
                 }
-                return;
+                break;
 
-            case BossStage.Stage2:
+            case bossMovement.missle:
+                StartCoroutine(fireMissle());
+                break;
 
-                float distance = Vector2.Distance(gameObject.transform.position, stage2Position.position);
-                if (!currentFireBall & distance < 0.1f & !isFireBall & stage2HP > 0){
-                    isFireBall = true;
-                    StartCoroutine(GenerateFireBall());
-                }
-
-                if (isInCrack){
-                    if (Input.GetKeyDown(KeyCode.Alpha2)){
-                        //enable shield
-                        enableShield();
-                        isInCrack = false;
-                        StartCoroutine(shieldDelay());
-                    }
-                    
-                }
-
-                return;
-
-            case BossStage.Stage3:
-                if (!currentMissle & !isMissle & !isstage3Silent){
-                    isMissle = true;
-
-                    //if(!isstage3Silent) missleCnt = 0;
-                    // if (missleCnt >= 3) {
-                    //     isstage3Silent = true;
-                    //     missleCnt = 0;
-
-                    //     if (isstage3Silent){
-                    //         Stage3Silent();
-                    //         //deleteSkull();
-                    //     }
-                    //     return;
-                    // }
-                    if (missleCnt >= 3){
-                        missleCnt = 0;
-                        stage3HP--;
-                    }
-                    StartCoroutine(fireMissle());
-                }
-                return;
-
-            case BossStage.Stage4:
-                if (!isSmall) {
-                    gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
-                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, 0.843f, 0);
-                    isSmall = true;
-                }
-                return;
-            case BossStage.End:
-                return;
-            default:
-                Debug.Log("In boss movement: boss has an unknown stage.");
-                return;
         }
     }
+
+    IEnumerator Idle(){
+        yield return new WaitForSeconds(1.0f);
+        isIdle = true;
+    }
+
+    IEnumerator shootMiniFireballs(){
+        yield return new WaitForSeconds(0.5f);
+        throwMultiFireballs();
+        yield return new WaitForSeconds(1.0f);
+        isIdle = true;
+    }
+
+    void Dash(){
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(dashPlayerPosition.x, transform.position.y), Time.deltaTime);
+        float distance = Vector2.Distance(gameObject.transform.position, dashPlayerPosition);
+
+        if (distance < 0.1f){
+            isDash = false;
+            isIdle = true;
+        }
+    }
+
+    public void ShowUp(){
+    
+        transform.position = Vector2.MoveTowards(transform.position, Stage1Positions[1].position, Time.deltaTime);
+
+        //distance to target position
+        float distance = Vector2.Distance(transform.position, Stage1Positions[1].position);
+
+        if (distance > showUpDistance) showUpDistance = distance;
+
+        //scale factor
+        Vector3 scaleFactor = Vector3.Lerp(new Vector3(0.1f, 0.1f, 0), new Vector3(0.2f, 0.2f, 0), 1 - (distance / showUpDistance));
+
+        gameObject.transform.localScale = scaleFactor;
+
+        //boss reaches the target position
+        if (distance < 0.1f){
+            isEnterStage0 = false;
+            isShowUp = true;
+        }
+        
+    }
+
+    void throwMultiFireballs(){
+        Vector3 moveDirection = new Vector3(0, 1, 0);
+        for (int i = 0; i < 8; i++){
+            moveDirection = Quaternion.Euler(0, 0, 45) * moveDirection;
+            GameObject _miniFireBall = Instantiate(miniFireball, gameObject.transform.position, Quaternion.identity);
+            miniFireball miniFireballSrc = _miniFireBall.GetComponent<miniFireball>();
+            if (!miniFireballSrc) Debug.Log("src for mini fire ball not founded");
+            miniFireballSrc.setForce(moveDirection.x, moveDirection.y);
+        }
+    }
+
+
 
     //------- functions for stage 1 boss AI ----
 
@@ -310,6 +417,8 @@ public class FinalBoss : MonoBehaviour {
         _chest.GetComponent<Rigidbody2D>().AddForce(force);
         Chest chestScript = _chest.GetComponent<Chest>();
         chestScript.SetEnemy(currentS1emermy);
+        yield return new WaitForSeconds(1.0f);
+        isIdle = true;
     }
 
     //throw the chest when enemy in chest is defeated.
@@ -379,6 +488,8 @@ public class FinalBoss : MonoBehaviour {
         currentMissle = GenerateMissle();
         isMissle = false;
         if(!isstage3Silent)missleCnt++;
+        yield return new WaitForSeconds(1.0f);
+        isIdle = true;
     }
 
     void Stage3Silent(){
@@ -443,27 +554,7 @@ public class FinalBoss : MonoBehaviour {
     //----------------------------------------
 
     //Boss shows up (stage 0 -> stage 1)
-    void ShowUp(){
     
-        transform.position = Vector2.MoveTowards(transform.position, Stage1Positions[1].position, Time.deltaTime);
-
-        //distance to target position
-        float distance = Vector2.Distance(transform.position, Stage1Positions[1].position);
-
-        if (distance > showUpDistance) showUpDistance = distance;
-
-        //scale factor
-        Vector3 scaleFactor = Vector3.Lerp(new Vector3(0.1f, 0.1f, 0), new Vector3(0.4f, 0.4f, 0), 1 - (distance / showUpDistance));
-
-        gameObject.transform.localScale = scaleFactor;
-
-        //boss reaches the target position
-        if (distance < 0.1f){
-            isEnterStage0 = false;
-            isShowUp = true;
-        }
-        
-    }
 
     IEnumerator Stage1toStage2Move(){
         yield return new WaitForSeconds(3.0f);
@@ -487,12 +578,17 @@ public class FinalBoss : MonoBehaviour {
         }
     }
 
-    
-
     //--------- Debug functions -------------------
     //stage 1 debug function
     void DestroyCurrentEnemy(){
         Destroy(currentS1emermy);
     }
+    //---------------------------------------------
+
+    //--------- Boss Attack -----------------------
+    
+
+    
+
     //---------------------------------------------
 }

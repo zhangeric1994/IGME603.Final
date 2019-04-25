@@ -19,6 +19,7 @@ TagManager:
   - FinalBoss
   - Grass
   - fireball
+  - chessBoss
   layers:
   - Default
   - TransparentFX
