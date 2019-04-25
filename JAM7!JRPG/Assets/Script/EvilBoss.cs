@@ -52,7 +52,6 @@ public class EvilBoss : Enemy
         if (health < 1000 && ! triggered)
         {
             triggered = true;
-            Debug.Log("haha");
             StartCoroutine(SpawnBoss());
         }
 
