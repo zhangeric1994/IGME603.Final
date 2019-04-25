@@ -202,17 +202,17 @@ public class FinalBoss : Enemy {
         //     Debug.Log(gameObject.transform.position.y);
         // }
 
-        if (Input.GetKeyDown(KeyCode.U)){
-            DestroyCurrentEnemy();
-        }
+        // if (Input.GetKeyDown(KeyCode.U)){
+        //     DestroyCurrentEnemy();
+        // }
 
         // if (Input.GetKeyDown(KeyCode.I)){
         //     GenerateStage3();
         // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)){
-            throwMultiFireballs();
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha1)){
+        //     throwMultiFireballs();
+        // }
 
         //-------------------------------------
 
@@ -417,11 +417,13 @@ public class FinalBoss : Enemy {
             currentDashPosition = wallRight;
             phoenix.SetBool("isRight", true);
             phoenix.SetBool("isIdle", false);
+            phoenix.SetBool("isLeft", false);
         }
         else{
             currentDashPosition = wallLeft;
             phoenix.SetBool("isLeft", true);
             phoenix.SetBool("isIdle", false);
+            phoenix.SetBool("isRight", false);
         }
 
         var bossColor = GetComponent<SpriteRenderer>().color;
