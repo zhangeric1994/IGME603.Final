@@ -73,6 +73,8 @@ public class FinalBoss : Enemy {
     private Transform currentBossPosition;
     private Transform groud;
 
+    private Transform currentDashPosition;
+
     //-------------------------------
 
     //------- test param ------------
@@ -82,6 +84,8 @@ public class FinalBoss : Enemy {
     //-------------------------------
 
     void Start(){
+        enemy_anim = null;
+        rb2d = null;
         defaultStage = BossStage.Stage0;
         currentStage = defaultStage;
         //Debug.Log("Default stage is: " + defaultStage.ToString());
@@ -146,6 +150,8 @@ public class FinalBoss : Enemy {
         Debug.Log(groud.position.y);
         groud.position = new Vector3(groud.position.x, groud.position.y + 1.0f, 0);
         Debug.Log(groud.position.y);
+
+        currentDashPosition = wallLeft;
 
         //-------------------------------------
 
@@ -234,6 +240,7 @@ public class FinalBoss : Enemy {
             BossMovement();
         }
 
+
         if (isDash){
             Dash();
         }
@@ -311,9 +318,28 @@ public class FinalBoss : Enemy {
         // }
         var bossMoveCnt = (int)bossMovement.NumStatus;
         
-        int randomMove = Random.Range(0, bossMoveCnt);
+         int randomMove = Random.Range(0, 100);
+        //int randomMove = 4;
+        int bossMove = 0;
+        if (randomMove < 10){
+            bossMove = 0;
+        }
+        else if(randomMove < 20){
+            bossMove = 3;
+        }
+        else if (randomMove < 30){
+            bossMove = 4;
+        }
+        else if (randomMove < 65){
+            bossMove = 1;
+        }
 
-        switch((bossMovement) randomMove){
+        else if (randomMove < 100){
+            bossMove = 2;
+        }
+
+
+        switch((bossMovement) bossMove){
             case bossMovement.Idle:
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y, 0);
                 StartCoroutine(Idle());
@@ -327,7 +353,7 @@ public class FinalBoss : Enemy {
             case bossMovement.Dash:
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y, 0);
                 dashPlayerPosition = new Vector3(player.transform.position.x, gameObject.transform.position.y, 0);
-                isDash = true;
+                StartCoroutine(DashPre());
                 break;
             
             case bossMovement.chest:
@@ -335,7 +361,6 @@ public class FinalBoss : Enemy {
                     currentS1emermy = enemiesS1[0];
                     enemiesS1.RemoveAt(0);
 
-                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y + 1.0f, 0.0f);
                     StartCoroutine(GenerateChest());
                 }
                 break;
@@ -343,7 +368,6 @@ public class FinalBoss : Enemy {
             case bossMovement.missle:
                 StartCoroutine(fireMissle());
                 break;
-
         }
     }
 
@@ -353,19 +377,99 @@ public class FinalBoss : Enemy {
     }
 
     IEnumerator shootMiniFireballs(){
-        yield return new WaitForSeconds(0.5f);
+        var bossColor = GetComponent<SpriteRenderer>().color;
+
+        for (int i = 0; i < 8; i++){
+            if (i % 2 == 0){
+                GetComponent<SpriteRenderer>().color = Color.red;
+                yield return new WaitForSeconds(0.1f);
+            }
+            else {
+                
+                GetComponent<SpriteRenderer>().color = Color.white;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        GetComponent<SpriteRenderer>().color = bossColor;
         throwMultiFireballs();
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(4.0f);
         isIdle = true;
     }
 
     void Dash(){
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(dashPlayerPosition.x, transform.position.y), Time.deltaTime);
-        float distance = Vector2.Distance(gameObject.transform.position, dashPlayerPosition);
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(currentDashPosition.position.x, transform.position.y), Time.deltaTime);
+        float distance = Vector2.Distance(gameObject.transform.position, new Vector2(currentDashPosition.position.x, transform.position.y));
 
         if (distance < 0.1f){
             isDash = false;
             isIdle = true;
+        }
+    }
+
+    IEnumerator DashPre(){
+        if (player.transform.position.x > gameObject.transform.position.x){
+            currentDashPosition = wallRight;
+        }
+        else{
+            currentDashPosition = wallLeft;
+        }
+
+        var bossColor = GetComponent<SpriteRenderer>().color;
+        for (int i = 0; i < 8; i++){
+            if (i % 2 == 0){
+                GetComponent<SpriteRenderer>().color = Color.blue;
+                yield return new WaitForSeconds(0.1f);
+            }
+            else {
+                
+                GetComponent<SpriteRenderer>().color = Color.white;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        GetComponent<SpriteRenderer>().color = bossColor;
+
+        
+        isDash = true;
+    }
+
+    IEnumerator GenerateChest(){
+        ;
+        var bossColor = GetComponent<SpriteRenderer>().color;
+        for (int i = 0; i < 8; i++){
+            if (i % 2 == 0){
+                GetComponent<SpriteRenderer>().color = Color.black;
+                yield return new WaitForSeconds(0.1f);
+            }
+            else {
+                
+                GetComponent<SpriteRenderer>().color = Color.white;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        GetComponent<SpriteRenderer>().color = bossColor;
+
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y + 1.0f, 0.0f);
+
+        yield return new WaitForSeconds(1.0f);
+        GameObject _chest = Instantiate(chest, gameObject.transform.position, Quaternion.identity);
+        Vector3 force = new Vector3(100 * (player.transform.position.x - _chest.transform.position.x), 0.0f, 0.0f);
+
+        //throw towards player (looks like that)
+        _chest.GetComponent<Rigidbody2D>().AddForce(force);
+        Chest chestScript = _chest.GetComponent<Chest>();
+        chestScript.SetEnemy(currentS1emermy);
+        yield return new WaitForSeconds(4.0f);
+        isIdle = true;
+    }
+
+    void throwMultiFireballs(){
+        Vector3 moveDirection = new Vector3(0, 1, 0);
+        for (int i = 0; i < 8; i++){
+            moveDirection = Quaternion.Euler(0, 0, 45) * moveDirection;
+            GameObject _miniFireBall = Instantiate(miniFireball, gameObject.transform.position, Quaternion.identity);
+            miniFireball miniFireballSrc = _miniFireBall.GetComponent<miniFireball>();
+            if (!miniFireballSrc) Debug.Log("src for mini fire ball not founded");
+            miniFireballSrc.setForce(moveDirection.x, moveDirection.y);
         }
     }
 
@@ -391,35 +495,12 @@ public class FinalBoss : Enemy {
         
     }
 
-    void throwMultiFireballs(){
-        Vector3 moveDirection = new Vector3(0, 1, 0);
-        for (int i = 0; i < 8; i++){
-            moveDirection = Quaternion.Euler(0, 0, 45) * moveDirection;
-            GameObject _miniFireBall = Instantiate(miniFireball, gameObject.transform.position, Quaternion.identity);
-            miniFireball miniFireballSrc = _miniFireBall.GetComponent<miniFireball>();
-            if (!miniFireballSrc) Debug.Log("src for mini fire ball not founded");
-            miniFireballSrc.setForce(moveDirection.x, moveDirection.y);
-        }
-    }
+    
 
 
 
     //------- functions for stage 1 boss AI ----
-
-    //1.generate chest in the boss's position
-    //2.throw chest to the player
-    IEnumerator GenerateChest(){
-        yield return new WaitForSeconds(1.0f);
-        GameObject _chest = Instantiate(chest, gameObject.transform.position, Quaternion.identity);
-        Vector3 force = new Vector3(100 * (player.transform.position.x - _chest.transform.position.x), 0.0f, 0.0f);
-
-        //throw towards player (looks like that)
-        _chest.GetComponent<Rigidbody2D>().AddForce(force);
-        Chest chestScript = _chest.GetComponent<Chest>();
-        chestScript.SetEnemy(currentS1emermy);
-        yield return new WaitForSeconds(1.0f);
-        isIdle = true;
-    }
+    
 
     //throw the chest when enemy in chest is defeated.
     //when the amount of enemies reaches a value, change the stage and trigger stage attack
@@ -483,7 +564,19 @@ public class FinalBoss : Enemy {
     }
 
     IEnumerator fireMissle(){
-        yield return new WaitForSeconds(2.0f);
+        var bossColor = GetComponent<SpriteRenderer>().color;
+        for (int i = 0; i < 8; i++){
+            if (i % 2 == 0){
+                GetComponent<SpriteRenderer>().color = Color.gray;
+                yield return new WaitForSeconds(0.1f);
+            }
+            else {
+                
+                GetComponent<SpriteRenderer>().color = Color.white;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        GetComponent<SpriteRenderer>().color = bossColor;
         gameObject.transform.position = new Vector3(player.transform.position.x, Stage1Positions[0].position.y, 0.0f);
         currentMissle = GenerateMissle();
         isMissle = false;
@@ -587,8 +680,13 @@ public class FinalBoss : Enemy {
 
     //--------- Boss Attack -----------------------
     
-
-    
+    void OnTriggerEnter2D(Collider2D other) {
+        if (isDash){
+            if (other.name == "Hitbox"){
+                other.GetComponentInParent<PlayerCombatController>().Hurt(1);
+            }
+        }
+    }
 
     //---------------------------------------------
 }

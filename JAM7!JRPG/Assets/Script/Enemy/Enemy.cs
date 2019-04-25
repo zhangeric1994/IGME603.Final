@@ -141,7 +141,7 @@ public abstract class Enemy : MonoBehaviour
                     }
                     else
                     {
-                        enemy_anim.SetFloat("Speed", 1f);
+                        if (enemy_anim) enemy_anim.SetFloat("Speed", 1f);
                         transform.position += direction * speed * Time.deltaTime;
 
                         if (seconds % 6 == 0 && lastTurnSecond != seconds)
@@ -253,7 +253,7 @@ public abstract class Enemy : MonoBehaviour
         {
             //died
             
-            enemy_anim.SetBool("Dead", true);
+            if(enemy_anim)    enemy_anim.SetBool("Dead", true);
             
             int num = Random.Range(0, 100);
             WeaponManager._instance.randomDrop(transform.position);
