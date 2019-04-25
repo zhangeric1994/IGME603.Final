@@ -26,6 +26,7 @@ public class EvilBoss : Enemy
         defaultState = EnemyState.ChaseMove;
         setState(defaultState);
         health = health * 1;
+        health = 15;
         idle = true;
         boss = true;
         triggered = false;

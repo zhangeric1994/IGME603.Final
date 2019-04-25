@@ -43,7 +43,7 @@ public class ChessBoss : MonoBehaviour {
 
         finalBoss = boss.GetComponent<FinalBoss>();
 
-        finalBoss.ShowUp();
+        finalBoss.isActive = true;
 
         Destroy(gameObject);
     }

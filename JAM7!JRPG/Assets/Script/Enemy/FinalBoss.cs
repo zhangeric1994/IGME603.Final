@@ -76,6 +76,8 @@ public class FinalBoss : Enemy {
     private Transform currentDashPosition;
 
     private Animator phoenix;
+
+    public bool isActive = false;
     //-------------------------------
 
     //------- test param ------------
@@ -238,19 +240,21 @@ public class FinalBoss : Enemy {
 
         // StageSwitch();
         //---------------------------------------------------
-        if (isIdle & isShowUp){
-            isIdle = false;
-            BossMovement();
-        }
+        if (isActive){
+            if (isIdle & isShowUp){
+                isIdle = false;
+                BossMovement();
+            }
 
 
-        if (isDash){
-            Dash();
-        }
+            if (isDash){
+                Dash();
+            }
 
-        if (!isShowUp & !GameObject.FindGameObjectWithTag("chessBoss")){
-            ShowUp();
-            currentBossPosition = gameObject.transform;
+            if (!isShowUp & !GameObject.FindGameObjectWithTag("chessBoss")){
+                ShowUp();
+                currentBossPosition = gameObject.transform;
+            }
         }
 
         //Dash();
