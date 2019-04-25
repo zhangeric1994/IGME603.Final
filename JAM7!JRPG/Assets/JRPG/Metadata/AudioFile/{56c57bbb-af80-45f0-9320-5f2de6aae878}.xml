@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{56c57bbb-af80-45f0-9320-5f2de6aae878}">
+        <property name="assetPath">
+            <value>town.mp3</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>72.048000000000002</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{f93ad093-b3e2-44f5-b7b6-f34ed094c85d}</destination>
+        </relationship>
+    </object>
+</objects>

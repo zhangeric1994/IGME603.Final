@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{9f59a1f7-8b6b-48bd-8bff-8d98e8655233}">
+        <property name="name">
+            <value>NormalBattle</value>
+        </property>
+        <relationship name="folder">
+            <destination>{2ac778a6-0b62-46ac-bdde-dfd687b01f1a}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{f79472d8-8b4a-4a44-9718-3bfd8dab782b}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{f79472d8-8b4a-4a44-9718-3bfd8dab782b}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+        <property name="seekSpeed">
+            <value>4</value>
+        </property>
+    </object>
+</objects>
