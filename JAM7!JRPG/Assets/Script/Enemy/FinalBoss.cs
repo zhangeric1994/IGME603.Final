@@ -171,7 +171,7 @@ public class FinalBoss : Enemy {
         //-------- Inherit from enemy class ---
         defaultState = EnemyState.Idle;
         setState(defaultState);
-        health = 100;
+        health = 1000;
         //-------------------------------------
     }
 
