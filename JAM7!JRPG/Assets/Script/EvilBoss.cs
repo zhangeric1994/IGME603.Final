@@ -26,7 +26,7 @@ public class EvilBoss : Enemy
         defaultState = EnemyState.ChaseMove;
         setState(defaultState);
         health = health * 1;
-        health = 15;
+        health = 100;
         idle = true;
         boss = true;
         triggered = false;
@@ -49,11 +49,14 @@ public class EvilBoss : Enemy
             executeBehavior((EvilBehaviour) behaviourId);
         }
 
-        if (health < 100 && ! triggered)
+        if (health < 1000 && ! triggered)
         {
             triggered = true;
+            Debug.Log("haha");
             StartCoroutine(SpawnBoss());
         }
+
+        
     }
     
     private void executeBehavior(EvilBehaviour behaviour)

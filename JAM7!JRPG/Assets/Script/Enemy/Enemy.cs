@@ -263,7 +263,7 @@ public abstract class Enemy : MonoBehaviour
             }
            
             StartCoroutine(Destroy_delay());
-            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            //gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             deathCounted = true;
         }
 

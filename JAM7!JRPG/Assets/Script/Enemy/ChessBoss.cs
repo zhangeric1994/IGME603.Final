@@ -45,6 +45,12 @@ public class ChessBoss : MonoBehaviour {
 
         finalBoss.isActive = true;
 
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+
+        foreach (var item in items) {
+            Destroy(item);
+        }
+
         Destroy(gameObject);
     }
 
