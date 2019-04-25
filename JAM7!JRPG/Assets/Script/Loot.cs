@@ -59,7 +59,7 @@ public class Loot : MonoBehaviour
     {
         chase = false;
 
-        if (type == LootType.Item)
+        if (type == LootType.Item || type == LootType.Potion)
         {
             triggered = true;
 

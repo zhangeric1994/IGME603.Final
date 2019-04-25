@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000000005303A068 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000000008ED88BE8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -15,17 +15,33 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SoundI::release                          : town (0000000073733688)
+[LOG] SoundI::release                          :     town (0000000072395F98)
+[LOG] SoundI::release                          :     town (00000000737339E8)
+[LOG] SoundI::release                          : Fire (000000006D0BB598)
+[LOG] SoundI::release                          :     Fire (00000000723981B8)
+[LOG] SoundI::release                          :     Fire (0000000073732248)
+[LOG] SoundI::release                          : LakeSound (0000000073732758)
+[LOG] SoundI::release                          :     LakeSound (00000000723989D8)
+[LOG] SoundI::release                          :     LakeSound (00000000737334D8)
+[LOG] SoundI::release                          : LakeSound (0000000073732908)
+[LOG] SoundI::release                          :     LakeSound (0000000072398B78)
+[LOG] SoundI::release                          :     LakeSound (0000000073732E18)
+[LOG] SoundI::release                          : LakeSound (000000006C870C68)
+[LOG] SoundI::release                          :     LakeSound (0000000072395DF8)
+[LOG] SoundI::release                          :     LakeSound (00000000737325A8)
+[LOG] SoundI::release                          :  (0000000078718098)
+[LOG] SoundI::release                          :     Suck (0000000072395C58)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)

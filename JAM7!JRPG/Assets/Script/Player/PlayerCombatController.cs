@@ -732,8 +732,7 @@ public class PlayerCombatController : MonoBehaviour
                 case LootType.Potion:
                     if (!loot.triggered)
                     {
-                        Avatar.Loot(loot);
-                        loot.triggered = true;
+                        loot.Trigger(this);
                         string text = "Hp + 3!";
                         GUIManager.Singleton.CreateFloatingText(text, transform.position);
                         break;
