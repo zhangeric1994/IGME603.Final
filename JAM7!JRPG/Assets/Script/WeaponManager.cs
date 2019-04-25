@@ -143,10 +143,10 @@ public class WeaponManager : MonoBehaviour
         {
             generateDrop(Pos, (WeaponType) type, 2);
         }
-        else if (random >= 18 && random < 38)
+        else if (random >= 18 && random < 28)
         {
             generateDrop(Pos, (WeaponType) type, 1);
-        }else if (random >= 38 && random < 55)
+        }else if (random >= 28 && random < 55)
         {
             generateHealDrop(Pos);
         }

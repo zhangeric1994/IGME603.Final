@@ -257,7 +257,7 @@ public abstract class Enemy : MonoBehaviour
             
             int num = Random.Range(0, 100);
             WeaponManager._instance.randomDrop(transform.position);
-            if (num < 70 || boss)
+            if (num < 80 || boss)
             {
                 WeaponManager._instance.randomDrop(transform.position);
             }

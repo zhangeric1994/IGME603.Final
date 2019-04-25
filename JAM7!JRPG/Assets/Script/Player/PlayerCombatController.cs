@@ -692,6 +692,38 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         Avatar.Loot(loot);
                         loot.triggered = true;
+                        string text = "";
+                        switch (loot.Id)
+                        {
+                            case 1:
+                                text = "Movement Speed increased by 5%!";
+                                GUIManager.Singleton.CreateFloatingText(text, transform.position);
+                                break;
+                            case 2:
+                                text = "Jump Power increased by 10%!";
+                                GUIManager.Singleton.CreateFloatingText(text, transform.position);
+                                break;
+                            case 3:
+                                text = "Max Health increased by 1!";
+                                GUIManager.Singleton.CreateFloatingText(text, transform.position);
+                                break;
+                            case 4:
+                                text = "Critical Chance increased by 5%!";
+                                GUIManager.Singleton.CreateFloatingText(text, transform.position);
+                                break;
+                            case 5:
+                                text = "Critical Damage increased by 10%!";
+                                GUIManager.Singleton.CreateFloatingText(text, transform.position);
+                                break;
+                            case 6:
+                                text = "Base Damage increased by 5%!";
+                                GUIManager.Singleton.CreateFloatingText(text, transform.position);
+                                break;
+                            case 7:
+                                text = "Attack Speed increased by 5%!";
+                                GUIManager.Singleton.CreateFloatingText(text, transform.position);
+                                break;
+                        }
                         Destroy(loot.gameObject);
                         FMOD.Studio.EventInstance lootSound = FMODUnity.RuntimeManager.CreateInstance("event:/AutoLoot");
                         lootSound.start();
