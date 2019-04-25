@@ -15907,7 +15907,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.3202453, y: 2.7748911}
   m_EdgeRadius: 0
---- !u!95 &5308295259143610854
+--- !u!95 &8624984622446426540
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -15917,7 +15917,7 @@ Animator:
   m_GameObject: {fileID: 1855014758023334709}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 759ac065f887425489737adb8fa9be9a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 88625589aaeab684e9c4278f97caeb0f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -31030,6 +31030,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4844806227779111032}
     m_Modifications:
+    - target: {fileID: 510960051156847531, guid: f3990e5e9c9b96c40bc787b3be57941d,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCombat
+      objectReference: {fileID: 0}
     - target: {fileID: 510960050875274643, guid: f3990e5e9c9b96c40bc787b3be57941d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31099,11 +31104,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 510960051156847531, guid: f3990e5e9c9b96c40bc787b3be57941d,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerCombat
       objectReference: {fileID: 0}
     - target: {fileID: 510960051156847534, guid: f3990e5e9c9b96c40bc787b3be57941d,
         type: 3}
@@ -31498,6 +31498,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4844806227779111032}
     m_Modifications:
+    - target: {fileID: 8114400206826363134, guid: 7367fdae70fdef44d89f1f34e622442e,
+        type: 3}
+      propertyPath: m_Name
+      value: crank-up
+      objectReference: {fileID: 0}
     - target: {fileID: 8114400206826363121, guid: 7367fdae70fdef44d89f1f34e622442e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31552,11 +31557,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8114400206826363134, guid: 7367fdae70fdef44d89f1f34e622442e,
-        type: 3}
-      propertyPath: m_Name
-      value: crank-up
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7367fdae70fdef44d89f1f34e622442e, type: 3}

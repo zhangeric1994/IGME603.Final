@@ -75,6 +75,7 @@ public class FinalBoss : Enemy {
 
     private Transform currentDashPosition;
 
+    private Animator phoenix;
     //-------------------------------
 
     //------- test param ------------
@@ -84,7 +85,7 @@ public class FinalBoss : Enemy {
     //-------------------------------
 
     void Start(){
-        enemy_anim = null;
+        //enemy_anim = null;
         rb2d = null;
         defaultStage = BossStage.Stage0;
         currentStage = defaultStage;
@@ -139,6 +140,8 @@ public class FinalBoss : Enemy {
         crackup.SetActive(false);
         crackdown.SetActive(false);
         shield.SetActive(false);
+
+        phoenix = GetComponent<Animator>();
 
         //-------- new features ---------------
         dashPlayerPosition = player.transform.position;
@@ -403,15 +406,23 @@ public class FinalBoss : Enemy {
         if (distance < 0.1f){
             isDash = false;
             isIdle = true;
+            phoenix.SetBool("isRight", false);
+            phoenix.SetBool("isLeft", false);
+            phoenix.SetBool("isIdle", true);
+            
         }
     }
 
     IEnumerator DashPre(){
         if (player.transform.position.x > gameObject.transform.position.x){
             currentDashPosition = wallRight;
+            phoenix.SetBool("isRight", true);
+            phoenix.SetBool("isIdle", false);
         }
         else{
             currentDashPosition = wallLeft;
+            phoenix.SetBool("isLeft", true);
+            phoenix.SetBool("isIdle", false);
         }
 
         var bossColor = GetComponent<SpriteRenderer>().color;
