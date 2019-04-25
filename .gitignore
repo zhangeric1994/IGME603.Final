@@ -60,3 +60,4 @@ crashlytics-build.properties
 /JAM7!JRPG/obj
 /JAM7!JRPG/.idea
 JAM7!JRPG/fmod_editor.log
+*.log
