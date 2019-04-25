@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{42fa9625-2494-4d4e-b112-e07564704dd1}">
+        <property name="name">
+            <value>RuinedTown</value>
+        </property>
+        <relationship name="folder">
+            <destination>{2ac778a6-0b62-46ac-bdde-dfd687b01f1a}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{643b7721-a151-4004-96f1-93cc20877461}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{643b7721-a151-4004-96f1-93cc20877461}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+        <property name="seekSpeed">
+            <value>4</value>
+        </property>
+    </object>
+</objects>

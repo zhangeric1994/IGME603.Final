@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{75e004a5-b1c2-427d-afec-4342f46bac42}">
+        <property name="name">
+            <value>FinalBossBattle</value>
+        </property>
+        <relationship name="folder">
+            <destination>{2ac778a6-0b62-46ac-bdde-dfd687b01f1a}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{889744f2-bd04-4eb2-a30a-c27ee3272002}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{889744f2-bd04-4eb2-a30a-c27ee3272002}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+        <property name="seekSpeed">
+            <value>4</value>
+        </property>
+    </object>
+</objects>

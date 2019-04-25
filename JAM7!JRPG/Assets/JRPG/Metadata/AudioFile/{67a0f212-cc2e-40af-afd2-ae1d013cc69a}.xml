@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{67a0f212-cc2e-40af-afd2-ae1d013cc69a}">
+        <property name="assetPath">
+            <value>AnotherWorldP.mp3</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>60.024000000000001</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{f93ad093-b3e2-44f5-b7b6-f34ed094c85d}</destination>
+        </relationship>
+    </object>
+</objects>

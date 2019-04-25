@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{0fad38c7-94d9-4527-a07f-3ff14297edb4}">
+        <property name="name">
+            <value>NormalTown</value>
+        </property>
+        <relationship name="folder">
+            <destination>{2ac778a6-0b62-46ac-bdde-dfd687b01f1a}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{4943eac9-e931-4c71-ab5a-74cfa08d7e09}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{4943eac9-e931-4c71-ab5a-74cfa08d7e09}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+        <property name="seekSpeed">
+            <value>4</value>
+        </property>
+    </object>
+</objects>

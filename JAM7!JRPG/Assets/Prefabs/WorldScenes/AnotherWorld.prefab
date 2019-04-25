@@ -98,7 +98,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300020, guid: 83e317eef65d5034e85fc504c89281b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -127,6 +127,11 @@ MonoBehaviour:
   - 'Earth: I am the guardian of the dimension.'
   alternativeDialogues:
   - 'Earth: The true wisdom lies in the universe.'
+  eventAfterDialog:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &249605216
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -221,7 +226,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300014, guid: 83e317eef65d5034e85fc504c89281b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -251,6 +256,11 @@ MonoBehaviour:
   - 'Air: Go face your destiny.'
   alternativeDialogues:
   - Air:...
+  eventAfterDialog:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &313744972
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -345,7 +355,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300008, guid: 83e317eef65d5034e85fc504c89281b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -376,6 +386,11 @@ MonoBehaviour:
   - 'Fire: But this is it, here is your end.'
   alternativeDialogues:
   - Fire:...
+  eventAfterDialog:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &460804327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -470,7 +485,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 83e317eef65d5034e85fc504c89281b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -500,6 +515,11 @@ MonoBehaviour:
   - 'Water: You shall not pass!'
   alternativeDialogues:
   - 'Water: Well. If so, I have to destory you.'
+  eventAfterDialog:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &623254718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -594,7 +614,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: d6cd33ff67cd6e340a10a4a9b24666cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -713,7 +733,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300108, guid: 10ea4ad6c810cbd4498c92b056f5d67e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -771,6 +791,11 @@ MonoBehaviour:
   - 'Devil: Let me see if you have trained your skills.'
   alternativeDialogues:
   - What? Bug Happens.
+  eventAfterDialog:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &7839883925369168231
 GameObject:
   m_ObjectHideFlags: 0
@@ -118502,7 +118527,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -507206985
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 1a788f76e8b258a468de3a184a7ca52c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -118561,3 +118586,8 @@ MonoBehaviour:
   alternativeDialogues:
   - 'Miko: ...'
   - 'Miko: May you find your answer there. '
+  eventAfterDialog:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
