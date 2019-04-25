@@ -700,7 +700,7 @@ public class PlayerCombatController : MonoBehaviour
                                 GUIManager.Singleton.CreateFloatingText(text, transform.position);
                                 break;
                             case 2:
-                                text = "Jump Power increased by 10%!";
+                                text = "Jump Power increased by 10!";
                                 GUIManager.Singleton.CreateFloatingText(text, transform.position);
                                 break;
                             case 3:
@@ -716,11 +716,11 @@ public class PlayerCombatController : MonoBehaviour
                                 GUIManager.Singleton.CreateFloatingText(text, transform.position);
                                 break;
                             case 6:
-                                text = "Base Damage increased by 5%!";
+                                text = "Base Damage increased by 10%!";
                                 GUIManager.Singleton.CreateFloatingText(text, transform.position);
                                 break;
                             case 7:
-                                text = "Attack Speed increased by 5%!";
+                                text = "Attack Speed increased by 10%!";
                                 GUIManager.Singleton.CreateFloatingText(text, transform.position);
                                 break;
                         }
@@ -734,6 +734,9 @@ public class PlayerCombatController : MonoBehaviour
                     {
                         Avatar.Loot(loot);
                         loot.triggered = true;
+                        string text = "Hp + 3!";
+                        GUIManager.Singleton.CreateFloatingText(text, transform.position);
+                        break;
                         Destroy(loot.gameObject);
                         FMOD.Studio.EventInstance potionSound = FMODUnity.RuntimeManager.CreateInstance("event:/Drinking");
                         potionSound.start();
