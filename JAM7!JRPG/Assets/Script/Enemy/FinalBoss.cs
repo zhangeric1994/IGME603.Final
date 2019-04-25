@@ -344,7 +344,6 @@ public class FinalBoss : Enemy {
             bossMove = 2;
         }
 
-
         switch((bossMovement) bossMove){
             case bossMovement.Idle:
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y, 0);
