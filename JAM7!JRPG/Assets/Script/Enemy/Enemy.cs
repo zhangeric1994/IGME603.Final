@@ -39,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
     private float lastFacingRight;
     private float lastFindJump;
     // Use this for initialization
-    public int distanceConstraint;
+    public float distanceConstraint;
 
     public EnemyState defaultState;
     public EnemyState currentState;
@@ -261,7 +261,7 @@ public abstract class Enemy : MonoBehaviour
             {
                 WeaponManager._instance.randomDrop(transform.position);
             }
-           
+
             StartCoroutine(Destroy_delay());
             //gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             deathCounted = true;

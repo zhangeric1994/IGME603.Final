@@ -15940,7 +15940,7 @@ GameObject:
   - component: {fileID: 1855014758244659551}
   m_Layer: 8
   m_Name: fireBallPoint
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32155,7 +32155,7 @@ PrefabInstance:
     - target: {fileID: 7659663171589426991, guid: 9e5a50440db62384e9dde34242d06b23,
         type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e5a50440db62384e9dde34242d06b23, type: 3}

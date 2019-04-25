@@ -18,18 +18,24 @@ public class EvilBoss : Enemy
     
     public GameObject bossObj;
 
+    private List<GameObject> enemies;
+
     [SerializeField] private GameObject dummy;
     private bool triggered;
+
+    private bool isDeleted;
     // Start is called before the first frame update
     void Start()
     {
-        defaultState = EnemyState.ChaseMove;
+        defaultState = EnemyState.CircleMove;
+        distanceConstraint = 0.5f;
         setState(defaultState);
         health = health * 1;
         health = 100;
         idle = true;
         boss = true;
         triggered = false;
+        isDeleted = false;
         executeBehavior(EvilBehaviour.Idle);
     }
 
@@ -54,7 +60,6 @@ public class EvilBoss : Enemy
             triggered = true;
             StartCoroutine(SpawnBoss());
         }
-
         
     }
     

@@ -42,6 +42,7 @@ public class FinalBoss : Enemy {
     private float showUpDistance;
     public List<GameObject> enemiesS1;
     private GameObject currentS1emermy;
+    private GameObject e;
     private int s1EnemiesNum;
     private bool isShowUp;
     private int currentPosition;
@@ -104,12 +105,17 @@ public class FinalBoss : Enemy {
         missle = (GameObject)Resources.Load("Prefabs/FinalBoss/Stage3/missle");
         if (!missle) Debug.Log("missle load failed");
 
+        
+
         stage3 = (GameObject)Resources.Load("Prefabs/FinalBoss/Stage3/stage3");
         if (!stage3) Debug.Log("Stage3 not loaded");
 
         miniFireball = (GameObject)Resources.Load("Prefabs/FinalBoss/miniFireball");
         if (!miniFireball) Debug.Log("mini fire ball not loaded");
         miniFireball.transform.localScale = new Vector3(0.04f, 0.04f, 1.0f);
+        
+        e = (GameObject)Resources.Load("Prefabs/Enemy/Runner");
+        if (!e) Debug.Log("runner not loaded.");
 
         //-------------------------------
 
@@ -158,15 +164,8 @@ public class FinalBoss : Enemy {
 
         currentDashPosition = wallLeft;
 
-        //-------------------------------------
 
         //-------------------------------------
-
-        //-------- test param -----------------
-        Debug.Log("Wall left position: " + wallLeft.position);
-        Debug.Log("Wall right position: " + wallRight.position);
-
-        Debug.Log("Level distance between right and left: " + Vector2.Distance(wallLeft.position, wallRight.position));
 
         //-------------------------------------
 
@@ -345,6 +344,7 @@ public class FinalBoss : Enemy {
             bossMove = 2;
         }
 
+
         switch((bossMovement) bossMove){
             case bossMovement.Idle:
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, Stage1Positions[1].position.y, 0);
@@ -363,12 +363,7 @@ public class FinalBoss : Enemy {
                 break;
             
             case bossMovement.chest:
-                if (enemiesS1.Count > 0){
-                    currentS1emermy = enemiesS1[0];
-                    enemiesS1.RemoveAt(0);
-
                     StartCoroutine(GenerateChest());
-                }
                 break;
 
             case bossMovement.missle:
@@ -449,7 +444,6 @@ public class FinalBoss : Enemy {
     }
 
     IEnumerator GenerateChest(){
-        ;
         var bossColor = GetComponent<SpriteRenderer>().color;
         for (int i = 0; i < 8; i++){
             if (i % 2 == 0){
@@ -473,7 +467,7 @@ public class FinalBoss : Enemy {
         //throw towards player (looks like that)
         _chest.GetComponent<Rigidbody2D>().AddForce(force);
         Chest chestScript = _chest.GetComponent<Chest>();
-        chestScript.SetEnemy(currentS1emermy);
+        chestScript.SetEnemy(e);
         yield return new WaitForSeconds(4.0f);
         isIdle = true;
     }
@@ -593,8 +587,8 @@ public class FinalBoss : Enemy {
             }
         }
         GetComponent<SpriteRenderer>().color = bossColor;
-        gameObject.transform.position = new Vector3(player.transform.position.x, Stage1Positions[0].position.y, 0.0f);
-        currentMissle = GenerateMissle();
+        gameObject.transform.position = new Vector3(player.transform.position.x, Stage1Positions[1].position.y + 1.0f, 0.0f);
+        GenerateMissle();
         isMissle = false;
         if(!isstage3Silent)missleCnt++;
         yield return new WaitForSeconds(1.0f);

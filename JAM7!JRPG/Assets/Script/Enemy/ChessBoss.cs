@@ -13,8 +13,15 @@ public class ChessBoss : MonoBehaviour {
 
     void Start(){
         isTriggered = false;
-        //boss = (GameObject)Resources.Load("Prefabs/FinalBoss/boss");
         if (!boss) Debug.Log("In chess: final boss not loaded");
+
+        GameObject[] e = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (var item in e) {
+            if(item.name != "boss"){
+                Destroy(item);
+            }
+        }
     }
 
     void Update(){
@@ -24,7 +31,6 @@ public class ChessBoss : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.name);
         if (other.tag == "Player"){
             //todo: freeze player movement
 
