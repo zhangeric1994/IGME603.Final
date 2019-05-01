@@ -58,11 +58,14 @@ public class Boss : Enemy
             case BossBehaviour.BulletHell:
                 GetComponent<SpriteRenderer>().color = Color.cyan;
                 StartCoroutine(untargetedFire(4f,speed,defaultColor));
+                
                 break;
 			
             case BossBehaviour.Shake:
                 rb2d.AddForce(250 * transform.up);
                 enemy_anim.SetBool("Attack", true);
+                FMOD.Studio.EventInstance shakeSound = FMODUnity.RuntimeManager.CreateInstance("event:/Combat/BossHitGround");
+                shakeSound.start();
                 break;
         }
 
@@ -137,6 +140,8 @@ public class Boss : Enemy
                 for (float angle = 0f; angle < 180f; angle += 15f)
                 {
                     fire(rotate(direction, -angle));
+                    FMOD.Studio.EventInstance bossBulletSound = FMODUnity.RuntimeManager.CreateInstance("event:/Combat/BossBullet");
+                    bossBulletSound.start();
                     //yield return new WaitForSeconds(0.1f);
                 }
                 lastFiredSec = seconds;
@@ -148,6 +153,9 @@ public class Boss : Enemy
         GetComponent<SpriteRenderer>().color = defaultColor;
         GetComponent<Animator>().speed = 1;
         speed = _speed;
+
+
+
         yield return new WaitForSeconds(delay);
         idle = true;
     }

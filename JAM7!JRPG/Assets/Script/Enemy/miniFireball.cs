@@ -29,6 +29,7 @@ public class miniFireball : MonoBehaviour {
         forceY = _forceY;
 
         rb2d.AddForce(new Vector2(_forceX * forceFactor, _forceY * forceFactor));
+        
     }
 
     void OnTriggerEnter2D(Collider2D other) {

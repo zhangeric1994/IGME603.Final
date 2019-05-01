@@ -24,6 +24,8 @@ public class MainMenu : GUIWindow
 
                 list.GetChild(choosenIndex).GetComponent<Text>().color = Color.green;
                 //AudioManager.Instance.PlaySoundEffect("Click", pitch: false);
+                FMOD.Studio.EventInstance SelectedSound = FMODUnity.RuntimeManager.CreateInstance("event:/Interface/Selected");
+                SelectedSound.start();
             }
         }
     }
@@ -51,6 +53,8 @@ public class MainMenu : GUIWindow
             if (Input.GetButtonDown("Submit"))
             {
                 //AudioManager.Instance.PlaySoundEffect("Confirm");
+                FMOD.Studio.EventInstance confirmSound = FMODUnity.RuntimeManager.CreateInstance("event:/Interface/Confirm");
+                confirmSound.start();
                 switch (choosenIndex)
                 {
                     case 0:

@@ -11,7 +11,7 @@ public class ChestAnimation : MonoBehaviour
         if (!isOpen)
         {
             isOpen = true;
-            FMOD.Studio.EventInstance lootSound = FMODUnity.RuntimeManager.CreateInstance("event:/AutoLoot");
+            FMOD.Studio.EventInstance lootSound = FMODUnity.RuntimeManager.CreateInstance("event:/Combat/AutoLoot");
             lootSound.start();
         }
     }

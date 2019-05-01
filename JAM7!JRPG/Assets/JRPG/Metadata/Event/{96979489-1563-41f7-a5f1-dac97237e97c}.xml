@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{96979489-1563-41f7-a5f1-dac97237e97c}">
         <property name="name">
-            <value>Drinking</value>
+            <value>Potion</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
         </property>
         <relationship name="folder">
-            <destination>{9d10b9df-24a8-47dd-8308-d73dda8ba8dd}</destination>
+            <destination>{bb2df796-b2c5-462e-863a-4e25ed83c8bd}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{86dbb0dc-4a21-4670-8b65-769d1f4075c1}</destination>
@@ -53,7 +53,7 @@
             <destination>{422510b1-acd8-4b1f-a4d0-a72ac16cc8c7}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{9ed3d1b4-cb66-4318-8ca1-b20198e4974b}</destination>
+            <destination>{93d84359-aec9-4c76-bb55-1e95b9590f56}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{a51675fb-5254-4d8a-89bc-4b7d56f3971b}"/>
@@ -103,9 +103,6 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{376db1e6-c326-4ab9-ac8e-88e21a6aaca4}">
-        <property name="volume">
-            <value>4</value>
-        </property>
         <property name="name">
             <value>Audio 1</value>
         </property>
@@ -137,6 +134,7 @@
     <object class="MixerBusEffectChain" id="{970869e2-b57e-47af-8db0-78368cfc560a}">
         <relationship name="effects">
             <destination>{5f00de6b-a027-4df1-9a9e-15d64d7c1474}</destination>
+            <destination>{ba58024d-54a8-4f2b-9728-b5fcae5e1e03}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{b7ed8d35-e450-4b59-9ea8-1818e39f6a65}"/>
@@ -161,4 +159,27 @@
         </property>
     </object>
     <object class="MixerBusFader" id="{5f00de6b-a027-4df1-9a9e-15d64d7c1474}"/>
+    <object class="SFXReverbEffect" id="{ba58024d-54a8-4f2b-9728-b5fcae5e1e03}">
+        <property name="decayTime">
+            <value>400</value>
+        </property>
+        <property name="earlyDelay">
+            <value>2</value>
+        </property>
+        <property name="lateDelay">
+            <value>3</value>
+        </property>
+        <property name="HFDecayRatio">
+            <value>83</value>
+        </property>
+        <property name="highCut">
+            <value>6050</value>
+        </property>
+        <property name="earlyLateMix">
+            <value>88</value>
+        </property>
+        <property name="wetLevel">
+            <value>-9.39999962</value>
+        </property>
+    </object>
 </objects>

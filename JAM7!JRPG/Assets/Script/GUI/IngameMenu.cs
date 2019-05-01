@@ -58,7 +58,9 @@ public class IngameMenu : GUIWindow
         {
             if (Input.GetButtonDown("Submit"))
             {
-                GUIManager.Singleton.Open(list.GetChild(choosenIndex).name, (Action)StartToCheckForPlayerInput);               
+                GUIManager.Singleton.Open(list.GetChild(choosenIndex).name, (Action)StartToCheckForPlayerInput);
+                FMOD.Studio.EventInstance confirmSound = FMODUnity.RuntimeManager.CreateInstance("event:/Interface/Confirm");
+                confirmSound.start();
                 yield break;
             }
             else if (Input.GetButtonDown("Cancel"))
@@ -71,11 +73,15 @@ public class IngameMenu : GUIWindow
             {
                 ChoosenIndex = (maxIndex + choosenIndex - 1) % maxIndex;
                 //AudioManager.Instance.PlaySoundEffect("Click");
+                FMOD.Studio.EventInstance selectSound = FMODUnity.RuntimeManager.CreateInstance("event:/Interface/Selected");
+                selectSound.start();
             }
             else if (Input.GetButtonDown("Down"))
             {
                 ChoosenIndex = (maxIndex + choosenIndex + 1) % maxIndex;
                 //AudioManager.Instance.PlaySoundEffect("Click");
+                FMOD.Studio.EventInstance selectSound = FMODUnity.RuntimeManager.CreateInstance("event:/Interface/Selected");
+                selectSound.start();
             }
             yield return null;
         }

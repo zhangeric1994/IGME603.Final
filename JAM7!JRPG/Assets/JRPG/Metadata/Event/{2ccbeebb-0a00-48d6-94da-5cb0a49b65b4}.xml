@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{2ccbeebb-0a00-48d6-94da-5cb0a49b65b4}">
         <property name="name">
-            <value>Attack</value>
+            <value>Sword</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
         </property>
         <relationship name="folder">
-            <destination>{9d10b9df-24a8-47dd-8308-d73dda8ba8dd}</destination>
+            <destination>{c03b6f2a-5122-4a3e-8baa-7c91910f2643}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{f1f36dee-7efc-49f7-9461-ab623faf9156}</destination>
@@ -57,7 +57,7 @@
             <destination>{fd4f3cfa-cfe8-4a69-b63b-03a4b1ea6e95}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{9ed3d1b4-cb66-4318-8ca1-b20198e4974b}</destination>
+            <destination>{1f9bdb41-f05a-4790-9eb8-a33b6b23902e}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{31b43679-62bb-486e-b19b-f6e4fb63f1d2}"/>
@@ -353,7 +353,7 @@
             <value>0</value>
         </property>
         <property name="value">
-            <value>10</value>
+            <value>5</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{e5bbc23f-ca98-4153-b94d-2f312a853569}">

@@ -50,10 +50,12 @@ public class Shooter : Enemy
         bullet.GetComponent<LinearMovement>().speed = 1.0f;
 
         bullet.gameObject.SetActive(true);
+        FMOD.Studio.EventInstance fireball = FMODUnity.RuntimeManager.CreateInstance("event:/Combat/EnemyBullet");
+        fireball.start();
     }
 
     IEnumerator shot()
-    {
+    {      
         float defaultSpeed = speed;
         speed = 0;
         yield return new WaitForSeconds(1f);

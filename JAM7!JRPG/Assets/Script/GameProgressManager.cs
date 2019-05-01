@@ -112,7 +112,7 @@ public class GameProgressManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         FlashImage.color = new Color(1, 1, 1, 1);
         //AudioManager.Instance.PlaySoundEffect("Punch");
-        FMOD.Studio.EventInstance punchSound = FMODUnity.RuntimeManager.CreateInstance("event:/Punch");
+        FMOD.Studio.EventInstance punchSound = FMODUnity.RuntimeManager.CreateInstance("event:/SFX/Punch");
         punchSound.start();
         yield return new WaitForSeconds(0.2f);
         FlashImage.color = new Color(0, 0, 0, 1);
@@ -121,7 +121,12 @@ public class GameProgressManager : MonoBehaviour
 
 
         if (dialogue.StartDialog(player.GetComponent<PlayerExplorationController>()))
+        {
             player.GetComponent<PlayerExplorationController>().CurrentState = PlayerExplorationState.InTalking;
+            FMOD.Studio.EventInstance jumpSound = FMODUnity.RuntimeManager.CreateInstance("event:/Dialogues/VO/You");
+            jumpSound.start();
+        }
+        
     }
 
     public void RemoveMiko()

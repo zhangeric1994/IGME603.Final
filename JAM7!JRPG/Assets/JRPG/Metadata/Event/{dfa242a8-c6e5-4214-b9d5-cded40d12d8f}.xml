@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{dfa242a8-c6e5-4214-b9d5-cded40d12d8f}">
         <property name="name">
-            <value>SpearSword</value>
+            <value>StabSword</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
         </property>
         <relationship name="folder">
-            <destination>{9d10b9df-24a8-47dd-8308-d73dda8ba8dd}</destination>
+            <destination>{c03b6f2a-5122-4a3e-8baa-7c91910f2643}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{bf6086bf-f0b1-4b1c-859b-6b4d2b37e871}</destination>
@@ -57,7 +57,7 @@
             <destination>{e524a20f-c56a-4566-abff-651684f46e5b}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{9ed3d1b4-cb66-4318-8ca1-b20198e4974b}</destination>
+            <destination>{1f9bdb41-f05a-4790-9eb8-a33b6b23902e}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{8f3f8698-3fdf-4a85-b320-6f6266b2e47c}"/>

@@ -155,9 +155,15 @@ public class GUIManager : MonoBehaviour
             while (s.Count > 0)
                 uiWindowStack.Push(s.Pop());
 
+            if (!ui.gameObject.name.Contains("MainMenu"))
+            {
+                FMOD.Studio.EventInstance cancelSound = FMODUnity.RuntimeManager.CreateInstance("event:/Interface/Cancel");
+                cancelSound.start();
+            }
             Destroy(ui.gameObject);
 
             uiWindowsOpened.Remove(name);
+
         }
     }
 

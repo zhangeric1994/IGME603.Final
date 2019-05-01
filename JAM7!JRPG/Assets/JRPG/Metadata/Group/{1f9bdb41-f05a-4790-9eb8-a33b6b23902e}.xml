@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="MixerGroup" id="{1f9bdb41-f05a-4790-9eb8-a33b6b23902e}">
+        <property name="volume">
+            <value>-25.5</value>
+        </property>
+        <property name="name">
+            <value>Weapon</value>
+        </property>
+        <relationship name="effectChain">
+            <destination>{a0544bcb-0c4d-40d6-9120-c3c73087d7d5}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{11383262-f244-4f36-8e6d-876f63ef5426}</destination>
+        </relationship>
+        <relationship name="output">
+            <destination>{9ed3d1b4-cb66-4318-8ca1-b20198e4974b}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusEffectChain" id="{a0544bcb-0c4d-40d6-9120-c3c73087d7d5}">
+        <relationship name="effects">
+            <destination>{f8ca15b7-490b-4df9-bd09-5020703995ee}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{11383262-f244-4f36-8e6d-876f63ef5426}"/>
+    <object class="MixerBusFader" id="{f8ca15b7-490b-4df9-bd09-5020703995ee}"/>
+</objects>
